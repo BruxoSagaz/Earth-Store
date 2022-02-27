@@ -1,0 +1,456 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&family=Gideon+Roman&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap');
+
+/* General */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ /* Variables */
+html{
+    /* bg header */
+    --color_primary:#DF0711;
+    --final_gradient:#9e050c;
+
+    /* bg nav */
+    --bg_nav:#ccc;
+    --bg_li:rgb(223, 222, 222);
+    
+    /* footer */
+    --sec_footer:#e6333c;
+
+}   
+
+/* Auxilliar Classes */ 
+
+.container{
+    max-width: 1100px;
+    padding: 0 2%;
+    margin: 0 auto;
+}
+
+.w10{
+    width: 10%;
+}
+
+.w20{
+    width: 20%;
+}
+
+.w33{
+    width:33.3%;
+}
+
+.w50{
+    width: 50%;
+}
+
+.w100{
+    width: 100%;
+}
+
+
+.clear{clear: both;}
+
+.line_bot{
+    border-bottom: 2px solid white;
+}
+
+
+/*
+# 
+##Sections
+# 
+*/
+
+/* header */ 
+
+header{
+    height: 100px;
+    background-image:linear-gradient(to right, var(--color_primary),var(--final_gradient)) ;
+}
+
+.mobile-header{
+    display: none;    
+}
+
+
+.logo-desktop{
+    width: 20%;
+    float: left;
+}
+
+.logo-mobile{
+    display: none;
+}
+
+
+
+.logo-desktop a > img{
+    max-width: 100%;
+    max-height: 100px;
+}
+
+.logo-desktop a{
+    position: absolute;
+}
+
+.nav-desktop{
+    width: 80%;
+    float: right;
+    letter-spacing: 1px;
+}
+
+.nav-desktop li{
+    display: inline-block;
+    padding: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-desktop ul{
+    vertical-align: center;
+    padding: 41px 0;
+    float: right;
+}
+
+.nav-desktop i{
+    color: white;
+}
+
+.form-field{
+    font-family: inherit;
+    border: 0;
+    border-bottom: 2px solid white;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    width: 330px;
+    background: transparent;
+}
+
+input::placeholder{
+    color: rgba(255, 255, 255, 0.562);
+}
+
+/* Fim Header*/
+
+/* Footer*/
+
+
+.sec-footer{
+
+    bottom: 0;
+    width: 100%;
+    background-color: var(--sec_footer);
+}
+
+.footer-single{
+    display: inline-block;
+    width: 243px;
+    color: white;
+}
+
+.footer-single li{
+    list-style: none;
+    padding: 4px 0;
+    font-weight: normal;
+}
+
+.footer-single h2{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.footer-single a{
+    color: white;
+    text-decoration: none;
+}
+
+footer.F1{
+    height: 190px;
+    display: flex;
+}
+
+
+footer.F2{
+    background-color: var(--color_primary);
+    padding: 8px 0;
+    text-align: center;
+    color: white;
+}
+
+.box-footer{
+    width: 130px;
+
+}
+
+.box-footer p{
+    display: inline-block;
+    padding-left: 2px;
+    padding: 2px 3px;
+}
+
+.paiment{
+    height: 136px;
+    align-self: center;
+    background: #da787d;
+    text-align: center;
+    vertical-align: auto;
+}
+
+.icon-list{
+    font-size: 35px;
+    display: grid;
+    padding-left: 91px;
+}
+
+.seal{
+    width: 180px;
+    height: 73px;
+    border: 1px solid #000000 ;
+    background:#da787d ;
+}
+
+/* Fim Footer*/
+
+
+/*Banner Cta*/
+section.banner{
+    width: 100%;
+    max-height: 350px;
+    padding-bottom: 5px;
+}
+
+section.banner img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* Desk */
+
+.desk{
+    background-color: #ccc;
+}
+
+.desk-box{
+    display: flex;
+}
+
+.desk div.item{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+    
+} 
+
+.align{
+    width:25%;
+    height: 130px;
+    font-size: 15px;
+    position: relative;
+}
+
+.desk div.item i{
+    font-size: 48px;
+    color: black;
+    display: block;
+    width: 57px;
+    padding-left: 100px;
+}
+
+.desk div.item span{
+    font-size: 26px;
+    padding: 0px 10px;
+}
+
+/* Fim Desk */  
+
+
+/* Primary Nav */
+
+
+
+.primary-nav{
+    width: 100%;
+    height: 50px;
+    background: var(--bg_nav);
+    display: flex;
+}
+
+
+.primary-nav li{
+    /* padding: 0px 12px; */
+   /* border-right: 1px solid #ccc; */
+   background-color: var(--bg_li);
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+}
+
+nav.primary-nav li > button{
+    text-decoration: none;
+    color: black;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    height: 50px;
+    width: 80px;
+    border: none;
+    background-color: var(--bg_li);
+}
+
+.primary-nav button:hover{
+    background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsivity */
+
+@media screen and (max-width:768px) {
+    .logo-desktop{
+        display: none;
+        height: 200px;
+    }
+
+    header{
+        height: 65px;
+    }
+    .nav-desktop > .list-nav{
+        width: 100%;
+        padding: 14px 150px;
+        padding: 14px calc(50% - 80px);
+    }
+    .nav-desktop{
+        width: 100%;
+    }
+
+    .desk-box{
+        flex-wrap: wrap;
+    }
+
+    .align{
+        width: 100%;
+    }
+
+    .desk div.item{
+        padding: 14px calc(50% - 121px);
+    }
+
+    .desk div.item span {
+        padding: 0px 8px;
+    }
+
+    footer .F1{
+        height: 410px;
+        flex-wrap: wrap;
+    }
+
+    .footer-single{
+        width: 100%;
+    }
+
+    .primary-nav{
+        display: none;
+    }
+
+    .desktop-header{
+        display: none;
+    }
+
+    .mobile-header{
+        display: block;
+        color: white;
+        height: 65px;
+    }
+
+    .mobile-header .list-nav{
+        float: right;
+        display: flex;
+        list-style: none;
+        padding: 2px 0;
+        font-size: 20px;
+    }
+
+    .mobile-header .list-nav li{
+        display: inline-block;
+        padding: 16px 0px 0px 7px;
+    }
+    .mobile-header i{
+        font-size: 32px;
+        padding-top: 14px;
+    }
+
+    .mobile-header .list-nav i{
+        font-size: 26px;
+    }
+
+    .logo-mobile{
+        display: block;
+        width: 120px;
+        position: absolute;
+        display: inline-block;
+    }
+
+    .logo-mobile img{
+        max-width: 100%;
+        max-height: 100px;
+    }
+
+
+}
+
+
+
+
