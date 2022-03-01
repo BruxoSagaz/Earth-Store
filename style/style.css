@@ -272,6 +272,7 @@ section.banner img{
     flex-wrap: nowrap;
     align-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .desk div.alert-icon i{
@@ -282,12 +283,28 @@ section.banner img{
 
 }
 
+.text-desk{
+    font-size: 26px;
+    width: 100%;
+    text-align: center;
+}
+
+.p-balance{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
 .desk div.alert-icon span{
     font-size: 26px;
     width: 100%;
     text-align: center;
 
 }
+
+.desk div.alert-icon .p-balance > p.zapzap{
+    padding-left: 5px;
+}
+
 
 .align:not(:first-child){
     border-left: 1px solid #adadad;
@@ -572,7 +589,7 @@ div.product-name{
         padding: 0px 5px;
     }
 
-    .desk div.alert-icon p.zapzap{
+    .desk div.alert-icon .p-balance > p.zapzap{
         padding-left: 5px;
     }
 
