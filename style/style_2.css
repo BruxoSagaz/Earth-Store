@@ -35,5 +35,30 @@
 
 .result-items{
     width: 78%;
+    display: flex;
+    flex-direction: column;
 }
+
+.breadcrumbs{
+    padding-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.breadcrumbs i{
+    font-size: 12px;
+    padding: 0 2px;
+    
+}
+
+.breadcrumbs a{
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
 

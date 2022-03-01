@@ -167,7 +167,7 @@ input::placeholder{
 
 .footer-single{
     display: inline-block;
-    width: 243px;
+    width: 20%;
     color: white;
 }
 
@@ -476,6 +476,7 @@ div.product-name{
     display: flex;
 }
 
+
 .add-to-cart input{
     width: 40px;
     height: 30px;
@@ -492,6 +493,14 @@ div.product-name{
     margin-left: 15px;
     color: white;
 }
+
+.add-to-cart button:hover {
+	background:linear-gradient(to bottom, var(--sec_footer) 5%, #f24537 100%);
+	background-color:#c62d1f;
+    cursor: pointer;
+}
+
+
 
 
 
