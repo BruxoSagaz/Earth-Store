@@ -138,41 +138,49 @@
                                 <p class="tag">Lançamento</p>
                             </div>
 
-                            <h1 class="product-name">Terço Muito Bonito</h1>
+                            <h1 class="product-name">Terço De Madeira</h1>
 
                             <div class="line-info">
                                 <span class="ref">7620-02</span>
                             </div>
 
                             <div class="product-quantity">
+
+                                <label for="">Quantidade:</label>
+
                                 <div class="positioner">
                                     <input type="text" value="1" maxlength="5">
                                 </div>
-                                <label for="">quantidade</label>
+                                
                             </div>
 
                             <div class="price-and-buy">
 
-                                <div class="w50">
-                                    <div>
+                                <div class="w35">
+                                    <div class="price">
                                         <p>R$ 25,00</p>
                                         <span>Ou 2x de R$ 13,00</span>
                                         <a href="#">saiba mais</a>
                                     </div>
                                 </div>
                                 
-                                <div class="w50">
-                                    <button></button>
-                                    <span>Compra Segura</span>
+                                <div class="buy-action">
+                                    <button>Comprar</button>  
                                 </div>
 
                             </div>
 
                             <div class="cep-area">
-                                <i class="fa-solid fa-truck"></i>
-                                <span>INFORME SEU CEP</span>
-                                <input type="text" placeholder="00000-000" minlength="9" required>
-                                <button type="submit">Calcular</button>
+
+                                <div class="cep-text">
+                                    <i class="fa-solid fa-truck"></i>
+                                    <span>INFORME SEU CEP</span>
+                                </div>
+
+                                <div class="submit-area">
+                                    <input type="text" placeholder="00000-000" minlength="9" maxlength="9" required>
+                                    <button type="submit">Calcular</button>
+                                </div>
                             </div>
 
                         </div>
@@ -183,7 +191,32 @@
             </div>
         </section>
 
+        <section class="description-section">
 
+            <div class="container">
+                <div class="lettering">
+                    <div class="banner-l"><h2>Descrição Geral!</h2></div>
+                </div>
+            
+                <div class="description">
+                    <h2>Terço de Madeira</h2>
+                </div>
+
+                <div class="lettering">
+                    <div class="banner-l"><h2>Especificações!</h2></div>
+                </div>
+
+                <div class="description">
+                    <h2>Terço de Madeira</h2>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="indications">
+            <div class="banner-p"></div>
+            <h2>Outros Produtos!</h2>
+        </section>
 
     </main>
 
@@ -282,6 +315,8 @@
                 $('nav.mobile-header').slideToggle();
             })
         })
+
+    
     </script>
 
 </body>
