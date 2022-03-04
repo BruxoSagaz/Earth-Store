@@ -68,6 +68,9 @@ div.autow{
     width: auto;
 }
 
+.sans{
+    font-family: 'Open Sans';
+}
 
 
 .clear{clear: both;}
@@ -94,6 +97,14 @@ header{
     top: 0;
 }
 
+.desktop-header{
+    display: flex;
+    height: 100px;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .mobile-header{
     display: none;    
 }
@@ -101,7 +112,6 @@ header{
 
 .logo-desktop{
     width: 20%;
-    float: left;
 }
 
 .logo-mobile{
@@ -120,9 +130,13 @@ header{
 }
 
 .nav-desktop{
-    width: 80%;
-    float: right;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
 .nav-desktop li{
@@ -134,8 +148,6 @@ header{
 
 .nav-desktop ul{
     vertical-align: center;
-    padding: 41px 0;
-    float: right;
 }
 
 .nav-desktop i{
@@ -155,6 +167,29 @@ header{
 
 input::placeholder{
     color: rgba(255, 255, 255, 0.562);
+}
+
+.bag-shipping{
+    width: auto;
+    margin-bottom: 8px;
+}
+
+.bag-shipping i{
+    font-size: 35px;
+    height: auto;
+}
+
+.num-cart{
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    font-family: 'Open Sans';
+    font-size: 14px;
 }
 
 /* Fim Header*/
@@ -400,7 +435,7 @@ div.banner-p{
 .promotion .item{
     width: 20%;
     box-sizing: border-box;
-    height: 375px;
+    height: 386px;
     padding: 0 10px;
     margin-bottom: 10px;
 }
