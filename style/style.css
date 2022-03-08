@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+}
+
  /* Variables */
 html{
     /* bg header */
@@ -147,11 +151,20 @@ header{
 }
 
 .nav-desktop ul{
-    vertical-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.nav-desktop a{
+    display: flex;
+    align-content: center;
+    align-items: center;
 }
 
 .nav-desktop i{
     color: white;
+    font-size: 30px;
 }
 
 .form-field{
@@ -384,7 +397,7 @@ section.banner img{
 
 }
 
-nav.primary-nav li > button{
+nav.primary-nav li  button{
     text-decoration: none;
     color: black;
     font-family: 'Open Sans';
@@ -393,6 +406,7 @@ nav.primary-nav li > button{
     width: 80px;
     border: none;
     background-color: var(--bg_li);
+    cursor: pointer;
 }
 
 .primary-nav button:hover{
@@ -446,17 +460,31 @@ div.banner-p{
     border: 1px solid #adadad2e;
     width: 100%;
     position: relative;
-    overflow: hidden;
     flex-direction: column;
     padding: 3px;
     height: 100%;
 }
 
+.product .product-image{
+    position: relative;
+    margin: -0.75rem 1.25rem -21px;
+    display: flex;
+    justify-content: center;
+    width: 85%;
+}
+
+.product .product-image a{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .product .product-image img{
     display: block;
-    max-width: 90%;
+    max-width: 75%;
     width: auto !important;
-    max-height: 100%;
+    max-height: 145%;
+    justify-content: center;
 }
 
 div.product{
@@ -475,14 +503,10 @@ div.product-name{
     display: block;
     text-align: center;
     max-height: 60px;
-    overflow: hidden;
+
 }
 
 
-.product .product-image{
-    position: relative;
-    margin: -0.75rem 1.25rem -21px;
-}
 
 .price-box{
     display: flex;
@@ -594,6 +618,7 @@ div.product-name{
         display: none;
         height: 200px;
     }
+
 
     header{
         height: 65px;
@@ -714,7 +739,7 @@ div.product-name{
     }
 
     nav.mobile-header {
-        display: block;
+        display: none;
         background-color: #ccc;
         position: absolute;
         left: -2%;
@@ -722,6 +747,8 @@ div.product-name{
         width: 104%;
         text-align: center;
     }
+
+
 
     .mobile-header .list-nav{
         float: right;
@@ -759,6 +786,7 @@ div.product-name{
 
     .promotion .item{
         width: 50%;
+        height: 430px;
     }
 
 
@@ -766,4 +794,16 @@ div.product-name{
 
 
 
+@media screen and (max-width:1010px) {
+    .form-field{
+        width: 160px;
+    }
 
+    .nav-desktop li {
+        padding: 0 4px;
+    }
+
+    .nav-desktop {
+        letter-spacing: 0.6px;
+    }
+}
