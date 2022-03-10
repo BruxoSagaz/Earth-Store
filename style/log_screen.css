@@ -139,3 +139,23 @@ div.enter{
 .social-media a{
     color: white;
 }
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:768px) {
+
+    .space{
+        display: none;
+    }
+
+    section div.screen {
+        width: 100%;
+        margin-top: 95px;
+    }
+}

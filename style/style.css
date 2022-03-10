@@ -113,6 +113,9 @@ header{
     display: none;    
 }
 
+.list-nav a{
+    color: white;
+}
 
 .logo-desktop{
     width: 20%;
@@ -485,11 +488,13 @@ div.banner-p{
     width: auto !important;
     max-height: 145%;
     justify-content: center;
+    z-index: -5;
 }
 
 div.product{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 div.product-name{
@@ -625,7 +630,7 @@ div.product-name{
     }
 
     section.banner{
-        padding-top: 70px;
+        padding-top: 5px;
     }
 
     .banner{
@@ -696,6 +701,9 @@ div.product-name{
         flex-direction: row;
     }
     
+    .footer-single{
+        width: 50%;
+    }
 
    .footer-single h2{
         text-align: center;
@@ -710,7 +718,7 @@ div.product-name{
         display: flex;
         align-content: center;
         flex-wrap: wrap;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: baseline;
         width: auto;
