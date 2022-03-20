@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
 
 a{
@@ -257,8 +258,7 @@ footer.F2{
 }
 
 .box-footer{
-    width: 130px;
-
+    width: 170px;
 }
 
 .box-footer p{
@@ -422,7 +422,7 @@ nav.primary-nav li  button{
 */
 
 div.banner-p{
-    background: var(--final_gradient);
+    background: #de0610;
     display: block;
     z-index: -1;
     position: absolute;
@@ -804,7 +804,7 @@ div.product-name{
 
 @media screen and (max-width:1010px) {
     .form-field{
-        width: 160px;
+        width: 200px;
     }
 
     .nav-desktop li {
@@ -813,5 +813,16 @@ div.product-name{
 
     .nav-desktop {
         letter-spacing: 0.6px;
+    }
+}
+
+
+@media screen and (max-width:870px) {
+    #tell-us{
+        display: none;
+    }
+
+    .list-nav{
+        margin:0px 10px ;
     }
 }
