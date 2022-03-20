@@ -156,7 +156,9 @@ div.enter{
 }
 
 .form input[type='text'],
-.form2 input[type='text']{
+.form input[type='email'],
+.form2 input[type='text'],
+.form2 input[type='email']{
     height: 35px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -221,9 +223,13 @@ div.enter{
 }
 
 
+.form .social-media a:hover{
+    animation: colorIconF1 1s;
+}
 
-
-
+.form2 .social-media a:hover{
+    animation: colorIconF2 1s;
+}
 
 
 
@@ -247,5 +253,27 @@ div.enter{
 
     to{
         background-color:white ;
+    }
+}
+
+@keyframes colorIconF1 {
+    from{
+        
+        color:black;
+    }
+
+    to{
+        color:white ; 
+    }
+}
+
+@keyframes colorIconF2 {
+    from{
+        
+        color:#DF0711;
+    }
+
+    to{
+        color:rgb(0, 0, 0) ; 
     }
 }
