@@ -13,6 +13,8 @@ a{
     color: white;
 }
 
+
+
  /* Variables */
 html{
     /* bg header */
@@ -485,7 +487,7 @@ div.banner-p{
 
 .product .product-image{
     position: relative;
-    margin: -0.75rem 1.25rem -21px;
+    /*margin: -0.75rem 1.25rem -21px;*/
     display: flex;
     justify-content: center;
     width: 85%;
