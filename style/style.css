@@ -10,6 +10,7 @@
 
 a{
     text-decoration: none;
+    color: white;
 }
 
  /* Variables */
@@ -455,6 +456,20 @@ div.banner-p{
     height: 386px;
     padding: 0 10px;
     margin-bottom: 10px;
+}
+
+.promotion .item .discount{
+    font-size: 19px;
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background-color: #de0610;
+    text-align: center;
+    padding: 9px 0px;
+    color: white;
+    font-weight: 600;
+    z-index: 9999;
+    left: 0;
 }
 
 
