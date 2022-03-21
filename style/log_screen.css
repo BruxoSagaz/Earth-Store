@@ -242,7 +242,6 @@ div.enter{
 
     section div.screen {
         width: 100%;
-        margin-top: 120px;
     }
 
     body{
@@ -250,16 +249,53 @@ div.enter{
     }
 
     h2{
-        font-size: 25px;
+        font-size: 22px;
     }
 
     .form{
-        padding: 60px;
+        padding: 90px 0;
     }
+
+    .form form{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .form2 form{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .form input[type='text'], .form input[type='email'], .form2 input[type='text'], .form2 input[type='email'] {
+        width: 100%;
+    }
+
+    section div.form-div {
+        width: 83%;
+    }
+
 
     .form2{
         border-radius: 0px 0px 24px 24px;
-        height: calc(100% - 34px);
+        height: calc(100% - 30px);
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        padding: 0;
+    }
+
+    div.enter{
+        margin: 8px 0px;
+        padding:0px calc(6% - 2px);
     }
 }
 
