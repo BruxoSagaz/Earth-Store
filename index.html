@@ -48,7 +48,8 @@
                         <div class="w50 sign_area" id="cad"><h2>Cadastrar</h2></div>
                     </div>
                     
-                    <div class="form" id="elem"><!--Form-->
+                    <!--Form1-->
+                    <div class="form" id="elem">
 
 
                         <form action="" method="get">
@@ -70,7 +71,7 @@
 
                         <div class="sub-button">
                             <a href="main.html"><button class="enter" type="button">Entrar</button></a>
-                            <button class="sign-up" id="troc_cad">Cadastrar</button>
+                            <!-- <button class="sign-up" id="troc_cad">Cadastrar</button> -->
                         </div>
                         
                         <div class="social-media">
@@ -89,43 +90,51 @@
 
 
 
-
-                    <div class="form2"><!--Form2-->
+                    <!--Form2-->
+                    <div class="form2">
 
                         <span>Campos marcados com * são obrigatórios</span>
 
-                        <form action="" method="get">
+                        <form action="" method="POST" id="cadForm">
 
                             <div class="enter">
                                 <label for="">Nome Completo:</label>
-                                <input type="text" placeholder="Nome">
+                                <input type="text" name="nome" placeholder="Nome">
                             </div>
 
                             <div class="enter">
                                 <label for="">CPF:</label>
-                                <input type="tel" placeholder="CPF">
+                                <input type="tel" name="cpf" placeholder="CPF">
                             </div>
 
                             <div class="enter">
                                 <label for="">Celular:</label>
-                                <input type="tel" placeholder="Celular">
+                                <input type="tel" name="cell" placeholder="Celular">
                             </div>
 
                             <div class="enter">
                                 <label for="">Email:</label>
-                                <input type="email" placeholder="Email">
-                            </div>
+                                <input type="email" name="email" placeholder="Email">
+                            </div> 
 
                             <div class="enter">
                                 <label for="">Senha:</label>
-                                <input type="text" placeholder="Senha">
+                                <input type="password" name="senha" placeholder="Senha">
                             </div>
+
+                            <div class="sub-button">
+                                
+                                <button class="enter" type="button" id="troc_log">Entrar</button>
+                                
+                                <button type="submit" class="sign-up" id="cadSubBtn">Cadastrar</button>
+                            </div>
+
                         </form>
 
-                        <div class="sub-button">
-                            <button class="enter" type="button" id="troc_log">Entrar</button>
-                            <button class="sign-up">Cadastrar</button>
-                        </div>
+                        
+
+
+                        
                         
                         <div class="social-media">
                             <a href="https://www.facebook.com/FundacaoTerra/" target="blank"><i class="fa-brands fa-facebook"></i></a>
@@ -151,63 +160,7 @@
     
     <!-- Script -->
    <script src="js/jquery-3.6.0.js"></script>
-
-
-    <script>
-
-        var cad_b = $('#troc_cad');
-        var log_b = $('#troc_log');
-        var cad_a = $('#cad');
-        var log_a = $('#log')
-
-        function changF2(){
-
-            $('.form').fadeOut();
-
-            setTimeout(function(){
-                $('.form2').fadeIn();
-                $('.form2').css('display','flex');
-            },500);
-        }
-
-        function changF1(){
-
-            $('.form2').fadeOut();
-
-            setTimeout(function(){
-                $('.form').fadeIn();
-                // $('.form2').css('display','flex');
-            },500);
-        }
-
-
-
-        cad_b.click(function(){
-            cad_a.css("cursor","default");
-            log_a.css("cursor","pointer");
-            changF2();
-        });
-
-        log_b.click(function(){
-            changF1()
-            cad_a.css("cursor","pointer");
-            log_a.css("cursor","default");
-        });
-
-        cad_a.click(function(){
-            cad_a.css("cursor","default");
-            log_a.css("cursor","pointer");
-            changF2();
-        });
-
-        log_a.click(function(){
-            changF1()
-            log_a.css("cursor","default");
-            cad_a.css("cursor","pointer");
-        });
-
-
-    </script>
+   <script src="js/functions.js"></script>
 
 </body>
 </html>

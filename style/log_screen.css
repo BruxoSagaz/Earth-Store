@@ -92,7 +92,7 @@ section div.form-animation{
     color: black;
 }
 
-.form2 .sub-button .enter {
+.form2  button.enter {
     box-shadow: 0px 10px 14px -7px #e6333c;
     background-color: #df0711;
     border-radius: 5px;
@@ -181,7 +181,7 @@ div.enter{
     width: 100%;
 }
 
-.sub-button .enter{
+.form .sub-button .enter{
     box-shadow: 0px 10px 14px -7px #e6333c;
     background-color: #f1f1f1;
     border-radius: 5px;
@@ -193,11 +193,12 @@ div.enter{
     padding: 9px 28px;
     text-decoration: none;
     border: 0;
+    width: 280px;
     margin: 0px 4px;
 }
 
 
-.sub-button .sign-up{
+.sign-up{
     box-shadow: 0px 10px 14px -7px #e6333c;
     background-color: #f1f1f1;
     border-radius: 5px;
@@ -297,6 +298,15 @@ div.enter{
     div.enter{
         margin: 8px 0px;
         padding:0px calc(6% - 2px);
+    }
+
+}
+
+
+@media screen and (max-width:368px){
+    .sub-button button.enter{
+        width: 100px;
+        padding: 9px 18px;
     }
 }
 
