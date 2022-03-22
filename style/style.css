@@ -442,7 +442,7 @@ div.banner-p{
     font-family: 'Open Sans';
     z-index: 2;
     color: white;
-    background-color: #de0610;
+    background-color: #df5056;
 }
 
 .promotion{
@@ -471,7 +471,7 @@ div.banner-p{
     color: white;
     font-weight: 600;
     z-index: 1;
-    left: 0;
+    top: -10px;
 }
 
 

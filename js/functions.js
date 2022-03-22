@@ -60,20 +60,35 @@ log_a.click(function(){
 // Validações e Submit
 
 var cadBtn = $('#cadSubBtn');
-var form = $('#cadForm');
+var form = $('.form2 #cadForm');
 
 
 
-form.submit(function(){
+form.submit(function(e){
+
+    // e.preventDefalt();
 
     var nome = $('input[name=nome]').val();
     var cpf = $('input[name=cpf]').val();
     var cell = $('input[name=cell]').val();
     var email = $('input[name=email]').val();
     var senha = $('input[name=senha]').val();
+    var amount = nome.split(' ').length;
+    var splitStr = nome.split(' ');
 
-    if(nome.split(' ').length >= 2){
+    if( amount >= 2){
         console.log("passou");
+        for(var i = 0; i < amount; i++){
+            //Trocando para primeira maiuscula
+            var word = splitStr[i];
+            var capt = word[0].toUpperCase() + word.slice(1).toLowerCase();
+            splitStr[i] = capt;
+
+            console.log(splitStr[i]);
+        }
+    }else{
+        console.log("não passou");
+        return false;
     }
 
     //se chegar ao final envia

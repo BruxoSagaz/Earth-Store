@@ -92,7 +92,7 @@ section div.form-animation{
     color: black;
 }
 
-.form2  button.enter {
+/* .form2  button.enter {
     box-shadow: 0px 10px 14px -7px #e6333c;
     background-color: #df0711;
     border-radius: 5px;
@@ -104,7 +104,7 @@ section div.form-animation{
     padding: 9px 28px;
     text-decoration: none;
     border: 0;
-}
+} */
 
 .screen .title{
     display: flex;
@@ -210,6 +210,7 @@ div.enter{
     padding: 9px 28px;
     text-decoration: none;
     border: 0;
+    width: 270px;
 }
 
 .social-media{
@@ -274,7 +275,8 @@ div.enter{
         width: 100%;
     }
 
-    .form input[type='text'], .form input[type='email'], .form2 input[type='text'], .form2 input[type='email'] {
+    .form input[type='text'],
+    .form input[type='email'], .form2 input {
         width: 100%;
     }
 
@@ -304,7 +306,7 @@ div.enter{
 
 
 @media screen and (max-width:368px){
-    .sub-button button.enter{
+    .form .sub-button button.enter{
         width: 100px;
         padding: 9px 18px;
     }
