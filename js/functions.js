@@ -63,39 +63,129 @@ var cadBtn = $('#cadSubBtn');
 var form = $('.form2 #cadForm');
 
 
-
 form.submit(function(e){
 
-    // e.preventDefalt();
+    stopDefAction(e);
 
     var nome = $('input[name=nome]').val();
     var cpf = $('input[name=cpf]').val();
     var cell = $('input[name=cell]').val();
     var email = $('input[name=email]').val();
     var senha = $('input[name=senha]').val();
+
+    //se chegar ao final envia
+    if(verificarNome(nome) == false){
+        aplicarCampoInvalido($('input[name=nome]'));
+    }if(verificarCell(cell)== false){
+        aplicarCampoInvalido($('input[name=cell]'));
+    }if(verificarEmail(email) == false){
+        aplicarCampoInvalido($('input[name=email]'));
+    };
+
+    return false;
+});
+
+
+// Funções de validação
+function verificarNome(nome){
+
+    // e.preventDefalt();
+
+    if(nome == ''){
+        return false;
+    }
+
     var amount = nome.split(' ').length;
     var splitStr = nome.split(' ');
+    var final = '';
+
 
     if( amount >= 2){
-        console.log("passou");
+
         for(var i = 0; i < amount; i++){
             //Trocando para primeira maiuscula
             var word = splitStr[i];
             var capt = word[0].toUpperCase() + word.slice(1).toLowerCase();
             splitStr[i] = capt;
 
-            console.log(splitStr[i]);
         }
+
+        for(var i = 0; i < amount; i++){
+            final += splitStr[i] + " ";
+        }
+
+        $('input[name=nome]').val(final);
+
     }else{
-        console.log("não passou");
         return false;
     }
 
-    //se chegar ao final envia
+}
+
+function aplicarCampoInvalido(el){
+    var sd = el.attr('placeholder')
+    el.val('');
+    el.css('border', '0px solid red');
+    el.animate({'borderWidth': '3px'});
+    el.attr("placeholder", "Campo Inválido");
+    setTimeout(function(){
+        el.animate({'borderWidth': '0px'});
+    },500);
+    setTimeout(function(){
+        el.css('border', '1px solid #ccc');
+        el.attr("placeholder", sd);
+    },1000);
+    
 
     return false;
-});
+}
 
+function verificarCell(cell){
+    if(cell == ''){
+        return false;
+    }
+    if(cell.match(/^\([0-9]{2}\)[0-9]{5}-[0-9]{4}$/) == null){
+        return false;
+    }
+}
 
+function verificarEmail(email){
+    if(email == ''){
+        return false;
+    }
 
+    if(email.match(/^([a-z0-9A-Z]{1,})+@+([a-z0-9A-Z.]{1,})$/) == null){
+        return false;
+    }
+
+    var amount = email.split('@').length;
+    var splitStr = email.split('@');
+    var montage = "";
+
+    if( amount >= 2){
+
+        for(var i = 0; i < amount; i++){
+            //Trocando para primeira minuscula
+            var capt = splitStr[i].toLowerCase();
+            
+            splitStr[i] = capt;
+
+            if(i == 1){
+                montage += '@';
+            }
+
+            montage+=splitStr[i];
+        }
+
+        $('input[name=email]').val(montage);
+
+    }else{
+        return false;
+    }
+
+}
+
+function stopDefAction(evt) {
+    evt.preventDefault();
+}
 
