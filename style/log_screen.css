@@ -169,7 +169,18 @@ div.enter{
 }
 
 .form input[type='text']:focus,
-.form2 input[type='text']:focus{
+.form input[type='email'],
+.form2 input{
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 275px;
+    padding: 10px;
+}
+
+.form input[type='text']:focus,
+.form input[type='email']:focus,
+.form2 input:focus{
     outline: 0;
 }
 
