@@ -80,14 +80,22 @@ $(document).ready(function(){
         //se chegar ao final envia
         if(verificarNome(nome) == false){
             aplicarCampoInvalido($('input[name=nome]'));
+            // return false;
         }if(verificarCell(cell)== false){
             aplicarCampoInvalido($('input[name=cell]'));
+            // return false;
         }if(verificarEmail(email) == false){
             aplicarCampoInvalido($('input[name=email]'));
+            // return false;
         }if(verificarCPF(cpf) == 'Um CPF não pode ter letras' ){
             aplicarCampoInvalido($('input[name=cpf]'),'Um CPF não pode ter letras');
+            // return false;
         }else if(verificarCPF(cpf) == false){
             aplicarCampoInvalido($('input[name=cpf]'));
+            // return false;
+        }if(verificarSenha() == false){
+            aplicarCampoInvalido($('input[name=senha]'));
+            // return false;
         };
 
         return false;
@@ -219,7 +227,7 @@ $(document).ready(function(){
 
     }
 
-
+    // Validar CPF
     function verificarCPF(cpf){
 
         cpf = cpf.toString();
@@ -261,8 +269,80 @@ $(document).ready(function(){
 
     }
 
+    function verificarSenha(){
 
+        if(senhaSeg() < 45){
+            return  false;
+        }
+
+
+    }
+
+    function senhaSeg(){
+        var el = $('#senha');
+        var senha = el.val();
+        var seg = 0;
+        var tamanho = senha.length;
+
+        console.log(senha);
+
+        if(tamanho >= 4 && tamanho <= 6 ){
+            seg += 10;
+            console.log("satisfaz1");
+        }else if (tamanho > 6 ){  
+            console.log("satisfaz2");
+            seg += 25;
+        }
+
+        if(senha.match(/[a-z]+/) && senha.match(/[A-Z]+/)){
+            seg += 10;  
+            console.log("satisfaz3");
+        }
+
+        if(senha.match(/[0-9]+/)){
+            seg += 10;
+            console.log("satisfaz4");
+        }
+
+        if(senha.match(/[@!#$%&*]+/)){
+            seg += 20;
+            console.log("satisfaz5");
+
+        }
+
+        return seg;
+    }
+
+
+    function mostrarSeg(seg){
+        var ind =  $('#segtotal');
+
+        ind.css("display", "block");
+
+        console.log("seg total: " + seg);
+
+        if(seg <= 25){
+            ind.text("Muito Fraca");
+            ind.css('color', "red");
+        }else if(seg > 25 && seg < 45){            
+            ind.text("Fraca");
+            ind.css('color', "orange");
+        }else if(seg >= 45 && seg <= 55){
+            ind.text("média");
+            ind.css('color', "green");
+        }else if(seg > 55 && seg <= 65){
+            ind.text("Muito Forte");
+            ind.css('color', "blue");
+        }
+    }
+
+    $('#senha').on('keyup', function() {
+        //Mostra a segurança de senha pelo retono da função
+        mostrarSeg(senhaSeg());
+    })
     // Mascaras
     $('#cpf').mask('000.000.000-00');
     $('#cell').mask('(00)00000-0000');
+
+
 })

@@ -184,6 +184,15 @@ div.enter{
     outline: 0;
 }
 
+.seg-senha{
+    display: none;
+    padding-left: 5px;
+}
+
+.password-area{
+    display: inline-flex;
+}
+
 .sub-button{
     margin-top: 30px;
     display: flex;
