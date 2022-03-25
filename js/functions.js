@@ -67,13 +67,13 @@ $(document).ready(function(){
 
     form.submit(function(e){
 
-        stopDefAction(e);
+        // stopDefAction(e);
 
         var nome = $('input[name=nome]').val();
         var cpf = $('input[name=cpf]').val();
         var cell = $('input[name=cell]').val();
         var email = $('input[name=email]').val();
-        var senha = $('input[name=senha]').val();
+        // var senha = $('input[name=senha]').val();
 
 
 
@@ -98,6 +98,11 @@ $(document).ready(function(){
             // return false;
         };
 
+        //se chegar ao final envia
+        if(verificarNome(nome) != false && verificarCell(cell) != false && verificarEmail(email) != false && verificarCPF(cpf) == true &&  verificarSenha() != false){
+            console.log("Negão");
+            return true;
+        }
         return false;
     });
 
@@ -265,6 +270,7 @@ $(document).ready(function(){
     
         if ((resto == 10) || (resto == 11))  resto = 0;
         if (resto != parseInt(cpf.substring(10, 11) ) ) return false;
+
         return true;
 
     }
@@ -284,29 +290,23 @@ $(document).ready(function(){
         var seg = 0;
         var tamanho = senha.length;
 
-        console.log(senha);
 
         if(tamanho >= 4 && tamanho <= 6 ){
             seg += 10;
-            console.log("satisfaz1");
         }else if (tamanho > 6 ){  
-            console.log("satisfaz2");
             seg += 25;
         }
 
         if(senha.match(/[a-z]+/) && senha.match(/[A-Z]+/)){
             seg += 10;  
-            console.log("satisfaz3");
         }
 
         if(senha.match(/[0-9]+/)){
             seg += 10;
-            console.log("satisfaz4");
         }
 
         if(senha.match(/[@!#$%&*]+/)){
             seg += 20;
-            console.log("satisfaz5");
 
         }
 
@@ -319,7 +319,6 @@ $(document).ready(function(){
 
         ind.css("display", "block");
 
-        console.log("seg total: " + seg);
 
         if(seg <= 25){
             ind.text("Muito Fraca");

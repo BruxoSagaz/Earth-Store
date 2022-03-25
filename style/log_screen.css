@@ -26,18 +26,17 @@ section{
 }
 
 section div.screen{
-    width: 60%;
+    width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-content: center;
     flex-direction: row;
     align-items: center;
 }
 
-section div.space{
-    width: 40%;
-    height: 100%;
+section div.space {
+    width: 60px;
 }
 
 section div.form-div{
@@ -256,16 +255,27 @@ div.enter{
 }
 
 
+@media screen and (max-width:1900px) {
+    section div.form-div {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    h2{
+        font-size: 28px;
+    }
+
+    section div.form-div {
+        width: 46%;
+    }
+
+}
+
 
 @media screen and (max-width:768px) {
 
-    .space{
-        display: none;
-    }
 
-    section div.screen {
-        width: 100%;
-    }
 
     body{
         background-image: url('../images/bg_login_mobile.png');
@@ -325,7 +335,7 @@ div.enter{
 }
 
 
-@media screen and (max-width:368px){
+@media screen and (max-width:400px){
     .form .sub-button button.enter{
         width: 100px;
         padding: 9px 18px;
