@@ -214,6 +214,7 @@ input::placeholder{
     font-family: 'Open Sans';
     font-size: 14px;
     color: #df0109;
+    cursor: pointer;
 }
 
 /* Fim Header*/
@@ -438,7 +439,7 @@ div.banner-p{
 }
 
 
-.promo-section h2{
+.promo-section h2,.indications h2{
     text-align: center;
     font-weight: 300;
     padding: 5px 0;
@@ -459,7 +460,7 @@ div.banner-p{
 .offers .item{
     width: 20%;
     box-sizing: border-box;
-    height: 366px;
+    height: 390px;
     padding: 0 10px;
     margin-bottom: 25px;
 }
@@ -467,7 +468,7 @@ div.banner-p{
 .result-items .offers .item {
     width: 25%;
     box-sizing: border-box;
-    height: 366px;
+    height: 382px;
     padding: 0 10px;
     margin-bottom: 25px;
 }
@@ -540,6 +541,9 @@ div.product-name{
     border-bottom: 1px solid #ccc;
 }
 
+.result-items div.product-name {
+    padding: 0px 40px;
+}
 
 
 .price-box{
@@ -556,6 +560,10 @@ div.product-name{
     align-content: center;
     justify-content: center;
     align-items: center;
+}
+
+.price-item span{
+    color: #c9040e;
 }
 
 .price-box .price-before{
