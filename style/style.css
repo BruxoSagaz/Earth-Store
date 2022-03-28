@@ -449,19 +449,27 @@ div.banner-p{
     background-color: #df5056;
 }
 
-.promotion{
+.offers{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 25px 0;
 }
 
-.promotion .item{
+.offers .item{
     width: 20%;
     box-sizing: border-box;
-    height: 386px;
+    height: 366px;
     padding: 0 10px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.result-items .offers .item {
+    width: 25%;
+    box-sizing: border-box;
+    height: 366px;
+    padding: 0 10px;
+    margin-bottom: 25px;
 }
 
 .discount{
@@ -480,7 +488,7 @@ div.banner-p{
 }
 
 
-.promotion .item > .product{
+.offers .item > .product{
 
     border: 1px solid #adadad2e;
     width: 100%;
@@ -515,7 +523,7 @@ div.banner-p{
 div.product{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 div.product-name{
@@ -590,7 +598,27 @@ div.product-name{
     cursor: pointer;
 }
 
+.price-cart-allign{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.product-allign{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.under-area{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 2px;
+}
 
 
 
@@ -813,7 +841,7 @@ div.product-name{
         max-height: 100px;
     }
 
-    .promotion .item{
+    .offers .item{
         width: 50%;
         height: 430px;
     }
