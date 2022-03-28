@@ -129,16 +129,41 @@
                 <div class="filter-columns">
                     <!-- Filters -->
                     <div class="filters">
-
-                        <div class="filter-case">
+                        <!-- Categorias -->
+                        <div class="filter-case" onclick="slidingToggle(1)">
                             <h3>Categoria</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
 
+                        <div class="filter-options" id="filter-cases1">
 
-                        <div class="filter-case">
+                            <div class="block">
+                                <input type="checkbox"><span> Categora1</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Categora2</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Categora3</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Categora4</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Categora5</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Preços -->
+                        <div class="filter-case" onclick="slidingToggle(2)">
                             <h3>Preços</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
-                        <div class="filter-options">
+
+                        <div class="filter-options-price" id="filter-cases2">
 
                             <div class="block">
                                 <input type="checkbox"><span> Até R$ 4,99</span>
@@ -162,25 +187,95 @@
 
                             <div class="block">
                                 <input type="checkbox"><span> Acima de R$ 500,00 </span>
-                        </div>
+                            </div>
                         </div>
 
-
-                        <div class="filter-case">
+                        <!-- marca -->
+                        <div class="filter-case" onclick="slidingToggle(3)">
                             <h3>Marca</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
 
-                        <div class="filter-case">
+                        <div class="filter-options" id="filter-cases3">
+                            <div class="block">
+                                <input type="checkbox"><span> Fundação Terra</span>
+                            </div>
+                        </div>
+
+
+                        <!-- Cor -->
+                        <div class="filter-case" onclick="slidingToggle(4)">
                             <h3>Cor</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
 
-                        <div class="filter-case">
+                        <div class="filter-options" id="filter-cases4">
+
+                            <div class="block">
+                                <input type="checkbox"><span> Azul</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Amarelo</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Marrom</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Preto</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Colorido</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Material -->
+                        <div class="filter-case" onclick="slidingToggle(5)">
                             <h3>Material</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
 
-                        <div class="filter-case">
+                        <div class="filter-options" id="filter-cases5">
+
+                            <div class="block">
+                                <input type="checkbox"><span> Madeira</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Acrílico</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Pérola</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Cristal</span>
+                            </div>
+                        </div>
+
+                        <!-- Tema -->
+                        <div class="filter-case" onclick="slidingToggle(6)">
                             <h3>Tema</h3><i class="fa-solid fa-angle-down"></i>
                         </div>
+
+                        <div class="filter-options" id="filter-cases6">
+
+                            <div class="block">
+                                <input type="checkbox"><span> 1ª Comunhão</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Divina Misericórdia</span>
+                            </div>
+
+                            <div class="block">
+                                <input type="checkbox"><span> Infantil</span>
+                            </div>
+
+                        </div>
+
                     </div>
 
 
@@ -220,11 +315,12 @@
                                                 <div class="price-item">
                                                     <div class="price-before">R$ 30,00</div>
                                                     <div class="price-off"> R$ 25,00</div>
-                                                    <span>+ Frete</span>
+                                                    
                                                 </div>
         
                                                 <div  class="divisions">
                                                     <span>Ou 2x de R$ 13,00  </span>
+                                                    <span>+ sFrete</span>
                                                 </div>
         
                                             </div>
@@ -260,13 +356,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -300,13 +398,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -340,13 +440,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -380,13 +482,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -420,13 +524,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -460,13 +566,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -500,13 +608,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -540,13 +650,15 @@
                                         <div class="price-box">
                                             <div class="price-item">
                                                 <div class="price-off"> R$ 25,00</div>
-                                                <span>+ Frete</span>
+                                                
                                             </div>
         
                                             <div  class="divisions">
                                                 <span>Ou 2x de R$ 13,00  </span>
+                                                <span>+ Frete</span>
                                             </div>
-        
+  
+                                            
                                         </div>
         
                                         <div class="add-to-cart">
@@ -673,7 +785,11 @@
                 }
 
             })
+
+            
+
         })
+
 
     </script>
 </body>

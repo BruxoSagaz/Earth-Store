@@ -551,6 +551,7 @@ div.product-name{
     flex-direction: column;
     justify-content: center;
     font-family: "Open Sans";
+    padding-bottom: 18px;
 }
 
 .price-box .price-item{
@@ -562,7 +563,7 @@ div.product-name{
     align-items: center;
 }
 
-.price-item span{
+.divisions span:nth-child(2){
     color: #c9040e;
 }
 

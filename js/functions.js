@@ -59,5 +59,35 @@ $(document).ready(function(){
         cad_a.css("cursor","pointer");
     });
 
-    
 })
+
+
+//filter-case
+function slidingToggle(num){
+
+    switch(num){
+        case 1:
+            $('#filter-cases1').slideToggle();
+        break;
+
+        case 2:
+            $('#filter-cases2').slideToggle();
+        break;
+
+        case 3:
+            $('#filter-cases3').slideToggle();
+        break;
+
+        case 4:
+            $('#filter-cases4').slideToggle();
+        break;
+
+        case 5:
+            $('#filter-cases5').slideToggle();
+        break;
+
+        case 6:
+            $('#filter-cases6').slideToggle();
+        break;
+    }
+}
