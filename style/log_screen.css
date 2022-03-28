@@ -38,11 +38,11 @@ section div.screen{
 section div.space {
     width: 60px;
 }
-/*#DF0109 */
+/*#DF0109 #e33a40 */
 section div.form-div{
     width: 65%;
     height: 600px;
-    background-color: #e33a40 ;
+    background-color: #DF0109 ;
     border-radius: 25px;
     display: flex;
     box-shadow: 20px 14px 22px 0px #afaaaa;
@@ -93,7 +93,7 @@ section div.form-animation{
 
 /* .form2  button.enter {
     box-shadow: 0px 10px 14px -7px #e6333c;
-    background-color: #e33a40 ;
+    background-color: #DF0109 ;
     border-radius: 5px;
     cursor: pointer;
     color: #ffffff;
@@ -123,7 +123,7 @@ section div.form-animation{
     text-align: center;
     background-color: #fff;
     border-radius: 0px 24px 0px 0px;
-    color: #e33a40 ;
+    color: #DF0109 ;
     cursor: pointer;
 }
 
@@ -205,7 +205,7 @@ div.enter{
     background-color: #f1f1f1;
     border-radius: 5px;
     cursor: pointer;
-    color: #e33a40 ;
+    color: #DF0109 ;
     font-family: Arial;
     font-size: 20px;
     font-weight: bold;
@@ -222,7 +222,7 @@ div.enter{
     background-color: #f1f1f1;
     border-radius: 5px;
     cursor: pointer;
-    color: #e33a40 ;
+    color: #DF0109 ;
     font-family: Arial;
     font-size: 20px;
     font-weight: bold;
@@ -345,7 +345,7 @@ div.enter{
 
 @keyframes changeColor {
     from{
-        background-color:#e33a40  ;
+        background-color:#DF0109  ;
     }
 
     to{
@@ -367,7 +367,7 @@ div.enter{
 @keyframes colorIconF2 {
     from{
         
-        color:#e33a40 ;
+        color:#DF0109 ;
     }
 
     to{
