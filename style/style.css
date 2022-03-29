@@ -235,12 +235,11 @@ input::placeholder{
     width: 300px;
     min-height: 400px;
     background: #df0109;
-    position: absolute;
-    top: 71px;
-    right: 97px;
+    position: relative;
+    top: -31px;
+    right: -9px;
     z-index: 10;
-    padding: 0 2%;
-    margin: 0 auto;
+    float: right;
 }
 
 .cart-sidebar::before{
@@ -740,6 +739,9 @@ div.product-name{
         height: 200px;
     }
 
+    .cart-sidebar{
+        display: none;
+    }
 
     header{
         height: 65px;

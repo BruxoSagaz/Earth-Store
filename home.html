@@ -39,6 +39,7 @@
         
         <!-- Container -->
         <div class="container">
+  
             <!-- Header Desktop -->
             <div class="desktop-header">
                 <!-- Logo -->
@@ -70,15 +71,17 @@
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
 
-                            <div class="cart-sidebar">
-
-                            </div>
-
                         </div>
                     </ul>
                 </nav><!-- Nav -->
-            </div><!-- Container -->
-        </div><!-- Header Desktop -->
+
+            </div>
+            
+            <div class="cart-sidebar">
+
+            </div>
+
+        </div><!-- Container --><!-- Header Desktop -->
 
         <div class="container">
             <div class="mobile-header">
@@ -94,13 +97,6 @@
                    <a href="cadastro"><i class="fa-solid fa-arrow-right-to-bracket" ></i></a> <!--<li>Minha Conta</li> -->
                 </ul>
                 
-
-                <ul id="slide-out" class="sidenav">
-  
-
-                </ul>
-
-
             </div>
 
         </div>
@@ -1129,7 +1125,6 @@
     <!-- Script -->
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/functions.js"></script>
-    <script src="js/materialize.js"></script>
 
     <script>
         $(function () {
@@ -1149,13 +1144,30 @@
                 }
 
             })
-            
+
             abrirJanela();
             function abrirJanela(){
-                $('.bag-shipping').click(function(){
+                $('.bag-shipping').click(function(e){
+                    e.stopPropagation();
                     $('.cart-sidebar').fadeToggle("slow");
                 });
+
+                $('body').click(function(){
+                    $('.cart-sidebar').fadeOut("slow");
+                });
+
             }
+
+            window.addEventListener('resize', hideCartSideBar);
+
+            function hideCartSideBar(){
+
+                if($(window).width() < 768){
+                    $('.cart-sidebar').replaceWith('<div class="cart-sidebar"></div>');
+                }
+
+            }
+            
         })
 
     </script>
