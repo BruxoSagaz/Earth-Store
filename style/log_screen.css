@@ -18,6 +18,14 @@ body{
     width: 50%;
 }
 
+h1{
+    text-align: center;
+    color: white;
+    margin-top: 45px;
+    font-size: 35px;
+    text-decoration: underline;
+    cursor: default;
+}
 
 section{
     height: 100vh;
@@ -129,7 +137,7 @@ section div.form-animation{
 
 .form{
     width: 100%;
-    padding: 110px;
+    padding: 55px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -286,7 +294,8 @@ div.enter{
     }
 
     .form{
-        padding: 90px 0;
+        padding: 55px 0;
+
     }
 
     .form form{
@@ -337,8 +346,13 @@ div.enter{
 
 @media screen and (max-width:400px){
     .form .sub-button button.enter{
-        width: 100px;
+        width: 110px;
         padding: 9px 18px;
+    }
+
+    h1{
+        font-size: 25px;
+        margin-top: 36px;
     }
 }
 

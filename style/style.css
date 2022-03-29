@@ -94,6 +94,19 @@ div.autow{
 # 
 */
 
+/*Modal*/
+
+.modal-bg{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 /* header */ 
 
 header{
@@ -101,7 +114,7 @@ header{
     background-color: white;
     position: fixed;
     width: 100%;
-    z-index: 999;
+    z-index: 8;
     top: 0;
     box-shadow: 0px 3px 13px 0px #a39e9e;
 }
@@ -215,6 +228,41 @@ input::placeholder{
     font-size: 14px;
     color: #df0109;
     cursor: pointer;
+}
+
+.cart-sidebar{
+    display: none;
+    width: 300px;
+    min-height: 400px;
+    background: #df0109;
+    position: absolute;
+    top: 71px;
+    right: 97px;
+    z-index: 10;
+    padding: 0 2%;
+    margin: 0 auto;
+}
+
+.cart-sidebar::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 21px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #df0109;
+}
+
+.cart-sidebar::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -16px;
+    height: 16px;
+    z-index: -1;
+    width: 100%;
+    left: 0;
 }
 
 /* Fim Header*/
