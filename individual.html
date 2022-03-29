@@ -213,7 +213,7 @@
                                 </div>
 
                                 <div class="submit-area">
-                                    <input type="text" placeholder="00000-000" minlength="9" maxlength="9" required>
+                                    <input type="text" id="ceps" placeholder="00000-000" >
                                     <button type="submit">Calcular</button>
                                 </div>
                             </div>
@@ -567,6 +567,7 @@
     <!-- Script -->
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/jquery.mask.js"></script>
 
     <script>
         $(function () {
@@ -586,6 +587,9 @@
                 }
 
             })
+
+            $('#ceps').mask('00000-000');
+
         })
 
     </script>

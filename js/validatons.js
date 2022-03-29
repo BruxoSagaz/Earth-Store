@@ -278,7 +278,9 @@
         //Mostra a segurança de senha pelo retono da função
         mostrarSeg(senhaSeg());
     })
+
     // Mascaras
     $('#cpf').mask('000.000.000-00');
     $('#cell').mask('(00)00000-0000');
+
 

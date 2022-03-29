@@ -504,6 +504,7 @@ div.banner-p{
     display: flex;
     justify-content: center;
     width: 85%;
+    min-width: 190px;
 }
 
 .product .product-image a{
@@ -530,7 +531,7 @@ div.product{
 div.product-name{
     margin: 0px 0px 5px;
     font-size: 19px;
-    padding: 0px 49px;
+    padding: 0px 0px;
     line-height: 2.23;
     letter-spacing: 0.28px;
     -ms-flex-positive: 1;
@@ -538,7 +539,7 @@ div.product-name{
     display: block;
     text-align: center;
     max-height: 40px;
-    border-bottom: 1px solid #ccc;
+
 }
 
 .result-items div.product-name {
@@ -615,11 +616,14 @@ div.product-name{
 
 .product-allign{
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-content: center;
     align-items: center;
+    min-height: 240px;
+    border-bottom: 1px solid #ccc;
+    flex-direction: column;
 }
+
 
 .under-area{
     height: 100%;
@@ -676,6 +680,12 @@ div.product-name{
 
 /* Responsivity */
 
+@media screen and (max-width:607px) {
+
+
+}
+
+
 @media screen and (max-width:768px) {
     .logo-desktop{
         display: none;
@@ -730,6 +740,7 @@ div.product-name{
 
     .desk div.alert-icon span {
         padding: 0px 5px;
+        font-size: 20px;
     }
 
     .desk div.alert-icon .p-balance > p.zapzap{
@@ -738,7 +749,7 @@ div.product-name{
 
     .text-desk{
    
-        font-size: 26px;
+        font-size: 20px;
         width: auto;
         text-align: center;
 
@@ -832,6 +843,7 @@ div.product-name{
     .mobile-header i{
         font-size: 32px;
         padding-top: 14px;
+        color: #de0610;
     }
 
     .mobile-header .list-nav i{
@@ -856,6 +868,11 @@ div.product-name{
     }
 
 
+    .divisions span:nth-child(2){
+        color: #c9040e;
+        display: block;
+        text-align: center;
+    }
 }
 
 
