@@ -55,11 +55,11 @@
         <div class="container">
             <!-- Div de form -->
             <div class="form-area">
-                <div class="flex center"><h2>Cadastro de Item</h2></div>
+                <div class="flex-center"><h2>Cadastro de Item</h2></div>
 
 
                 <form action="#">
-
+                    <div class="flex-center">
                     <div class="input-area">
                         <label for="nome">Nome do Produto: </label>
                         <input type="text" name="nome" id="">
@@ -67,17 +67,171 @@
 
                     <div class="input-area">
                         <label for="">Categoria: </label>
-                        <input list="categorias" name="categorias">
+                        <input list="categorias" name="categorias" class="list">
+                        <!-- Datalist    -->
                         <datalist id="categorias">
                             <option value="Terços"></option>
                         </datalist>
                     </div>
+
+                    <div class="input-area">
+                        <label for="preco">Preço Base: </label>
+                        <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;">
+                    </div>
+
                     
+                    <div class="input-area">
+                        <label for="prom">aplicar promoção:</label>
+                        <input type="checkbox" name="prom_ver" id="aply_prom">
+                    </div>
+
+                    <div class="input-area">
+                        <input type="text" step="0.01" name="prom_val" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px;" id="prom_val" disabled>
+                        <label for="prom_val">(valor em promoção)</label>
+                    </div>
+
+                    </div>
+
+                    <div class="flex-center">
+
+                        <div class="input-area">
+                            <label for="parcelas">Divisão de Parcelas</label>
+                            <select name="parcelas" id="">
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="1">3</option>
+                                <option value="1">4</option>
+                                <option value="1">5</option>
+                                <option value="1">6</option>
+                                <option value="1">7</option>
+                                <option value="1">8</option>
+                                <option value="1">9</option>
+                                <option value="1">10</option>
+                                <option value="1">11</option>
+                                <option value="1">12</option>
+                            </select>
+                        </div>
+
+                        <div class="input-area">
+                            <label for="quantity">Quantidade em estoque</label>
+                            <input type="number" name="quatity" id="" maxlength="7">
+                        </div>
+
+                        <div class="input-area">
+
+                            <label for="">Filtro: </label>
+                            <input list="filtro" name="filtro" class="list" id="filter">
+                            <!-- Datalist -->
+                            <datalist id="filtro">
+                                <option value="cor"></option>
+                            </datalist>
+
+                            <label for="">Valor: </label>
+                            <input list="valor" name="valor" class="list"  id="value">
+                            <!-- Datalist -->
+                            <datalist id="valor">
+                                <option value="preto"></option>
+                            </datalist>
+
+                            <button id="startTag"> OK </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-center">
+
+                        <div class="input-area" style="width: 40%; margin-left: 85px;">
+                            <div class="tag-container">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex-center">
+                        <label for="descricaoGeral">Descrição Geral: </label>
+                        <textarea name="descricaoGeral" id="descricaoGeral" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div class="flex-center">
+                        <label for="especificacoes">Especficações: </label>
+                        <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style="margin-left: 20px;"></textarea>
+                    </div>
+
+
+                    <div class="flex-center">
+                        <label for="images">Imagens (falta integração)</label>
+                        <input type="file" name="images" id="">
+                    </div>
                 </form>
 
             </div>
         </div>
     </main>
 
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/validatons.js"></script>
+ 
+
+    <script>
+        $(document).ready(function(){
+            var aply = $('#aply_prom');
+            
+            aply.click(function(){
+
+                if (aply.is(':checked')){
+                    $('#prom_val').prop('disabled', false);
+                }else{
+                    $('#prom_val').prop('disabled', true);
+                }
+            })
+
+            $('.valor').mask('000.000.000.000.000,00 R$', {reverse: true});
+
+            $('#startTag').click(function(e){
+
+                e.preventDefault();
+
+                var filter = $('#filter').val();
+                var value = $('#value').val();
+                var tag = filter +" : "+ value;
+
+                let tags = [];
+
+                function createTag(tag) {
+                    const div = document.createElement('div');
+                    div.setAttribute('class', 'tag');
+                    const span = document.createElement('span');
+                    span.innerHTML = tag;
+                    const closeIcon = document.createElement('i');
+                    closeIcon.innerHTML = 'X';
+                    closeIcon.setAttribute('class', 'close');
+                    closeIcon.setAttribute('data-item', tag);
+                    div.appendChild(span);
+                    div.appendChild(closeIcon);
+                    return div;
+                }
+
+                
+                function clearTags() {
+                    document.querySelectorAll('.tag').forEach(tag => {
+                        tag.parentElement.removeChild(tag);
+                    });
+                }
+
+                var div = createTag(tag);
+
+                $(div).appendTo(".tag-container");
+
+
+                var filter = $('#filter').val("");
+                var value = $('#value').val("");
+            });
+        });
+    </script>
 </body>
 </html> 
