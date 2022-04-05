@@ -147,6 +147,7 @@ textarea{
     border: 2px solid #ccc;
     border-radius: 3px;
     background: #fff;
+    padding: 4px 10px;
 }
 
 .tag-container {
@@ -175,12 +176,14 @@ textarea{
     cursor: default;
   }
 
-  .tag i {
-    font-size: 16px;
-    color: #666;
-    margin-left: 5px;
-  }
-  .tag-container input {
+.tag i {
+    font-size: 18px;
+    color: #464545;
+    margin-left: 4px;
+    font-weight: 700;
+}
+
+.tag-container input {
     padding: 5px;
     font-size: 16px;
     border: 0;
@@ -188,4 +191,13 @@ textarea{
     font-family: 'Rubik';
     color: #333;
     flex: 1;
-  }
+}
+
+input:focus,
+textarea:focus{
+    outline: 0;
+}
+
+.close{
+    cursor: pointer;
+}
