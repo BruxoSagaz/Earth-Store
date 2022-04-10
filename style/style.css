@@ -510,9 +510,10 @@ div.banner-p{
 .offers .item{
     width: 20%;
     box-sizing: border-box;
-    height: 390px;
+    min-height: 390px;
     padding: 0 10px;
     margin-bottom: 25px;
+    margin-top: 20px;
 }
 
 .result-items .offers .item {
@@ -582,13 +583,13 @@ div.product-name{
     margin: 0px 0px 5px;
     font-size: 19px;
     padding: 0px 0px;
-    line-height: 2.23;
+    line-height: 1.23;
     letter-spacing: 0.28px;
     -ms-flex-positive: 1;
     flex-grow: 1;
     display: block;
     text-align: center;
-    max-height: 40px;
+    max-height: 50px;
 
 }
 
@@ -612,6 +613,7 @@ div.product-name{
     align-content: center;
     justify-content: center;
     align-items: center;
+    margin-top: 7px;
 }
 
 .divisions span:nth-child(2){
@@ -669,7 +671,7 @@ div.product-name{
     flex-wrap: nowrap;
     align-content: center;
     align-items: center;
-    min-height: 240px;
+    min-height: 264px;
     border-bottom: 1px solid #ccc;
     flex-direction: column;
 }

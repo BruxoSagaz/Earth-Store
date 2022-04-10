@@ -62,7 +62,7 @@
                     <div class="flex-center">
                     <div class="input-area">
                         <label for="nome">Nome do Produto: </label>
-                        <input type="text" name="nome" id="">
+                        <input type="text" name="nome" id="nome">
                     </div>
 
                     <div class="input-area">
@@ -76,7 +76,7 @@
 
                     <div class="input-area">
                         <label for="preco">Preço Base: </label>
-                        <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;">
+                        <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
                     </div>
 
                     
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="input-area">
-                        <input type="text" step="0.01" name="prom_val" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px;" id="prom_val" disabled>
+                        <input type="text" step="0.01" name="prom_val" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px;background: #b5b5b5;" id="prom_val" disabled>
                         <label for="prom_val">(valor em promoção)</label>
                     </div>
 
@@ -96,19 +96,19 @@
 
                         <div class="input-area">
                             <label for="parcelas">Divisão de Parcelas</label>
-                            <select name="parcelas" id="">
+                            <select name="parcelas" id="par-div">
                                 <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="1">5</option>
-                                <option value="1">6</option>
-                                <option value="1">7</option>
-                                <option value="1">8</option>
-                                <option value="1">9</option>
-                                <option value="1">10</option>
-                                <option value="1">11</option>
-                                <option value="1">12</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
                             </select>
                         </div>
 
@@ -162,8 +162,63 @@
 
                     <div class="flex-center">
                         <label for="images">Imagens (falta integração)</label>
-                        <input type="file" name="images" id="">
+                        <input type="file" name="images" id="file-uploader" accept=".jpg, .png, .jpeg, .webp" multiple>
                     </div>
+
+
+                    <div id="img-label"><label for="images-show">Item Final:</label></div>
+                    
+                    <!-- Display item -->
+                    <div class="flex-center">
+                        <div class="offers">
+                            <div class="images-show">
+                                <div class="item promotion">
+                                    <div class="product">
+                                        <div class="product-allign">
+                                            <div class="product-image">
+                                                <a href="individual">
+                                                    <!-- Discount -->
+                                                    <div class="discount hide" ></div>
+                                                    <div class="prom-value"></div>
+                                                    <!-- Image -->
+                                                    <img src="images/example.png" alt="Terço">
+                                                </a>
+                                            </div>
+                                            <!-- Product Name -->
+                                            <div class="product-name">
+                                                Nome Exemplo
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="under-area">
+                                            <div class="price-cart-allign">
+                                                <div class="price-box">
+                                                    <div class="price-item">
+                                                        <!-- Price Before -->
+                                                        <div class="price-before hide">R$ 11,11</div>
+                                                        <div class="price-off"> R$ 00,00</div>
+                                                        
+                                                    </div>
+                                                    
+                                                    <!-- Divisions -->
+                                                    <div  class="divisions">
+                                                        <span id="divisions-par">Ou até </span>
+                                                        <span>+ Frete</span>
+                                                    </div>
+            
+                                                </div>
+            
+                                                <div class="add-to-cart">
+                                                    <input type="number" value="1">
+                                                    <button>Adicionar ao Carrinho</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
 
             </div>
@@ -175,91 +230,6 @@
     <script src="js/functions.js"></script>
     <script src="js/jquery.mask.js"></script>
     <script src="js/validatons.js"></script>
- 
-
-    <script>
-        $(document).ready(function(){
-
-            var aply = $('#aply_prom');
-            var tags = [];
-            
-            aply.click(function(){
-
-                if (aply.is(':checked')){
-                    $('#prom_val').prop('disabled', false);
-                }else{
-                    $('#prom_val').prop('disabled', true);
-                }
-            })
-
-            $('.valor').mask('000.000.000.000.000,00 R$', {reverse: true});
-
-            $('#startTag').click(function(e){
-
-                e.preventDefault();
-
-                var filter = $('#filter').val().trim();
-                var value = $('#value').val().trim();
-                var tag = filter +" : "+ value;
-
-                if(value == "" || filter == ""){
-                    return false;
-                }
-                
-
-                function createTag(tag) {
-                    const div = document.createElement('div');
-                    div.setAttribute('class', 'tag');
-                    const span = document.createElement('span');
-                    span.innerHTML = tag;
-                    const closeIcon = document.createElement('i');
-                    closeIcon.innerHTML = 'X';
-                    closeIcon.setAttribute('class', 'close');
-                    closeIcon.setAttribute('data-item', tag);
-                    div.appendChild(span);
-                    div.appendChild(closeIcon);
-                    tags.push(tag);
-                    console.log(tags);
-                    return div;
-                }
-
-
-                var div = createTag(tag);
-
-                $(div).appendTo(".tag-container");
-
-
-                var filter = $('#filter').val("");
-                var value = $('#value').val("");
-
-                $('.close').click(function(e){
-                    e.stopPropagation();
-                    e.preventDefault();
-                    clearTags(this);
-            });
-
-
-            });
-            
-
-
-            function clearTags(rtag) {
-
-                let attr = rtag.getAttribute('data-item');
-
-                if(tags.includes(attr)){
-                    tags.splice(tags.indexOf(attr), 1);
-                }
-                
-                rtag.closest('.tag').remove();
-
-            }
-
-            
-
-
-
-        });
-    </script>
+    <script  src="js/cad_item.js"></script>
 </body>
 </html> 
