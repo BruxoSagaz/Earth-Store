@@ -149,20 +149,19 @@
 
                     </div>
 
+                    
+
                     <div class="flex-center">
-                        <label for="descricaoGeral">Descrição Geral: </label>
-                        <textarea name="descricaoGeral" id="descricaoGeral" cols="30" rows="10"></textarea>
+                        <label id="label-up" for="file_to_upload">Escolher Imagens </label>
+                        <input type="file"  name="file_to_upload" id="file_to_upload" accept=".jpg, .png, .jpeg, .webp" multiple>
+                        <p id="file_name">arquivos: </p>
+                        <p id="progress_status"></p>
                     </div>
 
                     <div class="flex-center">
-                        <label for="especificacoes">Especficações: </label>
-                        <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style="margin-left: 20px;"></textarea>
-                    </div>
-
-
-                    <div class="flex-center">
-                        <label for="images">Imagens (falta integração)</label>
-                        <input type="file" name="images" id="file-uploader" accept=".jpg, .png, .jpeg, .webp" multiple>
+                        <span>Barra de progresso: </span>
+                        <progress id="progress_bar" value="0" max="100"></progress>
+                        <input type="button" value="Mandar para o Servidor" id="upload_file_button">
                     </div>
 
 
@@ -176,13 +175,13 @@
                                     <div class="product">
                                         <div class="product-allign">
                                             <div class="product-image">
-                                                <a href="individual">
-                                                    <!-- Discount -->
-                                                    <div class="discount hide" ></div>
-                                                    <div class="prom-value"></div>
-                                                    <!-- Image -->
-                                                    <img src="images/example.png" alt="Terço">
-                                                </a>
+                                                
+                                                <!-- Discount -->
+                                                <div class="discount hide" ></div>
+                                                <div class="prom-value"></div>
+                                                <!-- Image -->
+                                                <img src="images/example.png" alt="Terço" id="img">
+                                                
                                             </div>
                                             <!-- Product Name -->
                                             <div class="product-name">
@@ -217,9 +216,20 @@
                                 </div>
                             </div>
                         </div>
+                    </div><!-- Display item -->
+
+
+                    <div class="flex-center w100">
+                        <label for="descricaoGeral">Descrição Geral: </label>
+                        <textarea name="descricaoGeral" id="descricaoGeral" cols="30" rows="10"></textarea>
                     </div>
 
-                </form>
+                    <div class="flex-center w100">
+                        <label for="especificacoes">Especficações: </label>
+                        <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style="margin-left: 20px;"></textarea>
+                    </div>
+
+                </form> <!-- form -->
 
             </div>
         </div>
@@ -231,5 +241,9 @@
     <script src="js/jquery.mask.js"></script>
     <script src="js/validatons.js"></script>
     <script  src="js/cad_item.js"></script>
+
+    <script>
+
+    </script>
 </body>
 </html> 

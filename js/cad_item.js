@@ -100,21 +100,6 @@ $(document).ready(function(){
 
     }
 
-    // Start File Upload System
-
-    const fileUploader = document.getElementById('file-uploader');
-
-    fileUploader.addEventListener('change', (event) => {
-        const files = event.target.files;
-        for (const file of files) {
-            const name = file.name;
-            const type = file.type ? file.type: 'NA';
-            const size = file.size;
-            const lastModified = file.lastModified;
-            console.log({ file, name, type, size, lastModified });
-         }
-    });
-
     // Item Creation
 
     $('#nome').keyup(function(){
@@ -198,4 +183,58 @@ $(document).ready(function(){
     $('#par-div').change(function(){
         applyDivisions();
     });
+
+
+    // File upload system
+
+    $('#file_to_upload').change(function(e){
+        $('#file_name').text("arquivos: ")
+        window.selectedFile = e.target.files;
+        let len = window.selectedFile.length;
+
+        for(i = 0; i<=len-1;i++){
+            // console.log(window.selectedFile[i].name);
+            if(i==len-1){
+                $('#file_name').append(` ${window.selectedFile[i].name} `);
+            }else{
+                $('#file_name').append(` ${window.selectedFile[i].name} +`);
+            }
+        }
+
+        const file = $(this)[0].files[0];
+        const reader = new FileReader();
+        reader.onload = function(){
+            $('#img').attr('src', reader.result)
+        }
+        reader.readAsDataURL(file);
+
+    });
+
+    // Manda o arquivo
+    $('#upload_file_button').click(function(){
+
+        let len = window.selectedFile.length;
+
+        for(i=0;i<=len-1;i++){
+            uploadFile(window.selectedFile[i]);
+        }
+    });
+
+
+
+    function uploadFile(file) {
+        var formData = new FormData();
+        formData.append('file_to_upload', file);
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.open('POST', 'uploader.php');
+        ajax.send(formData);
+    }
+
+    function progressHandler(event) {
+        var percent = (event.loaded / event.total) * 100;
+        document.getElementById("progress_bar").value = Math.round(percent);
+        document.getElementById("progress_status").innerHTML = Math.round(percent) + "% Enviado ";
+    }
+
 });

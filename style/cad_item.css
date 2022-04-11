@@ -20,6 +20,10 @@ a{
     text-decoration: none;
 }
 
+.w100{
+    width: 100%;
+}
+
 form{
     width: 100%;
     height: calc(100% - 31px);
@@ -78,6 +82,10 @@ header{
     align-items: right;
     justify-content: right;
     flex-wrap: wrap;
+}
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+    background-color: #0073ff;
 }
 
 /* Header */
@@ -225,6 +233,47 @@ textarea:focus{
     margin: 0 auto;
 }
 
+
+input[type="file"] {
+    display: none;
+}
+
+#label-up {
+    padding: 8px 10px;
+    width: 180px;
+    background-color: #e33c46;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+#upload_file_button{
+    padding: 8px 4px;
+    width: 185px;
+    background-color: #e33c46;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-right: 12px;
+    cursor: pointer;
+    border: 0;
+}
+
+#progress_status{
+    margin-left: 15px;
+    font-style: italic;
+    font-weight: 900;
+}
+
+#progress_bar{
+    width:400px;
+    margin: 0 10px;
+}
+
 /* item configuration */
 
 .result-items .offers .item {
@@ -273,7 +322,7 @@ textarea:focus{
     width: auto !important;
     max-height: 145%;
     justify-content: center;
-    z-index: -5;
+    z-index: 0;
 }
 
 div.product-name{
