@@ -4,34 +4,7 @@ $(document).ready(function(){
     var aply = $('#aply_prom');
     var tags = [];
     
-    //On-Off Apply prom
-    aply.click(function(){
-        let basePrice = $('#base-price').val();
-        let promText = $('#prom_val');
-        let discountTag = $('.discount');
-        let priceBefore =  $('.price-before');
-        let priceOff = $('.price-off')
-        
-        if (aply.is(':checked')){
-            promText.prop('disabled', false);
-            discountTag.fadeToggle();
-            priceBefore.fadeToggle();
-            priceBefore.text(priceOff.text()); 
-            promText.css('background','#fff');
-        }else{
-            promText.prop('disabled', true);
-            if(basePrice == ''){
-                $('.price-off').text('R$ 00,00');
-            }else{
-                $('.price-off').text('R$ '+ basePrice);
-            }
-            promText.val('');
-            discountTag.fadeToggle();
-            priceBefore.fadeToggle();
-            promText.css('background','#b5b5b5');
-            applyDivisions();
-        }
-    })
+
 
     // Mask
     $('.valor').mask('000.000.000.000.000,00', {reverse: true});
@@ -102,6 +75,39 @@ $(document).ready(function(){
 
     // Item Creation
 
+
+    //On-Off Apply prom
+    aply.click(function(){
+        let basePrice = $('#base-price').val();
+        let promText = $('#prom_val');
+        let discountTag = $('.discount');
+        let priceBefore =  $('.price-before');
+        let priceOff = $('.price-off')
+        
+        if (aply.is(':checked')){
+            promText.prop('disabled', false);
+            discountTag.fadeToggle();
+            priceBefore.fadeToggle();
+            priceBefore.text(priceOff.text()); 
+            promText.css('background','#fff');
+            applyPercent();
+        }else{
+            clearPercent();
+            promText.prop('disabled', true);
+            if(basePrice == ''){
+                $('.price-off').text('R$ 00,00');
+            }else{
+                $('.price-off').text('R$ '+ basePrice);
+            }
+            promText.val('');
+            discountTag.fadeToggle();
+            priceBefore.fadeToggle();
+            promText.css('background','#b5b5b5');
+            applyDivisions();
+            
+        }
+    })
+
     $('#nome').keyup(function(){
         let pName = $('.product-name');
         pName.text(this.value)
@@ -133,6 +139,7 @@ $(document).ready(function(){
         }
 
         applyDivisions();
+        applyPercent();
     });
 
     $('#prom_val').keyup(function(){
@@ -147,7 +154,24 @@ $(document).ready(function(){
         }
 
         applyDivisions();
+        applyPercent();
     });
+
+    
+    // Aplly Divisions function 
+
+    // Tranform text to data
+    function ripValues(value) {
+
+        value = value.split('R$ ');
+        value = value[1];
+        value = value.replace(".","");
+        value = value.replace(",",".");
+        value = parseFloat(value);
+
+        return value;
+    }
+
 
     function applyDivisions(){
         let value = $("#par-div").val();
@@ -156,11 +180,8 @@ $(document).ready(function(){
         let calcDiv = parseInt(value);
 
         if (value != 1){
-            price = price.split('R$ ');
-            price = price[1];
-            price = price.replace(".","");
-            price = price.replace(",",".");
-            price = parseFloat(price);
+            // Tranform text to data
+            price = ripValues(price);
             price = price / calcDiv;
             price = price.toString();
             price = price.split(".");
@@ -180,8 +201,48 @@ $(document).ready(function(){
         }
     }
 
+    //  Aplly Percent
+    function applyPercent() {  
+
+        let divtag = $(".discount");
+        let baseValue = format($("#base-price").val());
+        let promValue = format($("#prom_val").val());
+        let final = (promValue * 100) / baseValue;  
+        final = Math.round(final);
+        final = 100 - final;
+
+        function format(val) {
+            
+            val = val.replace(",",".");
+            val = parseFloat(val);
+            return val;
+        }
+        
+        if(final.toString() != "NaN"){
+            divtag.text(final+"%");
+        }
+        
+    }
+
+    function clearPercent() { 
+        let divtag = $(".discount");
+        divtag.text("");
+    }
+
     $('#par-div').change(function(){
         applyDivisions();
+    });
+
+
+    //Change img .mouseenter
+    $(".product-allign").mouseenter(function(){
+        $("#img").css("z-index", "-99");
+        return;
+    });
+
+    $(".product-allign").mouseleave(function(){
+        $("#img").css("z-index", "1");
+        return;
     });
 
 
