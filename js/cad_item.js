@@ -235,15 +235,15 @@ $(document).ready(function(){
 
 
     //Change img .mouseenter
-    $(".product-allign").mouseenter(function(){
-        $("#img").css("z-index", "-99");
-        return;
-    });
+    // $(".product-allign").mouseenter(function(){
+    //     $("#img").css("z-index", "-99");
+    //     return;
+    // });
 
-    $(".product-allign").mouseleave(function(){
-        $("#img").css("z-index", "1");
-        return;
-    });
+    // $(".product-allign").mouseleave(function(){
+    //     $("#img").css("z-index", "1");
+    //     return;
+    // });
 
 
     // File upload system
