@@ -30,8 +30,110 @@
 
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="height: 1000px;">
     
+    <!-- Modal Bg -->
+    <div class="modal-bg">
+        <div class="form-modal">
+            <!-- close Button -->
+            <div class="close-btn">x</div>
+
+            <!-- FORM   -->
+            <form action="">
+
+
+                
+            <div class="modal-grouper"><!-- Grouper -->
+                <label for="nome">Nome do Produto: </label>
+                <input type="text" name="nome" id="nome">
+
+                <label for="">Categoria: </label>
+                <input list="categorias" name="categorias" class="list">
+                <!-- Datalist    -->
+                <datalist id="categorias">
+                    <option value="Terços"></option>
+                </datalist>
+            </div><!-- Grouper -->
+
+            <div class="modal-grouper"><!-- Grouper -->
+            <label for="preco">Preço Base: </label>
+            <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
+
+            <label for="prom">aplicar promoção:</label>
+            <input type="checkbox" name="prom_ver" id="aply_prom">
+
+            <div class="input-area">
+                <input type="text" step="0.01" name="prom_val" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px;background: #b5b5b5;" id="prom_val" disabled>
+                <label for="prom_val">(valor em promoção)</label>
+            </div>
+            </div><!-- Grouper -->
+
+            <div class="modal-grouper"><!-- Grouper -->
+            <label for="parcelas">Divisão de Parcelas</label>
+            <select name="parcelas" id="par-div">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
+            <label for="quantity">Quantidade em estoque</label>
+            <input type="number" name="quatity" id="" maxlength="7">
+
+            </div><!-- Grouper -->
+   
+
+            <div class="modal-grouper"><!-- Grouper -->
+            <label for="">Filtro: </label>
+            <input list="filtro" name="filtro" class="list" id="filter">
+            <!-- Datalist -->
+            <datalist id="filtro">
+                <option value="cor"></option>
+            </datalist>
+
+            <label for="">Valor: </label>
+            <input list="valor" name="valor" class="list"  id="value">
+            <!-- Datalist -->
+            <datalist id="valor">
+                <option value="preto"></option>
+            </datalist>
+
+            <button id="startTag"> OK </button>
+            </div><!-- Grouper -->
+
+        
+
+            <div>
+
+                <div class="input-area" style="width: 40%;">
+                    <div class="tag-container">
+                        
+                    </div>
+                </div>
+    
+            </div>
+
+            <button class="salvar">Salvar</button>
+
+            <span>Imagens</span>
+            <div class="img"><img src="../images/terco.jpg" alt=""></div>
+
+            </form> <!-- Form -->
+            </div><!-- div form -->
+
+        </div><!-- modal bg  -->
+
+
+
+    </div>
     <!-- Header -->
     <header>
         <div class="container">
@@ -368,7 +470,18 @@
                                 <th >1287</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
-
+                            
+                            <!-- Items teste -->
+                            <tr>
+                                <td >Terço Exemplo</td>
+                                <td >terço</td>
+                                <td >R$ 30,00</td>
+                                <td >R$ 25,00</td>
+                                <td >100</td>
+                                <td >20</td>
+                                <th >1287</th>
+                                <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
+                            </tr>
                             <!-- Fim Items Teste -->
                         </tbody>    
                     </table>
@@ -386,6 +499,17 @@
     <script  src="js/cad_item.js"></script>
 
     <script>
+        // Jquery and Javascript
+        $(function () {
+            
+            $('.fa-pen').click(function(e){
+                e.stopPropagation();
+                abrirJanelaModal();
+            });
+
+            verificarCliqueFechar();
+        });
+
 
     </script>
 
