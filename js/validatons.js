@@ -1,5 +1,5 @@
     // Validações e Submit
-
+    var path = $('path').val();
     var cadBtn = $('#cadSubBtn');
     var form = $('.form2 #cadForm');
 
@@ -39,8 +39,20 @@
 
         //se chegar ao final envia
         if(verificarNome(nome) != false && verificarCell(cell) != false && verificarEmail(email) != false && verificarCPF(cpf) == true &&  verificarSenha() != false){
-            console.log("Negão");
-            return true;
+            
+            let form = $(this); 
+            $.ajax({
+                type: "post",
+                dataType:'json',
+                url: path+'ajax/formularios.php' ,
+                data: form.serialize(),
+            }).done(function(data){
+                if(data.retorno == 'sucesso'){
+                    alert('enviado');
+                }
+                
+            });
+            return false;
         }
         return false;
     });
