@@ -122,12 +122,12 @@ queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`produto` (
 
 queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`usuario` (
   `id` INT(64) NOT NULL AUTO_INCREMENT,
-  `cpf` VARCHAR(14) NOT NULL,
-  `senha` VARCHAR(128) NOT NULL,
+  `cpf` VARCHAR(14) UNIQUE NOT NULL,
+  `senha` VARCHAR(128) UNIQUE NOT NULL,
   `nome` VARCHAR(128) NULL,
   `celular` VARCHAR(14) NULL,
   `email` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`, `cpf`, `senha`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 ");
 
@@ -153,18 +153,18 @@ queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`enderecos` (
 
 queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`admin` (
     `admin_id` INT(64) NOT NULL AUTO_INCREMENT,
-    `senha_admin` VARCHAR(64) NOT NULL,
+    `senha_admin` VARCHAR(64) UNIQUE NOT NULL,
     `nome_admin` VARCHAR(128) NULL,
-    PRIMARY KEY (`admin_id`, `senha_admin`))
+    PRIMARY KEY (`admin_id`))
   ENGINE = InnoDB;
   ");
 
  queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`gestor` (
     `id` INT(64) NOT NULL,
-    `senha` VARCHAR(45) NOT NULL,
+    `senha` VARCHAR(45) UNIQUE NOT NULL,
     `nome` VARCHAR(45) NULL,
     `num_vendas` VARCHAR(45) NULL,
-    PRIMARY KEY (`id`, `senha`))
+    PRIMARY KEY (`id`))
   ENGINE = InnoDB;
   ");
  ?>

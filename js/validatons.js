@@ -44,11 +44,23 @@
             $.ajax({
                 type: "post",
                 dataType:'json',
-                url: path+'ajax/formularios.php' ,
+                url: path+'ajax/cadastrar.php' ,
                 data: form.serialize(),
             }).done(function(data){
-                if(data.retorno == 'sucesso'){
+                if(data.retorno == "sucesso"){
                     alert('enviado');
+                }else{
+                    invalidos = data.invalidos.split(',');
+                    invalidos = invalidos.filter((item)=>item != '');
+
+                    invalidos.forEach(function(nome) {
+                        if(nome != "senha"){
+                            aplicarCampoInvalido($('input[name='+nome+']'),'Este '+nome+' não pode ser usado');
+                        }else{
+                            aplicarCampoInvalido($('input[name='+nome+']'),'Esta '+nome+' não pode ser usada')
+                        }
+                    });
+                    
                 }
                 
             });
@@ -74,11 +86,11 @@
         
         setTimeout(function(){
             el.animate({'borderWidth': '0px'});
-        },500);
-        setTimeout(function(){
-            el.css('border', '1px solid #ccc');
-            el.attr("placeholder", sd);
         },1000);
+        setTimeout(function(){
+            el.css('border', '1px solid #ccc',2000);
+            el.attr("placeholder", sd);
+        },1500);
         
 
         return false;
