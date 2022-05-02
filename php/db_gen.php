@@ -103,21 +103,12 @@ function queries($query){
     $pdo = new PDO('mysql:host=localhost;dbname=dblojinha','root','');
     $sql = $pdo->prepare($query);
     $sql->execute();
+    sleep(2);
 }
 
-queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`produto` (
-    `id` INT(64) NOT NULL,
-    `nome` VARCHAR(128) NULL,
-    `categoria` VARCHAR(45) NULL,
-    `preco` FLOAT(30) NULL,
-    `promocao` BIT(1) NOT NULL,
-    `valor_em_promocao` FLOAT(30) NULL,
-    `parcelas` INT(2) NULL,
-    `estoque` INT(64) NULL,
-    `filtros` VARCHAR(128) NULL,
-    `imagens` VARCHAR(128) NULL,
-    PRIMARY KEY (`id`))
-  ENGINE = InnoDB;");
+
+
+queries("CREATE TABLE `dblojinha`.`produto` ( `id` INT(64) NOT NULL AUTO_INCREMENT , `nome` VARCHAR(128) NOT NULL , `imagens` VARCHAR(264) NOT NULL , `categoria` VARCHAR(48) NOT NULL , `preco` FLOAT(32) NOT NULL , `promocao` BIT(1) NOT NULL , `valor_em_promocao` FLOAT(32) NOT NULL , `parcelas` INT(2) NOT NULL , `estoque` INT(64) NOT NULL , `filtros` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
 
 
 queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`usuario` (

@@ -60,7 +60,8 @@ $(function() {
                 data: form.serialize(),
             }).done(function(data){
                 if(data.retorno == "sucesso"){
-                    alert('enviado');
+                    alert('Cadastro feito, faça Login!');
+                    $('input').val("");
                 }else{
                     invalidos = data.invalidos.split(',');
                     invalidos = invalidos.filter((item)=>item != '');

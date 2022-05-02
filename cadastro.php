@@ -101,18 +101,18 @@
 
                                 
                                 <label for="">Nome Completo:</label>
-                                <input  type="text" name="nome" placeholder="Nome" autocomplete="off">
+                                <input  type="text" name="nome" placeholder="Nome" >
                                 
 
                                 
                                 <label for="data" style="margin:8px 0">Data de Nascimento:</label>
-                                <input  type="date" name="data"  autocomplete="off" id="data">
+                                <input  type="date" name="data"  id="data">
                                 
                             </div>
 
                             <div class="enter">
                                 <label for="">CPF:</label>
-                                <input  type="tel" name="cpf" placeholder="CPF" autocomplete="off" id="cpf">
+                                <input  type="tel" name="cpf" placeholder="CPF" id="cpf">
                             </div>
 
                             <div class="enter">
@@ -120,7 +120,7 @@
                                 <input  type="tel" name="cell" placeholder="(xx) xxxxx-xxxx " id="cell">
                             </div>
 
-                            <div class="enter">
+                            <div class="enter"> 
                                 <label for="">Email:</label>
                                 <input  type="email" name="email" placeholder="Email">
                             </div> 
