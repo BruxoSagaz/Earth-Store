@@ -3,6 +3,7 @@ $(document).ready(function(){
     // Common variables
     var aply = $('#aply_prom');
     var tags = [];
+    var i = 0;
     
 
 
@@ -298,6 +299,17 @@ $(document).ready(function(){
         document.getElementById("progress_status").innerHTML = Math.round(percent) + "% Enviado ";
     }
 
+    $("#img").hover(function(e){
+        
+        e.stopPropagation();
+        $(this).stop().fadeOut();
+        
+    }, function(e){
+
+        e.stopPropagation();
+        $(this).stop().fadeIn();
+        
+    });
 });
 
     // Funções para tela de gerência
