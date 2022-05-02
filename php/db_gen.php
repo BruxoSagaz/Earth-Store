@@ -125,6 +125,7 @@ queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`usuario` (
   `cpf` VARCHAR(14) UNIQUE NOT NULL,
   `senha` VARCHAR(128) UNIQUE NOT NULL,
   `nome` VARCHAR(128) NULL,
+  `dataNascimento` VARCHAR(10) NULL,
   `celular` VARCHAR(14) NULL,
   `email` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`))

@@ -98,8 +98,16 @@
                         <form action="" method="GET" id="cadForm">
 
                             <div class="enter">
+
+                                
                                 <label for="">Nome Completo:</label>
                                 <input  type="text" name="nome" placeholder="Nome" autocomplete="off">
+                                
+
+                                
+                                <label for="data" style="margin:8px 0">Data de Nascimento:</label>
+                                <input  type="date" name="data"  autocomplete="off" id="data">
+                                
                             </div>
 
                             <div class="enter">

@@ -2,12 +2,18 @@
 $pdo = new PDO('mysql:host=localhost;dbname=dblojinha','root','');
 
 $nome = $_POST['nome'];
+$date = $_POST['data'];
 $cpf = $_POST{'cpf'};
 $cell = $_POST{'cell'};
 $email = $_POST{'email'};
 $senha = $_POST{'senha'};
+
+$date =  explode('-',$date);
+$date = "{$date[2]}-{$date[1]}-{$date[0]}";
+
 $data = array();
-$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `celular`, `email`) VALUES ('{$cpf}','{$senha}','{$nome}','{$cell}','{$email}')";
+
+$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `dataNascimento`, `celular`, `email`) VALUES ('{$cpf}','{$senha}','{$nome}','{$date}','{$cell}','{$email}')";
 
 function dbQuery($query){
     global $pdo;
