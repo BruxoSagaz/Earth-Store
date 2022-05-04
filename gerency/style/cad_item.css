@@ -348,14 +348,14 @@ input[type="file"] {
 }
 
 #upload_file_button{
-    padding: 8px 4px;
-    width: 185px;
+    padding: 15px 6px;
+    width: 216px;
     background-color: #e33c46;
     color: #FFF;
     text-transform: uppercase;
     text-align: center;
     display: block;
-    margin-right: 12px;
+    margin: 0 auto;
     cursor: pointer;
     border: 0;
 }

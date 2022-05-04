@@ -1,6 +1,6 @@
 <?php
 
-
+define("PATH","https://localhost/Lojinha/");
 
 $autoload = function($class){
     if($class == 'Email'){

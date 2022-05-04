@@ -1,6 +1,5 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;dbname=dblojinha','root','');
-
+include("PDO.php");
 $nome = $_POST['nome'];
 $date = $_POST['data'];
 $cpf = $_POST{'cpf'};

@@ -39,7 +39,7 @@ $(document).ready(function(){
             div.appendChild(span);
             div.appendChild(closeIcon);
             tags.push(tag);
-            console.log(tags);
+            //console.log(tags);
             return div;
         }
 
@@ -189,7 +189,7 @@ $(document).ready(function(){
             //Adicionando 00 no fim para não ter problema
             price[1] = price[1]+"00";
             price[1] = price[1].substr(0,2);
-            if(price[1] == "nd"){
+            if(price[1] == "nd" || price[1] == 'un'){
                 price[1] = "00";
             }
             price = price[0] + "." + price[1];
@@ -245,11 +245,13 @@ $(document).ready(function(){
 
     $('#file_to_upload').change(function(e){
         $('#file_name').text("arquivos: ");
+
         window.selectedFile = e.target.files;
         files = e.target.files;
         console.log(e.target.files);
         let len = window.selectedFile.length;
-       
+
+      
         for(i = 0; i<=len-1;i++){
             // console.log(window.selectedFile[i].name);
             if(i==len-1){
@@ -267,6 +269,9 @@ $(document).ready(function(){
             $('#sec_img').attr('src',"../images/example.png");
         }
 
+        
+
+
         // let file = $(this)[0].files[0];
         // const reader = new FileReader();
         // reader.readAsDataURL(file);
@@ -279,31 +284,19 @@ $(document).ready(function(){
     });
 
     // Manda o arquivo
-    $('#upload_file_button').click(function(){
+    // $('#upload_file_button').click(function(){
 
-        let len = window.selectedFile.length;
+        // let len = window.selectedFile.length;
 
-        for(i=0;i<=len-1;i++){
-            uploadFile(window.selectedFile[i]);
-        }
-    });
+        // for(i=0;i<=len-1;i++){
+        //     uploadFile(window.selectedFile[i]);
+        // }
+
+    // });
 
 
 
-    function uploadFile(file) {
-        var formData = new FormData();
-        formData.append('file_to_upload', file);
-        var ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.open('POST', './php/uploader.php');
-        ajax.send(formData);
-    }
 
-    // function progressHandler(event) {
-    //     var percent = (event.loaded / event.total) * 100;
-    //     document.getElementById("progress_bar").value = Math.round(percent);
-    //     document.getElementById("progress_status").innerHTML = Math.round(percent) + "% Enviado ";
-    // }
 
     $("#img").hover(function(e){
         
@@ -317,6 +310,183 @@ $(document).ready(function(){
         $("#sec_img").stop().fadeOut();
 
         
+    });
+    // guardar func
+
+    // var formData = new FormData();
+    // formData.append('file_to_upload', file);
+    // var ajax = new XMLHttpRequest();
+    // ajax.upload.addEventListener("progress", progressHandler, false);
+    // ajax.open('POST', './php/uploader.php');
+    // ajax.send(formData);
+    // ajax.done(function(data){
+    //     console.log(data);
+    // });
+
+    // sistema de envio de form
+    
+    // Upload imagens
+    function uploadFile(files) {
+        form = new FormData();
+        form.append('file_to_upload', files);
+
+
+        $.ajax({
+            
+            url: './php/uploader.php', // Url do lado server que vai receber o arquivo
+            data: form,
+            processData: false,
+            contentType: false,
+            dataType: 'json',   
+            type: 'POST',
+            async:'false',
+        }).done(function(data){
+            // nameFile = data[1];
+            $('#responseAjax').append(data[1]+" ");
+        });
+    }
+
+    // barra de progresso
+    function progressHandler(event) {
+        var percent = (event.loaded / event.total) * 100;
+        document.getElementById("progress_bar").value = Math.round(percent);
+        document.getElementById("progress_status").innerHTML = Math.round(percent) + "% Enviado ";
+    }
+
+    // aplicar campo invalido
+
+    function aplicarCampoInvalido(el,msg){
+        var valor = el.val();
+        var sd = el.attr('placeholder')
+        el.val('');
+        el.css('border', '0px solid red');
+        el.animate({'borderWidth': '3px'});
+        if(valor == ""){
+            el.attr("placeholder", "Preencha Este Campo");
+        } else if(msg){
+            el.attr("placeholder", msg);
+        } else{
+            el.attr("placeholder", "Campo Inválido");
+        }
+        
+        //scroll top
+        window.scrollTo(0,0);
+
+        setTimeout(function(){
+            el.animate({'borderWidth': '0px'});
+        },1000);
+        setTimeout(function(){
+            el.css('border', '1px solid #ccc',2000);
+            el.attr("placeholder", sd);
+        },1500);
+        
+
+        return false;
+    }
+
+    $('#form_cad_item').submit(function(){
+
+        //form variables 
+        let nome = $('input[name=nome]').val();
+        let categoria = $('input[name=categoria]').val();
+        let basePrice = $('input[name=basePrice]').val();
+        let estoque = $('input[name=estoque]').val();
+        let promVal = $('input[name=prom_val]').val();
+
+
+
+        //veririficar se ta vazio
+
+        if(nome == ""){
+            aplicarCampoInvalido($('input[name=nome]'));
+        }if(categoria == ""){
+            aplicarCampoInvalido($('input[name=categria]'));
+        }if(basePrice == ""){
+            aplicarCampoInvalido($('input[name=basePrice]'));
+        }if(estoque == ""){
+            aplicarCampoInvalido($('input[name=estoque]'));
+        }
+
+
+
+        if(!nome == "" && !categoria == "" && !basePrice == "" && !estoque == ""){
+
+
+
+            var files =  window.selectedFile;
+            let len = files.length;
+            let form = $(this);
+            let dados = form.serialize();
+            let span = $('.tag span');
+            let tam = span.length;
+            let tags = Array();
+            let names = Array(); 
+    
+            // Tratar dados para o banco
+            basePrice = basePrice.replace(",",".");
+            if(!promVal == ""){
+                promVal = promVal.replace(",",".");
+            }
+
+            for(i=0;i<tam;i++){
+                let val = span[i].textContent;
+                val = val.replace(" ","");
+                val = val.replace(" ","");
+                tags.push(val);
+            }
+            dados = dados + "&tags="+tags;
+
+            for(i=0;i<len;i++){
+                uploadFile(files[i]);
+            }
+
+
+            setTimeout(function(){
+                names = $('#responseAjax').text();
+                // console.log(names);
+            
+
+                dados = dados + "&image_names="+names;
+    
+
+                // console.log(dados);
+                $.ajax({
+                    url:'./php/cad_item.php',
+                    method: 'post',
+                    dataType:'json',
+                    data: dados
+                    
+                }).done(function(data){
+
+                    $('#responseAjax').empty();
+                    if(data.sucesso){
+
+                        //scroll top
+                        window.scrollTo(0,0);
+                        alert("Enviado e Cadastrado!");
+                        
+                        $('#descricaoGeral').val("");
+                        $('#especificacoes').val("");
+                        $('.tag-container').empty();
+                        $('#file_name').text("arquivos: ");
+                        $('input').val(""); 
+                        $('input[type=submit]').val("Mandar para o Servidor") 
+                        $('.discount').text("");
+                        $('.discount').css("display","none");
+                        $('.price-before').css("display","none");
+                        $('.product-name').text("Nome Exemplo");
+                        $('.price-off').text("R$ 00,00");
+                        $('#divisions-par').text("Ou até ");
+                        $('#img').attr('src',"../images/example.png");
+                        $('#sec_img').attr('src',"../images/example_2.png");
+                    }else{
+                        alert('Formulario não sucedido');
+                    }
+                });
+
+            },100);
+        }
+        return false
     });
 });
 

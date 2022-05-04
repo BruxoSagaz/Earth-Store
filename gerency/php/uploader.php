@@ -1,10 +1,12 @@
 <?php
+
 $file_name = $_FILES["file_to_upload"]["name"];
 $file_temp_location = $_FILES["file_to_upload"]["tmp_name"];
 $len = strlen($file_name);
 $len = $len - 1;
 $formato = "";
 $token = uniqid();
+
 //$token = substr($token,0,13);
 
 for($i=0;$i<=$len;$i++){
@@ -15,17 +17,17 @@ for($i=0;$i<=$len;$i++){
     }
 }
 
-echo "o Token é  $token";
+
 $file_name = "$token$formato";
-echo "O nome é $file_name";
+
 
 if (!$file_temp_location) {
     echo "ERROR: No file has been selected";
     exit();
 }
 
-if(move_uploaded_file($file_temp_location, "uploads/$file_name")){
-    echo "$file_name upload is complete";
+if(move_uploaded_file($file_temp_location, "../../uploads/$file_name")){
+    die(json_encode(["nome",$file_name]));
 } else {
     echo "A server was unable to move the file";
 }

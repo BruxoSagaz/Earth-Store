@@ -65,7 +65,7 @@
                 <div class="flex-center"><h2>Cadastro de Item</h2></div>
 
 
-                <form action="#"  enctype="multipart/form-data">
+                <form action="#"  enctype="multipart/form-data" id="form_cad_item">
                     <div class="flex-center">
                     <div class="input-area">
                         <label for="nome">Nome do Produto: </label>
@@ -74,7 +74,7 @@
 
                     <div class="input-area">
                         <label for="">Categoria: </label>
-                        <input list="categorias" name="categorias" class="list">
+                        <input list="categorias" name="categoria" class="list">
                         <!-- Datalist    -->
                         <datalist id="categorias">
                             <option value="Terços"></option>
@@ -83,7 +83,7 @@
 
                     <div class="input-area">
                         <label for="preco">Preço Base: </label>
-                        <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
+                        <input type="text" step="0.01" name="basePrice" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
                     </div>
 
                     
@@ -121,7 +121,7 @@
 
                         <div class="input-area">
                             <label for="quantity">Quantidade em estoque</label>
-                            <input type="number" name="quatity" id="" maxlength="7">
+                            <input type="number" name="estoque" id="" maxlength="7">
                         </div>
 
                         <div class="input-area">
@@ -168,7 +168,6 @@
                     <div class="flex-center">
                         <span>Barra de progresso: </span>
                         <progress id="progress_bar" value="0" max="100"></progress>
-                        <input type="button" value="Mandar para o Servidor" id="upload_file_button">
                     </div>
 
 
@@ -190,7 +189,7 @@
                                                 <div class="img-field">
                                                 <!-- Image -->
                                                 <img src="../images/example.png" alt="Terço" id="img">
-                                                <img src="../images/terco.jpg" alt="Terço" id="sec_img">
+                                                <img src="../images/example_2.png" alt="Terço" id="sec_img">
                                                 </div>
                                             </div>
                                             <!-- Product Name -->
@@ -240,6 +239,9 @@
                         <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style="margin-left: 20px;"></textarea>
                     </div>
 
+                    <input type="submit" value="Mandar para o Servidor" id="upload_file_button">
+
+                    <div id="responseAjax" style="display: none;"></div>
                 </form> <!-- form -->
 
             </div>
