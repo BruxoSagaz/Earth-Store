@@ -28,6 +28,7 @@
 
     <link rel="stylesheet" href="style/cad_item.css">
 
+
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
 <body style="height: 1000px;">
@@ -57,7 +58,7 @@
 
             <div class="modal-grouper"><!-- Grouper -->
             <label for="preco">Preço Base: </label>
-            <input type="text" step="0.01" name="quantity" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
+            <input type="text" step="0.01"  min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="base-price">
 
             <label for="prom">aplicar promoção:</label>
             <input type="checkbox" name="prom_ver" id="aply_prom">
@@ -86,7 +87,7 @@
             </select>
 
             <label for="quantity">Quantidade em estoque</label>
-            <input type="number" name="quatity" id="" maxlength="7">
+            <input type="number" name="quantity" id="" maxlength="7">
 
             </div><!-- Grouper -->
    
@@ -123,8 +124,25 @@
 
             <button class="salvar">Salvar</button>
 
-            <span>Imagens</span>
-            <div class="img"><img src="../images/terco.jpg" alt=""></div>
+            <!-- IMAGENS -->
+
+
+            <ul class="slider">
+                <div style="text-align: center;">
+                    <span>imagens</span>
+                </div>
+
+                <div class="img-breaker">
+                    <!-- <li>
+                        <img src="../images/terco.jpg" alt="">
+                    </li>
+
+                    <li>
+                        <img src="../images/terco.jpg" alt="">
+                    </li> -->
+                </div>
+            </ul>
+
 
             </form> <!-- Form -->
             </div><!-- div form -->
@@ -298,7 +316,7 @@
                                 <td >R$ 25,00</td>
                                 <td >100</td>
                                 <td >20</td>
-                                <th >1287</th>
+                                <th class="id">15</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
 
@@ -310,7 +328,7 @@
                                 <td >R$ 25,00</td>
                                 <td >100</td>
                                 <td >20</td>
-                                <th >1287</th>
+                                <th class="id">14</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
 
@@ -322,7 +340,7 @@
                                 <td >R$ 25,00</td>
                                 <td >100</td>
                                 <td >20</td>
-                                <th >1287</th>
+                                <th class="id">18</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
 
@@ -334,7 +352,7 @@
                                 <td >R$ 25,00</td>
                                 <td >100</td>
                                 <td >20</td>
-                                <th >1287</th>
+                                <th class="id">24</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
 
@@ -467,7 +485,7 @@
                                 <td >R$ 25,00</td>
                                 <td >100</td>
                                 <td >20</td>
-                                <th >1287</th>
+                                <th class="id">5151</th>
                                 <th><i class="fa-solid fa-pen"></i><i class="fa-solid fa-trash-can"></i></th>
                             </tr>
                             
@@ -496,20 +514,10 @@
     <script src="../js/functions.js"></script>
     <script src="../js/jquery.mask.js"></script>
     <script src="../js/validatons.js"></script>
-    <script  src="js/cad_item.js"></script>
+    <script  src="js/listing.js"></script>
+
 
     <script>
-        // Jquery and Javascript
-        $(function () {
-            
-            $('.fa-pen').click(function(e){
-                e.stopPropagation();
-                abrirJanelaModal();
-            });
-
-            verificarCliqueFechar();
-        });
-
 
     </script>
 

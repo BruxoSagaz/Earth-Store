@@ -490,27 +490,3 @@ $(document).ready(function(){
     });
 });
 
-    // Funções para tela de gerência
-
-    function abrirJanelaModal(e){
-        let bg = $('.modal-bg');
-
-        bg.fadeIn();
-    }
-
-    function verificarCliqueFechar(){
-        let el = $('body,.close-btn');
-        let bg = $('.modal-bg');
-        
-        el.click(function(){
-            bg.fadeOut();
-        });
-
-        $('.form-modal').click(function (e){
-            e.stopPropagation();
-        })
-
-        $('.salvar').click(function (e){
-            e.preventDefault();
-        })
-    }
