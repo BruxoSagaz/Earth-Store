@@ -384,8 +384,8 @@ $(document).ready(function(){
         return false;
     }
 
-    $('#form_cad_item').submit(function(){
-
+    $('#form_cad_item').submit(function(e){
+        e.preventDefault();
         //form variables 
         let nome = $('input[name=nome]').val();
         let categoria = $('input[name=categoria]').val();
@@ -421,6 +421,11 @@ $(document).ready(function(){
             let tam = span.length;
             let tags = Array();
             let names = Array(); 
+
+            if(!len){
+                alert("Sem Imagens Selecionadas!");
+                return 0;
+            }
     
             // Tratar dados para o banco
             basePrice = basePrice.replace(",",".");
