@@ -9,7 +9,7 @@ $estoque = $_POST['estoque'];
 $tags = $_POST['tags'];
 $image_names = $_POST['image_names'];
 $id =$_POST['id'];
-$dataRet = array();
+$data = array();
 
 if(isset($_POST['prom_ver'])){
     if($_POST['prom_ver']=='on'){

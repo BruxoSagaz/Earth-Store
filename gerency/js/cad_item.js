@@ -6,7 +6,7 @@ $(document).ready(function(){
     var i = 0;
     
 
-
+    
     // Mask
     $('.valor').mask('000.000.000.000.000,00', {reverse: true});
 
