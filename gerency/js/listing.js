@@ -30,7 +30,9 @@ $(document).ready(function(){
 
     //sair da modal
     $('body').click(function(){
-        sairMordal();
+        if(descModal.attr('ative') == 0 && specModal.attr('ative') == 0 ){
+            sairMordal();
+        }
     });
     //evitar bugs
     $('.form-modal').click(function(e){
@@ -48,6 +50,7 @@ $(document).ready(function(){
     $('#description_button').click(function(e){
         e.preventDefault();
         descModal.fadeIn();
+        descModal.attr({"ative":"1"});
         modalShadow.fadeIn();
         $('.form-modal').css("border","2px solid #858585");
     });
@@ -56,6 +59,7 @@ $(document).ready(function(){
     $('#espec_button').click(function(e){
         e.preventDefault();
         specModal.fadeIn();
+        specModal.attr({"ative":"1"});
         modalShadow.fadeIn();
         $('.form-modal').css("border","2px solid #858585");
     })
@@ -64,7 +68,9 @@ $(document).ready(function(){
     $('.exit_modal_input').click(function(e){
         e.preventDefault();
         descModal.fadeOut();
+        descModal.attr({"ative":"0"});
         specModal.fadeOut();
+        specModal.attr({"ative":"0"});
         modalShadow.fadeOut();
         $('.form-modal').css("border","2px solid #ccc");
     });
@@ -97,6 +103,17 @@ $(document).ready(function(){
         //modal.fadeIn();
     });
 
+    function ripValues(value){
+        value = value.split(',');
+        value = value[0];
+        value = value.split('.');
+        let lenForItem = value.length;
+        value = value.toString();
+        for(let i = 0;i<lenForItem;i++){
+            value = value.replace(',','');
+        }
+        return value;
+    }
 
     // Clear Tags Function
     function clearTags(rtag) {
@@ -114,10 +131,13 @@ $(document).ready(function(){
 
     aply.click(function(){
         if(aply.is(':checked')){
+            aply.val("on")
             promVal.removeAttr("disabled");
             promVal.css('background','white')
         }else{
+            aply.val("off");
             promVal.attr("disabled");
+            promVal.val("");
             promVal.css('background','#b5b5b5');
         }
     });
@@ -125,17 +145,19 @@ $(document).ready(function(){
     function actualizeModal(obj){
         $('#nome').val(obj['nome']);
         $('input[name=categoria]').val(obj['categoria']);
-        $('#base-price').val(obj['preco']+',00');
+        $('#base-price').val(obj['preco']+",00");
         if(obj['promocao'] == 1){
             aply.prop('checked', true);
-            promVal.val(obj['valor_em_promocao']+',00').removeAttr("disabled").css('background','white');
+            aply.val("on");
+            promVal.val(obj['valor_em_promocao']+",00").removeAttr("disabled").css('background','white');
+        }else{
+            aply.val("off");
         }
         $('par-div').val(obj['parcelas']);
         $('input[name=estoque]').val(obj['estoque']);
 
         tags =  obj['tags'].split(',');
 
-        $('#id').val(obj['id']);
 
         tags.forEach(element => {
             var div = createTag(element);
@@ -332,28 +354,45 @@ $(document).ready(function(){
         console.log(antigasInfo);
 
         //form variables 
-        let nome = $('input[name=nome]').val();
-        let categoria = $('input[name=categoria]').val();
-        let basePrice = $('input[name=basePrice]').val();
-        let estoque = $('input[name=estoque]').val();
-        let promVal = $('input[name=prom_val]').val();
+        let nomes = $('input[name=nome]');
+        let categorias = $('input[name=categoria]');
+        let basePrices = $('input[name=basePrice]');
+        let estoques = $('input[name=estoque]');
+        let promVals = $('input[name=prom_val]');
+        let tempTrat
+        // varificar se esta vazio e tratar para o banco
 
-
-
-        //veririficar se ta vazio
-
-        if(nome == ""){
-            aplicarCampoInvalido($('input[name=nome]'));
-        }if(categoria == ""){
-            aplicarCampoInvalido($('input[name=categoria]'));
-        }if(basePrice == ""){
-            aplicarCampoInvalido($('input[name=basePrice]'));
-        }if(estoque == ""){
-            aplicarCampoInvalido($('input[name=estoque]'));
+        // tratando a promoção se houver
+        if(!promVals.val()== ""){
+            tempTrat = promVals.val();
+            tempTrat = ripValues(tempTrat);
+            promVals.val(tempTrat)
         }
 
+        if(nomes.val() == ""){
+            aplicarCampoInvalido($('input[name=nome]'));
+            return 0;
+        }if(categorias.val() == ""){
+            aplicarCampoInvalido($('input[name=categoria]'));
+            return 0;
+        }if(basePrices.val() == ""){
+            aplicarCampoInvalido($('input[name=basePrice]'));
+            return 0;
+        }else{
+            //Tratando o preço base
+            tempTrat = basePrices.val();
+            tempTrat = ripValues(tempTrat);
+            basePrices.val(tempTrat)
+        }
 
-        if(!nome == "" && !categoria == "" && !basePrice == "" && !estoque == ""){
+        if(estoques.val() == ""){
+            aplicarCampoInvalido($('input[name=estoque]'));
+            return 0;
+        }
+        
+
+
+        if(!nomes == "" && !categorias == "" && !basePrices == "" && !estoques == ""){
 
 
             var files =  window.selectedFile;
@@ -366,28 +405,27 @@ $(document).ready(function(){
             
 
             try{
-                var len = files.length;
-                for(let i=0;i<len;i++){
-                    uploadFile(files[i]);
-                }
-                setTimeout(function(){
-                names = $('#responseAjax').text();
-                console.log(names);
-            
+                var len
+                if(len = files.length){
+                    for(let i=0;i<len;i++){
+                        uploadFile(files[i]);
+                    }
+                    setTimeout(function(){
+                    names = $('#responseAjax').text();
+                    console.log(names);
+                
 
-                dados = dados + "&image_names="+names;
-                },100);
+                    dados = dados + "&image_names="+names;
+                    },100);
+                }else{
+                    dados = dados + "&image_names="+antigasInfo['imagens'];
+                }  
             }catch{
                 console.log("Sem Imagens Selecionadas!");
-                dados = dados + "&imagens="+antigasInfo['imagens'];
+                dados = dados + "&image_names="+antigasInfo['imagens'];
             }
 
             setTimeout(function(){
-                // Tratar dados para o banco
-                basePrice = basePrice.replace(",",".");
-                if(!promVal == ""){
-                    promVal = promVal.replace(",",".");
-                }
 
                 for(i=0;i<tam;i++){
                     let val = span[i].textContent;
@@ -401,22 +439,47 @@ $(document).ready(function(){
                     val = val.trim();
                     tags.push(val);
                 }
+                let tagsquant = tags.length
+                tags = tags.toString();
+
+                for(i=0;i<tagsquant;i++){
+                    tags.replace(","," ");''
+                }
 
                 dados = dados + "&tags="+tags;
-                dados = dados + "&id="+$('#id').val();
+                dados = dados + "&id="+antigasInfo['id'];
 
 
                 dados = dados.split("&");
-                console.log(dados);
-
-                for(let i = 0;i<dados.length;i++){
-                    temp = dados[i].split("=");
-                    console.log(temp);
-                }
+                tamDados = dados.length;
+                // Area onde dados estão em array
 
                 
 
+                console.log(dados);
+
+                for(let i = 0;i<tamDados;i++){
+                    temp = dados[i].split("=");
+                    if(temp[1] == '' && antigasInfo[temp[0]]){
+                        temp[1] = antigasInfo[temp[0]];
+                    }
+
+                    temp = temp.toString();
+                    temp = temp.replace(",","=");
+                    dados[i] = temp;
+
+
+                }
+
+
+                dados = dados.toString();
+
+                for(let i = 0;i<=tamDados;i++){
+                    dados = dados.replace(",","&");
+                }
                 // console.log(dados);
+                
+
                 $.ajax({
                     url:'./php/edit_item.php',
                     method: 'post',
@@ -430,10 +493,14 @@ $(document).ready(function(){
                         alert("ATUALIZADO!");
                     }
                 });
+
             },150);
+            basePrices.val(basePrices.val()+",00");
+            promVals.val(promVals.val()+",00");
         }
     })
 
     $('#base-price').mask('000.000.000.000.000,00', {reverse: true});
+    $('#prom_val').mask('000.000.000.000.000,00', {reverse: true});
 });
 

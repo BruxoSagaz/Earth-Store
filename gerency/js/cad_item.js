@@ -173,6 +173,18 @@ $(document).ready(function(){
         return value;
     }
 
+    function ripToSend(value){
+        value = value.split(',');
+        value = value[0];
+        value = value.split('.');
+        let lenForItem = value.length;
+        value = value.toString();
+        for(let i = 0;i<lenForItem;i++){
+            value = value.replace(',','');
+        }
+        return value;
+    }
+
 
     function applyDivisions(){
         let value = $("#par-div").val();
@@ -387,29 +399,48 @@ $(document).ready(function(){
     $('#form_cad_item').submit(function(e){
         e.preventDefault();
         //form variables 
-        let nome = $('input[name=nome]').val();
-        let categoria = $('input[name=categoria]').val();
-        let basePrice = $('input[name=basePrice]').val();
-        let estoque = $('input[name=estoque]').val();
-        let promVal = $('input[name=prom_val]').val();
+        let nomes = $('input[name=nome]');
+        let categorias = $('input[name=categoria]');
+        let basePrices = $('input[name=basePrice]');
+        let estoques = $('input[name=estoque]');
+        let promVals = $('input[name=prom_val]');
+        let tempTrat
 
 
+        // tratando a promoção se houver
+        if(!promVals.val()== ""){
+            tempTrat = promVals.val();
+            tempTrat = ripToSend(tempTrat);
+            promVals.val(tempTrat)
+        }
 
         //veririficar se ta vazio
 
-        if(nome == ""){
+        if(nomes.val()== ""){
             aplicarCampoInvalido($('input[name=nome]'));
-        }if(categoria == ""){
+            return 0;
+        }if(categorias.val() == ""){
             aplicarCampoInvalido($('input[name=categria]'));
-        }if(basePrice == ""){
+            return 0;
+        }if(basePrices.val() == ""){
             aplicarCampoInvalido($('input[name=basePrice]'));
-        }if(estoque == ""){
+            return 0;
+        }else{
+            //Tratando o preço base
+            tempTrat = basePrices.val();
+            tempTrat = ripToSend(tempTrat);
+            basePrices.val(tempTrat)
+        }
+        
+        if(estoques.val() == ""){
             aplicarCampoInvalido($('input[name=estoque]'));
+            return 0;
         }
 
 
 
-        if(!nome == "" && !categoria == "" && !basePrice == "" && !estoque == ""){
+
+        if(!nomes == "" && !categorias == "" && !basePrices == "" && !estoques == ""){
 
 
 
@@ -428,10 +459,10 @@ $(document).ready(function(){
             }
     
             // Tratar dados para o banco
-            basePrice = basePrice.replace(",",".");
-            if(!promVal == ""){
-                promVal = promVal.replace(",",".");
-            }
+            // basePrice = basePrice.replace(",",".");
+            // if(!promVal == ""){
+            //     promVal = promVal.replace(",",".");
+            // }
 
             for(i=0;i<tam;i++){
                 let val = span[i].textContent;
@@ -489,6 +520,8 @@ $(document).ready(function(){
                     }
                 });
 
+                basePrices.val(basePrices.val()+",00");
+                promVals.val(promVals.val()+",00");
             },100);
         }
         return false

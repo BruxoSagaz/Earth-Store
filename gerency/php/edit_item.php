@@ -41,14 +41,14 @@ if(isset($_POST['especificacoes'])){
     $especificacoes = "";
 }
 
-echo "Nome = ",$nome,"  Categoria = ",$categoria," BasePrice = ",$basePrice," Parcelas = ",$parcelas," Estoque = ",$estoque,"  Tags = ",$tags," IMG-Names = ",$image_names," PROM_VER: ",
-$prom_ver,$prom_val," Descricao = ",$descricaoGeral,"  Especificacoes = ", $especificacoes,"ID = ",$id;
+// echo "Nome = ",$nome," <br>  Categoria = ",$categoria," <br> BasePrice = ",$basePrice," <br> Parcelas = ",$parcelas," <br> Estoque = ",$estoque," <br> Tags = ",$tags," <br> IMG-Names = ",$image_names," <br> PROM_VER: ",
+// $prom_ver,$prom_val," <br> Descricao = ",$descricaoGeral,"  <br>Especificacoes = ", $especificacoes," <br> ID = ",$id;
 
-$querys = "INSERT INTO `produto`( `nome`, `imagens`, `categoria`, `descricao_geral`, `especificacoes`, `tags`, `preco`, `promocao`, `valor_em_promocao`, `parcelas`, `estoque`) VALUES ('$nome','$image_names','$categoria','$descricaoGeral','$especificacoes','$tags','$basePrice',$prom_ver,'$prom_val','$parcelas','$estoque')";
+$querys = "UPDATE `produto` SET `nome`='$nome',`imagens`='$image_names',`categoria`='$categoria',`descricao_geral`='$descricaoGeral',`especificacoes`='$especificacoes',`tags`='$tags',`preco`='$basePrice',`promocao`=$prom_ver,`valor_em_promocao`='$prom_val',`parcelas`='$parcelas',`estoque`='$estoque' WHERE `id` = $id";
 
-echo "<br>";
-echo $querys;
-echo "<br>";
+// echo "<br>";
+// echo $querys;
+// echo "<br>";
 
 function dbQuery($query){
     global $pdo;
@@ -63,5 +63,5 @@ function dbQuery($query){
     }
 }
 
-// dbQuery($querys);
+dbQuery($querys);
 ?>
