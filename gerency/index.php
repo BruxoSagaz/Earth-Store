@@ -4,7 +4,7 @@ include(".././config.php");
 if(Painel::logado()==false){
     include("login.php");
 }else{
-    include('edit_item.php');
+    include('home.php');
 }
 
 

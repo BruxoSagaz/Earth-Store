@@ -147,16 +147,9 @@ queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`admin` (
     `admin_id` INT(64) NOT NULL AUTO_INCREMENT,
     `senha_admin` VARCHAR(64) UNIQUE NOT NULL,
     `nome_admin` VARCHAR(128) NULL,
+    `nivel` TINYINT(20) NOT NULL DEFAULT '1',
     PRIMARY KEY (`admin_id`))
   ENGINE = InnoDB;
   ");
 
- queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`gestor` (
-    `id` INT(64) NOT NULL,
-    `senha` VARCHAR(45) UNIQUE NOT NULL,
-    `nome` VARCHAR(45) NULL,
-    `num_vendas` VARCHAR(45) NULL,
-    PRIMARY KEY (`id`))
-  ENGINE = InnoDB;
-  ");
  ?>
