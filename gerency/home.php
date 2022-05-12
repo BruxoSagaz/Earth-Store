@@ -33,6 +33,17 @@
 </head>
 <body style="height: 1000px;">
     
+    <?php 
+        if(!isset($_SESSION['usuario'])){
+            header("Location: index.php");
+        }
+        if(isset($_GET['loggout'])){
+            Painel::loggout();
+        }
+        if(!isset($_GET['page'])){
+            $_GET['page'] = 'edit_item';
+        }
+    ?>
 
     <!-- Modal Bg -->
     <div class="modal-bg">
@@ -207,7 +218,8 @@
     </div>
     <!-- Header -->
     <header>
-        <div class="container">
+        <div class="container" style="height:50px;position: absolute;
+    width: 100%;">
             <div class="header">
                 <div class="logo">
                     <h2 >Tela de Administração</h2>
@@ -215,19 +227,31 @@
                 </div>
                 <div class="header-account">
                     <i class="bi bi-person"></i>
-                    <?php echo "<span>".$_SESSION['usuario']."</span>";?>
+                    <?php echo "<span>".$_SESSION['nome']."</span>";?>
                     
                 </div>
             </div>
-            <div class="modal-user"></div>
+            <div class="modal-user">
+                <div class="modal-contents">
+                    <h2>Seja bem vindo: <?php echo $_SESSION['nome'] ?></h2>
+
+                </div>
+                
+                <div class="exit">
+                    <a href="<?php echo PATH_GERENCY ?>&loggout">
+                    <i class="fa-solid fa-right-from-bracket"></i>Sair
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
         </div>
     </header>
     <!-- Nav de configurações -->
     <nav class="config-nav">
         <div class="align-nav">
             <ul class="config-list">
-                <li><a href=""><button>Cadastrar Item</button></a></li>
-                <li><button style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;">Consultar Banco</button></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button <?php if($_GET['page']=='cad_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Cadastrar Item</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button <?php if($_GET['page']=='edit_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Consultar Banco</button></a></li>
             </ul>
         </div>
     </nav>
@@ -237,10 +261,9 @@
     <!-- MAIN -->
 
     <?php
-        if(isset($_POST['page'])){
-            include("./pages/".$_POST['page']."php");
-        }else{
-            include("./pages/edit_item.php");
+
+        if(isset($_GET['page'])){
+            include("./pages/".$_GET['page'].".php");
         }
     
     ?>

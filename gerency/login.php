@@ -17,14 +17,18 @@
                 if(isset($_POST['acao'])){
                     $user = $_POST['usuario'];
                     $senha = $_POST['senha'];
-                    $sql = Mysql::conectar()->prepare("SELECT * FROM `admin` WHERE nome_admin = ? AND senha_admin = ? ");
+                    $sql = Mysql::conectar()->prepare("SELECT * FROM `admin` WHERE login_admin = ? AND senha_admin = ? ");
                     $sql->execute(array($user,$senha));
 
                     if($sql->rowCount() == 1){
+                        $info = $sql->fetch();
                         //logamos
                         $_SESSION['login'] = true;
                         $_SESSION['usuario'] = $user;
                         $_SESSION['senha'] = $senha;
+                        $_SESSION['nome'] = $info['nome_admin'];
+                        $_SESSION['cargo'] = $info['cargo_admin'];
+
                         header('Location:'.PATH_GERENCY);
                         die();
                     }else{
