@@ -154,4 +154,6 @@ queries("CREATE TABLE IF NOT EXISTS `dblojinha`.`admin` (
   ENGINE = InnoDB;
   ");
 
+  queries("CREATE TABLE `dblojinha`.`admin_online` ( `id` INT(30) NOT NULL , `ip` VARCHAR(255) NOT NULL , `ultima_acao` DATETIME NOT NULL , `token` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+
  ?>

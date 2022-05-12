@@ -1,3 +1,4 @@
+<?php include('../config.php') ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -70,7 +71,7 @@
                         </form>
 
                         <div class="sub-button">
-                            <a href="home"><button class="enter" type="button">Entrar</button></a>
+                            <a href="<?php echo PATH?>"><button class="enter" type="button">Entrar</button></a>
                             <!-- <button class="sign-up" id="troc_cad">Cadastrar</button> -->
                         </div>
                         

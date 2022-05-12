@@ -685,8 +685,37 @@ div.product-name{
     padding-bottom: 2px;
 }
 
+div .img-field{
+    width: 200px;
+    height: 235px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    display: block;
+    max-width: 95%;
+    padding-left: 5%;
+    width: auto !important;
+    max-height: 145%;
+    justify-content: center;
+    z-index: 1;
+    position: absolute
+}
 
 
+
+.product .product-image .sec_img {
+    display: block;
+    max-width: 95%;
+    padding-left: 5%;
+    width: auto !important;
+    max-height: 145%;
+    justify-content: center;
+    z-index: 0;
+    position: absolute;
+}
 
 
 
