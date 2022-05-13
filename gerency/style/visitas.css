@@ -1,0 +1,29 @@
+.cont-visitas .letters{
+    width: 100%;
+    display: flex;
+}
+
+.cont-visitas .block{
+    width: 30%;
+    height: 110px;
+    margin: 20px 3%;
+    color: white;
+    font-size: 25px;
+    padding: 14px 16px;
+}
+
+.cont-visitas .online-users{
+    background-color: #ffc107;
+}
+
+.cont-visitas .total-users{
+    background-color: #e53935;
+}
+
+.cont-visitas .visits-today{
+    background-color: #7cb342 ;
+}
+
+.cont-visitas .table{
+    
+}

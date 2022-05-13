@@ -27,7 +27,7 @@ $(document).ready(function(){
         setTimeout(function(){
             $('.form').fadeIn();
             // $('.form2').css('display','flex');
-        },500);
+        },400);
     }
 
 

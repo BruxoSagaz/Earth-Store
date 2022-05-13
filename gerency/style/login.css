@@ -23,6 +23,10 @@ body,html{
     width: 20%;
 }
 
+.w50{
+    width: 50%;
+}
+
 .w40{
     width: 40%;
 }
@@ -39,7 +43,17 @@ body,html{
     display: none;
 }
 
+.left{
+    float:left;
+}
 
+.right{
+    float: right;
+}
+
+.clear{
+    clear: both;
+}
 /*  */
 
 .form-area{
@@ -68,7 +82,7 @@ body,html{
 
 .form-area input[type=submit]{
     height: 30px;
-    width: 20%;
+    width: 50%;
     border: 1px solid #ccc;
     background-color: #32D9BA;
     color: white;
@@ -100,4 +114,8 @@ body,html{
 
 .error-box i{
     margin: 0 5px;
+}
+
+.form-group-login{
+
 }

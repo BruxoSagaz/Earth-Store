@@ -1,8 +1,10 @@
 <?php include('config.php') ?>
 
 <?php
-        if($_GET['page']=='filtros'){
-            include("filtros.php");
+        if(@$_GET['page']=='filtros'){
+            include("pages/filtros.php");
+        }else if(@$_GET['page']=='individual'){
+            include("pages/individual.php");
         }else{
 ?>
 
@@ -36,6 +38,7 @@
 
 
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style2.css">
 
  
 
@@ -144,15 +147,17 @@
     <!-- MAIN  -->
 
     <?php 
-    if(isset($_GET['page'])){
-        try{
+    // if(isset($_GET['page'])){
+    //     try{
 
-            include("./pages/".$_GET['page'].".php");
+    //         include("./pages/".$_GET['page'].".php");
             
-        }catch (Exception $e){
-            include("./pages/404.php");
-        }
-    }
+    //     }catch (Exception $e){
+    //         include("./pages/404.php");
+    //     }
+    // }
+
+        Loja::loadPage();
     ?>
     <!-- MAIN -->
 

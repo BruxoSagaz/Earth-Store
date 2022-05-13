@@ -1,3 +1,23 @@
+<?php
+    if(isset($_COOKIE['lembrar'])){
+        $user = $_COOKIE['user'];
+        $senha = $_COOKIE['senha'];
+        $sql = Mysql::conectar()->prepare("SELECT * FROM `admin` WHERE login_admin = ? AND senha_admin = ? ");
+        $sql->execute(array($user,$senha));
+
+        if($sql->rowCount() == 1){
+            $info = $sql->fetch();
+            //logamos
+            $_SESSION['login'] = true;
+            $_SESSION['usuario'] = $user;
+            $_SESSION['senha'] = $senha;
+            $_SESSION['nome'] = $info['nome_admin'];
+            $_SESSION['cargo'] = $info['cargo_admin'];
+            header('Location:'.PATH_GERENCY);
+            die();
+        }
+    }
+ ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -28,6 +48,11 @@
                         $_SESSION['senha'] = $senha;
                         $_SESSION['nome'] = $info['nome_admin'];
                         $_SESSION['cargo'] = $info['cargo_admin'];
+                        if(isset($_POST['lembrar'])){
+                            setcookie('lembrar',true,time()+(60*60*24),'/');
+                            setcookie('user',$user,time()+(60*60*24),'/');
+                            setcookie('senha',$senha,time()+(60*60*24),'/');
+                        }
 
                         header('Location:'.PATH_GERENCY);
                         die();
@@ -40,7 +65,14 @@
             <form method="post">
                 <input type="text" name="usuario" placeholder="Usuario..." required>
                 <input type="password" name="senha" placeholder="Senha..." required>
-                <input type="submit" name="acao" value="Logar!">
+                <div class="form-group-login left w50">
+                    <input type="submit" name="acao" value="Logar!">
+                </div>
+                <div class="form-group-login right ">
+                    <label for="">Lembrar de mim</label>
+                    <input type="checkbox" name="lembrar">
+                </div>
+                <div class="clear"></div>
             </form>
         </div>
     </section>

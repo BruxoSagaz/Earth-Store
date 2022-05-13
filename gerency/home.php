@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="style/cad_item.css">
     <link rel="stylesheet" href="style/home.css">
-
+    <link rel="stylesheet" href="style/visitas.css">
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
 <body style="height: 1000px;">
@@ -250,8 +250,15 @@
     <nav class="config-nav">
         <div class="align-nav">
             <ul class="config-list">
+                <!-- Botao cad item -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button <?php if($_GET['page']=='cad_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Cadastrar Item</button></a></li>
+
+                <!-- Botao edit item -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button <?php if($_GET['page']=='edit_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Consultar Banco</button></a></li>
+
+                <!-- Botao visitas -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button <?php if($_GET['page']=='visitas'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Visitas</button></a></li>
+            
             </ul>
         </div>
     </nav>
@@ -270,5 +277,6 @@
     <!--  -->
 
     <script  src="js/home.js"></script>
+
 </body>
 </html>

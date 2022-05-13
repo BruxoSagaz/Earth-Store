@@ -4,4 +4,4 @@ $(document).ready(function(){
         $('.modal-user').fadeToggle();
     });
 
-})
+});

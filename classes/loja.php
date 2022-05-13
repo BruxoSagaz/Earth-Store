@@ -1,7 +1,7 @@
 <?php
 
 
-class Painel 
+class Loja 
 {
     public static function logado(){
         return isset($_SESSION['login']) ? true : false;
@@ -9,8 +9,7 @@ class Painel
 
     public static function loggout(){
         session_destroy();
-        setcookie('lembrar','false',time()-10,'/');
-        header("Location: ".PATH_GERENCY);
+        header("Location: ".PATH);
     }
 
     public static function loadPage(){
@@ -19,7 +18,7 @@ class Painel
             if(file_exists('pages/'.$url[0].'.php')){
                 include('pages/'.$url[0].'.php');
             }else{
-                header('Location: '.PATH_GERENCY);
+                include('pages/home.php');
             }
         }else{
             include('pages/home.php');
