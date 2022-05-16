@@ -15,7 +15,7 @@
 
                     <div class="input-area">
                         <label for="">Categoria: </label>
-                        <input list="categorias" name="categoria" class="list">
+                        <input list="categorias" name="categoria" class="list" id="categoria">
                         <!-- Datalist    -->
                         <datalist id="categorias">
                             <option value="Terços"></option>
@@ -192,7 +192,7 @@
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/functions.js"></script>
     <script src="../js/jquery.mask.js"></script>
-    <script src="../js/validatons.js"></script>
+    <!-- <script src="../js/validatons.js"></script> -->
     <script  src="js/cad_item.js"></script>
 
     <script>

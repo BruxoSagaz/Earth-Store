@@ -12,8 +12,8 @@ $(document).ready(function(){
 
     // Ok button click Start tags
     $('#startTag').click(function(e){
-
         e.preventDefault();
+        e.stopPropagation();
 
         var filter = $('#filter').val().trim();
         var value = $('#value').val().trim();
@@ -369,7 +369,7 @@ $(document).ready(function(){
 
     function aplicarCampoInvalido(el,msg){
         var valor = el.val();
-        var sd = el.attr('placeholder')
+        var sd = el.attr('placeholder');
         el.val('');
         el.css('border', '0px solid red');
         el.animate({'borderWidth': '3px'});
@@ -399,12 +399,12 @@ $(document).ready(function(){
     $('#form_cad_item').submit(function(e){
         e.preventDefault();
         //form variables 
-        let nomes = $('input[name=nome]');
-        let categorias = $('input[name=categoria]');
+        let nomes = $('input[id=nome]');
+        let categorias = $('input[id=categoria]');
         let basePrices = $('input[name=basePrice]');
         let estoques = $('input[name=estoque]');
         let promVals = $('input[name=prom_val]');
-        let tempTrat
+        let tempTrat;
 
 
         // tratando a promoção se houver
@@ -416,11 +416,11 @@ $(document).ready(function(){
 
         //veririficar se ta vazio
 
-        if(nomes.val()== ""){
+        if(nomes.val() == ""){
             aplicarCampoInvalido($('input[name=nome]'));
             return 0;
         }if(categorias.val() == ""){
-            aplicarCampoInvalido($('input[name=categria]'));
+            aplicarCampoInvalido($('input[id=categoria]'));
             return 0;
         }if(basePrices.val() == ""){
             aplicarCampoInvalido($('input[name=basePrice]'));
