@@ -47,10 +47,10 @@ $(document).ready(function(){
     });
 
     $('#are-prom').change(function(){
-        $('#ordem').trigger("change");
+        $('input.input-filter:checked').trigger("change");
     });
 
     $('#start-query-button').click(function(){
-        $('#ordem').trigger("change");
+        $('input.input-filter:checked').trigger("change");
     });
 })

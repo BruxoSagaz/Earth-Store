@@ -96,6 +96,7 @@ form{
     max-width: 1600px;
     padding: 0 2%;
     margin: 0 auto;
+    height: 100%;
 }
 
 header{
@@ -138,7 +139,7 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-    height: 1000px;
+    height: 100%;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
 }

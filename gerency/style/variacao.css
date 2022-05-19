@@ -1,0 +1,125 @@
+/* GENERAL */
+
+.w33{
+    width: 33%;
+}
+
+.overflow{
+    overflow: overlay;
+}
+
+/* GENERAL */
+
+.comment{
+    position: absolute;
+    font-weight: 600;
+    height: 120px;
+}
+
+p.line-comment{
+    left: 40px;
+    margin-top: 2px;
+    position: relative;
+}
+
+.work-area{
+    width: 100%;
+}
+
+div.var-buttons{
+    align-items: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+div.var-buttons button{
+    margin: 0 10px;
+    width: 165px;
+    height: 45px;
+}
+
+.var-block{
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.flex-conf{
+    display: flex;
+    align-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.items-var{
+    padding-top: 10px;
+    margin: 2px 0;
+    width: 100%;
+}
+
+.cont-direito-adjust{
+    min-width: 900px;
+}
+
+.fil-config-adjust{
+    padding-left: 17px;
+    min-width: 255px;
+}
+
+.cont-esq-adjust{
+    min-width: 255px;
+}
+
+.allign-p p{
+    display: inline-block;
+    margin-left: 12px;
+    font-weight: bolder;
+}
+
+.allign-p{
+    font-size: 20px;
+}
+
+.div-label{
+
+}
+
+.divisions{
+    width: 102%;
+    height: 242px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    overflow: overlay;
+}
+
+.square-input{
+    display: inline-block;
+}
+
+.square-input i{
+    font-size: 33px;
+    color: brown;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.square-input i.fa-circle-minus{
+    font-size: 20px;
+    margin-left: auto;
+    margin-top: inherit;
+}
+
+input[type='text'].input-gerado{
+    width: 169px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    margin: 3px 16px;
+}

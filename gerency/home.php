@@ -29,9 +29,10 @@
     <link rel="stylesheet" href="style/cad_item.css">
     <link rel="stylesheet" href="style/home.css">
     <link rel="stylesheet" href="style/visitas.css">
+    <link rel="stylesheet" href="style/variacao.css">
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
-<body style="height: 1000px;">
+<body>
     
     <?php 
         if(!isset($_SESSION['usuario'])){
@@ -85,6 +86,9 @@
                 <!-- Botao edit item -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button <?php if($_GET['page']=='edit_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Consultar Banco</button></a></li>
 
+                <!-- Botão Variação de Item -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button <?php if($_GET['page']=='variacao'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Variação Estoque</button></a></li>
+
                 <!-- Botao visitas -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button <?php if($_GET['page']=='visitas'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Visitas</button></a></li>
             
@@ -106,6 +110,7 @@
     <!--  -->
 
     <script  src="js/home.js"></script>
+
 
 </body>
 </html>

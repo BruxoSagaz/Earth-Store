@@ -174,14 +174,14 @@ $(document).ready(function(){
     }
 
     function ripToSend(value){
-        value = value.split(',');
-        value = value[0];
         value = value.split('.');
-        let lenForItem = value.length;
         value = value.toString();
-        for(let i = 0;i<lenForItem;i++){
-            value = value.replace(',','');
-        }
+        value = value.replace(',',".");
+        // let lenForItem = value.length;
+        // value = value.toString();
+        // for(let i = 0;i<lenForItem;i++){
+        //     value = value.replace(',','');
+        // }
         return value;
     }
 

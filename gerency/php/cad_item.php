@@ -48,6 +48,21 @@ $querys = "INSERT INTO `produto`( `nome`, `imagens`, `categoria`, `descricao_ger
 // echo "<br>";
 // echo $querys;
 
+
+$query2 = "SELECT * FROM `variacoes` WHERE categoria = '".$categoria."'";
+
+$sql2 = $pdo->prepare($query2);
+
+$sql2->execute();
+$row = $sql2->rowCount();
+
+echo $row;
+
+if($sql2->rowCount() == 0 || $sql2->rowCount() == false ){
+    $sql2 = $pdo->prepare("INSERT INTO `variacoes` (`categoria`) VALUES ('$categoria')");
+    $sql2->execute();
+}
+
 function dbQuery($query){
     global $pdo;
     $sql = $pdo->prepare($query);
@@ -60,6 +75,7 @@ function dbQuery($query){
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
 }
+
 
 dbQuery($querys);
 ?>

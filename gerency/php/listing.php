@@ -85,11 +85,42 @@ function gerarItemDefault($query){
 
 
 
+function insertInPosition($str, $pos, $c){
+    return substr($str, 0, $pos) . $c . substr($str, $pos);
+}
 
 
 
 
+function addZero($item){
+    
+    if(mb_strpos($item,",") !== false){
+        $teste = explode(",",$item);
 
+        $for = 2 - strlen($teste[1]);
+
+
+        if(strlen($teste[1]) <= 2 ){
+            for($i=0;$i < $for;$i++){
+                $teste[1] = $teste[1]."0";
+    
+            }
+        }
+    
+    
+        $item = implode("",$teste);
+        $tam = strlen($item);
+        $tam = $tam - 2;
+        $item = insertInPosition($item,$tam,',');
+    
+        return $item;
+    }else{
+        $final = $item.",00";
+        return $final;
+    }
+
+
+}
 
 
 
@@ -97,14 +128,31 @@ function gerarItemDefault($query){
 
 
 function construir($value){
+    echo "OISS".$value['preco'];
+
+    $value['preco'] = str_replace(".",",",$value['preco']);
+
+
+    echo "OI".$value['preco'];
+
+    
+    $value['valor_em_promocao'] = str_replace(".",",",$value['valor_em_promocao']);
+
+
+
+    echo "HAI".$value['preco'];
+    $value['preco'] = addZero($value['preco']);
+   // $value['valor_em_promocao'] = addZero($value['valor_em_promocao']);
+
+
     echo "<tr>";
     echo "<td>".$value['nome']."</td>";
     echo "<td>".$value['categoria']."</td>";
-    echo "<td>".$value['preco'].",00</td>";
+    echo "<td>".$value['preco']."</td>";
     if($value['valor_em_promocao'] == 0){
         echo "<td> - </td>";
     }else{
-        echo "<td>".$value['valor_em_promocao'].",00</td>";
+        echo "<td>".$value['valor_em_promocao']."</td>";
     }
     echo "<td>".$value['estoque']."</td>";
     echo "<td>".$value['vendas']."</td>";

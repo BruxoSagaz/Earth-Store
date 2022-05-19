@@ -192,20 +192,20 @@
 
                                 <div class="space">
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" id="ordem" value="cres" checked>
+                                    <input type="radio" name="ordem" id="ordem" value="cres" class="input-filter" checked>
                                     <span>ID Crescente</span>
                                 </div>
                                 
                                 
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="dec" id="ordem">
+                                    <input type="radio" name="ordem" value="dec" id="ordem" class="input-filter">
                                     <span>ID Decrescente</span>
                                 </div>
                                 </div>
 
                                 <div class="space">
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="alfa" id="ordem">
+                                    <input type="radio" name="ordem" value="alfa" id="ordem" class="input-filter">
                                     <span>Alfabética (A-Z)</span>
                                 </div>
                                 </div>
@@ -213,24 +213,24 @@
 
                                 <div class="space">
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="maiorpreco" id="ordem">
+                                    <input type="radio" name="ordem" value="maiorpreco" id="ordem" class="input-filter">
                                     <span>Maior Preço</span>
                                 </div>
 
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="menorpreco" id="ordem">
+                                    <input type="radio" name="ordem" value="menorpreco" id="ordem" class="input-filter">
                                     <span>Menor Preço</span>
                                 </div>
                                 </div>
 
                                 <div class="space">
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="maisvendidos" id="ordem">
+                                    <input type="radio" name="ordem" value="maisvendidos" id="ordem" class="input-filter">
                                     <span>Mais Vendidos</span>
                                 </div>
 
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="menosvendidos" id="ordem">
+                                    <input type="radio" name="ordem" value="menosvendidos" id="ordem" class="input-filter">
                                     <span>Menos Vendidos</span>
                                 </div>
                                 </div>
@@ -260,6 +260,7 @@
                                 <option value="categoria">categoria</option>
                                 <option value="id">id</option>
                                 <option value="preco">preço</option>   
+                                <option value="valor_em_promocao">V. Promoção</option>   
                             </select>
                         </ul>
 
