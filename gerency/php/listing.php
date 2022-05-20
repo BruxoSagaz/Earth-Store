@@ -147,7 +147,7 @@ function construir($value){
 
     echo "<tr>";
     echo "<td>".$value['nome']."</td>";
-    echo "<td>".$value['categoria']."</td>";
+    echo "<td class='categoria'>".$value['categoria']."</td>";
     echo "<td>".$value['preco']."</td>";
     if($value['valor_em_promocao'] == 0){
         echo "<td> - </td>";

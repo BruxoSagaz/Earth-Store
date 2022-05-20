@@ -10,6 +10,7 @@ $(document).ready(function(){
     var fileNames = $('#file_name');
     var descModal = $('#description_modal');
     var specModal = $('#spec_modal');
+    var varModal = $('#var_modal');
     var descText = $('#descricaoGeral');
     var specText = $('#especificacoes')
     var modalShadow = $('.modal-shadow');
@@ -25,15 +26,71 @@ $(document).ready(function(){
 
     //sair da modal
     $('.close-btn').click(function(){
+        $('.divisions-container').empty();
         sairMordal();
     });
 
     //sair da modal
     $('body').click(function(){
-        if(descModal.attr('ative') == 0 && specModal.attr('ative') == 0 ){
+        if(descModal.attr('ative') == 0 && specModal.attr('ative') == 0 && varModal.attr('ative') == 0){
+            $('.divisions-container').empty();
             sairMordal();
         }
     });
+
+    //aparecer modal variacoes
+    $('#get-variations').click(function(e){
+        
+        e.preventDefault();
+        $('#division-points').text($('#estoque_disp').val());
+
+        if($('.divisions-container *').length == 0 || $('.divisions-container *').length == null){
+
+            categ = $('input[name="categoria"]').val();
+            $.ajax({
+                method:"post",
+                url: "./php/select_categ.php",
+                data: "categoria="+categ,
+                dataType: "json",
+                error: function(){
+                    console.log("categoria não cadastrada");
+                    $('.divisions-container').text("categoria não cadastrada");
+
+                }
+            }).done(function(data){
+                // console.log(data);
+                construirInputVar(data);
+                atualizarSubDivisoes(antigasVariacoes);
+            });
+
+        }
+
+
+        varModal.fadeIn();
+        varModal.attr({"ative":"1"});
+        modalShadow.fadeIn();
+        $('.form-modal').css("border","2px solid #858585");
+
+
+        // Sistema de limitar as escolhas
+        $('.divisions-container').on('change','.input-gerado',function(){
+            let inputs = $("input[class^='input-gerado']");
+            let estoque = parseInt($('#estoque_disp').val());
+            tamInputs = inputs.length;
+            sum = 0;
+            for(i=0;i<tamInputs;i++){
+                sum += parseInt(inputs[i].value);
+            }
+            console.log("Sum " + sum);
+            if(estoque < sum){
+                $('.alert_var_plus').text("Há mais variações do que itens, dimunua as variações ou aumente o estoque!");
+            }else{
+                $('.alert_var_plus').text("");
+            }
+            $('.total_variacoes_display').text("Total de variações: "+ sum);
+        })
+
+    })
     //evitar bugs
     $('.form-modal').click(function(e){
         e.stopPropagation();
@@ -64,6 +121,11 @@ $(document).ready(function(){
         $('.form-modal').css("border","2px solid #858585");
     })
 
+    // Mudança de genero apaga div
+    $('input[name="categoria"]').change(function(){
+        $('.divisions-container').empty();
+    });
+
     // Sair modal interno
     $('.exit_modal_input').click(function(e){
         e.preventDefault();
@@ -71,6 +133,17 @@ $(document).ready(function(){
         descModal.attr({"ative":"0"});
         specModal.fadeOut();
         specModal.attr({"ative":"0"});
+        varModal.fadeOut();
+        varModal.attr({"ative":"0"});
+        modalShadow.fadeOut();
+        $('.form-modal').css("border","2px solid #ccc");
+    });
+
+    // sair modal interno de var
+    $('#sair_var_clean').click(function(e){
+        e.preventDefault();
+        varModal.fadeOut();
+        varModal.attr({"ative":"0"});
         modalShadow.fadeOut();
         $('.form-modal').css("border","2px solid #ccc");
     });
@@ -79,8 +152,10 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
         var id_tag = $(this).parent().siblings('.id');
+        var categ = $(this).parent().siblings('.categoria');
+        var categs = categ.text();
         //SALVANDO ID PARA TODO O COD
-        var id = id_tag.text();
+        globalThis.id = id_tag.text();
 
         $.ajax({
             method: 'post',
@@ -90,19 +165,34 @@ $(document).ready(function(){
 
         }).done(function(data){
             //Ativando o global das informações
-            antigasInfo = data;
-            console.log(data);
+            var antigasInfo = data;
+            globalThis.antigasVariacoes = data['variacoes'];
             actualizeModal(data);
-
             modal.fadeIn();
-
+            // console.log(data['variacoes']);
+            $.ajax({
+                method:"post",
+                url: "./php/select_categ.php",
+                data: "categoria="+categs,
+                dataType: "json",
+                error: function(){
+                    console.log("categoria não cadastrada")
+                }
+            }).done(function(data2){
+                // console.log(data);
+                
+                construirInputVar(data2);
+                atualizarSubDivisoes(antigasInfo['variacoes']);
+            });
         });
+        
 
-    
+        // console.log("categ ="+categs) 
+
 
         //modal.fadeIn();
     });
-
+    
     function ripValues(value){
         value = value.split(',');
         value = value[0];
@@ -422,9 +512,11 @@ $(document).ready(function(){
             let span = $('.tag span');
             let tam = span.length;
             let tags = Array();
-            let names = Array(); 
+            let names = Array();
+            let valores = Array();
+            var message = "Dados atualizados (Sem Variações)";
             
-
+            console.log(dados);
             try{
                 var len
                 if(len = files.length){
@@ -475,9 +567,6 @@ $(document).ready(function(){
                 tamDados = dados.length;
                 // Area onde dados estão em array
 
-                
-
-                console.log(dados);
 
                 for(let i = 0;i<tamDados;i++){
                     temp = dados[i].split("=");
@@ -498,8 +587,46 @@ $(document).ready(function(){
                 for(let i = 0;i<=tamDados;i++){
                     dados = dados.replace(",","&");
                 }
-                // console.log(dados);
+
                 
+                // Salvar variacoes
+                varia = document.querySelectorAll('.input-gerado');
+                quantidade = 0;
+                varia.forEach(element => {
+                    if(element.value != ''){
+                        valores.push(element.value);
+                        quantidade += parseInt(element.value);
+                    }
+                });
+                let estoque = parseInt($('#estoque_disp').val());
+
+                if(varia.length == valores.length && estoque == quantidade){
+                    $.ajax({
+                        url:'./php/update_variacao_edit.php',
+                        method: 'post',
+                        dataType:'json',
+                        data: {'id':antigasInfo['id'],'variations':valores}
+                        
+                    }).done(function(data){
+                        if(data.sucesso){
+                            console.log("fim");
+                            message = "Variações e dados atualizados"
+                        }
+                    });
+                }else if(estoque != quantidade){
+                    $.ajax({
+                        url:'./php/update_variacao_edit.php',
+                        method: 'post',
+                        dataType:'json',
+                        data: {'id':antigasInfo['id'],'variations':'0'}
+                        
+                    }).done(function(data){
+                        if(data.sucesso){
+                            console.log("fim");
+                            message = "Variações e dados atualizados"
+                        }
+                    });
+                }
 
                 $.ajax({
                     url:'./php/edit_item.php',
@@ -511,7 +638,7 @@ $(document).ready(function(){
 
                     $('#responseAjax').empty();
                     if(data.sucesso){
-                        alert("ATUALIZADO!");
+                        alert(message);
                     }
                 });
 
@@ -520,6 +647,44 @@ $(document).ready(function(){
             promVals.val(promVals.val()+",00");
         }
     })
+
+    function construirInputVar(item){
+        varia = item['variacoes'];
+        varia = varia.split(',');
+
+        varia.forEach(element => {
+            const selec = document.createElement('div');
+            selec.setAttribute("class","select-divisions");
+            const spans = document.createElement('span');
+            spans.innerHTML = element+" : ";
+            const input = document.createElement('input');
+            input.setAttribute("type","number");
+            input.setAttribute("class","input-gerado");
+
+            selec.appendChild(spans);
+            selec.appendChild(input);
+
+            $('.divisions-container').append(selec);
+
+        });
+
+    }
+
+    function atualizarSubDivisoes(sub){
+
+        sub2 = sub.split(',');
+        inputs = $("input[class^='input-gerado']");
+        tamInputs = inputs.length;
+
+        for(i=0;i<tamInputs;i++){
+
+            inputs[i].value = sub2[i];
+            console.log(inputs[i].value);
+        }
+
+    }
+
+
 
     $('#base-price').mask('000.000.000.000.000,00', {reverse: true});
     $('#prom_val').mask('000.000.000.000.000,00', {reverse: true});

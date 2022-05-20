@@ -832,6 +832,35 @@ button{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.divisions-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.select-divisions{
+    margin: 10px 5px;
+}
+
+h3.alert_var{
+    left: 22px;
+    font-size: 18px;
+    width: 81%;
+    position: absolute;
+    bottom: 72px;
+    color: crimson;
+}
+
+.generic_alert{
+    color: crimson;
+    font-weight: bolder;
+}
+
+
 .slider {
     border: 1px solid black;
     height: 194px;

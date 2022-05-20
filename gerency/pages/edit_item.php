@@ -36,7 +36,42 @@
             <button class="exit_modal_input">Sair</button>
         </div>
 
+        <!-- MODAL INTERNO 3 -->
+        <div class="modal_text_input" id="var_modal" style="display: none;" ative="0">
+            
+            <div class="flex-center">
+                <h2>Divisão de Estoque Por Categoria</h2>
+            </div>
 
+            <div class="flex-center">
+                <h2>Estoque:</h2>
+                <h2 id="division-points"></h2>
+            </div>
+            <div class="flex-center">
+                <div class="divisions-container">
+                    <!-- <div class="select-divisions">
+                         <span>G:</span>
+                        <input type="number"> 
+                    </div> -->
+                </div>
+
+
+                <div class="flex-center w100">
+                <div class="alert_var_plus generic_alert"></div>
+                </div>
+
+                <h4 class="total_variacoes_display" style="display:block;"></h4>
+
+
+
+
+                <div class="flex-center">
+                <h3 class="alert_var" style="display:block;"><i class="fa-solid fa-circle-exclamation"></i> Caso a quantidade de variações não seja a mesma da quantidade de estoque, as variações serão salvas como "sem variacões"<i class="fa-solid fa-circle-exclamation"></i></h3>
+                </div>
+            </div>
+
+            <button id="sair_var_clean">Sair</button>
+        </div>
 
         <!-- INICIO DO FORM -->
         <div class="modal-grouper"><!--  Grouper -->
@@ -82,7 +117,8 @@
         </select>
 
         <label for="estoque">Quantidade em estoque</label>
-        <input type="number" name="estoque" id="" maxlength="7">
+        <input type="number" name="estoque" id="estoque_disp" maxlength="7">
+        <button id="get-variations" style="width: 170px;"> Variação De Estoque </button>
 
         </div><!-- Grouper -->
 
