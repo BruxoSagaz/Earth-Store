@@ -26,10 +26,9 @@
     <meta name="theme-color" content="#e30613">
     <!--Favicon-->
 
-    <link rel="stylesheet" href="style/cad_item.css">
+    
     <link rel="stylesheet" href="style/home.css">
-    <link rel="stylesheet" href="style/visitas.css">
-    <link rel="stylesheet" href="style/variacao.css">
+
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
 <body>

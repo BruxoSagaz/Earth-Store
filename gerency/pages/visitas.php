@@ -1,3 +1,5 @@
+<!-- css -->   
+<link rel="stylesheet" href="style/visitas.css">
 <!-- MAIN -->
 
 <div class="container cont-visitas">

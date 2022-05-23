@@ -353,8 +353,10 @@ $(document).ready(function(){
             type: 'POST',
             async:'false',
         }).done(function(data){
-            // nameFile = data[1];
-            $('#responseAjax').append(data[1]+" ");
+            // nameFile = data[1];enviarBanco();
+            response = $('#responseAjax');
+            response.val(response.val() + data[1] + " ");
+            response.trigger("change");
         });
     }
 
@@ -429,7 +431,12 @@ $(document).ready(function(){
             //Tratando o preço base
             tempTrat = basePrices.val();
             tempTrat = ripToSend(tempTrat);
-            basePrices.val(tempTrat)
+            basePrices.val(tempTrat);
+                // promval
+            promval = $('#prom_val');
+            tempProm = promval.val();
+            tempProm = ripToSend(tempProm);
+            promval.val(tempProm);
         }
         
         if(estoques.val() == ""){
@@ -445,13 +452,7 @@ $(document).ready(function(){
 
 
             var files =  window.selectedFile;
-            let len = files.length;
-            let form = $(this);
-            let dados = form.serialize();
-            let span = $('.tag span');
-            let tam = span.length;
-            let tags = Array();
-            let names = Array(); 
+            var len = files.length;
 
             if(!len){
                 alert("Sem Imagens Selecionadas!");
@@ -464,67 +465,86 @@ $(document).ready(function(){
             //     promVal = promVal.replace(",",".");
             // }
 
-            for(i=0;i<tam;i++){
-                let val = span[i].textContent;
-                val = val.replace(" ","");
-                val = val.replace(" ","");
-                tags.push(val);
-            }
-            dados = dados + "&tags="+tags;
-
+            contadorMud = 0
             for(i=0;i<len;i++){
                 uploadFile(files[i]);
             }
 
-
-            setTimeout(function(){
-                names = $('#responseAjax').text();
-                // console.log(names);
-            
-
-                dados = dados + "&image_names="+names;
-    
-
-                // console.log(dados);
-                $.ajax({
-                    url:'./php/cad_item.php',
-                    method: 'post',
-                    dataType:'json',
-                    data: dados
-                    
-                }).done(function(data){
-
-                    $('#responseAjax').empty();
-                    if(data.sucesso){
-
-                        //scroll top
-                        window.scrollTo(0,0);
-                        alert("Enviado e Cadastrado!");
-                        
-                        $('#descricaoGeral').val("");
-                        $('#especificacoes').val("");
-                        $('.tag-container').empty();
-                        $('#file_name').text("arquivos: ");
-                        $('input').val(""); 
-                        $('input[type=submit]').val("Mandar para o Servidor") 
-                        $('.discount').text("");
-                        $('.discount').css("display","none");
-                        $('.price-before').css("display","none");
-                        $('.product-name').text("Nome Exemplo");
-                        $('.price-off').text("R$ 00,00");
-                        $('#divisions-par').text("Ou até ");
-                        $('#img').attr('src',"../images/example.png");
-                        $('#sec_img').attr('src',"../images/example_2.png");
-                    }else{
-                        alert('Formulario não sucedido');
-                    }
-                });
-
-                basePrices.val(basePrices.val()+",00");
-                promVals.val(promVals.val()+",00");
-            },100);
+            $("#responseAjax").change(function(){
+                contadorMud += 1;
+                if(contadorMud == len){
+                    enviarBanco();
+                    contadorMud = 0;
+                }
+            });
         }
         return false
     });
+
+    function enviarBanco(){
+        var span = $('.tag span');
+        var tam = span.length;
+        var tags = Array();
+        var names = Array(); 
+        let basePrices = $('input[name=basePrice]');
+        let promVals = $('input[name=prom_val]');
+        form = $("#form_cad_item")
+        dados = form.serialize();
+        names = $('#responseAjax').val();
+        // console.log(names);
+    
+        
+        for(i=0;i<tam;i++){
+            let val = span[i].textContent;
+            val = val.replace(" ","");
+            val = val.replace(" ","");
+            tags.push(val);
+
+        }
+        dados = dados + "&tags="+tags;
+
+        dados = dados + "&image_names="+names;
+
+
+        // console.log(dados);
+        $.ajax({
+            url:'./php/cad_item.php',
+            method: 'post',
+            dataType:'json',
+            data: dados
+            
+        }).done(function(data){
+
+            $('#responseAjax').empty();
+            if(data.sucesso){
+
+                //scroll top
+                window.scrollTo(0,0);
+                alert("Enviado e Cadastrado!");
+                
+                $('#descricaoGeral').val("");
+                $('#especificacoes').val("");
+                $('.tag-container').empty();
+                $('#file_name').text("arquivos: ");
+                $('input').val("");
+                $('#prom_val').attr('disabled');
+                 $("#aply_prom").prop("checked", false);
+                $('input[type=submit]').val("Mandar para o Servidor") 
+                $('.discount').text("");
+                $('.discount').css("display","none");
+                $('.price-before').css("display","none");
+                $('.product-name').text("Nome Exemplo");
+                $('.price-off').text("R$ 00,00");
+                $('#divisions-par').text("Ou até ");
+                $('#img').attr('src',"../images/example.png");
+                $('#sec_img').attr('src',"../images/example_2.png");
+            }else{
+                alert('Formulario não sucedido');
+            }
+        });
+
+        basePrices.val(basePrices.val()+",00");
+        promVals.val(promVals.val()+",00");
+    };
 });
 

@@ -1,3 +1,5 @@
+
+    <link rel="stylesheet" href="style/variacao.css">
 <!-- Modal Bg -->
 <div class="modal-bg">
 <div class="form-modal">

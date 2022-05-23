@@ -56,8 +56,6 @@ $sql2 = $pdo->prepare($query2);
 $sql2->execute();
 $row = $sql2->rowCount();
 
-echo $row;
-
 if($sql2->rowCount() == 0 || $sql2->rowCount() == false ){
     $sql2 = $pdo->prepare("INSERT INTO `variacoes` (`categoria`) VALUES ('$categoria')");
     $sql2->execute();

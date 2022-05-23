@@ -27,6 +27,8 @@ if (!$file_temp_location) {
 }
 
 if(move_uploaded_file($file_temp_location, "../../uploads/$file_name")){
+    include_once("../../classes/libWide/WideImage.php");
+    WideImage::load("../../uploads/$file_name")->resize(1455,1889)->saveToFile("../../uploads/$file_name");
     die(json_encode(["nome",$file_name]));
 } else {
     echo "A server was unable to move the file";

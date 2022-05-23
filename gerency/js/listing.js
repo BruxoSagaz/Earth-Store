@@ -3,7 +3,7 @@ $(document).ready(function(){
     $.ajax({
         method:"post",
         url: "./php/listing.php",
-        data: "select=all&check=False",
+        data: "select=dec&check=False",
         dataType: "html",
         success: function (response) {
             $('#item-list-body').html(response);

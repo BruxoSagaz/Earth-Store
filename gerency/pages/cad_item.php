@@ -1,3 +1,5 @@
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/cad_item.css">
     <!-- Main -->
     <main>
         <div class="container">
@@ -62,7 +64,7 @@
 
                         <div class="input-area">
                             <label for="quantity">Quantidade em estoque</label>
-                            <input type="number" name="estoque" id="" maxlength="7">
+                            <input type="number" name="estoque" id="" min="0">
                         </div>
 
                         <div class="input-area">
@@ -182,7 +184,7 @@
 
                     <input type="submit" value="Mandar para o Servidor" id="upload_file_button">
 
-                    <div id="responseAjax" style="display: none;"></div>
+                    <input id="responseAjax" style="display: none;" type="text"></input>
                 </form> <!-- form -->
 
             </div>

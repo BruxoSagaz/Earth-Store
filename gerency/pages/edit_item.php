@@ -1,4 +1,6 @@
-    <!-- Modal Bg -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/cad_item.css">
+  <!-- Modal Bg -->
     <div class="modal-bg">
     <div class="form-modal">
         <div class="modal-shadow"></div>
@@ -228,13 +230,13 @@
 
                                 <div class="space">
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" id="ordem" value="cres" class="input-filter" checked>
+                                    <input type="radio" name="ordem" id="ordem" value="cres" class="input-filter">
                                     <span>ID Crescente</span>
                                 </div>
                                 
                                 
                                 <div class="blocks">
-                                    <input type="radio" name="ordem" value="dec" id="ordem" class="input-filter">
+                                    <input type="radio" name="ordem" value="dec" id="ordem" class="input-filter" checked>
                                     <span>ID Decrescente</span>
                                 </div>
                                 </div>

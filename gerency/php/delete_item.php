@@ -24,7 +24,34 @@ function dbQuery($query){
     }
 }
 
+function apagarIm($id){
+    $queryInterna = "SELECT `imagens` FROM `produto` WHERE `id` = $id";
+    global $pdo;
+    $sql = $pdo->prepare($queryInterna);
+    try{
+        $sql->execute();
+        
+        if($sql->rowCount() > 0 ){
+            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $key => $value){
+                foreach ($value as $key2 => $value2){
+                    $value2 = explode(" ",$value2);
+                    foreach($value2 as $value3){
+                        if(file_exists("../../uploads/$value3") && $value3 != ""){
+                            // echo "Apagando $value3";
+                            unlink("../../uploads/$value3");
+                        }
+                    }
+                }
+            }
 
+            return True;
+        }
+    }catch (Exception $e) {
+        echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+    }
+}
 
+apagarIm($id);
 dbQuery($querys);
 ?>
