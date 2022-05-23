@@ -1,0 +1,6 @@
+{
+    "require": {
+        "nesbot/carbon": "^2.58",
+        "flyingluscas/correios-php": "^2.4"
+    }
+}
