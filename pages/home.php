@@ -44,7 +44,7 @@
                 <div class="offers">
                     
                     <!-- Item na promoção -->
-                    <div class="item promotion">
+                    <!-- <div class="item promotion">
                         <div class="product">
                             <div class="product-allign">
                                 <div class="product-image">
@@ -71,7 +71,7 @@
                                             <div class="price-off"> R$ 25,00</div>
                                             
                                         </div>
-
+                                            
                                         <div  class="divisions">
                                             <span>Ou 2x de R$ 13,00  </span>
                                             <span>+ Frete</span>
@@ -85,9 +85,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> -->
                     
+                    <?php
+                        
+                        include("./php/gerar_item_home.php");
+                        
+                    ?>
+            
                 </div>
             </div>
         </section>
@@ -527,3 +533,21 @@
             </div>
         </section>
     </main>
+
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(".img").hover(function(e){
+        
+        e.stopPropagation();
+        $(this).stop().fadeOut();
+        $("#sec_img").stop().fadeIn();
+    }, function(e){
+
+        e.stopPropagation();
+        $(this).stop().fadeIn();
+        $("#sec_img").stop().fadeOut();
+
+        
+    });
+    </script>

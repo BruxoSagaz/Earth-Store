@@ -570,10 +570,10 @@ div .img-field{
     opacity: 0;
 } */
 
-@keyframes blur{
+/* @keyframes blur{
     from {opacity: 1;}
     to {opacity: 0;}
-}
+} */
 
 /* Consultas no banco */
 

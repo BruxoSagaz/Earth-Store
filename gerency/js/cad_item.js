@@ -4,7 +4,7 @@ $(document).ready(function(){
     var aply = $('#aply_prom');
     var tags = [];
     var i = 0;
-    
+    var contadorMud = 0
 
     
     // Mask
@@ -465,18 +465,11 @@ $(document).ready(function(){
             //     promVal = promVal.replace(",",".");
             // }
 
-            contadorMud = 0
+            
             for(i=0;i<len;i++){
                 uploadFile(files[i]);
             }
 
-            $("#responseAjax").change(function(){
-                contadorMud += 1;
-                if(contadorMud == len){
-                    enviarBanco();
-                    contadorMud = 0;
-                }
-            });
         }
         return false
     });
@@ -515,7 +508,8 @@ $(document).ready(function(){
             
         }).done(function(data){
 
-            $('#responseAjax').empty();
+            $('#responseAjax').val("");
+
             if(data.sucesso){
 
                 //scroll top
@@ -527,8 +521,9 @@ $(document).ready(function(){
                 $('.tag-container').empty();
                 $('#file_name').text("arquivos: ");
                 $('input').val("");
-                $('#prom_val').attr('disabled');
-                 $("#aply_prom").prop("checked", false);
+                $('#par-div').val("1");
+                $('#prom_val').prop('disabled',true);
+                $("#aply_prom").prop("checked", false);
                 $('input[type=submit]').val("Mandar para o Servidor") 
                 $('.discount').text("");
                 $('.discount').css("display","none");
@@ -546,5 +541,17 @@ $(document).ready(function(){
         basePrices.val(basePrices.val()+",00");
         promVals.val(promVals.val()+",00");
     };
+
+    $("#responseAjax").change(function(){
+        globalThis.contadorMud;
+        len = window.selectedFile.length;
+        console.log(len);
+        contadorMud += 1;
+        if(contadorMud == len){
+            contadorMud = 0;
+            enviarBanco(); 
+        }
+    });
+
 });
 

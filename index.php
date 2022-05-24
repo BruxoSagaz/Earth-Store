@@ -1,4 +1,7 @@
-<?php include('config.php') ?>
+<?php 
+include('config.php');
+include("./ajax/PDO.php");
+?>
 
 <?php
         if(@$_GET['page']=='filtros'){

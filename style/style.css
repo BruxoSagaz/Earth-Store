@@ -534,7 +534,7 @@ div.banner-p{
     padding: 9px 0px;
     color: white;
     font-weight: 600;
-    z-index: 1;
+    z-index: 15;
     top: -10px;
     left: -10px;
 }
@@ -562,15 +562,24 @@ div.banner-p{
     display: flex;
     justify-content: center;
     width: 100%;
+    overflow: hidden;
 }
 
 .product .product-image img{
-    display: block;
+    /* display: block;
     max-width: 75%;
     width: auto !important;
     max-height: 145%;
     justify-content: center;
-    z-index: -5;
+    z-index: -5; */
+    display: block;
+    max-width: 100%;
+    padding-left: 5%;
+    width: auto !important;
+    max-height: 145%;
+    justify-content: center;
+    z-index: 1;
+    position: absolute;
 }
 
 div.product{
@@ -708,7 +717,7 @@ div .img-field{
 
 .product .product-image .sec_img {
     display: block;
-    max-width: 95%;
+    max-width: 100%;
     padding-left: 5%;
     width: auto !important;
     max-height: 145%;
@@ -716,6 +725,7 @@ div .img-field{
     z-index: 0;
     position: absolute;
 }
+
 
 
 
