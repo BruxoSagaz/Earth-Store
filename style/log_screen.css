@@ -264,6 +264,20 @@ div.enter{
     animation: colorIconF2 1s;
 }
 
+.error-box{
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    position: absolute;
+    background-color: cadetblue;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.error-box i{
+    margin-right: 7px;
+}
+
 
 @media screen and (max-width:1900px) {
     section div.form-div {

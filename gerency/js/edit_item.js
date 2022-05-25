@@ -1,3 +1,4 @@
+var antigasInfo = Array();
 $(document).ready(function(){
     // Funções para tela de gerência
     // janela modal
@@ -5,7 +6,7 @@ $(document).ready(function(){
     var promVal = $('#prom_val');
     var tagContainer =$(".tag-container");
     var imgBreaker = $('.img-breaker');
-    var antigasInfo = Array();
+    
     var fileInput = $('#file_to_upload');
     var fileNames = $('#file_name');
     var descModal = $('#description_modal');
@@ -165,9 +166,11 @@ $(document).ready(function(){
 
         }).done(function(data){
             //Ativando o global das informações
-            var antigasInfo = data;
-            globalThis.antigasVariacoes = data['variacoes'];
+            antigasInfo = data;
+            const antigasVariacoes = data['variacoes'];
+
             actualizeModal(data);
+
             modal.fadeIn();
             // console.log(data['variacoes']);
             $.ajax({
@@ -233,13 +236,16 @@ $(document).ready(function(){
     });
 
     function actualizeModal(obj){
+        let preco = obj['preco'].replace(".",",");
+        let prom = obj['valor_em_promocao'].replace(".",",");
+
         $('#nome').val(obj['nome']);
         $('input[name=categoria]').val(obj['categoria']);
-        $('#base-price').val(obj['preco']+",00");
+        $('#base-price').val(preco);
         if(obj['promocao'] == 1){
             aply.prop('checked', true);
             aply.val("on");
-            promVal.val(obj['valor_em_promocao']+",00").removeAttr("disabled").css('background','white');
+            promVal.val(prom).removeAttr("disabled").css('background','white');
         }else{
             aply.val("off");
         }
@@ -627,7 +633,7 @@ $(document).ready(function(){
                         }
                     });
                 }
-
+                console.log(dados);
                 $.ajax({
                     url:'./php/edit_item.php',
                     method: 'post',
@@ -639,6 +645,7 @@ $(document).ready(function(){
                     $('#responseAjax').empty();
                     if(data.sucesso){
                         alert(message);
+                        $('input.input-filter:checked').trigger("change");
                     }
                 });
 
@@ -671,17 +678,19 @@ $(document).ready(function(){
     }
 
     function atualizarSubDivisoes(sub){
+        try {
 
-        sub2 = sub.split(',');
-        inputs = $("input[class^='input-gerado']");
-        tamInputs = inputs.length;
+            sub2 = sub.split(',');
+            inputs = $("input[class^='input-gerado']");
+            tamInputs = inputs.length;
 
-        for(i=0;i<tamInputs;i++){
-
-            inputs[i].value = sub2[i];
-            console.log(inputs[i].value);
-        }
-
+            for(i=0;i<tamInputs;i++){
+                inputs[i].value = sub2[i];
+                console.log(inputs[i].value);
+            }
+        }catch (e) {
+            console.log("Erro em AtualizarSubDivisoes");
+         }
     }
 
 

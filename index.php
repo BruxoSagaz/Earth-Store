@@ -4,6 +4,9 @@ include("./ajax/PDO.php");
 ?>
 
 <?php
+        if(isset($_GET['loggout'])){
+            Loja::loggout();
+        }
         if(@$_GET['page']=='filtros'){
             include("pages/filtros.php");
         }else if(@$_GET['page']=='individual'){
@@ -41,7 +44,7 @@ include("./ajax/PDO.php");
 
 
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/style2.css">
+    <link rel="stylesheet" href="style/style_2.css">
 
  
 
@@ -56,72 +59,10 @@ include("./ajax/PDO.php");
 <body>
 
     <!-- Header -->
-    <header>
-        
-        <!-- Container -->
-        <div class="container">
-  
-            <!-- Header Desktop -->
-            <div class="desktop-header">
-                <!-- Logo -->
-                <div class="logo-desktop"><a href="home"><img src="images/Logo.png" alt=""></a></div>
-                <!-- Logo -->
-
-                <!-- Nav -->
-                <nav class="nav-desktop">
-
-                    <ul class="list-nav">                      
-                        <input type="input" class="form-field" placeholder="Pesquisa..." name="name" id='keysearch' autocomplete="off" />
-                        <i class="fa-solid fa-magnifying-glass" id="glass"></i ><li>Pesquisar</li>
-                    </ul>
-
-                    <ul class="list-nav">
-                        <i class="fa-solid fa-comment-dots"></i><li>Fale Conosco</li>
-                    </ul>
-
-                    <ul class="list-nav">
-                        <a href="./cadastro/cadastro.php">
-                            <i class="fa-solid fa-arrow-right-to-bracket" ></i><li>Minha Conta</li>
-                        </a>
-                    </ul>
-
-                    <ul>
-                        <div class="bag-shipping">
-                            <div class="num-cart">0</div>
-                            <div>
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </div>
-
-                        </div>
-                    </ul>
-                </nav><!-- Nav -->
-
-            </div>
-            
-            <div class="cart-sidebar">
-
-            </div>
-
-        </div><!-- Container --><!-- Header Desktop -->
-
-        <div class="container">
-            <div class="mobile-header">
-            
-                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa-solid fa-bars"></i></a>
-
-                
-                <!-- Logo -->
-                <div class="logo-mobile"><a href="home"><img src="images/Logo.png" alt=""></a></div>
-                <!-- Logo -->
-
-                <ul class="list-nav">
-                   <a href="cadastro"><i class="fa-solid fa-arrow-right-to-bracket" ></i></a> <!--<li>Minha Conta</li> -->
-                </ul>
-                
-            </div>
-
-        </div>
-    </header><!-- Header -->
+        <?php
+            include_once("header.php");
+        ?>
+    <!-- Header -->
 
 
 
@@ -129,19 +70,15 @@ include("./ajax/PDO.php");
     <nav class="primary-nav">
         <div class="container">
             <ul class="w100 nav-list">
-                <li><button href="">Livros</button></li>
-                <li><button href="">CDs</button></li>
-                <li><a href="&page=filtros"><button>Terços</button></a></li>
-                <li><button href="">Cruzes</button></li>
-                <li><button href="">Colares</button></li>
-                <li><button href="">Imagens em Resina</button></li>
-                <li><button href="">Pulseiras</button></li>
-                <li><button href="">Camisas</button></li>
-                <li><button href="">adornos</button></li>
-                <li><button href="">Chaveiros</button></li>
-                <li><button href="">Cratões</button></li>
-                <li><button href="">Pingentes</button></li>
-                <li><button href="">Mais</button></li>
+
+
+
+                <!-- 
+                <li><a href="&page=filtros&filter=terços"><button>Terços</button></a></li> -->
+
+ 
+
+
             </ul>
         </div>
     </nav> <!-- Nav  general -->
@@ -150,16 +87,6 @@ include("./ajax/PDO.php");
     <!-- MAIN  -->
 
     <?php 
-    // if(isset($_GET['page'])){
-    //     try{
-
-    //         include("./pages/".$_GET['page'].".php");
-            
-    //     }catch (Exception $e){
-    //         include("./pages/404.php");
-    //     }
-    // }
-
         Loja::loadPage();
     ?>
     <!-- MAIN -->
@@ -252,54 +179,9 @@ include("./ajax/PDO.php");
     <!-- Script -->
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/functions.js"></script>
-    
+    <script src="js/home.js"></script>
 
-    <script>
-        $(function () {
 
-            //Header
-            var iconSearch = $('#glass');
-            var search = $('#keysearch');
- 
-            $('.mobile-header h3').click(function(){
-                $('nav.mobile-header').slideToggle();
-            })
-
-            iconSearch.click(function(){
-
-                if(search.val() == ""){
-                    $('.form-field').toggle(500);
-                }
-
-            })
-
-            // Abrir Popup do cart
-            abrirJanela();
-            function abrirJanela(){
-                $('.bag-shipping').click(function(e){
-                    e.stopPropagation();
-                    $('.cart-sidebar').fadeToggle("slow");
-                });
-
-                $('body').click(function(){
-                    $('.cart-sidebar').fadeOut("slow");
-                });
-
-            }
-            //Escutar o evento de redimencionalização de tela
-            window.addEventListener('resize', hideCartSideBar);
-
-            function hideCartSideBar(){
-
-                if($(window).width() < 768){
-                    $('.cart-sidebar').replaceWith('<div class="cart-sidebar"></div>');
-                }
-
-            }
-            
-        })
-
-    </script>
     <?php } ?>
 </body>
 </html>

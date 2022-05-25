@@ -15,6 +15,21 @@ function gerarAleatorio(){
     }
 }
 
+function gerarMaisVendidos(){
+    global $pdo;
+    $query = "SELECT * FROM `produto` ORDER BY `vendas` DESC LIMIT 10";
+
+
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+
+    if($sql->rowCount() > 0 ){
+        foreach($sql->fetchAll() as $value){
+            construirItem($value);
+        }
+    }
+}
+
 
 
 function construirItem($item){
@@ -44,6 +59,7 @@ function construirItem($item){
     //     echo "R$ ".$item['valor_em_promocao'];
     // }
     // echo '</div>';
+
     echo '<div class="img-field">';
     echo "<img src='./uploads/$imagens[0]' alt='Terço' class='img'>";
     if(count($imagens) > 1){
@@ -115,8 +131,12 @@ function construirItem($item){
 }
 
 function calcularPorcentagem($prom,$preco){
-    return '10%';
+    $final = ($prom * 100) / $preco;
+    $final = round($final);
+    $final = strval($final);
+    $final = $final."%"; 
+    return $final;
 }
 
-gerarAleatorio();
+
 ?>

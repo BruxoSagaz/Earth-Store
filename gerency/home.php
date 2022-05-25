@@ -28,13 +28,14 @@
 
     
     <link rel="stylesheet" href="style/home.css">
+    
 
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     
     <?php 
-        if(!isset($_SESSION['usuario'])){
+        if(!isset($_SESSION['usuario_admin'])){
             header("Location: index.php");
         }
         if(isset($_GET['loggout'])){
@@ -56,13 +57,13 @@
                 </div>
                 <div class="header-account">
                     <i class="bi bi-person"></i>
-                    <?php echo "<span>".$_SESSION['nome']."</span>";?>
+                    <?php echo "<span>".$_SESSION['nome_admin']."</span>";?>
                     
                 </div>
             </div>
             <div class="modal-user">
                 <div class="modal-contents">
-                    <h2>Seja bem vindo: <?php echo $_SESSION['nome'] ?></h2>
+                    <h2>Seja bem vindo: <?php echo $_SESSION['nome_admin'] ?></h2>
 
                 </div>
                 
@@ -106,7 +107,7 @@
         }
     
     ?>
-    <!--  -->
+    
 
     <script  src="js/home.js"></script>
 

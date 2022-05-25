@@ -1,5 +1,6 @@
 <!-- css -->   
 <link rel="stylesheet" href="style/visitas.css">
+<link rel="stylesheet" href="style/cad_item.css">
 <!-- MAIN -->
 
 <div class="container cont-visitas">

@@ -402,34 +402,6 @@
     <script src="js/functions.js"></script>
 
     <script>
-        $(function () {
-
-            //Header
-            var iconSearch = $('#glass');
-            var search = $('#keysearch');
- 
-            $('.mobile-header h3').click(function(){
-                $('nav.mobile-header').slideToggle();
-            })
-
-            iconSearch.click(function(){
-
-                if(search.val() == ""){
-                    $('.form-field').toggle(500);
-                }
-
-            })
-            
-            abrirJanela();
-            function abrirJanela(){
-                $('.bag-shipping').click(function(){
-                    $('.cart-sidebar').fadeToggle("slow");
-                });
-            }
-            
-
-        })
-
 
     </script>
 </body>

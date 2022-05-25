@@ -534,7 +534,7 @@ div.banner-p{
     padding: 9px 0px;
     color: white;
     font-weight: 600;
-    z-index: 15;
+    z-index: 5;
     top: -10px;
     left: -10px;
 }
@@ -728,6 +728,33 @@ div .img-field{
 
 
 
+.welcome{
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    border-bottom: 1px solid;
+    background-color: #ef5350;
+}
+
+.exit{
+    position: absolute;
+    bottom: 0;
+    font-size: 22px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.nav-list span{
+    line-height: 50px;
+    font-size: 20px;
+    color: red;
+    font-weight: bolder;
+}
 
 
 

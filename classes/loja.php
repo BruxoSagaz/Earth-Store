@@ -9,6 +9,7 @@ class Loja
 
     public static function loggout(){
         session_destroy();
+        setcookie('lembrar','false',time()-10,'/');
         header("Location: ".PATH);
     }
 

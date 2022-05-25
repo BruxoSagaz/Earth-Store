@@ -1,35 +1,35 @@
-
     <link rel="stylesheet" href="style/variacao.css">
+    <link rel="stylesheet" href="style/cad_item.css">
 <!-- Modal Bg -->
 <div class="modal-bg">
-<div class="form-modal">
-    <div class="modal-shadow"></div>
-    <!-- close Button -->
-    <div class="close-btn">x</div>
+    <div class="form-modal">
+        <div class="modal-shadow"></div>
+        <!-- close Button -->
+        <div class="close-btn">x</div>
 
 
-    <!-- FORM   -->
-    <form action="" id="form_edit_item">
-        <div class="modal-grouper"><!--  Grouper -->
+        <!-- FORM   -->
+        <form action="" id="form_edit_item">
+            <div class="modal-grouper"><!--  Grouper -->
 
-            <div class="allign-p">
-            <label for="">Categoria: </label>
-            <p list="categorias" name="categoria" id="categ-get"></p>
-            </div>
-        </div>
-
-        <div class="modal-grouper" style="margin-top: 8%;"><!--  Grouper -->
-            <label for="divisions" class="div-label">Divisões</label>
-            <div class="divisions">
-                <div class="square-input">
-                    <i class="fa-solid fa-square-plus" numero="1"></i>
+                <div class="allign-p">
+                <label for="">Categoria: </label>
+                <p list="categorias" name="categoria" id="categ-get"></p>
                 </div>
             </div>
-        </div>
 
-        <input type="submit" class="salvar" style="right: 35px;left: auto;  bottom: 30px;" id="send-variations"></input>
-    </form>
-</div>
+            <div class="modal-grouper" style="margin-top: 8%;"><!--  Grouper -->
+                <label for="divisions" class="div-label">Divisões</label>
+                <div class="divisions">
+                    <div class="square-input">
+                        <i class="fa-solid fa-square-plus" numero="1"></i>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="salvar" style="right: 35px;left: auto;  bottom: 30px;" id="send-variations"></input>
+        </form>
+    </div>
 </div><!-- modal bg  -->
 
 
@@ -39,9 +39,9 @@
     <div class="work-area">
 
     <div class="var-buttons">
-    <button>Variação de Gênero</button>
+    <!-- <button>Variação de Gênero</button>
 
-    <button>Estoque Variado</button>
+    <button>Estoque Variado</button> -->
     </div>
 
     <div class="var-block">
@@ -78,8 +78,8 @@
             <!-- Area 2 -->
             <div class="cont-direito cont-direito-adjust">
 
-            <!-- Lista de Items -->
-            <div class="case">
+                <!-- Lista de Items -->
+                <div class="case">
                     <table class="items-var">
 
                         <thead>
@@ -98,12 +98,12 @@
                             
                         </tbody>    
                     </table>
-                    </div> 
-
+                </div> 
             </div>
-
         </div>
+
     </div>
+
 </div>
 
 <div class='container'>
@@ -117,7 +117,6 @@
         </p>
     </p>
     </div>
-
 
 </div>
 

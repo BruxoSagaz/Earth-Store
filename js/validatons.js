@@ -1,6 +1,6 @@
 $(function() {
    // Validações e Submit
-    var path = $('path').val();
+    
     var cadBtn = $('#cadSubBtn');
     var form = $('.form2 #cadForm');
     var dataAtual = new Date();
@@ -56,7 +56,7 @@ $(function() {
             $.ajax({
                 type: "post",
                 dataType:'json',
-                url: path+'ajax/cadastrar.php' ,
+                url: './../ajax/cadastrar.php' ,
                 data: form.serialize(),
             }).done(function(data){
                 if(data.retorno == "sucesso"){

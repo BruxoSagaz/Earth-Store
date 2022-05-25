@@ -1,18 +1,18 @@
 <?php
-    if(isset($_COOKIE['lembrar'])){
-        $user = $_COOKIE['user'];
-        $senha = $_COOKIE['senha'];
+    if(isset($_COOKIE['lembrar_admin'])){
+        $user = $_COOKIE['user_admin'];
+        $senha = $_COOKIE['senha_admin'];
         $sql = Mysql::conectar()->prepare("SELECT * FROM `admin` WHERE login_admin = ? AND senha_admin = ? ");
         $sql->execute(array($user,$senha));
 
         if($sql->rowCount() == 1){
             $info = $sql->fetch();
             //logamos
-            $_SESSION['login'] = true;
-            $_SESSION['usuario'] = $user;
-            $_SESSION['senha'] = $senha;
-            $_SESSION['nome'] = $info['nome_admin'];
-            $_SESSION['cargo'] = $info['cargo_admin'];
+            $_SESSION['login_admin'] = true;
+            $_SESSION['usuario_admin'] = $user;
+            $_SESSION['senha_admin'] = $senha;
+            $_SESSION['nome_admin'] = $info['nome_admin'];
+            $_SESSION['cargo_admin'] = $info['cargo_admin'];
             header('Location:'.PATH_GERENCY);
             die();
         }
@@ -43,15 +43,15 @@
                     if($sql->rowCount() == 1){
                         $info = $sql->fetch();
                         //logamos
-                        $_SESSION['login'] = true;
-                        $_SESSION['usuario'] = $user;
-                        $_SESSION['senha'] = $senha;
-                        $_SESSION['nome'] = $info['nome_admin'];
-                        $_SESSION['cargo'] = $info['cargo_admin'];
-                        if(isset($_POST['lembrar'])){
-                            setcookie('lembrar',true,time()+(60*60*24),'/');
-                            setcookie('user',$user,time()+(60*60*24),'/');
-                            setcookie('senha',$senha,time()+(60*60*24),'/');
+                        $_SESSION['login_admin'] = true;
+                        $_SESSION['usuario_admin'] = $user;
+                        $_SESSION['senha_admin'] = $senha;
+                        $_SESSION['nome_admin'] = $info['nome_admin'];
+                        $_SESSION['cargo_admin'] = $info['cargo_admin'];
+                        if(isset($_POST['lembrar_admin'])){
+                            setcookie('lembrar_admin',true,time()+(60*60*24),'/');
+                            setcookie('user_admin',$user,time()+(60*60*24),'/');
+                            setcookie('senha_admin',$senha,time()+(60*60*24),'/');
                         }
 
                         header('Location:'.PATH_GERENCY);
@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group-login right ">
                     <label for="">Lembrar de mim</label>
-                    <input type="checkbox" name="lembrar">
+                    <input type="checkbox" name="lembrar_admin">
                 </div>
                 <div class="clear"></div>
             </form>

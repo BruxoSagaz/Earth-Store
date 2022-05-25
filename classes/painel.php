@@ -4,7 +4,7 @@
 class Painel 
 {
     public static function logado(){
-        return isset($_SESSION['login']) ? true : false;
+        return isset($_SESSION['login_admin']) ? true : false;
     }
 
     public static function loggout(){

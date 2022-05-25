@@ -1,4 +1,3 @@
-<?php include('../config.php') ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -34,10 +33,30 @@
 </head>
 <body>
 
+
+<?php
+    if(isset($_COOKIE['lembrar'])){
+        $email = $_COOKIE['email'];
+        $senha = $_COOKIE['senha'];
+        $sql = Mysql::conectar()->prepare("SELECT * FROM `usuario` WHERE email = ? AND senha = ? ");
+        $sql->execute(array($email,$senha));
+
+        if($sql->rowCount() == 1){
+            $info = $sql->fetch();
+            //logamos
+            $_SESSION['login'] = true;
+            $_SESSION['email'] = $email;
+            $_SESSION['senha'] = $senha;
+            $_SESSION['nome'] = $info['nome'];
+           
+            header('Location:'.PATH);
+            die();
+        }
+    }
+ ?>
+
+
         <section>
-            
-
-
             <div class="screen"> <!--Screen-->
 
                 <div class="form-div">
@@ -48,33 +67,62 @@
                     </div>
                     
 
-                    <!--Form1-->
-                    <div class="form" id="elem">
 
+                    <!--Form1-->
+                    <div class="form" id="elem" >
+                    <?php
+                if(isset($_POST['acao'])){
+                    $email = $_POST['email_login'];
+                    $senha = $_POST['senha_login'];
+                    $sql = Mysql::conectar()->prepare("SELECT * FROM `usuario` WHERE email = ? AND senha = ? ");
+                    $sql->execute(array($email,$senha));
+
+                    if($sql->rowCount() == 1){
+                        $info = $sql->fetch();
+                        //logamos
+                        $_SESSION['login'] = true;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['senha'] = $senha;
+                        $_SESSION['nome'] = $info['nome'];
+
+                        if(isset($_POST['lembrar_login'])){
+                            setcookie('lembrar',true,time()+(60*60*24),'/');
+                            setcookie('email',$email,time()+(60*60*24),'/');
+                            setcookie('senha',$senha,time()+(60*60*24),'/');
+                        }
+
+                        header('Location:'.PATH);
+                        die();
+                    }else{
+                        echo '<div class="error-box"><i class="fa-solid fa-circle-xmark"></i>Usuário ou senha incorretos!</div>';
+                    }
+
+                }
+                ?>
                         <h1>Seja Bem Vindo!</h1>
                         
-                        <form action="" method="get">
+                        <form action="" method="post">
 
                             <div class="enter">
                                 <label for="">Email:</label>
-                                <input type="text" placeholder="Email">
+                                <input type="text" placeholder="Email" name="email_login">
                             </div>
 
                             <div class="enter">
                                 <label for="">Senha:</label>
-                                <input type="text" placeholder="Senha">
+                                <input type="text" placeholder="Senha" name="senha_login">
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="lembrar_login" >
                                     <span>lembrar senha</span>
                                 </div>
                             </div>
-                        </form>
 
-                        <div class="sub-button">
-                            <a href="<?php echo PATH?>"><button class="enter" type="button">Entrar</button></a>
-                            <!-- <button class="sign-up" id="troc_cad">Cadastrar</button> -->
-                        </div>
-                        
+
+                            <div class="sub-button">
+                                <button class="enter" type="submit" name="acao">Entrar</button>
+                                <!-- <button class="sign-up" id="troc_cad">Cadastrar</button> -->
+                            </div>
+                        </form>
                         <div class="social-media">
                             <a href="https://www.facebook.com/FundacaoTerra/" target="blank"><i class="fa-brands fa-facebook"></i></a>
 
