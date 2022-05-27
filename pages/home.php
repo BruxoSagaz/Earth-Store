@@ -39,7 +39,7 @@
             <div class="container">
 
                 <div class="banner-p"></div>
-                <h2>Promoções do Momento!</h2>
+                <h2>Veja Nosso Estoque!</h2>
                 
                 <div class="offers">
                     

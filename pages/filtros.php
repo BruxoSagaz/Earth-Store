@@ -57,34 +57,7 @@
                 <div class="filter-columns">
                     <!-- Filters -->
                     <div class="filters">
-                        <!-- Categorias -->
-                        <div class="filter-case" onclick="slidingToggle(1)">
-                            <h3>Categoria</h3><i class="fa-solid fa-angle-down"></i>
-                        </div>
 
-                        <div class="filter-options" id="filter-cases1">
-
-                            <div class="block">
-                                <input type="checkbox"><span> Categoria1</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Categoria2</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Categoria3</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Categoria4</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Categoria5</span>
-                            </div>
-
-                        </div>
 
                         <!-- Preços -->
                         <div class="filter-case" onclick="slidingToggle(2)">
@@ -94,27 +67,27 @@
                         <div class="filter-options-price" id="filter-cases2">
 
                             <div class="block">
-                                <input type="checkbox"><span> Até R$ 4,99</span>
+                                <input type="radio" name="preco" value="5"><span> Até R$ 4,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="checkbox"><span> de R$ 5,00 Até R$ 14,99</span>
+                                <input type="radio" name="preco" value="15"><span> Até R$ 14,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="checkbox"><span> de R$ 15,00 Até R$ 24,99</span>
+                                <input type="radio" name="preco" value="25"><span> Até R$ 24,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="checkbox"><span> de R$ 25,00 Até R$ 49,99</span>
+                                <input type="radio" name="preco" value="50"><span> Até R$ 49,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="checkbox"><span> de R$ 50,00 Até R$ 99,99</span>
+                                <input type="radio" name="preco" value="100"><span>Até R$ 99,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="checkbox"><span> Acima de R$ 500,00 </span>
+                                <input type="radio" name="preco" value="500"><span> Acima de R$ 500,00 </span>
                             </div>
                         </div>
 

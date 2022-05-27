@@ -85,25 +85,31 @@ function construirItem($item){
     echo '<div class="price-before">R$ '.$promFormatado.'</div>';
     echo '<div class="price-off"> R$ '.$valFormatado.'</div>';
     // adicionando as divisoes
-    $divisoes = $item['valor_em_promocao'] / $parcelas;
+    $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
     }else{
         echo '<div class="price-off"> R$ '.$valFormatado.'</div>';
-        $divisoes = $item['preco'] / $parcelas;
+        $divisoes = floatval($item['preco']) / $parcelas;
+       
     }
     // area de preço
     echo '</div>';
 
     // Tratamento das divisoes
     $divisoes = strval($divisoes);
+    
+    // $divisoes = str_replace(".",",",$divisoes);
     if(strpos($divisoes,".")){
         $divisoes = str_replace(".",",",$divisoes);
         $divisoes = explode(",",$divisoes);
+        
         $tam = strlen($divisoes[1]);
+
         if( $tam < 2){
-            for($i=0;i<=$tam;$i++){
-                $divisoes += $divisoes."0";
+            for($i=$tam;$i<2;$i++){
+                $divisoes[1] = $divisoes[1]."0";
             }
         }
+
         $divisoes = implode(",",$divisoes);
     }else{
         $divisoes = $divisoes.",00";
@@ -118,7 +124,8 @@ function construirItem($item){
 
     echo '<div class="add-to-cart">';
     echo '<input type="number" value="1" max="'.$item['estoque'].'">';
-    echo '<button>Adicionar ao Carrinho</button>';
+    echo '<button class="button-add-cart">Adicionar ao Carrinho</button>';
+    echo '<div class="item-id" style="display:none;">'.$item['id'].'</div>';
     echo '</div>';
     echo '</div>';
     echo '</div>';

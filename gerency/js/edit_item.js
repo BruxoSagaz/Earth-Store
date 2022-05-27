@@ -198,13 +198,14 @@ $(document).ready(function(){
     
     function ripValues(value){
         value = value.split(',');
-        value = value[0];
-        value = value.split('.');
-        let lenForItem = value.length;
-        value = value.toString();
+        temp = value[0];
+        temp = temp.split('.');
+        let lenForItem = temp.length;
+        temp = temp.toString();
         for(let i = 0;i<lenForItem;i++){
-            value = value.replace(',','');
+            temp = temp.replace(',','');
         }
+        value = temp+"."+value[1];
         return value;
     }
 
