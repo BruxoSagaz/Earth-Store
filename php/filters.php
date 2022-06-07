@@ -1,13 +1,18 @@
 <?php
 
-function gerarAleatorio(){
-    global $pdo;
-    $query = "SELECT * FROM `produto` ORDER BY RAND() LIMIT 10";
+;
 
+function selectCateg(){
+    global $pdo;
+    
+
+    $categ = @$_GET['filter'];
+    $query = "SELECT * FROM `produto` WHERE  `categoria` LIKE '%".$categ."%' ORDER BY RAND() LIMIT 30";
 
     $sql = $pdo->prepare($query);
     $sql->execute();
 
+    
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
             construirItem($value);
@@ -15,19 +20,88 @@ function gerarAleatorio(){
     }
 }
 
-function gerarMaisVendidos(){
+function selectNome(){
     global $pdo;
-    $query = "SELECT * FROM `produto` ORDER BY `vendas` DESC LIMIT 10";
+    
 
+    $nome = @$_GET['nome'];
+    $query = "SELECT * FROM `produto` WHERE  `nome` LIKE '%".$nome."%' ORDER BY RAND() LIMIT 30";
 
     $sql = $pdo->prepare($query);
     $sql->execute();
 
+    
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
             construirItem($value);
         }
     }
+}
+
+
+function gerarFiltros($metodo,$fonte){
+
+    global $pdo;
+
+    $list = [];
+   
+    $query = "SELECT `tags` FROM `produto` WHERE  `nome` LIKE '%".$metodo."%' OR `categoria` LIKE '%".$metodo."%' ORDER BY RAND() LIMIT 30";
+
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+   
+    
+    if($sql->rowCount() > 0 ){
+        
+        foreach($sql->fetchAll() as $value){
+            array_push($list,ripTags($value[0],$fonte));
+        }
+        // echo count($list);
+        // print_r($list);
+        if($list[0] != ''){
+            
+            foreach ($list as $key => $value) {
+                echo "
+                <div class='block'>
+                    <input type='radio' name='".$fonte."' value='".$value."'><span> ".ucfirst($value)."</span>
+                </div>";
+            }
+        }else{
+            echo "<span>sem filtros para ".$metodo." </span>";
+        }
+
+    }
+
+
+}
+
+
+
+function ripTags($tags,$fonte){
+    if(strpos($tags,' ')){
+        $tags = explode(" ",$tags);
+        
+        foreach($tags as $key => $value){
+            
+            $value =  explode(":",$value);
+            // print_r($value);
+            
+           
+            if($value[0] == $fonte){
+                return trim($value[1]);
+            }
+            
+        }
+        return false;
+    }
+
+    
+    $tags =  explode(":",$tags);
+    if($tags[0] == $fonte){
+        return trim($tags[1]);
+    }
+
+    return false;
 }
 
 
@@ -145,6 +219,5 @@ function calcularPorcentagem($prom,$preco){
     $final = $final."%"; 
     return $final;
 }
-
 
 ?>

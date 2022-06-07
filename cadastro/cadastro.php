@@ -120,7 +120,13 @@
 
                             <div class="sub-button">
                                 <button class="enter" type="submit" name="acao">Entrar</button>
+
                                 <!-- <button class="sign-up" id="troc_cad">Cadastrar</button> -->
+                            </div>
+                            <div class="sub-button" style="margin-top: 18px;">
+                            <a href="../index.php">
+                            <button class="enter" type="button" name="nada">Convidado</button>
+                            </a>
                             </div>
                         </form>
                         <div class="social-media">

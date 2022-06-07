@@ -21,16 +21,34 @@ $(document).ready(function(){
     function abrirJanela(){
         $('.bag-shipping').click(function(e){
             e.stopPropagation();
-            $('.cart-sidebar').fadeToggle("slow");
+            $('.cart-sidebar2').fadeOut("fast",function(){
+                $('.cart-sidebar').fadeToggle("slow");
+            });
+              
+        });
+
+        $('.account-head').click(function(e){
+            e.stopPropagation();
+            $('.cart-sidebar').fadeOut("fast",function(){
+                $('.cart-sidebar2').fadeToggle("slow");
+            });
+            
+            
         });
 
         $('.cart-sidebar').click(function(e){
             e.stopPropagation();
         });
 
+        
+        $('.cart-sidebar2').click(function(e){
+            e.stopPropagation();
+        });
+
         $('body').click(function(e){
             e.stopPropagation();
             $('.cart-sidebar').fadeOut("slow");
+            $('.cart-sidebar2').fadeOut("slow");
         });
 
     }
@@ -101,6 +119,7 @@ $(document).ready(function(){
     // $('.item-id')
     $('body').on('click', '.button-add-cart', function(e) {
         e.stopPropagation();
+        
         // pegando item pai
         pai = $(this).parent().parent().parent().parent();
         //pegando o id
@@ -120,8 +139,8 @@ $(document).ready(function(){
 
         cartId = $('.cart-itens').find('.cart-id');
         cartId = cartId.text();
-        
-        if(cartId.includes(id)){
+        // console.log("cartId:"+cartId+" id:"+id) ;  
+        if(cartId.trim().includes(id.trim())){
 
             str = "."+id;
             num = $(str).parent().find('input[type=number]');
@@ -143,7 +162,9 @@ $(document).ready(function(){
                 }
             })
 
+           
             addItemToCart(id,nome,quant,preco,img);
+            $('#empty-cart').fadeOut(100);
         }
     })
 
@@ -161,6 +182,8 @@ $(document).ready(function(){
             }
         })
 
+        calcularTotal();
+
     })
 
     function addItemToCart(id,nome,quant,preco,img){
@@ -174,12 +197,16 @@ $(document).ready(function(){
         const imgBox = document.createElement('div');
         imgBox.setAttribute('class','item-img-box');
 
+        const link = document.createElement("a");
+        link.setAttribute('href',"individual&id="+id)
+
         //image
         const imagem = document.createElement('img');
         imagem.setAttribute('src',img)
 
         //append image to imgbox
-        imgBox.appendChild(imagem);
+        link.appendChild(imagem);
+        imgBox.appendChild(link);
 
         //div especificacoes
         const espec = document.createElement('div');
@@ -215,7 +242,7 @@ $(document).ready(function(){
 
         //id tag
         const idTag = document.createElement('div');
-        idTag.setAttribute("class","cart-id");
+        idTag.setAttribute("class","cart-id "+id);
         idTag.setAttribute("value",id);
         idTag.setAttribute("style","display:none;")
         idTag.innerHTML = id+" ";
@@ -235,7 +262,9 @@ $(document).ready(function(){
         pai.appendChild(cartOpt);
         pai.appendChild(idTag);
 
-        $('.cart-itens').append(pai);
+        $('.cart-itens').prepend(pai);
+        calcularTotal();
+        addNumCart();
     }
 
     $('.cart-itens').on('click', 'i.fa-trash-can', function() {
@@ -253,6 +282,62 @@ $(document).ready(function(){
         })
         pai.fadeOut("slow",function(){
             pai.remove();
+            subNumCart();
+            calcularTotal();
         });
+
+        
     })
+
+    function calcularTotal() {
+        total = 0;
+        quant = [];
+        filtrados = [];
+        let precos = $('.cart-preco').text();
+        let inputs = document.querySelectorAll('input[name=quantidade]');
+        precos = precos.split(' ');
+
+        inputs.forEach(element => {
+            quant.push(parseInt(element.value));
+        });
+
+        console.log(quant);
+
+        for(i=2;i<=precos.length;i+=2){
+            filtrados.push(precos[i]);
+            
+        }
+
+        for(i=0;i<filtrados.length;i++){
+            send = (filtrados[i].match(/./g) || []).length;
+            for(i2=0;i2<send;i2++){
+                filtrados[i] = filtrados[i].replace(".","");
+                
+            }
+            filtrados[i] = parseFloat(filtrados[i].replace(",","."));
+            
+        }
+        console.log(filtrados);
+        for(i=0;i<filtrados.length;i++){
+            total += filtrados[i] * quant[i];
+        }
+
+        
+        total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
+        $('.total-price-cart').text(total2);
+    }
+
+    function addNumCart(){
+        cart = $('.num-cart');
+        let quant = cart.text();
+        quant = parseInt(quant) + 1;
+        cart.text(quant);
+    }
+
+    function subNumCart(){
+        cart = $('.num-cart');
+        let quant = cart.text();
+        quant = parseInt(quant) - 1;
+        cart.text(quant);
+    }
 });

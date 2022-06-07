@@ -40,7 +40,9 @@
     ?>
     <!-- Header -->
 
-    <?php include("./php/gerar_item_home.php"); ?>
+    <?php include("./php/filters.php"); 
+    
+    ?>
     <!-- Nav  general -->
     <nav class="primary-nav">
         <div class="container">
@@ -58,6 +60,7 @@
                     <!-- Filters -->
                     <div class="filters">
 
+                        <form action="" method="get">
 
                         <!-- Preços -->
                         <div class="filter-case" onclick="slidingToggle(2)">
@@ -65,10 +68,6 @@
                         </div>
 
                         <div class="filter-options-price" id="filter-cases2">
-
-                            <div class="block">
-                                <input type="radio" name="preco" value="5"><span> Até R$ 4,99</span>
-                            </div>
 
                             <div class="block">
                                 <input type="radio" name="preco" value="15"><span> Até R$ 14,99</span>
@@ -91,16 +90,6 @@
                             </div>
                         </div>
 
-                        <!-- marca -->
-                        <div class="filter-case" onclick="slidingToggle(3)">
-                            <h3>Marca</h3><i class="fa-solid fa-angle-down"></i>
-                        </div>
-
-                        <div class="filter-options" id="filter-cases3">
-                            <div class="block">
-                                <input type="checkbox"><span> Fundação Terra</span>
-                            </div>
-                        </div>
 
 
                         <!-- Cor -->
@@ -110,25 +99,17 @@
 
                         <div class="filter-options" id="filter-cases4">
 
-                            <div class="block">
-                                <input type="checkbox"><span> Azul</span>
-                            </div>
+                            <!-- <div class="block">
+                                <input type="checkbox" name="cor" value="preto"><span> Preto</span>
+                            </div> -->
 
-                            <div class="block">
-                                <input type="checkbox"><span> Amarelo</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Marrom</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Preto</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Colorido</span>
-                            </div>
+                            <?php
+                            if(isset($_GET['filter'])){
+                                gerarFiltros($_GET['filter'],'cor');
+                            }else if(isset($_GET['nome'])){
+                                gerarFiltros($_GET['nome'],'cor');
+                            }
+                            ?>
 
                         </div>
 
@@ -138,22 +119,19 @@
                         </div>
 
                         <div class="filter-options" id="filter-cases5">
-
+                            <!-- 
                             <div class="block">
                                 <input type="checkbox"><span> Madeira</span>
-                            </div>
+                            </div> -->
 
-                            <div class="block">
-                                <input type="checkbox"><span> Acrílico</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Pérola</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Cristal</span>
-                            </div>
+                            
+                            <?php
+                            if(isset($_GET['filter'])){
+                                gerarFiltros($_GET['filter'],'material');
+                            }else if(isset($_GET['nome'])){
+                                gerarFiltros($_GET['nome'],'material');
+                            }
+                            ?>
                         </div>
 
                         <!-- Tema -->
@@ -163,20 +141,24 @@
 
                         <div class="filter-options" id="filter-cases6">
 
-                            <div class="block">
+                            <!-- <div class="block">
                                 <input type="checkbox"><span> 1ª Comunhão</span>
-                            </div>
+                            </div> -->
 
-                            <div class="block">
-                                <input type="checkbox"><span> Divina Misericórdia</span>
-                            </div>
-
-                            <div class="block">
-                                <input type="checkbox"><span> Infantil</span>
-                            </div>
+                            <?php
+                            if(isset($_GET['filter'])){
+                                gerarFiltros($_GET['filter'],'tema');
+                            }else if(isset($_GET['nome'])){
+                                gerarFiltros($_GET['nome'],'tema');
+                            }
+                            ?>
 
                         </div>
-
+                        <div class="filter-case">
+                        <button class="filter-submit" type="submit">Filtrar!</button>
+                        </div>
+                        <!-- <input type="radio" name="subfilter" value="on" checked style="display:none;"> -->
+                        </form>
                     </div>
 
 
@@ -186,7 +168,15 @@
                     <div class="result-items">
 
                         <div class="breadcrumbs">
-                            <a href="#">Home</a><i class="fa-solid fa-chevron-right"></i><a href="#">Terços</a>
+                            <a href="index">Home</a><i class="fa-solid fa-chevron-right"></i><a href="#"><?php 
+                            if(isset($_GET['filter'])){
+                                echo ucfirst($_GET['filter']);
+               
+                            }else if(isset($_GET['nome'])){
+                                echo ucfirst($_GET['nome']);
+                            }
+                            
+                            ?></a>
                         </div>
 
 
@@ -238,8 +228,13 @@
  
                             <?php
 
-                            gerarMaisVendidos();
-
+                            // gerarMaisVendidos();
+                            if(isset($_GET['filter']  )){
+                                selectCateg();
+                            }else if($_GET['nome']){
+                                selectNome();
+                            }
+                           
                             ?>
 
                         </div>
@@ -249,88 +244,10 @@
         </section>
     </main>
 
+    <?php
+        include_once("./footer.php")
+    ?>
 
-
-    <!-- Footer -->
-    <section class="sec-footer">
-        <div class="container">
-            <footer class="F1">
-            
-                <div class="footer-single">
-                    <h2>Institucional</h2>
-                    <ul>
-                        <li><a href=""> Empresa</a></li>
-                        <li><a href=""> Segurança</a></li>
-                        <li><a href=""> Envio</a></li>
-                        <li><a href=""> Tempo de Garantia</a></li>
-                        <li><a href=""> Contato</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-single">
-                    
-                    <h2>Atendimento</h2>
-                    <div class="box-footer">
-                        <div class="phone">
-                            <i class="fa-solid fa-phone"></i><p>(99)99999-9999</p>
-                        </div>
-
-                        <div class="phone">
-                            <i class="fa-solid fa-phone"></i><p>(99)99999-9999</p>
-                        </div>
-
-                        <div class="phone">
-                            <i class="fa-brands fa-whatsapp"></i>               <p class="line_bot" style="margin-left: -2px;padding-bottom: 10px;">(99)99999-9999</p>
-                        </div>
-                    </div>
-
-                    <div class="box-footer autow">
-                        <div class="phone">
-                            <i class="fa-solid fa-envelope"></i><p style="display: inline-block; padding: 3px;">fundacaoterra@gmail.com</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="footer-single">
-                    <h2>Formas de pagamento</h2>
-
-                    <div class="paiment">
-                        <p style="padding-top: 60px;">ainda não implementado</p>
-                    </div>
-                </div>
-
-                <div class="footer-single">
-                    <h2 style="text-align: center;">Redes Sociais</h2>
-                    <div class="icon-list">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                </div>
-
-                <div class="footer-single">
-                    <h2>Selos de Segurança</h2>
-
-                    <div class="seal">
-
-                    </div>
-
-                    <div class="seal">
-
-                    </div>
-
-                </div>
-        </div>
-        </footer>
-
-
-        <footer class="F2">
-            todos os direitos reservados
-        </footer>
-
-    </section><!-- Footer -->
 
     
     <!-- Script -->

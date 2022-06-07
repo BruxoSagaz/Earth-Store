@@ -319,3 +319,18 @@
     font-size: larger;
     font-weight: bold;
 }
+
+
+.filter-submit{
+    display: flex;
+    height: 36px;
+    align-items: center;
+    border: 0;
+    background-color: var(--sec_footer);
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    font-size: 19px;
+    justify-content: center;
+}

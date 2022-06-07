@@ -239,8 +239,23 @@ input::placeholder{
     min-height: 400px;
     background: #df0109;
     position: relative;
-    top: -31px;
+    top: -24px;
     right: -9px;
+    z-index: 10;
+    float: right;
+    text-align: center;
+    border-radius: 10px;
+    max-height: 725px;
+}
+
+.cart-sidebar2{
+    display: none;
+    width: 300px;
+    min-height: 280px;
+    background: #df0109;
+    position: relative;
+    top: -24px;
+    right: 66px;
     z-index: 10;
     float: right;
     text-align: center;
@@ -260,6 +275,28 @@ input::placeholder{
 }
 
 .cart-sidebar::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -16px;
+    height: 16px;
+    z-index: -1;
+    width: 100%;
+    left: 0;
+}
+
+.cart-sidebar2::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 21px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #df0109;
+}
+
+.cart-sidebar2::after {
     content: '';
     display: block;
     position: absolute;
@@ -366,8 +403,7 @@ input::placeholder{
 
 
 .sec-footer{
-
-    bottom: 0;
+    margin-top: 23px;
     width: 100%;
     background-color: var(--sec_footer);
 }
@@ -696,7 +732,7 @@ div.product-name{
 }
 
 .result-items div.product-name {
-    padding: 0px 40px;
+  
 }
 
 

@@ -12,8 +12,12 @@
                 <!-- Nav -->
                 <nav class="nav-desktop">
 
-                    <ul class="list-nav">                      
-                        <input type="input" class="form-field" placeholder="Pesquisa..." name="name" id='keysearch' autocomplete="off" />
+                    <ul class="list-nav">   
+                        <form action="filtros" method="get">                 
+                        <input type="input" class="form-field" placeholder="Pesquisa..." name="nome" id='keysearch' autocomplete="on" />
+                        <input type="radio" value='filtros' name='page' style="display:none;" checked>
+
+                        </form>  
                         <i class="fa-solid fa-magnifying-glass" id="glass"></i ><li>Pesquisar</li>
                     </ul>
 
@@ -24,9 +28,10 @@
                     <ul class="list-nav">
                         <?php 
                         if(isset($_SESSION['login'])){
-                            echo '<a href="./cadastro/">
-                            <i class="fa-solid fa-arrow-right-to-bracket" ></i><li>Minha Conta</li>
-                            </a>';
+                            echo '<div class="account-head">
+                            <i class="fa-solid fa-user"></i><li>Minha Conta</li>
+                            </div>
+                            ';
                         }else{
                             echo '<a href="./cadastro/">
                             <i class="fa-solid fa-arrow-right-to-bracket" ></i><li>Cadastrar-se</li>
@@ -40,7 +45,20 @@
 
                     <ul>
                         <div class="bag-shipping">
-                            <div class="num-cart">0</div>
+                            <div class="num-cart">
+                                <?php
+                                 if(isset($_SESSION['cart'])){
+                                    $totalItem = 0;
+                                    foreach ($_SESSION['cart'] as $key => $value) {
+                                        $totalItem++;
+                                    }
+                                    echo $totalItem;
+                                 }else{
+                                     echo "0";
+                                 }
+
+                                ?>
+                            </div>
                             <div>
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
@@ -50,7 +68,7 @@
                 </nav><!-- Nav -->
 
             </div>
-            
+            <div class="cart-sidebar2"></div>
             <div class="cart-sidebar">
                 
                 <?php 
@@ -98,7 +116,9 @@
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 echo "<div class='cart-item-individual'>
                                 <div class='item-img-box'>
+                                    <a href='individual&id=".$value[0]."'>
                                     <img src='".$value[4]."' alt='img_do_banco'>
+                                    </a>
                                 </div>
                                 <div class='cart-especificacoes'>
                                     <span class='cart-item-name'>".$value[1]."</span>
@@ -118,26 +138,35 @@
                             //calulando total
                             $preco = explode(" ",$value[3]);
                             // var_dump($preco);
-                            $preco = str_replace(",",".",$preco[2]);
+                            $preco = str_replace(".","",$preco[2]);
+                            
+                            $preco = str_replace(",",".",$preco);
+                            
 
 
-                            $_SESSION['total'] = $_SESSION['total'] + floatval($preco); 
+                            $_SESSION['total'] = $_SESSION['total'] + (floatval($preco)*intval($value[2])); 
+
+
+                            }
 
                             
-                            }
-                        }
-                        if(count($_SESSION['cart']) == 0){
-                            echo "<h2 style='color: #ef5350;font-size: 19px;'>- Carrinho Vazio -</h2>";
-                        }else{
-                            echo '<div class="total-div">
-                            <span>Total do pedido (sem frete): </span>
-                            <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
-                        </div>';
+
+ 
                         }
 
+                        if(@count($_SESSION['cart']) == 0 || !isset($_SESSION['cart'])){
+                            echo "<h2 id = 'empty-cart' style='color: #ef5350;font-size: 19px;'>- Carrinho Vazio -</h2>";
+                        }
+
+                        echo '<div class="total-div">
+                        <span>Total do pedido (sem frete): </span>
+                        <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
+                        </div>';
+                        
                     ?>
 
                 </div>
+
 
                 <?php 
                 if(isset($_SESSION['login'])){
