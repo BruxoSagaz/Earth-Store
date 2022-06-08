@@ -75,7 +75,73 @@ function gerarFiltros($metodo,$fonte){
 
 }
 
+function pegarSubfiltros($array){
+    
+    global $pdo;
+    $str = "";
+    $tam = count($array);
+    $options = ['cor','material','tema'];
 
+    
+    if($tam == 1){
+        foreach ($array as $key => $value) {
+        
+            if($key == 'preco'){
+                $str .= " `$key` < $value "; 
+                // verifca se o valor é uma tag
+            }else if (in_array($key,$options)){
+                $str .= " `tags` LIKE '%$key:$value%'";
+            }else{
+                $str .= " `$key` LIKE '%$value%'";
+            }
+
+        }
+    }else{
+        $i = 0;
+        foreach ($array as $key => $value) {
+            if($i == 0){
+
+                if($key == 'preco'){
+                    $str .= "`$key` < $value "; 
+                }else if (in_array($key,$options)){
+                    $str .= " `tags` LIKE '%$key:$value%'";
+                }else{
+                    $str .= " `$key` LIKE '%$value%'";
+                }
+
+            }else{
+
+                if($key == 'preco'){
+                    $str .= " AND `$key` < $value "; 
+                }else if (in_array($key,$options)){
+                $str .= " AND `tags` LIKE '%$key:$value%'";
+                }else{
+                    $str .= "AND `$key` LIKE '%$value%'";
+                }
+            }
+            $i++;
+        }
+        
+    }
+
+   
+   
+    $query = "SELECT * FROM `produto` WHERE $str ORDER BY RAND() LIMIT 30";
+
+    // echo $query;
+
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+
+    if($sql->rowCount() > 0 ){
+        foreach($sql->fetchAll() as $value){
+            construirItem($value);
+        }
+    }else{
+        echo "<h1 class='alert-filter' style='margin: 0 auto;'>Não foram encontrados produtos com essas características</h1> ";
+    }
+   
+}
 
 function ripTags($tags,$fonte){
     if(strpos($tags,' ')){
@@ -102,6 +168,22 @@ function ripTags($tags,$fonte){
     }
 
     return false;
+}
+
+
+function gerarAleatorio(){
+    global $pdo;
+    $query = "SELECT * FROM `produto` ORDER BY RAND() LIMIT 30";
+
+
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+
+    if($sql->rowCount() > 0 ){
+        foreach($sql->fetchAll() as $value){
+            construirItem($value);
+        }
+    }
 }
 
 

@@ -40,7 +40,8 @@
     ?>
     <!-- Header -->
 
-    <?php include("./php/filters.php"); 
+    <?php include("./php/filters.php");
+
     
     ?>
     <!-- Nav  general -->
@@ -60,7 +61,7 @@
                     <!-- Filters -->
                     <div class="filters">
 
-                        <form action="" method="get">
+                        <form action="filtros?page='filtros'" method="get">
 
                         <!-- Preços -->
                         <div class="filter-case" onclick="slidingToggle(2)">
@@ -146,7 +147,7 @@
                             </div> -->
 
                             <?php
-                            if(isset($_GET['filter'])){
+                            if(isset($_GET['filter']    )){
                                 gerarFiltros($_GET['filter'],'tema');
                             }else if(isset($_GET['nome'])){
                                 gerarFiltros($_GET['nome'],'tema');
@@ -157,7 +158,19 @@
                         <div class="filter-case">
                         <button class="filter-submit" type="submit">Filtrar!</button>
                         </div>
-                        <!-- <input type="radio" name="subfilter" value="on" checked style="display:none;"> -->
+                        <input type="radio" name="subfilter" value="on" checked style="display:none;">
+                        <input type="radio" name="page" value="filtros" checked style="display:none;">
+                        <?php 
+                        if(isset($_GET['nome'])){
+                            echo ' <input type="radio" name="nome" value="'.$_GET['nome'].'" checked style="display:none;">';
+                        }
+
+                        if(isset($_GET['filter'])){
+                            echo ' <input type="radio" name="filter" value="'.$_GET['filter'].'" checked style="display:none;">';
+                        }
+                        
+                        ?>
+
                         </form>
                     </div>
 
@@ -229,16 +242,51 @@
                             <?php
 
                             // gerarMaisVendidos();
-                            if(isset($_GET['filter']  )){
-                                selectCateg();
-                            }else if($_GET['nome']){
-                                selectNome();
+                            if(!isset($_GET['subfilter'])){
+                                if(isset($_GET['filter']  )){
+                                    selectCateg();
+                                }else if(isset($_GET['nome'])){
+                                    selectNome();
+                                }else{
+                                    gerarAleatorio();
+                                }
+                            }else{
+                                $info = [];
+
+                                if(isset($_GET['filter'])){
+                                    $info['genero'] =  $_GET['filter'];
+                                }
+
+                                if(isset($_GET['nome'])){
+                                    $info['nome'] = $_GET['nome'];
+                                }
+
+                                if(isset($_GET['preco'])){
+                                    $info['preco'] = $_GET['preco'];
+                                }
+
+                                if(isset($_GET['cor'])){
+                                    $info['cor'] = $_GET['cor'];
+                                }
+
+                                if(isset($_GET['material'])){
+                                    $info['material'] = $_GET['material'];
+                                }
+
+                                if(isset($_GET['tema'])){
+                                    $info['tema'] = $_GET['tema'];
+                                }
+
+                               
+
+                                pegarSubfiltros($info);
                             }
+
                            
                             ?>
 
                         </div>
-            
+                            
                 </div>
             </div>
         </section>
