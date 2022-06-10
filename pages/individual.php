@@ -28,11 +28,23 @@
 
 
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/style_2.css">
+    <!-- <link rel="stylesheet" href="style/style_2.css"> -->
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
+
+    <?php
+        include_once('./php/get_item.php');
+        
+        // Get Item
+        $item = getItemFromID($_GET['id']);
+        $divisoes = pegarDivisoes($item);
+        
+    // Tratamento das divisoes
+
+       
+    ?>
  
     <!-- Content -->
     <main>
@@ -42,7 +54,11 @@
                 <div class="details-box">
 
                     <div class="breadcrumbs">
-                        <a href="#">Home</a><i class="fa-solid fa-chevron-right"></i><a href="#">Terços</a>
+                        <a href="index">Home</a><i class="fa-solid fa-chevron-right"></i>
+                        <?php
+                            echo "<a href='&page=filtros&filter=".$item['categoria']."'>".$item['categoria']."</a>"
+                        ?>
+                        
                     </div>
 
                     <div class="item-box">
@@ -50,26 +66,34 @@
                         <div class="images">
 
                             <div class="nav-images">
+                                <!-- 
+                                <div class="thumbnail">
+                                    <img src="images/terco.jpg" alt="">
+                                </div> -->
+                                <!-- Thumbs -->
+                                <?php
+                                    $separate = explode(" ",$item['imagens']);
+                                    // print_r($separate);
+                                    foreach ($separate as $key => $value) {
 
-                                    <div class="thumbnail">
-                                        <img src="images/terco.jpg" alt="">
-                                    </div>
+                                        echo "                                <div class='thumbnail'>
+                                        <img src='uploads/".$value."' alt='item_image'>
+                                        </div> ";
+                                    }
+                                    
+                                ?>
 
-                                    <div class="thumbnail">
-                                        <img src="images/terco.jpg" alt="">
-                                    </div>
-
-                                    <div class="thumbnail">
-                                        <img src="images/terco.jpg" alt="">
-                                    </div>
-
-                                    <div class="thumbnail">
-                                        <img src="images/terco.jpg" alt="">
-                                    </div>
                             </div>
 
                             <div class="image-show">
-                                <img src="images/terco.jpg" alt="">
+
+                                <!-- Princiaal -->
+                                <?php
+                                    echo "<img src='uploads/".$separate[0]."' alt='img_principal'>
+                                    <img src='uploads/".$separate[0]."' alt='img_principal' class='img' style='display:none;'>
+                                    ";
+                                ?>
+                                
                             </div>
 
                         </div>
@@ -77,13 +101,30 @@
                         <div class="details">
 
                             <div class="item-seal">
-                                <p class="tag">Lançamento</p>
+                                <p class="tag">
+                                    <?php
+                                        if($item['promocao'] != 0){
+                                            echo "Em Promoção!";
+                                        }
+                                    ?>
+                                </p>
                             </div>
 
-                            <h1 class="product-name">Terço De Madeira</h1>
+                            <div class="space-details">
+
+                            <!-- Nome do produto -->
+                            <h1 class="product-name">
+                               <?php
+                                echo $item['nome'];
+                               ?>
+                            </h1>
 
                             <div class="line-info">
-                                <span class="ref">7620-02</span>
+                                <span class="ref item-id">
+                                <?php
+                                echo $item['id'];
+                                ?>
+                                </span>
                             </div>
 
                             <div class="product-quantity">
@@ -91,23 +132,38 @@
                                 <label for="">Quantidade:</label>
 
                                 <div class="positioner">
-                                    <input type="text" value="1" maxlength="5">
+                                    <input type="number" value="1" max="<?php echo $item['estoque'] ?>" min="1">
                                 </div>
                                 
                             </div>
 
                             <div class="price-and-buy">
 
-                                <div class="w35">
+                                <div class="price-ind-case">
                                     <div class="price">
-                                        <p class="sans">R$ 25,00</p>
-                                        <span>Ou 2x de R$ 13,00</span>
+                                        <!-- preco -->
+                                        <p class="sans price-off">
+                                            <?php 
+                                            if($item['promocao'] != 0){
+                                                echo "R$ ".number_format($item['valor_em_promocao'],2,",",".");
+                                            }else{
+                                                echo "R$ ".number_format($item['preco'],2,",",".");
+                                            }
+
+
+                                            ?>
+
+                                        </p>
+                                        <span>Ou até 
+                                            <?php echo $item['parcelas']."x de R$ ".$divisoes;
+                                            ?> 
+                                        </span>
                                         <a href="#">saiba mais</a>
                                     </div>
                                 </div>
                                 
                                 <div class="buy-action">
-                                    <button>Comprar</button>  
+                                    <button class="button-add-cart">Adicionar ao Carrinho</button>  
                                 </div>
 
                             </div>
@@ -124,7 +180,7 @@
                                     <button type="submit">Calcular</button>
                                 </div>
                             </div>
-
+                            </div><!-- Space Details -->
                         </div>
 
                     </div>
@@ -141,8 +197,19 @@
                 </div>
             
                 <div class="descript-general">
-                    <h2>Terço de Madeira</h2>
-                    <p>Terço de madeira cofecionado à mão. Feito com missangas de madeira e nós de terço, cruz de madeira com imagem em dourado</p>
+                    <!-- NOME -->
+                    <?php 
+                        echo "<h2>".$item['nome']."</h2>";
+
+                        
+                        // Descrição
+
+                        echo "<p>".$item['descricao-geral']."</p>";
+                    ?>
+                    
+
+                    
+                    
                 </div>
 
                 <div class="lettering">
@@ -151,23 +218,10 @@
 
                 <div class="especify">
                     <div>
-                        <h2>
-                            Medidas:
-                            Peso: 27g <br>
-                            Comprimento: 40cm <br>
-                            Largura: 2,9cm <br>
-                            Altura: 0,8cm.
-                        </h2>
-                        <br>
-                        <br>
-                        <h2>
-                            Medidas:
-                            Peso: 27g <br>
-                            Comprimento: 40cm <br>
-                            Largura: 2,9cm <br>
-                            Altura: 0,8cm.
-                        </h2>
-
+                        <!-- Especificações -->
+                        <?php 
+                            echo "<h2>".$item['especificacoes']."</h2>";
+                        ?>
                     </div>
                 </div>
 
@@ -181,203 +235,9 @@
 
                 <div class="offers">
                     
-                    <!-- Item na promoção -->
-                    <div class="item promotion">
-                        
-                        <div class="product">
-                            <div class="product-allign">
-                                <div class="product-image">
-                                    <a href="individual">
-                                        <div class="discount">48%</div>
-                                        <div class="prom-value"></div>
-                                        <img src="images/terco.jpg" alt="Terço">
-                                    </a>
-                                </div>
-                            
-                                <div class="product-name">
-                                    Terço Exemplo
-                                </div>
-                            </div>
-                        
-                            <div class="under-area">
-                                <div class="price-cart-allign">
-                                    <div class="price-box">
-                                        <div class="price-item">
-                                            <div class="price-before">R$ 30,00</div>
-                                            <div class="price-off"> R$ 25,00</div>
-                                        </div>
-
-                                        <div  class="divisions">
-                                            <span>Ou 2x de R$ 13,00  </span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="add-to-cart">
-                                        <input type="number" value="1">
-                                        <button>Adicionar ao Carrinho</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item normal -->
-                    <div class="item">
-                        
-                        <div class="product">
-                            <div class="product-allign">
-                                <div class="product-image">
-                                    <a href="individual">
-                                        <div class="prom-value"></div>
-                                        <img src="images/terco.jpg" alt="Terço">
-                                    </a>
-                                </div>
-                            
-                                <div class="product-name">
-                                    Terço Exemplo
-                                </div>
-                            </div>
-                        
-                        <div class="under-area">
-                            <div class="price-cart-allign">
-                                <div class="price-box">
-                                    <div class="price-item">
-                                        <div class="price-off"> R$ 25,00</div>
-                                    </div>
-
-                                    <div  class="divisions">
-                                        <span>Ou 2x de R$ 13,00  </span>
-                                    </div>
-
-                                </div>
-
-                                <div class="add-to-cart">
-                                    <input type="number" value="1">
-                                    <button>Adicionar ao Carrinho</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Item normal -->
-                    <div class="item">
-                        
-                        <div class="product">
-                            <div class="product-allign">
-                                <div class="product-image">
-                                    <a href="individual">
-                                        <div class="prom-value"></div>
-                                        <img src="images/terco.jpg" alt="Terço">
-                                    </a>
-                                </div>
-                            
-                                <div class="product-name">
-                                    Terço Exemplo
-                                </div>
-                            </div>
-                        
-                        <div class="under-area">
-                            <div class="price-cart-allign">
-                                <div class="price-box">
-                                    <div class="price-item">
-                                        <div class="price-off"> R$ 25,00</div>
-                                    </div>
-
-                                    <div  class="divisions">
-                                        <span>Ou 2x de R$ 13,00  </span>
-                                    </div>
-
-                                </div>
-
-                                <div class="add-to-cart">
-                                    <input type="number" value="1">
-                                    <button>Adicionar ao Carrinho</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Item normal -->
-                    <div class="item">
-                        
-                        <div class="product">
-                            <div class="product-allign">
-                                <div class="product-image">
-                                    <a href="individual">
-                                        <div class="prom-value"></div>
-                                        <img src="images/terco.jpg" alt="Terço">
-                                    </a>
-                                </div>
-                            
-                                <div class="product-name">
-                                    Terço Exemplo
-                                </div>
-                            </div>
-                        
-                        <div class="under-area">
-                            <div class="price-cart-allign">
-                                <div class="price-box">
-                                    <div class="price-item">
-                                        <div class="price-off"> R$ 25,00</div>
-                                    </div>
-
-                                    <div  class="divisions">
-                                        <span>Ou 2x de R$ 13,00  </span>
-                                    </div>
-
-                                </div>
-
-                                <div class="add-to-cart">
-                                    <input type="number" value="1">
-                                    <button>Adicionar ao Carrinho</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Item normal -->
-                    <div class="item">
-                        
-                        <div class="product">
-                            <div class="product-allign">
-                                <div class="product-image">
-                                    <a href="individual">
-                                        <div class="prom-value"></div>
-                                        <img src="images/terco.jpg" alt="Terço">
-                                    </a>
-                                </div>
-                            
-                                <div class="product-name">
-                                    Terço Exemplo
-                                </div>
-                            </div>
-                        
-                        <div class="under-area">
-                            <div class="price-cart-allign">
-                                <div class="price-box">
-                                    <div class="price-item">
-                                        <div class="price-off"> R$ 25,00</div>
-                                    </div>
-
-                                    <div  class="divisions">
-                                        <span>Ou 2x de R$ 13,00  </span>
-                                    </div>
-
-                                </div>
-
-                                <div class="add-to-cart">
-                                    <input type="number" value="1">
-                                    <button>Adicionar ao Carrinho</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
+                <?php
+                    selectCateg($item['categoria']);
+                ?>
                 </div>
             </div>
         </section>
@@ -385,23 +245,10 @@
     </main>
 
 
-    <script src="js/jquery.mask.js"></script>
-
-    <script>
-        $(function () {
-            
-            $('#ceps').mask('00000-000');
-
-        })
-
-    </script>
+    
 
 
-    <!-- Script -->
-    <script src="js/jquery-3.6.0.js"></script>
-    <script src="js/functions.js"></script>
 
-    <script>
 
     </script>
 </body>

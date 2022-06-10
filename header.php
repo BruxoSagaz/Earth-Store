@@ -126,7 +126,7 @@
         
                                     <div>
                                     <label for='quantidade'>Quantidade:</label>
-                                    <input type='number' name='quantidade' id='' value='".$value[2]."' min='1'>
+                                    <input type='number' name='quantidade' id='' value='".$value[2]."' min='1' max=".$value[5]." >
                                     </div>
                                 </div>
         
@@ -161,10 +161,15 @@
                         echo '<div class="total-div">
                         <span>Total do pedido (sem frete): </span>
                         <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
-                        </div>';
+
+                        <a href="./pedido/" style="width: 56%;">
+                        <button id="finalizar-pedido">Finalizar pedido</button>
+                        </div>
+                        </a>
+                        ';
                         
                     ?>
-
+                        
                 </div>
 
 

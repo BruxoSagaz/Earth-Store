@@ -87,6 +87,10 @@
     width: 40%;
 }
 
+.space-details{
+    margin-left: 35px;
+}
+
 .item-box{
     width: 100%;
     display: flex;
@@ -104,8 +108,28 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 140px;
+    width: 143px;
+    cursor: pointer;
+    max-height: 910px;
+    overflow: overlay;
 }
+
+/* Scroll Bars */
+
+.nav-images {
+    scrollbar-width: thin;
+}
+
+.nav-images::-webkit-scrollbar {
+width: 12px;
+}
+
+  /* *::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    border: 3px solid orange;
+  } */
+
 
 .thumbnail{
     height: 130px;
@@ -139,14 +163,17 @@
 }
 
 .item-seal{
-    font-size: 17px;
-    padding-bottom: 4px;
-    margin: 10px 0;
-    width: 113px;
+    padding: 6px;
+    margin-bottom: 35px;
+    width: 100%;
     background: var(--color_primary);
+    text-align: center;
     color: white;
-    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 17px;
 }
+
+
 
 .product-name{
     font-size: 40px;
@@ -168,7 +195,9 @@
 .product-quantity input{
     width: 45px;
     height: 45px;
+    font-size: 20px;
     text-align: center;
+
 }
 
 .product-quantity label{
@@ -183,14 +212,22 @@
 .price-and-buy{
     padding: 70px 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     border-bottom: 1px solid #ddd;
+
+}
+
+.price-ind-case{
+    align-self: flex-start;
+    width: 86%;
+    margin: 0 auto;
 }
 
 .buy-action{
     width: 65%;
+    margin-top: 40px;
 }
 
 .price-and-buy .buy-action button{
@@ -336,3 +373,17 @@
 }
 
 
+#finalizar-pedido{
+    background-color: var(--color_primary);
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 0px;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 6px;
+}

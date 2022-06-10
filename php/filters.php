@@ -87,7 +87,7 @@ function pegarSubfiltros($array){
         foreach ($array as $key => $value) {
         
             if($key == 'preco'){
-                $str .= " `$key` < $value "; 
+                $str .= " `$key` $value "; 
                 // verifca se o valor é uma tag
             }else if (in_array($key,$options)){
                 $str .= " `tags` LIKE '%$key:$value%'";
@@ -102,7 +102,7 @@ function pegarSubfiltros($array){
             if($i == 0){
 
                 if($key == 'preco'){
-                    $str .= "`$key` < $value "; 
+                    $str .= "`$key` $value "; 
                 }else if (in_array($key,$options)){
                     $str .= " `tags` LIKE '%$key:$value%'";
                 }else{
@@ -112,7 +112,7 @@ function pegarSubfiltros($array){
             }else{
 
                 if($key == 'preco'){
-                    $str .= " AND `$key` < $value "; 
+                    $str .= " AND `$key` $value "; 
                 }else if (in_array($key,$options)){
                 $str .= " AND `tags` LIKE '%$key:$value%'";
                 }else{
@@ -239,8 +239,8 @@ function construirItem($item){
     echo '<div class="price-item">';
     // area de preço
     if($item['promocao'] != 0){
-    echo '<div class="price-before">R$ '.$promFormatado.'</div>';
-    echo '<div class="price-off"> R$ '.$valFormatado.'</div>';
+    echo '<div class="price-before">R$ '.$valFormatado.'</div>';
+    echo '<div class="price-off"> R$ '.$promFormatado.'</div>';
     // adicionando as divisoes
     $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
     }else{

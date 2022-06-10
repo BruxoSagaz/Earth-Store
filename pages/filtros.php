@@ -71,23 +71,23 @@
                         <div class="filter-options-price" id="filter-cases2">
 
                             <div class="block">
-                                <input type="radio" name="preco" value="15"><span> Até R$ 14,99</span>
+                                <input type="radio" name="preco" value="< 15"><span> Até R$ 14,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="radio" name="preco" value="25"><span> Até R$ 24,99</span>
+                                <input type="radio" name="preco" value="< 25"><span> Até R$ 24,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="radio" name="preco" value="50"><span> Até R$ 49,99</span>
+                                <input type="radio" name="preco" value="< 50"><span> Até R$ 49,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="radio" name="preco" value="100"><span>Até R$ 99,99</span>
+                                <input type="radio" name="preco" value="< 100"><span>Até R$ 99,99</span>
                             </div>
 
                             <div class="block">
-                                <input type="radio" name="preco" value="500"><span> Acima de R$ 500,00 </span>
+                                <input type="radio" name="preco" value="> 500"><span> Acima de R$ 500,00 </span>
                             </div>
                         </div>
 
@@ -254,7 +254,7 @@
                                 $info = [];
 
                                 if(isset($_GET['filter'])){
-                                    $info['genero'] =  $_GET['filter'];
+                                    $info['categoria'] =  $_GET['filter'];
                                 }
 
                                 if(isset($_GET['nome'])){

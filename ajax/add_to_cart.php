@@ -16,7 +16,9 @@ $preco = $_POST['preco'];
 
 $img = $_POST['img'];
 
-$info = [$id,$nome,$quant,$preco,$img];
+$max = $_POST['max'];
+
+$info = [$id,$nome,$quant,$preco,$img,$max];
 
 if(array_push($_SESSION['cart'],$info)){
     $data['sucesso']='true';

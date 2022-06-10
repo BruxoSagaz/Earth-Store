@@ -7,7 +7,7 @@ $basePrice = $_POST['basePrice'];
 $parcelas = $_POST['parcelas'];
 $estoque = $_POST['estoque'];
 $tags = $_POST['tags'];
-$image_names = $_POST['image_names'];
+$image_names = trim($_POST['image_names']);
 $dataRet = array();
 
 if(isset($_POST['prom_ver'])){

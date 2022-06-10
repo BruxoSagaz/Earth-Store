@@ -4,6 +4,10 @@ $(document).ready(function(){
     var iconSearch = $('#glass');
     var search = $('#keysearch');
 
+
+    $('#ceps').mask('00000-000');
+
+
     $('.mobile-header h3').click(function(){
         $('nav.mobile-header').slideToggle();
     })
@@ -121,19 +125,25 @@ $(document).ready(function(){
         e.stopPropagation();
         
         // pegando item pai
-        pai = $(this).parent().parent().parent().parent();
+        pai = $(this).parent().parent().parent().parent().parent();
         //pegando o id
         id = pai.find('.item-id').text();
+        id = id.trim();
         // pegar nome
         nome = pai.find('.product-name').text();
+        nome = nome.trim();
         // pegar quantidade
         quant = pai.find('input[type="number"]').val();
         // pegar preco
         preco = pai.find('.price-off').text();
+        preco = preco.trim();
+        preco = " "+preco;
         // img
         img = pai.find('.img').attr('src');
+        // maximo de itens
+        max = pai.find('input[type="number"]').attr('max');
         // id / nome / quantidade / preco
-        data = "id="+id+"&nome="+nome+"&quantidade="+quant+"&preco="+preco+"&img="+img;
+        data = "id="+id+"&nome="+nome+"&quantidade="+quant+"&preco="+preco+"&img="+img+"&max="+max;
 
 
 
@@ -163,7 +173,7 @@ $(document).ready(function(){
             })
 
            
-            addItemToCart(id,nome,quant,preco,img);
+            addItemToCart(id,nome,quant,preco,img,max);
             $('#empty-cart').fadeOut(100);
         }
     })
@@ -186,7 +196,7 @@ $(document).ready(function(){
 
     })
 
-    function addItemToCart(id,nome,quant,preco,img){
+    function addItemToCart(id,nome,quant,preco,img,max){
         //Criando as tags
 
         //div pai
@@ -233,6 +243,7 @@ $(document).ready(function(){
         inputQuantidade.setAttribute("name","quantidade");
         inputQuantidade.setAttribute("value",quant);
         inputQuantidade.setAttribute("min","1");
+        inputQuantidade.setAttribute("max",max);
 
         //trash button
         const cartOpt = document.createElement('div');
@@ -263,8 +274,9 @@ $(document).ready(function(){
         pai.appendChild(idTag);
 
         $('.cart-itens').prepend(pai);
-        calcularTotal();
+        
         addNumCart();
+        calcularTotal();
     }
 
     $('.cart-itens').on('click', 'i.fa-trash-can', function() {
@@ -291,24 +303,26 @@ $(document).ready(function(){
 
     function calcularTotal() {
         total = 0;
-        quant = [];
-        filtrados = [];
+        quant = Array();
+        filtrados = Array();
         let precos = $('.cart-preco').text();
         let inputs = document.querySelectorAll('input[name=quantidade]');
+        // console.log("ANtes precos: "+precos);
         precos = precos.split(' ');
 
         inputs.forEach(element => {
             quant.push(parseInt(element.value));
         });
 
-        console.log(quant);
-
+        // console.log("quantidade: "+quant);
+        // console.log("precos: "+precos);
         for(i=2;i<=precos.length;i+=2){
+            // console.log("precos[i]: "+precos[i]);
             filtrados.push(precos[i]);
-            
         }
-
+       
         for(i=0;i<filtrados.length;i++){
+            
             send = (filtrados[i].match(/./g) || []).length;
             for(i2=0;i2<send;i2++){
                 filtrados[i] = filtrados[i].replace(".","");
@@ -317,7 +331,7 @@ $(document).ready(function(){
             filtrados[i] = parseFloat(filtrados[i].replace(",","."));
             
         }
-        console.log(filtrados);
+        // console.log(filtrados);
         for(i=0;i<filtrados.length;i++){
             total += filtrados[i] * quant[i];
         }

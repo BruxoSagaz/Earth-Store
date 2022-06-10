@@ -1,13 +1,60 @@
 <?php
 
-function gerarAleatorio(){
+
+function getItemFromID($id){
     global $pdo;
-    $query = "SELECT * FROM `produto` ORDER BY RAND() LIMIT 10";
+    $query = "SELECT * FROM `produto` WHERE `id` = $id";
 
 
     $sql = $pdo->prepare($query);
     $sql->execute();
 
+    if($sql->rowCount() > 0 ){
+        $result = $sql->fetchAll();
+        return $result[0];
+    }else{
+        return false;
+    }
+}
+
+function pegarDivisoes($item){
+
+    $parcelas = intval($item['parcelas']);
+    
+    if($item['promocao'] != 0){
+        // echo '<div class="price-before">R$ '.$promFormatado.'</div>';
+        // echo '<div class="price-off"> R$ '.$valFormatado.'</div>';
+        // adicionando as divisoes
+        $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
+        
+    }else{
+        // echo '<div class="price-off"> R$ '.$valFormatado.'</div>';
+        $divisoes = floatval($item['preco']) / $parcelas;
+           
+    }
+
+    $divisoes = strval($divisoes);
+        
+    // $divisoes = str_replace(".",",",$divisoes);
+
+    $divisoes = number_format($divisoes,2,",",".");
+
+    return $divisoes;
+}
+
+
+
+function selectCateg($categ){
+    global $pdo;
+    
+
+    
+    $query = "SELECT * FROM `produto` WHERE  `categoria` LIKE '%".$categ."%' ORDER BY RAND() LIMIT 5";
+
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+
+    
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
             construirItem($value);
@@ -15,20 +62,12 @@ function gerarAleatorio(){
     }
 }
 
-function gerarMaisVendidos(){
-    global $pdo;
-    $query = "SELECT * FROM `produto` ORDER BY `vendas` DESC LIMIT 10";
 
 
-    $sql = $pdo->prepare($query);
-    $sql->execute();
 
-    if($sql->rowCount() > 0 ){
-        foreach($sql->fetchAll() as $value){
-            construirItem($value);
-        }
-    }
-}
+
+
+
 
 
 
@@ -145,6 +184,5 @@ function calcularPorcentagem($prom,$preco){
     $final = $final."%"; 
     return $final;
 }
-
 
 ?>
