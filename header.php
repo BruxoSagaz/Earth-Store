@@ -6,7 +6,7 @@
             <!-- Header Desktop -->
             <div class="desktop-header">
                 <!-- Logo -->
-                <div class="logo-desktop"><a href="home"><img src="images/Logo.png" alt=""></a></div>
+                <div class="logo-desktop"><a href="<?php echo PATH?>home"><img src="<?php echo PATH?>images/Logo.png" alt=""></a></div>
                 <!-- Logo -->
 
                 <!-- Nav -->
@@ -21,7 +21,7 @@
                         <i class="fa-solid fa-magnifying-glass" id="glass"></i ><li>Pesquisar</li>
                     </ul>
 
-                    <ul class="list-nav">
+                    <ul class="divlist-nav">
                         <i class="fa-solid fa-comment-dots"></i><li>Fale Conosco</li>
                     </ul>
 
@@ -33,7 +33,7 @@
                             </div>
                             ';
                         }else{
-                            echo '<a href="./cadastro/">
+                            echo '<a href="'.PATH.'./cadastro/">
                             <i class="fa-solid fa-arrow-right-to-bracket" ></i><li>Cadastrar-se</li>
                             </a>';
                         }
@@ -85,10 +85,7 @@
                 ?>
                 
                 <h2 style="margin-bottom: 8px;">Carrinho de compras</h2>
-
-                <div class="cart-itens">
-                   
-                    <!-- <div class='cart-item-individual'>
+                <!-- <div class='cart-item-individual'>
                         <div class='item-img-box'>
                             <img src='images/terco.jpg' alt='img_do_banco'>
                         </div>
@@ -107,6 +104,9 @@
                         </div>
                     </div>
                      -->
+                <div class="cart-itens">
+                   
+    
 
                     <?php   
                         if(isset($_SESSION['cart'])){
@@ -116,8 +116,8 @@
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 echo "<div class='cart-item-individual'>
                                 <div class='item-img-box'>
-                                    <a href='individual&id=".$value[0]."'>
-                                    <img src='".$value[4]."' alt='img_do_banco'>
+                                    <a href='".PATH."individual&id=".$value[0]."'>
+                                    <img src='".PATH.$value[4]."' alt='img_do_banco'>
                                     </a>
                                 </div>
                                 <div class='cart-especificacoes'>
@@ -162,7 +162,7 @@
                         <span>Total do pedido (sem frete): </span>
                         <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
 
-                        <a href="./pedido/" style="width: 56%;">
+                        <a href="'.PATH.'./pedido/" style="width: 56%;">
                         <button id="finalizar-pedido">Finalizar pedido</button>
                         </div>
                         </a>
@@ -194,11 +194,11 @@
 
                 
                 <!-- Logo -->
-                <div class="logo-mobile"><a href="home"><img src="images/Logo.png" alt=""></a></div>
+                <div class="logo-mobile"><a href="<?php echo PATH?>home"><img src="<?php echo PATH?>images/Logo.png" alt=""></a></div>
                 <!-- Logo -->
 
                 <ul class="list-nav">
-                   <a href="cadastro"><i class="fa-solid fa-arrow-right-to-bracket" ></i></a> <!--<li>Minha Conta</li> -->
+                   <a href="<?php echo PATH?>cadastro"><i class="fa-solid fa-arrow-right-to-bracket" ></i></a> <!--<li>Minha Conta</li> -->
                 </ul>
                 
             </div>

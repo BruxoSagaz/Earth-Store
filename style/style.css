@@ -888,7 +888,20 @@ div .img-field{
 }
 
 
-
+#finalizar-pedido{
+    background-color: var(--color_primary);
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 0px;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 6px;
+}
 
 
 

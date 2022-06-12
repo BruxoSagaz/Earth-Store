@@ -149,6 +149,7 @@ width: 12px;
 .image-show{
     width: calc(100% - 146px);
     border: 1px solid #ddd;
+    max-height: 908px;
 }
 
 .image-show img{
@@ -373,17 +374,3 @@ width: 12px;
 }
 
 
-#finalizar-pedido{
-    background-color: var(--color_primary);
-    border: 1px solid #d02718;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 20px;
-    padding: 10px 0px;
-    text-decoration: none;
-    width: 100%;
-    margin-top: 8px;
-    border-radius: 6px;
-}

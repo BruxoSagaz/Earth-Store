@@ -89,7 +89,7 @@
 
                                 <!-- Princiaal -->
                                 <?php
-                                    echo "<img src='uploads/".$separate[0]."' alt='img_principal'>
+                                    echo "<img src='uploads/".$separate[0]."' alt='img_principal' id='img-principal'>
                                     <img src='uploads/".$separate[0]."' alt='img_principal' class='img' style='display:none;'>
                                     ";
                                 ?>
@@ -249,7 +249,6 @@
 
 
 
-
-    </script>
+    <script src="<?php echo PATH?>js/config.js"></script>
 </body>
 </html>

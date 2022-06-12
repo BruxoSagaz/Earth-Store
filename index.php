@@ -100,11 +100,12 @@ include("./ajax/PDO.php");
 
 
     <!-- Script -->
+    <script src="<?php echo PATH?>js/config.js"></script>
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/jquery.mask.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/home.js"></script>
-    
+    <script src="<?php echo PATH?>js/header.js"></script>
 
     <?php } ?>
 </body>

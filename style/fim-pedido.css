@@ -1,0 +1,157 @@
+.div-chamada-finalizar{
+    margin-top: 100px;
+    background: #df0109;;
+    height: 54px;
+    text-align: center;
+}
+
+.chamada-finalizar{
+    color: white;
+    line-height: 2;
+}
+
+.tabela-pedidos{
+    margin-top: 40px;
+}
+
+.tabela-pedidos h2{
+    margin: 15px 0px;
+    border-bottom: 2px solid #ca383d;
+    font-size: 24px;
+    color: #df020a;
+}
+
+.fa-cart-shopping{
+    margin: 0 25px;
+}
+
+
+.tabela-pedidos table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-pedidos tbody tr:first-child{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.tabela-pedidos td{
+    border-bottom: 1px solid #ca383d;
+    padding: 8px;
+}
+
+
+.finalizar-pedido{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.finalizar-pedido h2{
+    padding-right: 80px;
+    margin: auto 0;
+}
+
+.finalizar-pedido button{
+    background-color: var(--color_primary);
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 11px 2px;
+    text-decoration: none;
+    width: 12%;
+    margin-top: 15px;
+    border-radius: 6px;
+    margin-right: 80px;
+}
+
+.tabela-pedidos i{
+    color: #df0109;
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: 22px;
+}
+
+.case-img-finalizar{
+    height: 165px;
+}
+
+.imagem-finalizar{
+    max-width:100%;
+    max-height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.alert-empty-cart{
+    color: white;
+    background: #df0109;
+    text-align: center;
+    margin: 190px 0;
+    height: 190px;
+    
+}
+
+.alert-empty-cart h2{
+    padding-top: 50px;
+    padding-bottom: 18px;
+    font-size: 32px;
+}
+
+.alert-empty-cart button{
+    background-color: white;
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #df0109;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 0px;
+    text-decoration: none;
+    width: 20%;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
+
+
+.space{
+    height: 140px;
+}
