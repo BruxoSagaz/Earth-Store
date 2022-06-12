@@ -212,6 +212,7 @@ $(document).ready(function(){
         inputQuantidade.setAttribute("value",quant);
         inputQuantidade.setAttribute("min","1");
         inputQuantidade.setAttribute("max",max);
+        inputQuantidade.setAttribute("ref",id);
 
         //trash button
         const cartOpt = document.createElement('div');

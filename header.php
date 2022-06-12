@@ -126,7 +126,7 @@
         
                                     <div>
                                     <label for='quantidade'>Quantidade:</label>
-                                    <input type='number' name='quantidade' id='' value='".$value[2]."' min='1' max=".$value[5]." >
+                                    <input type='number' name='quantidade' id='' value='".$value[2]."' min='1' max=".$value[5]." ref='".$value[0]."' >
                                     </div>
                                 </div>
         

@@ -58,7 +58,7 @@ include_once('../header.php');
 
         <td>".$value[1]."</td>
 
-        <td><input type='number' name='quantidade' class='final-quant' value='".$value[2]."' min='1' max=".$value[5]." ></td>
+        <td><input type='number' name='quantidade' class='final-quant' value='".$value[2]."' min='1' max=".$value[5]." ref=".$value[0]." ></td>
         
         <td>".$value[3]."</td>
         <td><i class='fa-solid fa-trash-can apagar-item'></i></td>

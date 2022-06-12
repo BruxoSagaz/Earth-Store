@@ -29,4 +29,21 @@ $(document).ready(function(){
     });
 
 
+
+    $("body").on( "change", "input[type=number]", function() {
+        input = $(this);
+        quant = input.val();
+        id = input.attr('ref');
+
+        if(quant <= input.attr('max')){
+            selector = 'input[ref="'+id+'"]';
+
+            $(selector).val(quant);
+        }else{
+            selector = 'input[ref="'+id+'"]';
+
+            $(selector).val(input.attr('max'));
+        }
+
+    });
 }); 
