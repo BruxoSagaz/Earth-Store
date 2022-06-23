@@ -1,6 +1,7 @@
 <?php
 session_start();
 $data = array();
+header('Access-Control-Allow-Origin: *');
 
 if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = array();
@@ -17,6 +18,7 @@ $preco = $_POST['preco'];
 $img = $_POST['img'];
 
 $max = $_POST['max'];
+
 
 $info = [$id,$nome,$quant,$preco,$img,$max];
 

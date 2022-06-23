@@ -125,6 +125,31 @@
         </div><!-- Grouper -->
 
 
+
+        <div class="modal-grouper">
+            <div class="input-area">
+                <label for="peso">Peso (Kg): </label>
+                <input type="text" step="0.01" name="peso" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="peso">
+            </div>
+
+            
+            <!-- <div class="input-area">
+                <label for="comprimento">comprimento (Cm): </label>
+                <input type="text" step="0.01" name="comprimento" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="comprimento">
+            </div>
+
+            <div class="input-area">
+                <label for="altura">altura (Cm): </label>
+                <input type="text" step="0.01" name="altura" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="altura">
+            </div>
+
+            <div class="input-area">
+                <label for="largura">largura (Cm): </label>
+                <input type="text" step="0.01" name="largura" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="largura">
+            </div> -->
+        </div>
+    
+        
         <div class="modal-grouper"><!-- Grouper -->
         <label for="">Filtro: </label>
         <input list="filtro" name="filtro" class="list" id="filter">
@@ -143,7 +168,6 @@
         <button id="startTag"> OK </button>
         </div><!-- Grouper -->
 
-    
 
         <div>
 

@@ -279,7 +279,7 @@ div.enter{
 }
 
 
-@media screen and (max-width:1900px) {
+@media screen and (max-width:3800px) {
     section div.form-div {
         width: 35%;
     }

@@ -178,6 +178,7 @@ header{
     display: flex;
     align-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .nav-desktop a{
@@ -470,6 +471,8 @@ footer.F2{
     align-items: center;
     justify-items: center;
 }
+
+
 
 .seal{
     width: 180px;
@@ -903,6 +906,13 @@ div .img-field{
     border-radius: 6px;
 }
 
+.account-head{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-right: 25px;
+    cursor: pointer;
+}
 
 
 

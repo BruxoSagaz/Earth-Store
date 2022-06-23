@@ -132,8 +132,7 @@ width: 12px;
 
 
 .thumbnail{
-    height: 130px;
-    
+    height: 185px;
 }
 
 .thumbnail img{
@@ -272,6 +271,25 @@ width: 12px;
     align-content: center;
 }
 
+.alert-cep-area{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-cep{
+    display: none;
+    width: 100%;
+    background-color: #f57c00;
+    color: #504f4f;
+    border-radius: 33px;
+    margin-top: 8px;
+    height: 51px;
+    line-height: 50px;
+    padding: 0 25px;  
+}
+
 .submit-area{
     display: flex;
     flex-wrap: nowrap;
@@ -286,6 +304,12 @@ width: 12px;
 
 .cep-area input{
     height: 36px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+.cep-area input:focus{
+    outline-width: 0;
 }
 
 .cep-area button{
@@ -373,4 +397,32 @@ width: 12px;
     justify-content: center;
 }
 
+.hide-result{
+    display: none;
+}
+
+.result-cep{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.result-cep table{
+    width: 315px;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.result-cep tbody .letter{
+    font-size: 22px;
+    font-weight: 500;
+}
+
+
+.result-cep tbody tr{
+    font-size: 16px;
+    text-align: center;
+}
 

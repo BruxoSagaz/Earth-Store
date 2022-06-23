@@ -2,19 +2,27 @@
 
 
 function getItemFromID($id){
+    
     global $pdo;
     $query = "SELECT * FROM `produto` WHERE `id` = $id";
 
+    try {
 
-    $sql = $pdo->prepare($query);
-    $sql->execute();
+        $sql = $pdo->prepare($query);
+        $sql->execute();
+    
+        if($sql->rowCount() > 0 ){
+            $result = $sql->fetchAll();
+            return $result[0];
+        }else{
+            return false;
+        }
 
-    if($sql->rowCount() > 0 ){
-        $result = $sql->fetchAll();
-        return $result[0];
-    }else{
+    } catch (Exception $e) {
+        // echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         return false;
     }
+
 }
 
 function pegarDivisoes($item){

@@ -9,7 +9,7 @@ $(document).ready(function(){
     
     // Mask
     $('.valor').mask('000.000.000.000.000,00', {reverse: true});
-
+    
     // Ok button click Start tags
     $('#startTag').click(function(e){
         e.preventDefault();

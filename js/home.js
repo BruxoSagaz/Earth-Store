@@ -2,8 +2,6 @@ $(document).ready(function(){
 
 
 
-    $('#ceps').mask('00000-000');
-
 
 
 
@@ -24,6 +22,7 @@ $(document).ready(function(){
 
     // Produzir Vac-list
     $.ajax({
+        Headers:'Access-Control-Allow-Origin: *',
         method:"post",
         url: config.path+"/php/gerar_nav.php",
         data:"oi",

@@ -1,31 +1,12 @@
 
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Pedido</title>
-    <?php 
 
-        include_once('../fav-icon.php');
-
-    ?>
-    <link rel="stylesheet" href="<?php echo PATH?>/style/style.css">
-    <link rel="stylesheet" href="<?php echo PATH?>/style/fim-pedido.css">
-    <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
-</head>
-<body>
-<?php 
-include_once('../header.php');
-?>
 
 <!-- Só mostra se tiver itens no carrinho -->
 <?php if(!isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
     ?>
 
 <div class="div-chamada-finalizar">
-    <h2 class="chamada-finalizar">Finalize o Seu Pedido!</h2>
+    <h2 class="chamada-finalizar">Revise seu Carrinho!</h2>
 </div>
 
 
@@ -49,6 +30,7 @@ include_once('../header.php');
 
         <!-- Gerar Itens -->
 <?php
+  
     
     foreach ($_SESSION['cart'] as $key => $value) {
         echo "
@@ -93,7 +75,36 @@ include_once('../header.php');
 
 <div class="container">
 <div class="finalizar-pedido">
-    <button>Pagar Agora!</button>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_51LC4N0GIUmR0keuMuVnYtSJMCyrMiP0HSMZPYqyYg7nRLf6qG92it6HDcAFYaBglTnSmNVOxDP36iJAIZJcWBsAv00ODmcQMgZ"
+    data-amount= "<?php echo $_SESSION['total']*100 ?>"
+    data-name="Terço de Madeira"
+    data-label="Pagar com cartão"
+    data-currency ="brl"
+    data-panel-label = "Pagar"
+    data-description = "Pagamento de Carrinho"
+    data-image="<?php echo PATH?>images/Logo.png"
+    data-locale="auto"
+    ></script>
+
+    <?php
+        
+
+        if(isset($_SESSION['login'])){
+            echo '
+            <div class="w100 flex-end">
+            <button id="get-paid-redirect" style="margin-right: 15px;">Pagar pelo Pagseguro!</button>
+            
+            
+            <button id="get-paid-here"><a href="finalizar">Pagar aqui mesmo!</a></button>
+            
+            </div>';
+        }else{
+            echo '<a href="'.PATH.'./cadastro/"><button id="login" style="width: 94%;">Faça Login Para comprar!</button></a>';
+        }
+    ?>
+    
     <h2 class="total-price-cart">Total: R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
     
 </div>
@@ -106,15 +117,19 @@ include_once('../header.php');
         <a href='".PATH."'><button class='return-home'> Voltar para página inicial</button></a>
         </div>
         ";
+
+       
 }?>
 
+<script type="text/javascript" src=
+"https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+<script src="<?php echo PATH?>js/config.js"></script>
+<script src="<?php echo PATH?>js/jquery-3.6.0.js"></script>
+<script src="<?php echo PATH?>js/jquery.mask.js"></script>
+<script src="<?php echo PATH?>js/header.js"></script>
+<script src="<?php echo PATH?>js/home.js"></script>
+<script src="<?php echo PATH?>js/finalizar-cart.js"></script>
 
-<?php 
-include_once('../footer.php');
-?>
-
-</body>
-</html>
 
 
 

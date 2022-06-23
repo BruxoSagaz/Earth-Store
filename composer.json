@@ -1,6 +1,10 @@
 {
     "require": {
         "nesbot/carbon": "^2.58",
-        "flyingluscas/correios-php": "^2.4"
+        "flyingluscas/correios-php": "^2.4",
+        "stripe/stripe-php": "^8.7"
+
+        
     }
+
 }

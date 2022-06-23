@@ -6,6 +6,12 @@ $categoria = $_POST['categoria'];
 $basePrice = $_POST['basePrice'];
 $parcelas = $_POST['parcelas'];
 $estoque = $_POST['estoque'];
+
+$peso = $_POST['peso'];
+$comprimento = $_POST['comprimento'];
+$altura = $_POST['altura'];
+$largura = $_POST['largura'];
+
 $tags = $_POST['tags'];
 $image_names = $_POST['image_names'];
 $id =$_POST['id'];
@@ -44,7 +50,7 @@ if(isset($_POST['especificacoes'])){
 // echo "Nome = ",$nome," <br>  Categoria = ",$categoria," <br> BasePrice = ",$basePrice," <br> Parcelas = ",$parcelas," <br> Estoque = ",$estoque," <br> Tags = ",$tags," <br> IMG-Names = ",$image_names," <br> PROM_VER: ",
 // $prom_ver,$prom_val," <br> Descricao = ",$descricaoGeral,"  <br>Especificacoes = ", $especificacoes," <br> ID = ",$id;
 
-$querys = "UPDATE `produto` SET `nome`='$nome',`imagens`='$image_names',`categoria`='$categoria',`descricao_geral`='$descricaoGeral',`especificacoes`='$especificacoes',`tags`='$tags',`preco`='$basePrice',`promocao`=$prom_ver,`valor_em_promocao`='$prom_val',`parcelas`='$parcelas',`estoque`='$estoque' WHERE `id` = $id";
+$querys = "UPDATE `produto` SET `nome`='$nome',`imagens`='$image_names',`categoria`='$categoria',`descricao-geral`='$descricaoGeral',`especificacoes`='$especificacoes',`tags`='$tags',`preco`='$basePrice',`promocao`=$prom_ver,`valor_em_promocao`='$prom_val',`parcelas`='$parcelas',`estoque`='$estoque',`peso`='$peso',`comprimento`='$comprimento',`altura`='$altura',`largura`='$largura' WHERE `id` = $id";
 
 // echo "<br>";
 // echo $querys;

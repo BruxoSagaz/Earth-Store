@@ -23,6 +23,7 @@ class ComposerStaticInitfd5c7f121883868ff51de255b2ede5b1
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\Translation\\' => 30,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
@@ -62,10 +63,14 @@ class ComposerStaticInitfd5c7f121883868ff51de255b2ede5b1
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (

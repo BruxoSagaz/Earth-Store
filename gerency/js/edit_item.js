@@ -25,6 +25,12 @@ $(document).ready(function(){
         fileNames.text("arquivos: ");
     }
 
+
+    // Mask
+    $('.valor').mask('000.000.000.000.000,00', {reverse: true});
+    $('.dimensao').mask('000,000,000,000,000.0  ', {reverse: true});
+
+    
     //sair da modal
     $('.close-btn').click(function(){
         $('.divisions-container').empty();
@@ -241,6 +247,12 @@ $(document).ready(function(){
         let prom = obj['valor_em_promocao'].replace(".",",");
 
         $('#nome').val(obj['nome']);
+
+        $('#peso').val(obj['peso']);
+        $('#comprimento').val(obj['comprimento']);
+        $('#altura').val(obj['altura']);
+        $('#largura').val(obj['largura']);
+
         $('input[name=categoria]').val(obj['categoria']);
         $('#base-price').val(preco);
         if(obj['promocao'] == 1){
@@ -651,8 +663,8 @@ $(document).ready(function(){
                 });
 
             },150);
-            basePrices.val(basePrices.val()+",00");
-            promVals.val(promVals.val()+",00");
+
+
         }
     })
 

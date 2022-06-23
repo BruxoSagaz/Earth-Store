@@ -1,5 +1,6 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
 
 try{
     $pdo = new PDO('mysql:host=localhost;dbname=dblojinha','root','');

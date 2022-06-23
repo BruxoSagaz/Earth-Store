@@ -74,7 +74,7 @@
                 if(isset($_POST['acao'])){
                     $email = $_POST['email_login'];
                     $senha = $_POST['senha_login'];
-                    $sql = Mysql::conectar()->prepare("SELECT * FROM `usuario` WHERE email = ? AND senha = ? ");
+                    $sql = Mysql::conectar()->prepare("SELECT `cpf`,`nome`,`dataNascimento`,`celular`,`email` FROM `usuario` WHERE email = ? AND senha = ? ");
                     $sql->execute(array($email,$senha));
 
                     if($sql->rowCount() == 1){
@@ -83,6 +83,7 @@
                         $_SESSION['login'] = true;
                         $_SESSION['email'] = $email;
                         $_SESSION['senha'] = $senha;
+                        $_SESSION['dados'] = $info;
                         $_SESSION['nome'] = $info['nome'];
 
                         if(isset($_POST['lembrar_login'])){

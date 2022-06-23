@@ -157,7 +157,9 @@
                         if(@count($_SESSION['cart']) == 0 || !isset($_SESSION['cart'])){
                             echo "<h2 id = 'empty-cart' style='color: #ef5350;font-size: 19px;'>- Carrinho Vazio -</h2>";
                         }
-
+                        if(!isset($_SESSION['total'])){
+                            $_SESSION['total'] = 0;
+                        }
                         echo '<div class="total-div">
                         <span>Total do pedido (sem frete): </span>
                         <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>

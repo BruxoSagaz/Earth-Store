@@ -33,9 +33,7 @@
                     <div class="input-area">
                         <label for="prom">aplicar promoção:</label>
                         <input type="checkbox" name="prom_ver" id="aply_prom">
-                    </div>
-
-                    <div class="input-area">
+                    
                         <input type="text" step="0.01" name="prom_val" min="0.01" class="valor" placeholder="0,00 R$" style="width: 100px; padding-left: 5px;background: #b5b5b5;" id="prom_val" disabled>
                         <label for="prom_val">(valor em promoção)</label>
                     </div>
@@ -87,7 +85,34 @@
 
                         </div>
 
+
                     </div>
+
+                    <div class="flex-center">
+
+                        <div class="input-area">
+                            <label for="peso">Peso (Kg): </label>
+                            <input type="text" step="0.01" name="peso" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="peso">
+                        </div>
+
+                        
+                        <!-- <div class="input-area">
+                            <label for="comprimento">comprimento (Cm): </label>
+                            <input type="text" step="0.01" name="comprimento" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="comprimento">
+                        </div>
+
+                        <div class="input-area">
+                            <label for="altura">altura (Cm): </label>
+                            <input type="text" step="0.01" name="altura" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="altura">
+                        </div>
+
+                        <div class="input-area">
+                            <label for="largura">largura (Cm): </label>
+                            <input type="text" step="0.01" name="largura" min="0.01" class="dimensao" placeholder="0,00" style="width: 100px; padding-left: 5px; margin-left: 5px;" id="largura">
+                        </div> -->
+
+                    </div>
+
 
                     <div class="flex-center">
 

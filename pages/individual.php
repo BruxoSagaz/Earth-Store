@@ -1,44 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filter</title>
 
-    <!--Favicon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/">
-    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="images/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#e30613">
-    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#e30613">
-    <!--Favicon-->
-
-
-    <link rel="stylesheet" href="style/style.css">
-    <!-- <link rel="stylesheet" href="style/style_2.css"> -->
-    <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
-
-</head>
-<body>
 
     <?php
         include_once('./php/get_item.php');
         
+
         // Get Item
         $item = getItemFromID($_GET['id']);
+        
+        if($item){
+        
         $divisoes = pegarDivisoes($item);
         
     // Tratamento das divisoes
@@ -48,6 +18,7 @@
  
     <!-- Content -->
     <main>
+
 
         <section class="details-section">
             <div class="container">
@@ -120,7 +91,7 @@
                             </h1>
 
                             <div class="line-info">
-                                <span class="ref item-id">
+                                <span class="ref item-id" id="<?php echo $item['id'];?>">
                                 <?php
                                 echo $item['id'];
                                 ?>
@@ -177,8 +148,36 @@
 
                                 <div class="submit-area">
                                     <input type="text" id="ceps" placeholder="00000-000" >
-                                    <button type="submit">Calcular</button>
+                                    <button type="submit" id="calcular-cep">Calcular</button>
                                 </div>
+
+                                <div class="alert-cep-area">
+                                    <div class="alert-cep">
+                                        Este Cep não é válido!
+                                    </div>
+                                </div>
+
+                                
+                                <div class="w100 hide-result">
+                                <div class="result-cep">
+                                    <table>
+                                        <tr class="letter">
+                                            <td>Serviço</td>
+                                            <td>Preço</td>
+                                            <td>Prazo</td>
+                                        </tr>
+                                        
+                                        <!-- <tr id="retorno1">
+                                            <td>SEDEX</td>
+                                            <td>R$20,00</td>
+                                            <td>5 dias</td>
+                                        </tr> -->
+
+                                    </table>
+                                </div>
+                                </div>
+
+
                             </div>
                             </div><!-- Space Details -->
                         </div>
@@ -250,5 +249,10 @@
 
 
     <script src="<?php echo PATH?>js/config.js"></script>
+    <?php
+        }else{
+            include_once('no-item.php');
+        }
+    ?>
 </body>
 </html>

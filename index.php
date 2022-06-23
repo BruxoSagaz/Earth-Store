@@ -21,7 +21,8 @@ include("./ajax/PDO.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title><?php 
+    if(isset($_GET['url'])){echo $_GET['url'];}else{echo 'Home';};?></title>
 
     <!--Favicon-->
     <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/">
@@ -52,9 +53,10 @@ include("./ajax/PDO.php");
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 
     <?php
-        if(!isset($_GET['page'])){
-            $_GET['page'] = 'home';
+        if(!isset($_GET['url'])){
+            $_GET['url'] = 'home';
         }
+        
     ?>
 </head>
 <body>
@@ -88,6 +90,7 @@ include("./ajax/PDO.php");
     <!-- MAIN  -->
 
     <?php 
+    
         Loja::loadPage();
     ?>
     <!-- MAIN -->
@@ -104,8 +107,17 @@ include("./ajax/PDO.php");
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/jquery.mask.js"></script>
     <script src="js/functions.js"></script>
+
     <script src="js/home.js"></script>
     <script src="<?php echo PATH?>js/header.js"></script>
+
+    <?php
+        if(@$_GET['url'] != 'home'){
+            if(is_file('js/'.$_GET['url'].'.js')){
+                echo '<script src="js/'.$_GET['url'].'.js"></script>';
+            } 
+        }
+    ?>
 
     <?php } ?>
 </body>

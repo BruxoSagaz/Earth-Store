@@ -1,3 +1,3 @@
 const config = {
-    path:'https://localhost/Lojinha/',
+    path:'http://localhost/Lojinha',
 };

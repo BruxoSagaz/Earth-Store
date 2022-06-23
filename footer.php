@@ -51,10 +51,19 @@
                 <div class="footer-single">
                     <h2 style="text-align: center;">Redes Sociais</h2>
                     <div class="icon-list">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-instagram"></i>
-                        <i class="fa-brands fa-youtube"></i>
+
+                    <div>
+                    <a href="https://www.facebook.com/FundacaoTerra/" target="blank"><i class="fa-brands fa-facebook"></i></a>
+
+                    <a href="https://www.instagram.com/fundacaoterra/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+
+                    <div>
+                    <a href="https://twitter.com/fundacaoterra"><i class="fa-brands fa-twitter" target="blank"></i></a>
+
+                    <a href="https://www.youtube.com/channel/UCqGWLotw2C2k2MjrHQHIoDA" target="blank"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    
                     </div>
                 </div>
 
