@@ -8,7 +8,9 @@ $(document).ready(function(){
 
     $('#calcular-cep').click(function(){
         cepInput = $("#ceps");
-
+        $('#loadingmessage').show();
+        $('.hide-result').hide();
+        $('.retorno').remove();
 
         if(validarCep(cepInput.val())){
             $('.alert-cep').fadeOut('fast');
@@ -23,10 +25,9 @@ $(document).ready(function(){
                 }
             }).done(function(data){
                 console.log(data);
-
+                $('#loadingmessage').hide();
                 data.forEach(function callback(item,index){
                     var tab = createTable(item,index);
-
                     $(tab).appendTo('.result-cep table tbody');
                    
                 })
@@ -34,8 +35,6 @@ $(document).ready(function(){
                 $('.hide-result').fadeIn();
 
             });
-
-
 
 
         }else{
@@ -70,7 +69,7 @@ $(document).ready(function(){
 
         const tr = document.createElement('tr');
 
-        tr.setAttribute('id',"retorno"+toString(index+1));
+        tr.setAttribute('class',"retorno");
       
 
         const td = document.createElement('td');

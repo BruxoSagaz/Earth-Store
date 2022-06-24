@@ -151,6 +151,10 @@
                                     <button type="submit" id="calcular-cep">Calcular</button>
                                 </div>
 
+                                <div id='loadingmessage' style='display:none'>
+                                    <img src='./ajax/loading.gif'/>
+                                </div>
+
                                 <div class="alert-cep-area">
                                     <div class="alert-cep">
                                         Este Cep não é válido!

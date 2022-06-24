@@ -401,6 +401,15 @@ width: 12px;
     display: none;
 }
 
+#loadingmessage{
+    height: 50px;
+    margin-top: 30px;
+}
+
+#loadingmessage img{
+    height: 100%;
+}
+
 .result-cep{
     width: 100%;
     display: flex;

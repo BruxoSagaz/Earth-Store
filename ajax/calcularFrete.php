@@ -12,8 +12,11 @@ $retorno = array();
 
 
 
-// echo "Id = $id AND CEP = $cep";
+
+
+$cep = str_replace("-","",$cep);
 $query = "SELECT * FROM `produto` WHERE `id` = $id";
+
 
 
 $sql = $pdo->prepare($query);
@@ -29,7 +32,7 @@ $peso = $item['peso'];
 // $largura = LARGURA;
 
 function buildArray($cod){
-
+    global $cep;
     $info = array(
         'nCdEmpresa' => '',
         'sDsSenha' => '',
@@ -38,7 +41,7 @@ function buildArray($cod){
         'sCdAvisoRecebimento' => 'n',
         'nCdServico' => "$cod",
         'sCepOrigem' => CEP_DE_ORIGEM,
-        'sCepDestino' => '96083050',
+        'sCepDestino' => $cep,
         'nVlPeso' => "0.5",
         'nVlComprimento' => COMPRIMENTO,
         'nVlAltura' => ALTURA,
