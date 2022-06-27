@@ -129,7 +129,7 @@
                                             <?php echo $item['parcelas']."x de R$ ".$divisoes;
                                             ?> 
                                         </span>
-                                        <a href="#">saiba mais</a>
+                                        <!-- <a href="#">saiba mais</a> -->
                                     </div>
                                 </div>
                                 
@@ -252,7 +252,7 @@
 
 
 
-    <script src="<?php echo PATH?>js/config.js"></script>
+    
     <?php
         }else{
             include_once('no-item.php');

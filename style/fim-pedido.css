@@ -8,6 +8,7 @@
     background: #df0109;;
     height: 54px;
     text-align: center;
+    cursor: default;
 }
 
 .chamada-finalizar{
@@ -19,15 +20,16 @@
     margin-top: 40px;
 }
 
-.tabela-pedidos h2{
+.tabela-pedidos h2, .tabela-entrega h2{
     margin: 15px 0px;
     border-bottom: 2px solid #ca383d;
     font-size: 24px;
     color: #df020a;
+    cursor: default;
 }
 
 
-.tabela-pedidos i{
+.tabela-pedidos i, .tabela-entrega i{
     margin: 0 25px;
 }
 
@@ -76,11 +78,12 @@
     margin-right: 80px;
 }
 
-.tabela-pedidos i{
+.tabela-pedidos i, .tebela-entrega i{
     color: #df0109;
     cursor: pointer;
     font-size: 30px;
     margin-left: 22px;
+    cursor: default;
 }
 
 .case-img-finalizar{
@@ -118,28 +121,74 @@
 input[type="text"]  {
     font-size: 17px;
     height: 33px;
-    border: 2px solid #ccc;
+    border: 1px solid #8f8f8f;
     border-radius: 3px;
     background: #fff;
+    padding-left: 6px;
 }
-
-
 
 input:focus,
 textarea:focus{
     outline: 0;
 }
 
+.tabela-entrega{
+    margin-top: 95px;
+}
 
 
+.total-price-cart{
+    margin-right: 6%;
+}
+
+.total-price-area{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
 
 
+input[type="text"]::-webkit-input-placeholder{
+    color:rgb(138, 138, 138);
+}
 
+#oho{
+    color:#504f4f;
+    transition: .1s;
+}
 
+#oho:hover{
+    color: cornflowerblue;
+}
 
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
 
+.individual{
+    margin-left: 30px;
+    margin-top: 18px;
+}
 
+.local-form{
+    max-width: 680px;
+    margin: 50px auto;
+}
 
+.local-form input{
+    border: 1px solid #ccc;
+}
+
+.local-form span{
+    font-size: 13px;
+    color: #df0109;
+    cursor: default;
+}
 
 
 

@@ -8,9 +8,10 @@ $(document).ready(function(){
 
     $('#calcular-cep').click(function(){
         cepInput = $("#ceps");
+        $('.retorno').remove();
         $('#loadingmessage').show();
         $('.hide-result').hide();
-        $('.retorno').remove();
+        
 
         if(validarCep(cepInput.val())){
             $('.alert-cep').fadeOut('fast');

@@ -1,12 +1,12 @@
 $(document).ready(function(){
-    // console.log($('tbody tr').length);
-    if($('tbody tr').length <= 2){
-        $('.sec-footer').css('position','absolute');
-        $('.sec-footer').css('bottom','0');
-    };
 
 
+    // Mascatas de input
+    $('#ceps').mask('00000-000');
+    $('#numero').mask('000000');
 
+
+    // Apagar itens
     $(".tabela-pedidos").on( "click", "td i.apagar-item", function() {
         // $("#button2").trigger('click');
         pai = $(this).parent().parent();
@@ -33,7 +33,7 @@ $(document).ready(function(){
             
             if(response.total>0){
                 total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(response.tota);
-                $('.total-price-cart').text(total2);
+                $('.total-price-cart').text("Total do Carrinho: "+total2);
             }else{
                 $('.total-price-cart').text("R$ 00,00");
             }
@@ -44,7 +44,7 @@ $(document).ready(function(){
     });
 
 
-
+    // Atualizar quantidade
     $("body").on( "change", "input[type=number]", function() {
         input = $(this);
         quant = input.val();
@@ -77,31 +77,33 @@ $(document).ready(function(){
     });
 
 
+    // Redirecionar ao Pagseguro
     $('#get-paid-redirect').click(function(e){
         e.preventDefault();
         $.ajax({
             url:"../ajax/finalizar-Pagamento.php",
         }).done(function (data) {
-            // console.log("https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + data)
+            // console.log(data)
             location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + data;
-            var code = data;
-            var callback = {
-                success : function(transactionCode) {
-                    //Insira os comandos para quando o usuário finalizar o pagamento. 
-                    //O código da transação estará na variável "transactionCode"
-                    console.log("Compra feita com sucesso, código de transação: " + transactionCode);
-                },
-                abort : function() {
-                    location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
-                    //Insira os comandos para quando o usuário abandonar a tela de pagamento.
-                    console.log("abortado");
-                }
-            };  
+            // var code = data;
+
+            // var callback = {
+            //     success : function(transactionCode) {
+            //         //Insira os comandos para quando o usuário finalizar o pagamento. 
+            //         //O código da transação estará na variável "transactionCode"
+            //         console.log("Compra feita com sucesso, código de transação: " + transactionCode);
+            //     },
+            //     abort : function() {
+            //         location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+            //         //Insira os comandos para quando o usuário abandonar a tela de pagamento.
+            //         console.log("abortado");
+            //     }
+            // };  
 
 
-            // //Chamada do lightbox passando o código de checkout e os comandos para o callback
+            ////Chamada do lightbox passando o código de checkout e os comandos para o callback
             // var isOpenLightbox = PagSeguroLightbox(code, callback);
-            // // Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
+            //// Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
             // if (!isOpenLightbox){
             //     location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
             //     console.log("Redirecionamento")
@@ -124,9 +126,54 @@ $(document).ready(function(){
 
     });
 
+    // preencher dados por cep
+    $('#ceps').change(function(){
+        var cep = $(this).val();
+        if(cep.length == 9){
+            cep = {"cep":cep};
+            $.ajax({
+                method:"post",
+                url: config.path+"/ajax/cep-consult.php",
+                data: cep,
+                dataType: "json",
+                error: function(){
+                    console.log("Erro em cep")
+                }
+            }).done(function(data){
+            // console.log(data);
+            $('#endereco').val(data["street"]);
+            $('#complement').val(data["complement"]);
+            $("#bairro").val(data["district"]);
+            $("#cidade").val(data["city"]);
+            $("#estado").val(data["uf"]);
+            })
+        }
+    });
+
+    // Aguardar salvar local
+    $('#salvar-end').click(function(){
+        if($(this).is(":checked")){
+            if(validarForm()== false){
+                $('input').change(function(){
+                    if(validarForm() == true){
+                        salvarLocal();
+                    }
+                })
+            }else{
+                salvarLocal();
+            }
+        };
+    });
 
 
-    
+
+    if($('#salvar-end').is(":checked")){
+            $('input').change(function(){
+                if(validarForm() == true){
+                    salvarLocal();
+                }
+            })
+    };
 
 
 
@@ -147,17 +194,71 @@ $(document).ready(function(){
 
 
 
+    function salvarLocal(){
+        data = $('.local-form input').serialize();
+        // console.log(data);
+
+
+        $.ajax({
+            method:"post",
+            url: config.path+"/ajax/save-local.php",
+            data: data,
+            dataType: "json",
+            error: function(){
+                console.log("Erro em save local Session")
+            }
+        }).done(function(data){
+           console.log(data);
+
+        })
+
+    }
 
 
 
+    function validarForm(){
 
+        var s = $('.local-form input');
+        s.each(function(){
+            var t = $(this);
+            if(t.val()){
+                t.addClass('exclua-me');
+            }
+        });
+        var vazios = s.not('.exclua-me'); 
+        tam = vazios.length;
+        
+        vazios.each(function(){
+            var v = $(this);
 
+            if(v.attr('name') != 'complement'){
+                v.css('border', '0px solid red');
+                v.animate({'borderWidth': '3px'});
+                v.attr("placeholder", "Preencha");
 
+                setTimeout(function(){
+                    v.animate({'borderWidth': '0px'});
+                },1000);
+                setTimeout(function(){
+                    v.css('border', '1px solid #ccc',2000);
+                },1500);
+            }
+        });
 
+        
 
+        if($('#complement').val() == ""){
+            tam = tam-1;
+        }
 
-
-
+        //console.log(tam);
+        if(tam == 0){
+            return true
+        }else{
+            return false
+        }
+        
+    }
 
 
     
@@ -198,6 +299,6 @@ $(document).ready(function(){
 
         
         total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
-        $('.total-price-cart').text(total2);
+        $('.total-price-cart').text("Total do Carrinho: "+total2);
     }
 }); 

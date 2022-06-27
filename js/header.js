@@ -136,10 +136,13 @@ $(document).ready(function(){
                 }
             })
 
-           
+            
             addItemToCart(id,nome,quant,preco,img,max);
+           
             $('#empty-cart').fadeOut(100);
         }
+
+        $('.cart-sidebar').fadeIn();
     })
 
     $('.cart-itens').on('change', 'input[name=quantidade]', function() {

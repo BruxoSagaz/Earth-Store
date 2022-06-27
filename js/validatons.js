@@ -97,13 +97,6 @@ $(function() {
             el.attr("placeholder", "Campo Inválido");
         }
         
-        setTimeout(function(){
-            el.animate({'borderWidth': '0px'});
-        },1000);
-        setTimeout(function(){
-            el.css('border', '1px solid #ccc',2000);
-            el.attr("placeholder", sd);
-        },1500);
         
 
         return false;

@@ -70,6 +70,8 @@ function gerarFiltros($metodo,$fonte){
             echo "<span>sem filtros para ".$metodo." </span>";
         }
 
+    }else{
+        echo "<span>sem filtros para ".$metodo." </span>";
     }
 
 
