@@ -1,5 +1,5 @@
 
-
+<div class="modal-bg"></div>
 
 <!-- Só mostra se tiver itens no carrinho -->
 <?php if(isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
@@ -59,7 +59,9 @@
 <!-- Total Cart -->
 <div class="container">
 <div class="total-price-area">
-    <h2 class="total-price-cart">Total do Carrinho: R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
+    <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">Total do Carrinho: R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
+
+    
 </div>
 </div>
 <!-- Total Cart -->
@@ -68,7 +70,7 @@
 
 <!-- Localização -->
 
-<div class="tabela-entrega">
+<div class="tabela-form">
     
 
     <div class="container">
@@ -79,7 +81,7 @@
 
     <div class="container">
 
-    <form action="" class="local-form">
+    <form action="" class="finalizar-form local-form">
 
 
         <div class='row'><!-- Row -->
@@ -166,6 +168,109 @@
 
 
 
+
+
+
+
+
+
+
+<!-- Dados Pagamento -->
+
+<div class="tabela-form pay-card" style="display:none;">
+    
+
+    <div class="container">
+        <h2><i class="fa-solid fa-credit-card"></i>Dados de Pagamento</h2>
+    </div>
+
+    <div class="container">
+
+    <div class="container">
+
+    <form action="" class="finalizar-form">
+
+
+        <div class='row'><!-- Row -->
+
+        <div class="individual">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="ceps" style="width: 330px;" value="<?php echo @$_SESSION['dados']['nome']?>">
+
+        </div>
+
+
+        <div class="individual">
+        <label for="cpf">CPF: </label>
+        <input type="text" name="cpf" id="cpf" style="width: 300px;" value="<?php echo @$_SESSION['dados']['cpf']?>">
+        </div>
+
+        </div><!-- Row -->
+
+
+        <div class='row'><!-- Row -->
+        <div class="individual">
+        <label for="bandeira">Bandeiras: </label>
+        <select name="bandeiras" id="bandeiras"  style="width: 175px;">
+            <!-- <option value="visa">Visa</option> -->
+        </select>
+        </div>
+
+        <div class="individual">
+        <label for="valores">divisões: </label>
+        <select name="valores" id="divisions-values"  style="width: 240px;">
+            <!-- <option value="199.00">1x de R$ 190.00</option> -->
+        </select>
+        </div>
+
+        </div><!-- Row -->
+
+       
+        
+        <div class="row"><!-- Row -->
+
+        <div class="individual">
+        <label for="num-card">numero do cartão: </label>
+        <input type="text" name="num-card" id="num-card" style="width: 300px;">
+        </div>
+
+        </div><!-- Row -->
+
+
+        <div class="row"><!-- Row -->
+
+        <div class="individual">
+        <label for="cvv">CVV: </label>
+        <input type="text" name="cvv" id="cvv" style="width: 75px;">
+        </div>
+
+        <div class="individual">
+        <label for="validade">Validade: </label>
+        <input type="text" name="validade" id="validade" style="width: 75px;">
+        </div>
+
+        </div><!-- Row -->
+
+        <div class="row"><!-- Row -->
+        <div class="individual">
+            <label for="salvar-card">Salvar Meu Cartão!</label>
+            <input type="checkbox" name="salvar-card" id="salvar-card">
+        </div>
+        </div><!-- Row -->
+
+                    
+
+
+    </form><!-- Local-Form -->
+
+    <button id="proceed-payment" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card"></i> Prosseguir</button>
+
+    </div>
+    </div>
+</div>
+<!-- Dados Pagamento -->
+
+
 <div class="container">
 <div class="finalizar-pedido">
 
@@ -187,10 +292,10 @@
         if(isset($_SESSION['login'])){
             echo '
             <div class="w100 flex-end">
-            <button id="get-paid-redirect" style="margin-right: 15px;">Pagar pelo Pagseguro!</button>
+            <button id="get-paid-redirect" style="margin-right: 15px;"> <i class="fa-solid fa-coins"></i> Pagar pelo Pagseguro!</button>
             
             
-            <button id="get-paid-here"><a href="finalizar">Pagar aqui mesmo!</a></button>
+            <button id="get-paid-here"><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
             
             </div>';
         }else{
@@ -227,6 +332,7 @@
 
 <script type="text/javascript" src=
 "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+<script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script src="<?php echo PATH?>js/config.js"></script>
 <script src="<?php echo PATH?>js/jquery-3.6.0.js"></script>
 <script src="<?php echo PATH?>js/jquery.mask.js"></script>

@@ -8,9 +8,7 @@ $parcelas = $_POST['parcelas'];
 $estoque = $_POST['estoque'];
 
 $peso = $_POST['peso'];
-$comprimento = $_POST['comprimento'];
-$altura = $_POST['altura'];
-$largura = $_POST['largura'];
+
 
 $tags = $_POST['tags'];
 $image_names = $_POST['image_names'];

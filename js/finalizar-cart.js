@@ -153,9 +153,9 @@ $(document).ready(function(){
     // Aguardar salvar local
     $('#salvar-end').click(function(){
         if($(this).is(":checked")){
-            if(validarForm()== false){
-                $('input').change(function(){
-                    if(validarForm() == true){
+            if(validarLocal()== false){
+                $('.local-form input').change(function(){
+                    if(validarLocal() == true){
                         salvarLocal();
                     }
                 })
@@ -168,8 +168,8 @@ $(document).ready(function(){
 
 
     if($('#salvar-end').is(":checked")){
-            $('input').change(function(){
-                if(validarForm() == true){
+            $('.local-form input').change(function(){
+                if(validarLocal() == true){
                     salvarLocal();
                 }
             })
@@ -177,6 +177,122 @@ $(document).ready(function(){
 
 
 
+    // Sistema de pagamento transparente
+    var valor = 0;
+   
+    var imagens = []
+
+    $('#get-paid-here').click(function(e){
+        e.stopPropagation();
+        valor = $('#quant-final-carr').attr('valor');
+        //console.log(valor)
+        if(validarLocal() == true){
+            $('.modal-bg').fadeIn();
+            $('.pay-card').fadeIn();
+            //disableForm('.pay-card')
+
+        }
+
+    })
+
+    $('.pay-card').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('body').click(function(e){
+        e.stopPropagation();
+        $('.pay-card').fadeOut("fast");
+        $('.modal-bg').fadeOut("slow");
+       
+    });
+
+
+    $('#proceed-payment').click(function(e){
+        e.preventDefault();
+        console.log(organizarDados($('.local-form')))
+        console.log(organizarDados($('.pay-card')))
+        enableForm('.pay-card');
+
+        ;
+    })
+
+    // listar badneiras
+
+    $.ajax({
+        method:"post",
+        url: config.path+"/ajax/cartao-credito.php",
+        data: {'gerar_sessao':'true'},
+        dataType: "json",
+        error: function(){
+            console.log("Erro em save local Session")
+        }
+    }).done(function(data){
+       console.log(data);
+
+       PagSeguroDirectPayment.setSessionId(data.id);
+       PagSeguroDirectPayment.getPaymentMethods({
+            success:function(response){
+                console.log(response);
+                var bancos = ''
+                var bandeiras = ''
+
+                $.each(response.paymentMethods.CREDIT_CARD.options,function(key,value){
+
+                    imagens[value.name.toLowerCase()] = 'https://stc.pagseguro.uol.com.br'+value.images.MEDIUM.path;
+
+                    bandeiras+='<option value="'+value.name.toLowerCase()+'">'+value.name+'</option>';
+
+                    $('#bandeiras').html(bandeiras);
+                })
+            }
+       })
+
+    })
+
+
+    // Detectar a bandeira do cartão
+
+
+    $('#num-card').on('keyup',function(){
+        if($(this).val().length == 6){
+            PagSeguroDirectPayment.getBrand({
+                cardBin:$(this).val(),
+                success:function(v){
+                    var cartao = v.brand.name;
+                    console.log(valor);
+                    PagSeguroDirectPayment.getInstallments({
+                        amount:valor,
+                        maxInstallmentNoInterest:'4',
+                        brand:cartao,
+                        success: function(data){
+
+                            bandeiras = $('select[name=bandeiras]')
+                            bandeiras.find('option').removeAttr('selected')
+                            bandeiras.find('option[value='+cartao+']').attr('selected','selected')
+
+                            // Listar Parcelamento
+                            
+                            $.each(data.installments[cartao],function(index,value){
+                                index++
+                                var htmlAtual =  $('#divisions-values').html();
+                                var valorParcela = value.installmentAmount;
+                                var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+                                parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
+                                var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
+
+                                $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
+
+                            })
+
+                          
+                        }
+                    })
+                }
+            });
+        }
+    });
 
 
 
@@ -185,11 +301,52 @@ $(document).ready(function(){
 
 
 
+// funcoes
+
+    function organizarDados(form){
+
+        data = Array()
+
+        inp = form.find('input');
+
+        inp.each(function(){
+            input = $(this)
+            ast = input.attr('name');
+            val = input.val();
+            data[ast] = val
+        })
+
+        sel = form.find('select');
+
+        sel.each(function(){
+            sele = $(this)
+            ast = sele.attr('name');
+            val = sele.find('option').val();
+            data[ast] = val
+        })
+
+        return data;
+    }
 
 
 
+    function disableForm(select){
+        form = $(select).find('form');
 
+        form.animate({'opacity':'0.4'})
+        form.find('input').attr('disabled','disabled')
+        form.find('button').attr('disabled','disabled')
+        form.find('select').attr('disabled','disabled')
+    }
 
+    function enableForm(select){
+        form = $(select).find('form');
+
+        form.animate({'opacity':'1'})
+        form.find('input').removeAttr('disabled')
+        form.find('button').removeAttr('disabled')
+        form.find('select').removeAttr('disabled')
+    }
 
 
 
@@ -216,7 +373,7 @@ $(document).ready(function(){
 
 
 
-    function validarForm(){
+    function validarLocal(){
 
         var s = $('.local-form input');
         s.each(function(){
@@ -300,5 +457,6 @@ $(document).ready(function(){
         
         total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
         $('.total-price-cart').text("Total do Carrinho: "+total2);
+        $('.total-price-cart').attr("value",total);
     }
 }); 

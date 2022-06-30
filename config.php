@@ -6,6 +6,11 @@ define("PATH_GERENCY","http://localhost/Lojinha/gerency/");
 ini_set('display_errors','1');
 header('Access-Control-Allow-Origin: *');
 
+//PAGSEGURO
+
+define("PAGEMAIL", "umpoucodetudogr@gmail.com");
+define("PAGTOKEN", "0DFF9092B2FA4B4F9557C353EB3A0E2B");
+
 //tamanho do pacote e CEP de Origem
 
 define("COMPRIMENTO","15");
