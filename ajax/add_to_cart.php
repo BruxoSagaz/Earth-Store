@@ -13,14 +13,23 @@ $nome = $_POST['nome'];
 
 $quant = $_POST['quantidade'];
 
-$preco = $_POST['preco'];
+$precoOrig = $_POST['precoOrig'];
+
+$precoFormat = $_POST['precoFormat'];
 
 $img = $_POST['img'];
 
 $max = $_POST['max'];
 
 
-$info = [$id,$nome,$quant,$preco,$img,$max];
+
+$info = ["id"=>$id,
+    "nome" => $nome,
+    "quant" => $quant,
+    "precoOrig"=>$precoOrig,
+    "precoFormat"=>$precoFormat,
+    "images"=>$img,
+    "max"=>$max];
 
 if(array_push($_SESSION['cart'],$info)){
     $data['sucesso']='true';

@@ -1,10 +1,13 @@
 $(document).ready(function(){
 
 
-    // Mascatas de input
+    // Mascaras de input
     $('#ceps').mask('00000-000');
     $('#numero').mask('000000');
+    $('#validade').mask('00/0000');
+    $('#num-card').mask('0000000000000000');
 
+    
 
     // Apagar itens
     $(".tabela-pedidos").on( "click", "td i.apagar-item", function() {
@@ -182,39 +185,7 @@ $(document).ready(function(){
    
     var imagens = []
 
-    $('#get-paid-here').click(function(e){
-        e.stopPropagation();
-        valor = $('#quant-final-carr').attr('valor');
-        //console.log(valor)
-        if(validarLocal() == true){
-            $('.modal-bg').fadeIn();
-            $('.pay-card').fadeIn();
-            //disableForm('.pay-card')
 
-        }
-
-    })
-
-    $('.pay-card').click(function(e){
-        e.stopPropagation();
-    });
-
-    $('body').click(function(e){
-        e.stopPropagation();
-        $('.pay-card').fadeOut("fast");
-        $('.modal-bg').fadeOut("slow");
-       
-    });
-
-
-    $('#proceed-payment').click(function(e){
-        e.preventDefault();
-        console.log(organizarDados($('.local-form')))
-        console.log(organizarDados($('.pay-card')))
-        enableForm('.pay-card');
-
-        ;
-    })
 
     // listar badneiras
 
@@ -254,9 +225,10 @@ $(document).ready(function(){
 
 
     $('#num-card').on('keyup',function(){
-        if($(this).val().length == 6){
+        if($(this).val().length >= 6){
+            brand =  $(this).val().substring(0,6);
             PagSeguroDirectPayment.getBrand({
-                cardBin:$(this).val(),
+                cardBin:brand,
                 success:function(v){
                     var cartao = v.brand.name;
                     console.log(valor);
@@ -271,7 +243,7 @@ $(document).ready(function(){
                             bandeiras.find('option[value='+cartao+']').attr('selected','selected')
 
                             // Listar Parcelamento
-                            
+                            $('#divisions-values').html('');
                             $.each(data.installments[cartao],function(index,value){
                                 index++
                                 var htmlAtual =  $('#divisions-values').html();
@@ -295,35 +267,180 @@ $(document).ready(function(){
     });
 
 
+    $('#bandeiras').change(function (){
+        cartao = $(this).val();
+        PagSeguroDirectPayment.getInstallments({
+            amount:valor,
+            maxInstallmentNoInterest:'4',
+            brand:cartao,
+            success: function(data){
+
+
+                // Listar Parcelamento
+                $('#divisions-values').html('');
+                $.each(data.installments[cartao],function(index,value){
+                    index++
+                    var htmlAtual =  $('#divisions-values').html();
+                    var valorParcela = value.installmentAmount;
+                    var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+                    parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
+                    var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
+
+                    $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
+
+                })
+
+              
+            }
+        })
+    })
+
+    $('#get-paid-here').click(function(e){
+        e.stopPropagation();
+        valor = $('#quant-final-carr').attr('valor');
+        //console.log(valor)
+        if(validarLocal() == true){
+            $('.modal-bg').fadeIn();
+            $('.pay-card').fadeIn();
+            //disableForm('.pay-card')
+
+        }
+
+    })
+
+    $('.pay-card').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('body').click(function(e){
+        e.stopPropagation();
+        $('.pay-card').fadeOut("fast");
+        $('.modal-bg').fadeOut("slow");
+       
+    });
+
+
+    $('#proceed-payment').click(function(e){
+        e.preventDefault();
+        organizarDados();
+        // console.log(organizarDados($('.local-form')))
+        // console.log(organizarDados($('.pay-card')))
+
+
+        // disableForm('.pay-card');
+        // var numero_cartao = $('#num-card').val();
+        // var cvv = $('#cvv').val();
+        // var bandeira = $('#bandeiras').val();
+        // var parcela = $('#divisions-values').val();
+        // var validade =  $('#validade').val();
+        // validade = validade.split('/');
+        // var mes = validade[0];
+        // var ano = validade[1]
+        // var hash = PagSeguroDirectPayment.getSenderHash();
+
+        // // pegar bandeira
+        // PagSeguroDirectPayment.createCardToken({
+        //     cardNumber: numero_cartao,
+        //     brand: bandeira,
+        //     cvv:cvv,
+        //     expirationMonth: mes,
+        //     expirationYear: ano,
+
+        //     success:function(data){
+        //         console.log('sucesso');
+        //         var token = data.card.token;
+
+        //         var splitParcelas = parcela.split(':');
+        //         var numeroParcela = splitParcelas[0];
+        //         var valorParcela = splitParcelas[1];
 
 
 
+        //         $.ajax({
+        //             method:"post",
+        //             url: config.path+"/ajax/cartao-credito.php",
+        //             data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor},
+        //             dataType: "json",
+        //             error: function(){
+        //                 console.log("Erro em save local Session")
+        //             }
+        //         }).done(function(data){
+        //         //    console.log(data);
+        //             if(data.status == undefined){
+        //                 // Ocorreu erro no pagamento
+        //             }else{
+        //                 // processado com sucesso
+        //                 enableForm('.pay-card');
+        //             }
+        
+        //         })
+
+        //     },
+
+        //     error: function(erro){
+        //         console.log('error')
+        //     }
+        // })
+        // // var bin = numero_cartao.substring(0,6);
+        
+        
+        
+    })
 
 
 
 // funcoes
 
-    function organizarDados(form){
+    function organizarDados(){
 
         data = Array()
 
-        inp = form.find('input');
+        // inp = form.find('input');
 
-        inp.each(function(){
-            input = $(this)
-            ast = input.attr('name');
-            val = input.val();
-            data[ast] = val
-        })
+        // inp.each(function(){
+        //     input = $(this)
+        //     ast = input.attr('name');
+        //     val = input.val();
+        //     data[ast] = val
+        // })
 
-        sel = form.find('select');
+        // sel = form.find('select');
 
-        sel.each(function(){
-            sele = $(this)
-            ast = sele.attr('name');
-            val = sele.find('option').val();
-            data[ast] = val
-        })
+        // sel.each(function(){
+        //     sele = $(this)
+        //     ast = sele.attr('name');
+        //     val = sele.find('option').val();
+        //     data[ast] = val
+        // })
+        nomes = Array();
+        nomesHTML = $('.nome-item-banco');
+        $.each(nomesHTML, function (index, value) { 
+            nomes[index] = $(this).text().trim();
+        });
+
+        
+        quant = Array();
+        quantHTML = $('.final-quant');
+        $.each(quantHTML, function (index, value) { 
+            quant[index] = $(this).val();
+        });
+
+        preco = Array();
+        precoHTML = $('.valorFinal');
+        $.each(precoHTML, function (index, value) { 
+            preco[index] = $(this).attr('valor');
+        });
+        
+        $.each(nomes, function (index, value) { 
+            data[index] = {'nome':value,'quant':quant[index],
+            'preco' : preco[index]    
+        };
+   
+        });
+
+        console.log(data);
 
         return data;
     }

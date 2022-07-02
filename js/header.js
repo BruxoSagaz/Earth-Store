@@ -83,15 +83,16 @@ $(document).ready(function(){
         // pegar quantidade
         quant = pai.find('input[type="number"]').val();
         // pegar preco
-        preco = pai.find('.price-off').text();
-        preco = preco.trim();
-        preco = " "+preco;
+        precoFormat = pai.find('.price-off').text();
+        precoOrig = pai.find('.price-off').attr('valor');
+        precoFormat = precoFormat.trim();
+        precoFormat = " "+precoFormat;
         // img
         img = pai.find('.img').attr('src');
         // maximo de itens
         max = pai.find('input[type="number"]').attr('max');
-        // id / nome / quantidade / preco
-        data = "id="+id+"&nome="+nome+"&quantidade="+quant+"&preco="+preco+"&img="+img+"&max="+max;
+        // id / nome / quantidade / precoFormat
+        data = "id="+id+"&nome="+nome+"&quantidade="+quant+"&precoFormat="+precoFormat+"&precoOrig="+precoOrig+"&img="+img+"&max="+max;
 
 
 
@@ -137,7 +138,7 @@ $(document).ready(function(){
             })
 
             
-            addItemToCart(id,nome,quant,preco,img,max);
+            addItemToCart(id,nome,quant,precoFormat,img,max);
            
             $('#empty-cart').fadeOut(100);
         }
@@ -167,7 +168,7 @@ $(document).ready(function(){
 
     })
 
-    function addItemToCart(id,nome,quant,preco,img,max){
+    function addItemToCart(id,nome,quant,precoFormat,img,max){
         //Criando as tags
 
         //div pai
@@ -198,10 +199,11 @@ $(document).ready(function(){
         spanNome.setAttribute('class','cart-item-name');
         spanNome.innerHTML = nome 
 
-        //preco
+        //precoFormat 
         const spanPreco = document.createElement('span');
         spanPreco.setAttribute('class','cart-preco');
-        spanPreco.innerHTML = preco;
+        spanPreco.setAttribute('valor',precoOrig);
+        spanPreco.innerHTML = precoFormat;
 
         //div para outros valores
         const divQuantidade = document.createElement('div');

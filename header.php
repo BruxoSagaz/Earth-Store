@@ -116,27 +116,27 @@
                             foreach ($_SESSION['cart'] as $key => $value) {
                                 echo "<div class='cart-item-individual'>
                                 <div class='item-img-box'>
-                                    <a href='".PATH."individual&id=".$value[0]."'>
-                                    <img src='".PATH.$value[4]."' alt='img_do_banco'>
+                                    <a href='".PATH."individual&id=".$value['id']."'>
+                                    <img src='".PATH.$value['images']."' alt='img_do_banco'>
                                     </a>
                                 </div>
                                 <div class='cart-especificacoes'>
-                                    <span class='cart-item-name'>".$value[1]."</span>
-                                    <span class='cart-preco'>".$value[3]."</span>
+                                    <span class='cart-item-name'>".$value['nome']."</span>
+                                    <span class='cart-preco' valor='".$value['precoOrig']."'>".$value['precoFormat']."</span>
         
                                     <div>
                                     <label for='quantidade'>Quantidade:</label>
-                                    <input type='number' name='quantidade' id='' value='".$value[2]."' min='1' max=".$value[5]." ref='".$value[0]."' >
+                                    <input type='number' name='quantidade' id='' value='".$value['quant']."' min='1' max=".$value['max']." ref='".$value['id']."' >
                                     </div>
                                 </div>
         
                                 <div class='cart-opcoes'>
                                     <i class='fa-solid fa-trash-can'></i>
                                 </div>
-                                <div class='cart-id ".$value[0]."' style='display:none;' value='".$value[0]." '>".$value[0]."</div>
+                                <div class='cart-id ".$value['id']."' style='display:none;' value='".$value['id']." '>".$value['id']."</div>
                             </div>";
                             //calulando total
-                            $preco = explode(" ",$value[3]);
+                            $preco = explode(" ",$value['precoFormat']);
                             // var_dump($preco);
                             $preco = str_replace(".","",$preco[2]);
                             
@@ -144,7 +144,7 @@
                             
 
 
-                            $_SESSION['total'] = $_SESSION['total'] + (floatval($preco)*intval($value[2])); 
+                            $_SESSION['total'] = $_SESSION['total'] + (floatval($preco)*intval($value['quant'])); 
 
 
                             }

@@ -28,6 +28,27 @@ if(isset($_POST['gerar_sessao'])){
 
     die(json_encode($session));
 
+}else if(isset($_POST['fechar_pedido'])){
+
+    $data = [
+        'email' => $email,
+        'token' => $token,
+        'paymentMode' => 'defalt',
+        'paymentMethod' => 'creditCard',
+        'receiverEmail' => $email,
+        'currency' => 'BRL',
+        'extraAmount' => '0.00'
+    ];
+
+    
+
+
+    //     'itenId1' => '1',
+    //     'itemDescripion'=> 'Camiseta',
+    //     'itemAmount1'=>number_format()
+    // ];
+
+    // die(json_encode(['status'=>'sucesso']));
 }
 
 

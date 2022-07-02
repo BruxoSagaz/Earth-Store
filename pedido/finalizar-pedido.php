@@ -34,18 +34,21 @@
   
     
     foreach ($_SESSION['cart'] as $key => $value) {
+
+
         echo "
         
         <tr>
-        <td class='case-img-finalizar'><a href='".PATH."individual&id=".$value[0]."'><img src='".PATH.$value[4]."' alt='imagem-item' class='imagem-finalizar'></a></td>
+        <td class='case-img-finalizar'><a href='".PATH."individual&id=".$value['id']."'><img src='".PATH.$value['images']."' alt='imagem-item' class='imagem-finalizar'></a></td>
 
-        <td>".$value[1]."</td>
+        <td class='nome-item-banco'>".$value['nome']."</td>
 
-        <td><input type='number' name='quantidade' class='final-quant' value='".$value[2]."' min='1' max=".$value[5]." ref=".$value[0]." ></td>
+        <td><input type='number' name='quantidade' class='final-quant' value='".$value['quant']."' min='1' max=".$value['max']." ref=".$value['id']." ></td>
         
-        <td>".$value[3]."</td>
+        <td class = 'valorFinal' valor='".$value['precoOrig']."' >".$value['precoFormat']."</td>
+
         <td><i class='fa-solid fa-trash-can apagar-item'></i></td>
-        <td class='cart-id ".$value[0]."' style='display:none;' value='".$value[0]." '>".$value[0]."</td>
+        <td class='cart-id ".$value['id']."' style='display:none;' value='".$value['id']." '>".$value['id']."</td>
         <td class='numero-ordem' style='display:none;'>".$key."</td>
         </tr>";
 
@@ -207,6 +210,15 @@
 
         </div><!-- Row -->
 
+        <div class="row"><!-- Row -->
+
+        <div class="individual">
+        <label for="num-card">numero do cartão: </label>
+        <input type="text" name="num-card" id="num-card" style="width: 300px;">
+        </div>
+
+        </div><!-- Row -->
+
 
         <div class='row'><!-- Row -->
         <div class="individual">
@@ -227,14 +239,6 @@
 
        
         
-        <div class="row"><!-- Row -->
-
-        <div class="individual">
-        <label for="num-card">numero do cartão: </label>
-        <input type="text" name="num-card" id="num-card" style="width: 300px;">
-        </div>
-
-        </div><!-- Row -->
 
 
         <div class="row"><!-- Row -->
@@ -245,8 +249,8 @@
         </div>
 
         <div class="individual">
-        <label for="validade">Validade: </label>
-        <input type="text" name="validade" id="validade" style="width: 75px;">
+        <label for="validade">Validade(MM/AAAA): </label>
+        <input type="text" name="validade" id="validade" style="width: 100px;">
         </div>
 
         </div><!-- Row -->
