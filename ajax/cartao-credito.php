@@ -3,13 +3,19 @@
 include("../config.php");
 
 
+
 // CORRETO
 //https://ws.sandbox.pagseguro.uol.com.br/v2/sessions?
+
+
+$idComprador = $_SESSION['dados']['id'];
 
 $email = PAGEMAIL;
 $token = PAGTOKEN; 
 
 ini_set('max_execution_time','0');
+
+
 
 if(isset($_POST['gerar_sessao'])){
     $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/sessions?email=$email&token=$token";
@@ -30,25 +36,115 @@ if(isset($_POST['gerar_sessao'])){
 
 }else if(isset($_POST['fechar_pedido'])){
 
+
+    // //Pegar dados cadastrais
+    // $query = "SELECT * FROM `dblojinha` WHERE `id` = '$idComprador'";
+
+
+    // function pegarDados($query){
+    //     global $pdo;
+
+
+    //     $sql = $pdo->prepare($query);
+    //     $sql->execute();
+
+    //     if($sql->rowCount() > 0 ){
+    //         return $sql->fetchAll();
+    //     }
+    // }
+
+    // $dadosUser = pegarDados($query);
+
+
+    // print_r($_POST['User']);
+    $areaCode = substr($_POST['User']['celular'],0,2);
+    $phone = substr($_POST['User']['celular'],2);
+
+
     $data = [
         'email' => $email,
         'token' => $token,
-        'paymentMode' => 'defalt',
+        'paymentMode' => 'default',
         'paymentMethod' => 'creditCard',
         'receiverEmail' => $email,
         'currency' => 'BRL',
-        'extraAmount' => '0.00'
+        'extraAmount' => '0.00',
+        'notificationURL' => PATH.'/php/finalizarPagamento.php',
+        'reference' => uniqid(),
+        // COMPRADOR
+        'senderName' => $_POST['User']['nome'],
+        'senderCPF' => $_POST['User']['cpf'],
+        'senderAreaCode' => $areaCode,
+        'senderPhone' => $phone,
+        'senderEmail'=> SENDER_EMAIL,
+        'senderHash'=> $_POST['hash'],
+        'shippingAddressStreet' => $_POST['local']['rua'],
+        'shippingAddressNumber' => $_POST['local']['numero'],
+        'shippingAddressComplement' => $_POST['local']['complemento'],
+        'shippingAddressDistrict' => $_POST['local']['bairro'],
+        'shippingAddressPostalCode' => $_POST['local']['cep'],
+        'shippingAddressCity' => $_POST['local']['cidade'],
+        'shippingAddressState' => $_POST['local']['estado'],
+        'shippingAddressCountry' => 'BRA',
+        'shippingType' => '3',
+        'shippingCost'=> '0.00',
+        'creditCardToken' => $_POST['token'],
+        'installmentQuantity' => $_POST['parcelas'],
+        'installmentValue' => number_format($_POST['valorParcela'],2,'.',''),
+        'noInterestInstallmentQuantity' => 4,
+        'creditCardHolderName' => strtoupper($_POST['User']['nome']) ,
+        'creditCardHolderCPF' => $_POST['User']['cpf'],
+        'creditCardHolderBirthDate' => '25/05/1993',
+        'creditCardHolderAreaCode' => $areaCode,
+        'creditCardHolderPhone'=>$phone,
+        'billingAddressStreet' => $_POST['local']['rua'],
+        'billingAddressNumber' => $_POST['local']['numero'],
+        'billingAddressComplement' => $_POST['local']['complemento'],
+        'billingAddressDistrict' => $_POST['local']['bairro'],
+        'billingAddressPostalCode' => $_POST['local']['cep'],
+        'billingAddressCity' => $_POST['local']['cidade'],
+        'billingAddressState' => $_POST['local']['estado'],
+        'billingAddressCountry' => 'BRA',
     ];
 
+    $itens = [];
+    foreach ($_POST['itens'] as $key => &$value) {
+        // entrou no primeiro arr
+        $point = $key + 1;
+        $construct = [
+            'itemId'.$point => $value['id'],
+            'itemDescription'.$point => $value['nome'],
+            'itemAmount'.$point => number_format($value['preco'],2,'.',''),
+            'itemQuantity'.$point => $value['quant']
+        ];
+        $itens = array_merge($itens,$construct);
+    }
     
+    $data = array_merge($data,$itens);
+
+    //print_r($data);
+    $query = http_build_query($data);
+    // print_r($data);
+    $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions";
+
+    //echo $url;
+
+    $curl = curl_init($url);
+
+    curl_setopt($curl,CURLOPT_HTTPHEADER,array('Content-Type : application/x-www-form-urlencoded;charset=UTF-8'));
+    curl_setopt($curl,CURLOPT_POST,1);
+    curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+    curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($curl,CURLOPT_POSTFIELDS,$query);
+    
+    $retorno = curl_exec($curl);
+    curl_close($curl);
+
+    $xml = json_encode(simplexml_load_string($retorno));
+
+    die($xml);
 
 
-    //     'itenId1' => '1',
-    //     'itemDescripion'=> 'Camiseta',
-    //     'itemAmount1'=>number_format()
-    // ];
-
-    // die(json_encode(['status'=>'sucesso']));
 }
 
 

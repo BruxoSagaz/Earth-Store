@@ -195,7 +195,7 @@ $(document).ready(function(){
         data: {'gerar_sessao':'true'},
         dataType: "json",
         error: function(){
-            console.log("Erro em save local Session")
+            console.log("Erro em pegar sessao")
         }
     }).done(function(data){
        console.log(data);
@@ -299,6 +299,7 @@ $(document).ready(function(){
 
     $('#get-paid-here').click(function(e){
         e.stopPropagation();
+        pegarLocal();
         valor = $('#quant-final-carr').attr('valor');
         //console.log(valor)
         if(validarLocal() == true){
@@ -324,66 +325,68 @@ $(document).ready(function(){
 
     $('#proceed-payment').click(function(e){
         e.preventDefault();
-        organizarDados();
+        itens = organizarDados();
+        pgto = pegarFormPagamento();
+        local = pegarLocal();
         // console.log(organizarDados($('.local-form')))
-        // console.log(organizarDados($('.pay-card')))
+        console.log(pgto)
 
 
-        // disableForm('.pay-card');
-        // var numero_cartao = $('#num-card').val();
-        // var cvv = $('#cvv').val();
-        // var bandeira = $('#bandeiras').val();
-        // var parcela = $('#divisions-values').val();
-        // var validade =  $('#validade').val();
-        // validade = validade.split('/');
-        // var mes = validade[0];
-        // var ano = validade[1]
-        // var hash = PagSeguroDirectPayment.getSenderHash();
+        disableForm('.pay-card');
+        var numero_cartao = $('#num-card').val();
+        var cvv = $('#cvv').val();
+        var bandeira = $('#bandeiras').val();
+        var parcela = $('#divisions-values').val();
+        var validade =  $('#validade').val();
+        validade = validade.split('/');
+        var mes = validade[0];
+        var ano = validade[1]
+        var hash = PagSeguroDirectPayment.getSenderHash();
 
-        // // pegar bandeira
-        // PagSeguroDirectPayment.createCardToken({
-        //     cardNumber: numero_cartao,
-        //     brand: bandeira,
-        //     cvv:cvv,
-        //     expirationMonth: mes,
-        //     expirationYear: ano,
+        // pegar bandeira
+        PagSeguroDirectPayment.createCardToken({
+            cardNumber: numero_cartao,
+            brand: bandeira,
+            cvv:cvv,
+            expirationMonth: mes,
+            expirationYear: ano,
 
-        //     success:function(data){
-        //         console.log('sucesso');
-        //         var token = data.card.token;
+            success:function(data){
+                console.log('sucesso');
+                var token = data.card.token;
 
-        //         var splitParcelas = parcela.split(':');
-        //         var numeroParcela = splitParcelas[0];
-        //         var valorParcela = splitParcelas[1];
+                var splitParcelas = parcela.split(':');
+                var numeroParcela = splitParcelas[0];
+                var valorParcela = splitParcelas[1];
 
 
 
-        //         $.ajax({
-        //             method:"post",
-        //             url: config.path+"/ajax/cartao-credito.php",
-        //             data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor},
-        //             dataType: "json",
-        //             error: function(){
-        //                 console.log("Erro em save local Session")
-        //             }
-        //         }).done(function(data){
-        //         //    console.log(data);
-        //             if(data.status == undefined){
-        //                 // Ocorreu erro no pagamento
-        //             }else{
-        //                 // processado com sucesso
-        //                 enableForm('.pay-card');
-        //             }
+                $.ajax({
+                    method:"post",
+                    url: config.path+"/ajax/cartao-credito.php",
+                    data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor,'itens':itens, 'User': pgto,'local':local},
+                    dataType: "json",
+                    error: function(){
+                        console.log("Erro em save local Session")
+                    }
+                }).done(function(data){
+                //    console.log(data);
+                    if(data.status == undefined){
+                        // Ocorreu erro no pagamento
+                    }else{
+                        // processado com sucesso
+                        enableForm('.pay-card');
+                    }
         
-        //         })
+                })
 
-        //     },
+            },
 
-        //     error: function(erro){
-        //         console.log('error')
-        //     }
-        // })
-        // // var bin = numero_cartao.substring(0,6);
+            error: function(erro){
+                console.log('error')
+            }
+        })
+        // var bin = numero_cartao.substring(0,6);
         
         
         
@@ -433,18 +436,74 @@ $(document).ready(function(){
             preco[index] = $(this).attr('valor');
         });
         
+        id = Array();
+        idHTML = $('.cart-id');
+        $.each(idHTML, function (index, value) { 
+            id[index] = $(this).text().trim();
+        });
+
+
+
         $.each(nomes, function (index, value) { 
             data[index] = {'nome':value,'quant':quant[index],
-            'preco' : preco[index]    
+            'preco' : preco[index],'id':id[index] 
         };
-   
         });
+
+        
 
         console.log(data);
 
         return data;
     }
 
+    function pegarFormPagamento(){
+        
+       
+        form = $('.payment-information');
+        celular = $('#celular').val();
+        celular2 = celular.replace(/([^\d])+/gim, '');
+
+
+        data = {
+            'nome' : $('#nomeCompra').val(),
+            'cpf' : $('#cpf').val().replace(/([^\d])+/gim, ''),
+            'celular':celular2,
+            'num-card' : $('#num-card').val(),
+            'bandeira' : $('#bandeiras').val(),
+            'divisoes' : $('#divisions-values').val(),
+            'cvv' : $('#cvv').val(),
+            'validade' : $('#validade').val()
+        }
+
+
+        return data;
+    }
+
+    function pegarLocal(){
+        form =  $('.local-form');
+        inputs = form.find('input');
+        info = Array();
+
+        $.each(inputs, function (index, value) {
+            info.push($(this).val());
+        });
+
+        final = {
+            'cep':info[0],
+            'rua':info[1],
+            'numero':info[2],
+            'complemento':info[3],
+            'bairro':info[4],
+            'cidade':info[5],
+            'estado':info[6]
+        }
+
+        console.log(final);
+
+        return final;
+
+    }
 
 
     function disableForm(select){

@@ -10,6 +10,11 @@ header('Access-Control-Allow-Origin: *');
 
 define("PAGEMAIL", "umpoucodetudogr@gmail.com");
 define("PAGTOKEN", "0DFF9092B2FA4B4F9557C353EB3A0E2B");
+define("NOME_EMPRESA","Fundação Terra");
+define("SENDER_EMAIL","berserker18th@gmail.com");
+define("SENDER_CPF", '14176547405');
+define("SENDER_AREA_CODE", '87');
+define("SENDER_PHONE", "991358619");
 
 //tamanho do pacote e CEP de Origem
 

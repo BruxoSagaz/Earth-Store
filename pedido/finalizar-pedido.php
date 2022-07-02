@@ -191,14 +191,14 @@
 
     <div class="container">
 
-    <form action="" class="finalizar-form">
+    <form action="" class="finalizar-form payment-information">
 
 
         <div class='row'><!-- Row -->
 
         <div class="individual">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="ceps" style="width: 330px;" value="<?php echo @$_SESSION['dados']['nome']?>">
+        <label for="NomeCompra">Nome:</label>
+        <input type="text" name="NomeCompra" id="nomeCompra" style="width: 330px;" value="<?php echo @$_SESSION['dados']['nome']?>">
 
         </div>
 
@@ -206,6 +206,12 @@
         <div class="individual">
         <label for="cpf">CPF: </label>
         <input type="text" name="cpf" id="cpf" style="width: 300px;" value="<?php echo @$_SESSION['dados']['cpf']?>">
+        </div>
+
+        
+        <div class="individual">
+        <label for="celular">celular: </label>
+        <input type="text" name="celular" id="celular" style="width: 300px;" value="<?php echo @$_SESSION['dados']['celular']?>">
         </div>
 
         </div><!-- Row -->

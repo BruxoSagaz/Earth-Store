@@ -8,9 +8,9 @@ $data = array();
 if(isset($_SESSION['cart'])){
 
     foreach ($_SESSION['cart'] as $key => $value) {
-        if($value[0]==$id){
+        if($value['id']==$id){
 
-            $_SESSION['cart'][$key][2] = $quant;
+            $_SESSION['cart'][$key]['quant'] = $quant;
         }
     }
 }
