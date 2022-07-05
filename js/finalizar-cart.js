@@ -13,37 +13,17 @@ $(document).ready(function(){
     $(".tabela-pedidos").on( "click", "td i.apagar-item", function() {
         // $("#button2").trigger('click');
         pai = $(this).parent().parent();
-        num = pai.find('.numero-ordem').text()
-        num = parseInt(num) + 1;
+        num = pai.find('.numero-ordem').attr('valor');
+        num = num;
         
-        selector = '.cart-itens .cart-item-individual:nth-child('+num+')';
-
+        selector = '.cart-itens .cart-item-individual .numero-ordem[valor='+num+']';
+        console.log("num " + num)
         pai.fadeOut('slow',function(){
             $(this).remove();
-            if($('tbody tr').length <= 2){
-                $('.sec-footer').css('position','absolute');
-                $('.sec-footer').css('bottom','0');
-            };
+            $(selector).find('i').trigger('click');
         });
 
 
-        $(selector).find('i').trigger('click');
-        
-        $.getJSON(config.path+'/ajax/get-total.php', function (response) {
-            console.log('Total = '+response.total)
-            console.log($('tbody tr').length)
-
-            
-            if(response.total>0){
-                total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(response.tota);
-                $('.total-price-cart').text("Total do Carrinho: "+total2);
-            }else{
-                $('.total-price-cart').text("R$ 00,00");
-            }
-
-            
-
-        });
     });
 
 
@@ -79,55 +59,6 @@ $(document).ready(function(){
 
     });
 
-
-    // Redirecionar ao Pagseguro
-    $('#get-paid-redirect').click(function(e){
-        e.preventDefault();
-        $.ajax({
-            url:"../ajax/finalizar-Pagamento.php",
-        }).done(function (data) {
-            // console.log(data)
-            location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + data;
-            // var code = data;
-
-            // var callback = {
-            //     success : function(transactionCode) {
-            //         //Insira os comandos para quando o usuário finalizar o pagamento. 
-            //         //O código da transação estará na variável "transactionCode"
-            //         console.log("Compra feita com sucesso, código de transação: " + transactionCode);
-            //     },
-            //     abort : function() {
-            //         location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
-            //         //Insira os comandos para quando o usuário abandonar a tela de pagamento.
-            //         console.log("abortado");
-            //     }
-            // };  
-
-
-            ////Chamada do lightbox passando o código de checkout e os comandos para o callback
-            // var isOpenLightbox = PagSeguroLightbox(code, callback);
-            //// Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
-            // if (!isOpenLightbox){
-            //     location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
-            //     console.log("Redirecionamento")
-            // }
-
-
-            // console.log(data);
-            // var isOpenLightBox = PagSeguroLightbox({
-            //     code:code2
-            // },{
-            //     success: function (transactionCode){
-            //         console.log("User Foi Ao Final")
-            //     },
-            //     abort: function () {
-            //         location.href="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code2;
-            //         console.log('fechou a janela');
-            //     }
-            // })
-        })
-
-    });
 
     // preencher dados por cep
     $('#ceps').change(function(){
@@ -354,7 +285,6 @@ $(document).ready(function(){
             success:function(data){
                 console.log('sucesso');
                 var token = data.card.token;
-
                 var splitParcelas = parcela.split(':');
                 var numeroParcela = splitParcelas[0];
                 var valorParcela = splitParcelas[1];
@@ -367,14 +297,18 @@ $(document).ready(function(){
                     data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor,'itens':itens, 'User': pgto,'local':local},
                     dataType: "json",
                     error: function(){
-                        console.log("Erro em save local Session")
+                        console.log('Ocorreu um erro no pagamento, Revise seus dados!')
                     }
                 }).done(function(data){
                 //    console.log(data);
                     if(data.status == undefined){
                         // Ocorreu erro no pagamento
+                        alert('Ocorreu um erro no pagamento, Revise seus dados!')
                     }else{
                         // processado com sucesso
+                        console.log(data);
+                        $('.apagar').fadeOut("fast");
+                        $('.aparecer-success-buy').fadeIn("slow")
                         enableForm('.pay-card');
                     }
         
@@ -383,7 +317,9 @@ $(document).ready(function(){
             },
 
             error: function(erro){
-                console.log('error')
+                alert('Erro ao gerar pagamento, Revise seus dados! Ou tente novamente mais tarde');
+                
+                enableForm('.pay-card');
             }
         })
         // var bin = numero_cartao.substring(0,6);
@@ -400,23 +336,6 @@ $(document).ready(function(){
 
         data = Array()
 
-        // inp = form.find('input');
-
-        // inp.each(function(){
-        //     input = $(this)
-        //     ast = input.attr('name');
-        //     val = input.val();
-        //     data[ast] = val
-        // })
-
-        // sel = form.find('select');
-
-        // sel.each(function(){
-        //     sele = $(this)
-        //     ast = sele.attr('name');
-        //     val = sele.find('option').val();
-        //     data[ast] = val
-        // })
         nomes = Array();
         nomesHTML = $('.nome-item-banco');
         $.each(nomesHTML, function (index, value) { 
@@ -632,7 +551,8 @@ $(document).ready(function(){
 
         
         total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
-        $('.total-price-cart').text("Total do Carrinho: "+total2);
-        $('.total-price-cart').attr("value",total);
+        $('.total-price-cart').text(total2);
+        $('.total-price-cart').attr("valor",total);
+        $("#servic").trigger('click');
     }
 }); 

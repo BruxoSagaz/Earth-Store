@@ -6,25 +6,51 @@ include("../config.php");
 
 
 $serv = array('04014','04510');
-$id = $_POST['id'];
+$ids = $_POST['id'];
 $cep = $_POST['cep'];
 $retorno = array();
+$pesos = [];
+$pesoFinal = 0;
+
+
+$ids = explode(",",$ids);
+
+if(count($ids) > 1){
+    foreach ($ids as  $chave => $id) {
+
+        $cep = str_replace("-","",$cep);
+        $query = "SELECT `peso` FROM `produto` WHERE `id` = $id";
+        
+        
+        
+        $sql = $pdo->prepare($query);
+        $sql->execute();
+        $item = $sql->fetchAll();
+        $item = $item[0];
+
+        array_push($pesos,$item['peso']);
+    }
+}else{
+    $cep = str_replace("-","",$cep);
+    $query = "SELECT `peso` FROM `produto` WHERE `id` = $id";
+    
+    
+    
+    $sql = $pdo->prepare($query);
+    $sql->execute();
+    $item = $sql->fetchAll();
+    $item = $item[0];
+
+    array_push($pesos,$item['peso']);
+}
 
 
 
+foreach ($pesos as  $chave => $peso) {
+    $pesoFinal += floatval($peso);
+}
 
 
-$cep = str_replace("-","",$cep);
-$query = "SELECT * FROM `produto` WHERE `id` = $id";
-
-
-
-$sql = $pdo->prepare($query);
-$sql->execute();
-$item = $sql->fetchAll();
-$item = $item[0];
-
-$peso = $item['peso'];
 
 //Pegando do config as dimensoes do pacote
 // $comprimento = COMPRIMENTO;
@@ -33,6 +59,7 @@ $peso = $item['peso'];
 
 function buildArray($cod){
     global $cep;
+    global $pesoFinal;
     $info = array(
         'nCdEmpresa' => '',
         'sDsSenha' => '',
@@ -42,7 +69,7 @@ function buildArray($cod){
         'nCdServico' => "$cod",
         'sCepOrigem' => CEP_DE_ORIGEM,
         'sCepDestino' => $cep,
-        'nVlPeso' => "0.5",
+        'nVlPeso' => strval($pesoFinal),
         'nVlComprimento' => COMPRIMENTO,
         'nVlAltura' => ALTURA,
         'nVlLargura' => LARGURA, 

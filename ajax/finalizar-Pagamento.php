@@ -1,8 +1,10 @@
 <?php
+    include("../config.php");
+
     session_start();
     header('Access-Control-Allow-Origin: *');
-    $data['token'] =  '0DFF9092B2FA4B4F9557C353EB3A0E2B';
-    $data['email'] = 'umpoucodetudogr@gmail.com';
+    $data['token'] =  PAGTOKEN;
+    $data['email'] = PAGEMAIL;
     $data['currency'] = 'BRL';
     $data['reference'] = uniqid();
     $data['shippingAddressRequired'] = "true";

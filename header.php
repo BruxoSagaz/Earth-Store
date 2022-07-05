@@ -123,14 +123,14 @@
                                 <div class='cart-especificacoes'>
                                     <span class='cart-item-name'>".$value['nome']."</span>
                                     <span class='cart-preco' valor='".$value['precoOrig']."'>".$value['precoFormat']."</span>
-        
+
                                     <div>
                                     <label for='quantidade'>Quantidade:</label>
                                     <input type='number' name='quantidade' id='' value='".$value['quant']."' min='1' max=".$value['max']." ref='".$value['id']."' >
                                     </div>
                                 </div>
         
-                                <div class='cart-opcoes'>
+                                <div class='cart-opcoes numero-ordem' valor='".$key."' >
                                     <i class='fa-solid fa-trash-can'></i>
                                 </div>
                                 <div class='cart-id ".$value['id']."' style='display:none;' value='".$value['id']." '>".$value['id']."</div>

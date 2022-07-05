@@ -49,7 +49,7 @@
 
         <td><i class='fa-solid fa-trash-can apagar-item'></i></td>
         <td class='cart-id ".$value['id']."' style='display:none;' value='".$value['id']." '>".$value['id']."</td>
-        <td class='numero-ordem' style='display:none;'>".$key."</td>
+        <td class='numero-ordem' style='display:none;' valor='$key'></td>
         </tr>";
 
     }
@@ -62,7 +62,8 @@
 <!-- Total Cart -->
 <div class="container">
 <div class="total-price-area">
-    <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">Total do Carrinho: R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
+    <h2 style="font-size: 27px;">Total do Carrinho:</h2>
+    <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
 
     
 </div>
@@ -174,6 +175,96 @@
 
 
 
+<!-- FRETE -->
+
+<div class="tabela-form">
+    
+
+    <div class="container">
+        <h2><i class="fa-solid fa-truck-fast"></i>FRETE</h2>
+    </div>
+
+    <div class="container">
+
+    <div class="container">
+
+    <form action="" class="finalizar-form frete-form">
+
+
+    <div id='loadingmessage' style='display:none'>
+        <img src='<?php echo PATH?>/ajax/loading.gif'/>
+    </div>
+                                
+    <div class="w100 hide-result">
+        <div class="result-cep" style="margin-bottom: 40px;">
+            <div id="servic" style="display:none"></div>
+            <table>
+                <tr class="letter">
+                    <td>Selecionar</td>
+                    <td>Serviço</td>
+                    <td>Preço</td>
+                    <td>Prazo</td>
+                </tr>
+                
+                <!-- <tr id="retorno1">
+                    <td>SEDEX</td>
+                    <td>R$20,00</td>
+                    <td>5 dias</td>
+                </tr> -->
+
+            </table>
+        </div>
+    </div>
+
+    <button id="calcular-cep" style="margin-right: 0;width: 35%;">Calcular Frete</button>
+
+    </form><!-- Local-Form -->
+
+    
+
+    </div>
+    </div>
+</div>
+<!-- FRETE -->
+
+
+
+<!-- PRECO FINAL -->
+<section>
+
+<div class="container center">
+
+<div class="div-chamada-finalizar div-final-price">
+    <h2 class="chamada-finalizar">PREÇO FINAL!</h2>
+</div>
+
+<div class="center-row">
+<h2 style="margin-right: 15px;">Total Final Com Frete:</h2>
+<h2 class="total-price" id ="quant-final-total" style="margin: 50px 0px;" valor="<?php echo @$_SESSION['totalFinal'] ?>"> R$ <?php echo @number_format($_SESSION['totalFinal'],2,",",".") ?></h2>
+</div>
+
+
+</div>
+
+
+</section>
+
+<!-- PRECO FINAL -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -191,7 +282,7 @@
 
     <div class="container">
 
-    <form action="" class="finalizar-form payment-information">
+    <form action="" class="finalizar-form payment-information apagar">
 
 
         <div class='row'><!-- Row -->
@@ -273,7 +364,18 @@
 
     </form><!-- Local-Form -->
 
-    <button id="proceed-payment" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card"></i> Prosseguir</button>
+    <button id="proceed-payment" class="apagar" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card"></i> Prosseguir</button>
+
+    <div class="aparecer-success-buy" style="display:none">
+        <div class='success-buy'>
+            <i class="fa-regular fa-circle-check"></i>
+            <p>Sua Compra Foi Efetuada com sucesso!</p>
+            <p>Você será notificado com as etapas do pagamento</p>
+            <p>e o código de rastreio!</p>
+
+            <a href='<?php echo PATH ?>'><button class='return-home'> Voltar para página inicial</button></a>
+        </div>
+    </div>
 
     </div>
     </div>
@@ -301,9 +403,6 @@
 
         if(isset($_SESSION['login'])){
             echo '
-            <div class="w100 flex-end">
-            <button id="get-paid-redirect" style="margin-right: 15px;"> <i class="fa-solid fa-coins"></i> Pagar pelo Pagseguro!</button>
-            
             
             <button id="get-paid-here"><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
             
@@ -349,6 +448,7 @@
 <script src="<?php echo PATH?>js/header.js"></script>
 <script src="<?php echo PATH?>js/home.js"></script>
 <script src="<?php echo PATH?>js/finalizar-cart.js"></script>
+<script src="<?php echo PATH?>js/finalizar-frete-calc.js"></script>
 
 
 

@@ -265,54 +265,93 @@ $(document).ready(function(){
             error: function(){
                 console.log("Erro em remove cart ajax")
             }
-        })
-        pai.fadeOut("slow",function(){
-            pai.remove();
-            subNumCart();
-            calcularTotal();
-        });
+        }).done(function(data){
 
+            pai.fadeOut("slow",function(){
+                pai.remove();
+                subNumCart();
+                calcularTotal();
+            });
+
+            $.ajax({
+                method:"post",
+                url: config.path+"/ajax/actualize-total.php",
+                dataType: "json",
+                error: function(){
+                    console.log("Erro em atualizar total")
+                }
+            }).done(function(){
+                $.getJSON(config.path+'/ajax/get-total.php', function (response) {
+                    console.log('Total = '+response.total)
+                    //console.log($('tbody tr').length)
         
+                    
+                    if(response.total>0){
+                        total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(response.total);
+                        $('.total-price-cart').text(total2);
+                        $('.total-price-cart').attr("valor",response.total);
+        
+                    }else{
+                        $('.total-price-cart').text("R$ 00,00");
+                        $('.total-price-cart').attr("valor",'0');
+                    }
+        
+                    $("#servic").trigger('click');
+        
+                });
+            })
+        })
+
+
     })
 
     function calcularTotal() {
         total = 0;
         quant = Array();
         filtrados = Array();
+        
         let precos = $('.cart-preco').text();
         let inputs = document.querySelectorAll('input[name=quantidade]');
         // console.log("ANtes precos: "+precos);
-        precos = precos.split(' ');
+        console.log(inputs.length)
+        if(inputs.length > 0){
 
-        inputs.forEach(element => {
-            quant.push(parseInt(element.value));
-        });
+            precos = precos.split(' ');
 
-        // console.log("quantidade: "+quant);
-        // console.log("precos: "+precos);
-        for(i=2;i<=precos.length;i+=2){
-            // console.log("precos[i]: "+precos[i]);
-            filtrados.push(precos[i]);
-        }
-       
-        for(i=0;i<filtrados.length;i++){
-            
-            send = (filtrados[i].match(/./g) || []).length;
-            for(i2=0;i2<send;i2++){
-                filtrados[i] = filtrados[i].replace(".","");
+            inputs.forEach(element => {
+                quant.push(parseInt(element.value));
+            });
+
+            // console.log("quantidade: "+quant);
+            // console.log("precos: "+precos);
+            for(i=2;i<=precos.length;i+=2){
+                // console.log("precos[i]: "+precos[i]);
+                filtrados.push(precos[i]);
+            }
+        
+            for(i=0;i<filtrados.length;i++){
+                
+                send = (filtrados[i].match(/./g) || []).length;
+                for(i2=0;i2<send;i2++){
+                    filtrados[i] = filtrados[i].replace(".","");
+                    
+                }
+                filtrados[i] = parseFloat(filtrados[i].replace(",","."));
                 
             }
-            filtrados[i] = parseFloat(filtrados[i].replace(",","."));
-            
-        }
-        // console.log(filtrados);
-        for(i=0;i<filtrados.length;i++){
-            total += filtrados[i] * quant[i];
-        }
+            // console.log(filtrados);
+            for(i=0;i<filtrados.length;i++){
+                total += filtrados[i] * quant[i];
+            }
 
-        
-        total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
-        $('.total-price-cart').text(total2);
+            
+            total2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
+            $('.total-price-cart').text(total2);
+            $('.total-price-cart').attr("valor",total);
+        }else{
+            $('.total-price-cart').text('0,00');
+            $('.total-price-cart').attr("valor",'0');
+        }
     }
 
     function addNumCart(){

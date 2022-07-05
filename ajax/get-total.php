@@ -5,7 +5,13 @@ header('Access-Control-Allow-Origin: *');
 
 header('Content-Type: application/json');
 
-$json = json_encode(['total' => $_SESSION['total']]);
+if(isset($_SESSION['total'])){
+    $send = ['total' => $_SESSION['total']];
+}else{
+    $send = ['total' => '0'];
+}
+
+$json = json_encode($send);
 
 exit($json);
 ?>

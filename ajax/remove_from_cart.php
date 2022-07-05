@@ -8,9 +8,12 @@ $id = $_POST['id'];
 if(isset($_SESSION['cart'])){
 
     foreach ($_SESSION['cart'] as $key => $value) {
-        if($value[0]==$id){
-            unset($_SESSION['cart'][$key]);
+        if(isset($value[0])){
+            if($value[0]==$id){
+                unset($_SESSION['cart'][$key]);
+            }
         }
+
     }
 }
 $data['sucesso'] = "true";
