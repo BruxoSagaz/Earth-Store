@@ -84,13 +84,13 @@ function construirItem($item){
     // area de preço
     if($item['promocao'] != 0){
     echo '<div class="price-before">R$ '.$valFormatado.'</div>';
-    echo '<div class="price-off" valor="'.$item['preco'].'"> R$ '.$promFormatado.'</div>';
+    echo '<div class="price-off" valor="'.number_format($item['preco'],2,',','').'"> R$ '.$promFormatado.'</div>';
     // adicionando as divisoes
     $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
     }else{
-        echo '<div class="price-off" valor="'.$item['preco'].'"> R$ '.$valFormatado.'</div>';
+        echo '<div class="price-off" valor="'.number_format($item['preco'],2,',','').'"> R$ '.$valFormatado.'</div>';
         $divisoes = floatval($item['preco']) / $parcelas;
-       
+        
     }
     // area de preço
     echo '</div>';
@@ -115,9 +115,9 @@ function construirItem($item){
     }else{
         $divisoes = $divisoes.",00";
     }
-
+    $divisoes = str_replace(",",".",$divisoes);
     echo '<div  class="divisions">';
-        echo '<span> Ou até '.$parcelas.'x de R$ '.$divisoes.'</span>';
+        echo '<span> Ou até '.$parcelas.'x de R$ '.number_format($divisoes,2,',','').'</span>';
         echo '<span>+ Frete</span>';
     echo '</div>';
 

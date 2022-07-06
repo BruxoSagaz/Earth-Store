@@ -24,7 +24,7 @@ include_once('../config.php')
 include_once('../header.php');
 ?>
 
-
+<section style="min-height: 66.5vh;">
 <?php
 
 
@@ -45,6 +45,7 @@ if(isset($_GET['url'])){
 
 
 ?>
+</section>
 
 <?php 
 include_once('../footer.php');

@@ -76,7 +76,7 @@
     margin: auto 0;
 }
 
-.finalizar-pedido button,.tabela-form button{
+.finalizar-pedido button,.tabela-form button,.container button{
     background-color: var(--color_primary);
     border: 1px solid #d02718;
     display: inline-block;
@@ -160,6 +160,9 @@ textarea:focus{
     display: flex;
     justify-content: flex-end;
     margin-top: 12px;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-end;
 }
 
 

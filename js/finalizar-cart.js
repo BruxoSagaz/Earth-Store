@@ -7,7 +7,24 @@ $(document).ready(function(){
     $('#validade').mask('00/0000');
     $('#num-card').mask('0000000000000000');
 
+    //Navegação
     
+    $('.continue-shipping').click(function(e){
+        e.preventDefault();
+
+        let ordemAtual = $(this).attr('ordem');
+        
+        selector = "*[ordem="+ordemAtual+"]";
+
+        $(selector).fadeOut(600,function(){
+            proximo = parseInt(ordemAtual) + 1;
+
+            selector = "*[ordem="+proximo+"]";
+            $(selector).fadeIn(1200);
+        });
+
+
+    })
 
     // Apagar itens
     $(".tabela-pedidos").on( "click", "td i.apagar-item", function() {

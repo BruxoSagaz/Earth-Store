@@ -13,7 +13,7 @@
 
 
 
-<div class="tabela-pedidos">
+<div class="tabela-pedidos" ordem="1">
     <div class="container">
    
     <h2><i class="fa-solid fa-cart-shopping"></i>Carrinho</h2>
@@ -57,24 +57,30 @@
     </table>
     </div>
 
-</div><!-- Tabela Pedidos -->
+
 
 <!-- Total Cart -->
 <div class="container">
+<div style="float: right;width: 310px;">
 <div class="total-price-area">
     <h2 style="font-size: 27px;">Total do Carrinho:</h2>
     <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
 
+    <button class="continue-shipping" style="width: 100%;margin: 20px 0px;" ordem="1">Continuar</button>
     
 </div>
 </div>
+<div class="clear"></div>
+</div>
 <!-- Total Cart -->
+
+</div><!-- Tabela Pedidos -->
 
 
 
 <!-- Localização -->
 
-<div class="tabela-form">
+<div class="tabela-form" ordem="2" style='display:none'>
     
 
     <div class="container">
@@ -164,6 +170,10 @@
 
     </form><!-- Local-Form -->
 
+    <div class="center">
+    <button class="continue-shipping" style="width: 33%;
+    margin: 0 auto;" ordem="2">Continuar</button>
+    </div>
 
     </div>
     </div>
@@ -177,7 +187,7 @@
 
 <!-- FRETE -->
 
-<div class="tabela-form">
+<div class="tabela-form" ordem="3" style='display:none'>
     
 
     <div class="container">
@@ -216,7 +226,7 @@
         </div>
     </div>
 
-    <button id="calcular-cep" style="margin-right: 0;width: 35%;">Calcular Frete</button>
+    <button class="continue-shipping" style="margin-right: 0;width: 35%;"  ordem="3">Continuar</button>
 
     </form><!-- Local-Form -->
 
@@ -230,7 +240,7 @@
 
 
 <!-- PRECO FINAL -->
-<section>
+<section ordem="4" style='display:none'>
 
 <div class="container center">
 
@@ -246,6 +256,12 @@
 
 </div>
 
+            
+<button class="get-paid-here" valor='boleto'><i class="fa-solid fa-credit-card  "></i> Pagar com Boleto!</button>
+
+<button class="get-paid-here" valor='credit-card'><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
+
+</div>
 
 </section>
 
@@ -419,16 +435,10 @@
     <?php
         
 
-        if(isset($_SESSION['login'])){
+        if(!isset($_SESSION['login'])){
     ?>
-            
-            <button class="get-paid-here" valor='boleto'><i class="fa-solid fa-credit-card  "></i> Pagar com Boleto!</button>
-
-            <button class="get-paid-here" valor='credit-card'><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
-            
-            </div>
     <?php
-        }else{
+        
             echo '<a href="'.PATH.'./cadastro/"><button id="login" style="width: 94%;">Faça Login Para comprar!</button></a>';
         }
     ?>
@@ -459,7 +469,6 @@
 
 
 ?>
-
 
 <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script src="<?php echo PATH?>js/config.js"></script>
