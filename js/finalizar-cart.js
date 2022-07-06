@@ -228,14 +228,30 @@ $(document).ready(function(){
         })
     })
 
-    $('#get-paid-here').click(function(e){
+    $('.get-paid-here').click(function(e){
         e.stopPropagation();
+        $('.once').fadeOut();
+        window.scrollTo(0,0);
         pegarLocal();
-        valor = $('#quant-final-carr').attr('valor');
-        //console.log(valor)
+        $.getJSON(config.path+'/ajax/get-total-final.php', function (response) {
+            valor = response.total
+            console.log(valor)
+        })
+        // valor = $('#quant-final-carr').attr('valor');
+        console.log(valor)
         if(validarLocal() == true){
             $('.modal-bg').fadeIn();
             $('.pay-card').fadeIn();
+            metodoForm = $(this).attr('valor');
+            seletor = "."+metodoForm;
+            $(seletor).fadeIn();
+
+            if(metodoForm == 'boleto'){
+                $('#proceed-payment').attr('valor',"BOLETO");
+            }else{
+                $('#proceed-payment').attr('valor','CreditCard')
+            }
+            
             //disableForm('.pay-card')
 
         }
@@ -256,72 +272,110 @@ $(document).ready(function(){
 
     $('#proceed-payment').click(function(e){
         e.preventDefault();
-        itens = organizarDados();
-        pgto = pegarFormPagamento();
-        local = pegarLocal();
-        // console.log(organizarDados($('.local-form')))
-        console.log(pgto)
 
-
-        disableForm('.pay-card');
-        var numero_cartao = $('#num-card').val();
-        var cvv = $('#cvv').val();
-        var bandeira = $('#bandeiras').val();
-        var parcela = $('#divisions-values').val();
-        var validade =  $('#validade').val();
-        validade = validade.split('/');
-        var mes = validade[0];
-        var ano = validade[1]
         var hash = PagSeguroDirectPayment.getSenderHash();
-
-        // pegar bandeira
-        PagSeguroDirectPayment.createCardToken({
-            cardNumber: numero_cartao,
-            brand: bandeira,
-            cvv:cvv,
-            expirationMonth: mes,
-            expirationYear: ano,
-
-            success:function(data){
-                console.log('sucesso');
-                var token = data.card.token;
-                var splitParcelas = parcela.split(':');
-                var numeroParcela = splitParcelas[0];
-                var valorParcela = splitParcelas[1];
-
-
-
-                $.ajax({
-                    method:"post",
-                    url: config.path+"/ajax/cartao-credito.php",
-                    data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor,'itens':itens, 'User': pgto,'local':local},
-                    dataType: "json",
-                    error: function(){
-                        console.log('Ocorreu um erro no pagamento, Revise seus dados!')
-                    }
-                }).done(function(data){
-                //    console.log(data);
-                    if(data.status == undefined){
-                        // Ocorreu erro no pagamento
-                        alert('Ocorreu um erro no pagamento, Revise seus dados!')
-                    }else{
-                        // processado com sucesso
-                        console.log(data);
-                        $('.apagar').fadeOut("fast");
-                        $('.aparecer-success-buy').fadeIn("slow")
-                        enableForm('.pay-card');
-                    }
+        itens = organizarDados();
         
-                })
+        local = pegarLocal();
+        // console.log(organizarDados($('.local-form')
+       
+        var metodo = $(this).attr('valor');
 
-            },
+        if(metodo == 'CreditCard'){
+            var pgto = pegarFormPagamento();
+            var numero_cartao = $('#num-card').val();
+            var cvv = $('#cvv').val();
+            var bandeira = $('#bandeiras').val();
+            var parcela = $('#divisions-values').val();
+            var validade =  $('#validade').val();
+            validade = validade.split('/');
+            var mes = validade[0];
+            var ano = validade[1]
+            
 
-            error: function(erro){
-                alert('Erro ao gerar pagamento, Revise seus dados! Ou tente novamente mais tarde');
-                
+            disableForm('.credit-card');
+
+            // pegar bandeira
+            PagSeguroDirectPayment.createCardToken({
+                cardNumber: numero_cartao,
+                brand: bandeira,
+                cvv:cvv,
+                expirationMonth: mes,
+                expirationYear: ano,
+    
+                success:function(data){
+                    console.log('sucesso');
+                    var token = data.card.token;
+                    var splitParcelas = parcela.split(':');
+                    var numeroParcela = splitParcelas[0];
+                    var valorParcela = splitParcelas[1];
+    
+    
+    
+                    $.ajax({
+                        method:"post",
+                        url: config.path+"/ajax/cartao-credito.php",
+                        data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor,'itens':itens, 'User': pgto,'local':local,'metodo':metodo},
+                        dataType: "json",
+                        error: function(){
+                            console.log('Ocorreu um erro no pagamento, Revise seus dados!')
+                        }
+                    }).done(function(data){
+                    //    console.log(data);
+                        if(data.status == undefined){
+                            // Ocorreu erro no pagamento
+                            alert('Ocorreu um erro no pagamento, Revise seus dados!')
+                        }else{
+                            // processado com sucesso
+                            console.log(data);
+                            $('.apagar').fadeOut("fast");
+                            $('.aparecer-success-buy').fadeIn("slow")
+                            enableForm('.pay-card');
+                        }
+            
+                    })
+    
+                },
+    
+                error: function(erro){
+                    alert('Erro ao gerar pagamento, Revise seus dados! Ou tente novamente mais tarde');
+                    
+                    enableForm('.pay-card');
+                }
+            })
+
+
+
+        }else if(metodo == 'BOLETO'){
+
+            // var token = data.card.token;
+            // var splitParcelas = parcela.split(':');
+            // var numeroParcela = splitParcelas[0];
+            // var valorParcela = splitParcelas[1];
+
+            disableForm('.boleto');
+            nome = $('#nomeCompraBoleto').val();
+            cpf = $('#cpfBoleto').val();
+            celular = $('#celularBoleto').val();
+
+            celular = celular.replace(/([^\d])+/gim, '');
+            cpf = cpf.replace(/([^\d])+/gim, ''),
+
+            $.ajax({
+                method:"post",
+                url: config.path+"/ajax/cartao-credito.php",
+                data: {'fechar_pedido': true,'hash':hash,'amount':valor,'itens':itens,'nome': nome,'cpf':cpf,'local':local,'celular':celular,'metodo':metodo},
+                dataType: "json",
+
+            }).done(function(BOLETO){
+                $('.apagar').fadeOut("fast");
+                $('.aparecer-success-buy').fadeIn("slow")
                 enableForm('.pay-card');
-            }
-        })
+               console.log(BOLETO.paymentLink);
+            })
+
+        }
+
         // var bin = numero_cartao.substring(0,6);
         
         

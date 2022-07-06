@@ -384,7 +384,7 @@ $(document).ready(function(){
         }
         
         //scroll top
-        window.scrollTo(0,0);
+        window.scrollTo(0,100);
 
         setTimeout(function(){
             el.animate({'borderWidth': '0px'});

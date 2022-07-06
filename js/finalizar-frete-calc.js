@@ -200,7 +200,7 @@ $(document).ready(function(){
             $.ajax({
                 method:"post",
                 url: config.path+"/ajax/update-total-final.php",
-                data: {'total':total,'servico':servico},
+                data: {'total':total,'servico':servico,'frete':frete},
                 dataType: "json",
                 error: function(){
                     console.log("Erro em save Total Final")

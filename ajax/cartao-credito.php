@@ -57,55 +57,105 @@ if(isset($_POST['gerar_sessao'])){
 
 
     // print_r($_POST['User']);
-    $areaCode = substr($_POST['User']['celular'],0,2);
-    $phone = substr($_POST['User']['celular'],2);
 
 
-    $data = [
-        'email' => $email,
-        'token' => $token,
-        'paymentMode' => 'default',
-        'paymentMethod' => 'creditCard',
-        'receiverEmail' => $email,
-        'currency' => 'BRL',
-        'extraAmount' => '0.00',
-        'notificationURL' => PATH.'/php/finalizarPagamento.php',
-        'reference' => uniqid(),
-        // COMPRADOR
-        'senderName' => $_POST['User']['nome'],
-        'senderCPF' => $_POST['User']['cpf'],
-        'senderAreaCode' => $areaCode,
-        'senderPhone' => $phone,
-        'senderEmail'=> SENDER_EMAIL,
-        'senderHash'=> $_POST['hash'],
-        'shippingAddressStreet' => $_POST['local']['rua'],
-        'shippingAddressNumber' => $_POST['local']['numero'],
-        'shippingAddressComplement' => $_POST['local']['complemento'],
-        'shippingAddressDistrict' => $_POST['local']['bairro'],
-        'shippingAddressPostalCode' => $_POST['local']['cep'],
-        'shippingAddressCity' => $_POST['local']['cidade'],
-        'shippingAddressState' => $_POST['local']['estado'],
-        'shippingAddressCountry' => 'BRA',
-        'shippingType' => '3',
-        'shippingCost'=> '0.00',
-        'creditCardToken' => $_POST['token'],
-        'installmentQuantity' => $_POST['parcelas'],
-        'installmentValue' => number_format($_POST['valorParcela'],2,'.',''),
-        'noInterestInstallmentQuantity' => 4,
-        'creditCardHolderName' => strtoupper($_POST['User']['nome']) ,
-        'creditCardHolderCPF' => $_POST['User']['cpf'],
-        'creditCardHolderBirthDate' => '25/05/1993',
-        'creditCardHolderAreaCode' => $areaCode,
-        'creditCardHolderPhone'=>$phone,
-        'billingAddressStreet' => $_POST['local']['rua'],
-        'billingAddressNumber' => $_POST['local']['numero'],
-        'billingAddressComplement' => $_POST['local']['complemento'],
-        'billingAddressDistrict' => $_POST['local']['bairro'],
-        'billingAddressPostalCode' => $_POST['local']['cep'],
-        'billingAddressCity' => $_POST['local']['cidade'],
-        'billingAddressState' => $_POST['local']['estado'],
-        'billingAddressCountry' => 'BRA',
-    ];
+    
+    if($_POST['metodo'] == 'CreditCard'){
+
+        $areaCode = substr($_POST['User']['celular'],0,2);
+        $phone = substr($_POST['User']['celular'],2);
+
+        $data = [
+            'email' => $email,
+            'token' => $token,
+            'paymentMode' => 'default',
+            'paymentMethod' => $_POST['metodo'],
+            'receiverEmail' => $email,
+            'currency' => 'BRL',
+            'extraAmount' => '0.00',
+            'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
+            'reference' => uniqid(),
+            // COMPRADOR
+            'senderName' => $_POST['User']['nome'],
+            'senderCPF' => $_POST['User']['cpf'],
+            'senderAreaCode' => $areaCode,
+            'senderPhone' => $phone,
+            'senderEmail'=> SENDER_EMAIL,
+            'senderHash'=> $_POST['hash'],
+            'shippingAddressStreet' => $_POST['local']['rua'],
+            'shippingAddressNumber' => $_POST['local']['numero'],
+            'shippingAddressComplement' => $_POST['local']['complemento'],
+            'shippingAddressDistrict' => $_POST['local']['bairro'],
+            'shippingAddressPostalCode' => $_POST['local']['cep'],
+            'shippingAddressCity' => $_POST['local']['cidade'],
+            'shippingAddressState' => $_POST['local']['estado'],
+            'shippingAddressCountry' => 'BRA',
+            'shippingType' => '3',
+            'shippingCost'=> number_format($_SESSION['frete'],2,'.',''),
+            'creditCardToken' => $_POST['token'],
+            'installmentQuantity' => $_POST['parcelas'],
+            'installmentValue' => number_format($_POST['valorParcela'],2,'.',''),
+            'noInterestInstallmentQuantity' => 4,
+            'creditCardHolderName' => strtoupper($_POST['User']['nome']) ,
+            'creditCardHolderCPF' => $_POST['User']['cpf'],
+            'creditCardHolderBirthDate' => '25/05/1993',
+            'creditCardHolderAreaCode' => $areaCode,
+            'creditCardHolderPhone'=>$phone,
+            'billingAddressStreet' => $_POST['local']['rua'],
+            'billingAddressNumber' => $_POST['local']['numero'],
+            'billingAddressComplement' => $_POST['local']['complemento'],
+            'billingAddressDistrict' => $_POST['local']['bairro'],
+            'billingAddressPostalCode' => $_POST['local']['cep'],
+            'billingAddressCity' => $_POST['local']['cidade'],
+            'billingAddressState' => $_POST['local']['estado'],
+            'billingAddressCountry' => 'BRA',
+        ];
+    }else if($_POST['metodo'] == 'BOLETO'){
+
+        $areaCode = substr($_POST['celular'],0,2);
+        $phone = substr($_POST['celular'],2);
+
+        $data = [
+            'email' => $email,
+            'token' => $token,
+            'paymentMode' => 'default',
+            'paymentMethod' => $_POST['metodo'],
+            'receiverEmail' => $email,
+            'currency' => 'BRL',
+            'extraAmount' => '0.00',
+            'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
+            'reference' => uniqid(),
+            // COMPRADOR
+            'senderName' => $_POST['nome'],
+            'senderCPF' => $_POST['cpf'],
+            'senderAreaCode' => $areaCode,
+            'senderPhone' => $phone,
+            'senderEmail'=> SENDER_EMAIL,
+            'senderHash'=> $_POST['hash'],
+            'shippingAddressStreet' => $_POST['local']['rua'],
+            'shippingAddressNumber' => $_POST['local']['numero'],
+            'shippingAddressComplement' => $_POST['local']['complemento'],
+            'shippingAddressDistrict' => $_POST['local']['bairro'],
+            'shippingAddressPostalCode' => $_POST['local']['cep'],
+            'shippingAddressCity' => $_POST['local']['cidade'],
+            'shippingAddressState' => $_POST['local']['estado'],
+            'shippingAddressCountry' => 'BRA',
+            'shippingType' => '3',
+            'shippingCost'=> number_format($_SESSION['frete'],2,'.',''),
+            'installmentQuantity' => '1',
+            'installmentValue' => number_format($_POST['amount'],2,'.',''),
+            'noInterestInstallmentQuantity' => 4,
+            'billingAddressStreet' => $_POST['local']['rua'],
+            'billingAddressNumber' => $_POST['local']['numero'],
+            'billingAddressComplement' => $_POST['local']['complemento'],
+            'billingAddressDistrict' => $_POST['local']['bairro'],
+            'billingAddressPostalCode' => $_POST['local']['cep'],
+            'billingAddressCity' => $_POST['local']['cidade'],
+            'billingAddressState' => $_POST['local']['estado'],
+            'billingAddressCountry' => 'BRA',
+        ];
+    }
+
 
     $itens = [];
     foreach ($_POST['itens'] as $key => &$value) {

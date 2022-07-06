@@ -19,6 +19,7 @@ include_once('../config.php')
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <?php 
 include_once('../header.php');
 ?>

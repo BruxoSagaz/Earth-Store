@@ -1,5 +1,5 @@
 
-<div class="modal-bg"></div>
+<div class="modal-bg" style='max-height: 2296.46px;'></div>
 
 <!-- Só mostra se tiver itens no carrinho -->
 <?php if(isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
@@ -281,7 +281,7 @@
     <div class="container">
 
     <div class="container">
-
+    <div class="credit-card once" style="display:none"> 
     <form action="" class="finalizar-form payment-information apagar">
 
 
@@ -362,9 +362,39 @@
                     
 
 
-    </form><!-- Local-Form -->
+    </form><!-- card-Form -->
+    </div>
+    <!-- Credit Card -->
 
-    <button id="proceed-payment" class="apagar" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card"></i> Prosseguir</button>
+    <div class="boleto once" style="display:none">
+    <form action="" class="finalizar-form payment-information apagar">
+
+        <div class='row'><!-- Row -->
+
+        <div class="individual">
+        <label for="NomeCompra">Nome:</label>
+        <input type="text" name="NomeCompra" id="nomeCompraBoleto" style="width: 330px;" value="<?php echo @$_SESSION['dados']['nome']?>">
+
+        </div>
+
+
+        <div class="individual">
+        <label for="cpf">CPF: </label>
+        <input type="text" name="cpf" id="cpfBoleto" style="width: 300px;" value="<?php echo @$_SESSION['dados']['cpf']?>">
+        </div>
+
+
+        <div class="individual">
+        <label for="celular">celular: </label>
+        <input type="text" name="celular" id="celularBoleto" style="width: 300px;" value="<?php echo @$_SESSION['dados']['celular']?>">
+        </div>
+
+        </div><!-- Row -->
+    </form>
+    </div>
+
+
+    <button id="proceed-payment" class="apagar" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card" valor="CreditCard"></i> Prosseguir</button>
 
     <div class="aparecer-success-buy" style="display:none">
         <div class='success-buy'>
@@ -386,27 +416,18 @@
 <div class="container">
 <div class="finalizar-pedido">
 
-    <!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_51LC4N0GIUmR0keuMuVnYtSJMCyrMiP0HSMZPYqyYg7nRLf6qG92it6HDcAFYaBglTnSmNVOxDP36iJAIZJcWBsAv00ODmcQMgZ"
-    data-amount= "<?php echo $_SESSION['total']*100 ?>"
-    data-name="Terço de Madeira"
-    data-label="Pagar com cartão"
-    data-currency ="brl"
-    data-panel-label = "Pagar"
-    data-description = "Pagamento de Carrinho"
-    data-image="<?php echo PATH?>images/Logo.png"
-    data-locale="auto"
-    ></script> -->
-
     <?php
         
 
         if(isset($_SESSION['login'])){
-            echo '
+    ?>
             
-            <button id="get-paid-here"><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
+            <button class="get-paid-here" valor='boleto'><i class="fa-solid fa-credit-card  "></i> Pagar com Boleto!</button>
+
+            <button class="get-paid-here" valor='credit-card'><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
             
-            </div>';
+            </div>
+    <?php
         }else{
             echo '<a href="'.PATH.'./cadastro/"><button id="login" style="width: 94%;">Faça Login Para comprar!</button></a>';
         }
@@ -439,8 +460,7 @@
 
 ?>
 
-<script type="text/javascript" src=
-"https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+
 <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
 <script src="<?php echo PATH?>js/config.js"></script>
 <script src="<?php echo PATH?>js/jquery-3.6.0.js"></script>
