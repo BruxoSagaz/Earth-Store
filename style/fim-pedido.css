@@ -12,6 +12,13 @@
     flex-direction: row;
 }
 
+.center-row-button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
 .flex-end{
     display: flex;
     justify-content: flex-end;
@@ -208,8 +215,7 @@ input[type="text"]::-webkit-input-placeholder{
     cursor: default;
 }
 
-
-
+/* 
 .pay-card{
     position: absolute;
     background-color: white;
@@ -224,7 +230,7 @@ input[type="text"]::-webkit-input-placeholder{
     border: 2px solid #ccc;
     border-radius: 10px;
     z-index: 9;
-}
+} */
 
 .modal-bg{
     display: none;
@@ -348,6 +354,12 @@ input[type="text"]::-webkit-input-placeholder{
     border-radius: 6px;
 }
 
+.continue-shipping i.fa-circle-right,.go-back i.fa-circle-left{
+    margin: 0;
+    font-size: inherit;
+    margin-left: 10px;
+    color: white;
+}
 
 .space{
     height: 140px;
@@ -355,9 +367,30 @@ input[type="text"]::-webkit-input-placeholder{
 
 
 
-
 .div-final-price{
-
     width: 600px;
     border-radius: 14px;
+    margin-top: 70px;
+}
+
+
+.display-final-payment{
+    width: 535px;
+    margin-top: 10px;
+}
+
+.display-final-payment tr{
+    text-align: center;
+    font-size: 18px;
+}
+
+.display-final-payment th{
+    background: #ccc;
+    font-weight: bolder;
+    height: 40px;
+    font-size: 20px;
+}
+
+.display-final-payment td{
+    
 }

@@ -24,7 +24,7 @@ include_once('../config.php')
 include_once('../header.php');
 ?>
 
-<section style="min-height: 66.5vh;">
+<section style="min-height: 73vh;">
 <?php
 
 

@@ -25,6 +25,64 @@ $(document).ready(function(){
     })
 
 
+    $('button[ordem=3]').click(function(){
+        let itens = organizarDados()
+
+        $('.display-frete').remove();
+        $('.display-item').remove();
+
+        $.each(itens, function (index, value) {
+
+            trItem = document.createElement('tr');
+            trItem.setAttribute('class','display-item');
+
+            tdNome = document.createElement('td');
+            stringItem = value.nome+" ("+value.quant+")"
+            tdNome.innerHTML =  stringItem;
+            trItem.appendChild(tdNome);
+
+            tdPreco = document.createElement('td');
+            total = value.preco * parseInt(value.quant);
+            totalFormated = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
+
+            tdPreco.innerHTML =  totalFormated;
+            trItem.appendChild(tdPreco);
+
+
+            $('.display-final-payment').append(trItem);
+        });
+
+
+        setTimeout(function(){ 
+            $.getJSON(config.path+'/ajax/get-frete-session.php', function (response) {
+                fretes = response.total;
+    
+                trFrete = document.createElement('tr');
+                trFrete.setAttribute('class','display-frete');
+    
+                tdAnun = document.createElement('td');
+                tdAnun.innerHTML =  "Frete:";
+                trFrete.appendChild(tdAnun);
+    
+                tdFrete = document.createElement('td');
+                total = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(fretes);
+                tdFrete.innerHTML =  total;
+                trFrete.appendChild(tdFrete);
+    
+                $('.display-final-payment').append(trFrete);
+            })
+        }, 1600);
+
+
+        // tudo = Array(itens,valors,fretes)
+        // console.log(tudo)
+    });
+
+
+
+
+
+
 
 
 
@@ -210,4 +268,52 @@ $(document).ready(function(){
         }
         },1000);
     }
+
+
+
+
+    function organizarDados(){
+
+        data = Array()
+
+        nomes = Array();
+        nomesHTML = $('.nome-item-banco');
+        $.each(nomesHTML, function (index, value) { 
+            nomes[index] = $(this).text().trim();
+        });
+
+        
+        quant = Array();
+        quantHTML = $('.final-quant');
+        $.each(quantHTML, function (index, value) { 
+            quant[index] = $(this).val();
+        });
+
+        preco = Array();
+        precoHTML = $('.valorFinal');
+        $.each(precoHTML, function (index, value) { 
+            preco[index] = $(this).attr('valor');
+        });
+        
+        id = Array();
+        idHTML = $('.cart-id');
+        $.each(idHTML, function (index, value) { 
+            id[index] = $(this).text().trim();
+        });
+
+
+
+        $.each(nomes, function (index, value) { 
+            data[index] = {'nome':value,'quant':quant[index],
+            'preco' : preco[index],'id':id[index] 
+        };
+        });
+
+        
+
+        console.log(data);
+
+        return data;
+    }
+
 });

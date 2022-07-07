@@ -15,9 +15,35 @@ $(document).ready(function(){
         let ordemAtual = $(this).attr('ordem');
         
         selector = "*[ordem="+ordemAtual+"]";
+        if(ordemAtual != '3'){
+            $(selector).fadeOut(600,function(){
+                proximo = parseInt(ordemAtual) + 1;
+    
+                selector = "*[ordem="+proximo+"]";
+                $(selector).fadeIn(1200);
+            });    
+        }else{
+            $(selector).fadeOut(1200,function(){
+                proximo = parseInt(ordemAtual) + 1;
+    
+                selector = "*[ordem="+proximo+"]";
+                $(selector).fadeIn(1800);
+            });
+        }
+
+
+    })
+
+        
+    $('.go-back').click(function(e){
+        e.preventDefault();
+
+        let ordemAtual = $(this).attr('ordem');
+        
+        selector = "*[ordem="+ordemAtual+"]";
 
         $(selector).fadeOut(600,function(){
-            proximo = parseInt(ordemAtual) + 1;
+            proximo = parseInt(ordemAtual) - 1;
 
             selector = "*[ordem="+proximo+"]";
             $(selector).fadeIn(1200);
@@ -252,13 +278,24 @@ $(document).ready(function(){
         pegarLocal();
         $.getJSON(config.path+'/ajax/get-total-final.php', function (response) {
             valor = response.total
-            console.log(valor)
+            
         })
         // valor = $('#quant-final-carr').attr('valor');
         console.log(valor)
         if(validarLocal() == true){
-            $('.modal-bg').fadeIn();
-            $('.pay-card').fadeIn();
+            // $('.modal-bg').fadeIn();
+            let ordemAtual = $(this).attr('ordem');
+        
+            selector = "*[ordem="+ordemAtual+"]";
+    
+            $(selector).fadeOut(600,function(){
+                proximo = parseInt(ordemAtual) + 1;
+    
+                selector = "*[ordem="+proximo+"]";
+                $(selector).fadeIn(1200);
+            });
+    
+            // $('.pay-card').fadeIn();
             metodoForm = $(this).attr('valor');
             seletor = "."+metodoForm;
             $(seletor).fadeIn();

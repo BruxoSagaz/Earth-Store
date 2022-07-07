@@ -1,5 +1,5 @@
 
-<div class="modal-bg" style='max-height: 2296.46px;'></div>
+<!-- <div class="modal-bg" style='max-height: 2296.46px;'></div> -->
 
 <!-- Só mostra se tiver itens no carrinho -->
 <?php if(isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
@@ -66,7 +66,7 @@
     <h2 style="font-size: 27px;">Total do Carrinho:</h2>
     <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
 
-    <button class="continue-shipping" style="width: 100%;margin: 20px 0px;" ordem="1">Continuar</button>
+    <button class="continue-shipping" style="width: 100%;margin: 20px 0px;" ordem="1">Continuar <i class="fa-regular fa-circle-right"></i></button>
     
 </div>
 </div>
@@ -170,9 +170,11 @@
 
     </form><!-- Local-Form -->
 
-    <div class="center">
+    <div class="center-row-button">
     <button class="continue-shipping" style="width: 33%;
-    margin: 0 auto;" ordem="2">Continuar</button>
+    margin: 0 auto;" ordem="2">Continuar <i class="fa-regular fa-circle-right"></i></button>
+    <button class="go-back" style="width: 33%;
+    margin: 19px auto;" ordem="2">Voltar <i class="fa-regular fa-circle-left"></i></button>
     </div>
 
     </div>
@@ -226,7 +228,11 @@
         </div>
     </div>
 
-    <button class="continue-shipping" style="margin-right: 0;width: 35%;"  ordem="3">Continuar</button>
+    <div class="center-row-button w100">
+    <button class="continue-shipping" style="margin: 0;width: 35%;"  ordem="3">Continuar <i class="fa-regular fa-circle-right"></i></button>
+    <button class="go-back" style="width: 35%;
+    margin: 0;" ordem="3">Voltar <i class="fa-regular fa-circle-left"></i></button>
+    </div>
 
     </form><!-- Local-Form -->
 
@@ -248,18 +254,40 @@
     <h2 class="chamada-finalizar">PREÇO FINAL!</h2>
 </div>
 
+<table class="display-final-payment">
+
+    <tr class="letter">
+        <th>Nome</th>
+        <th>Preço</th>
+    </tr>
+    
+    <!-- <tr class="retorno1">
+        <td>Item-1:</td>
+        <td>R$20,00</td>
+    </tr> -->
+
+
+
+</table>
+
 <div class="center-row">
+
 <h2 style="margin-right: 15px;">Total Final Com Frete:</h2>
 <h2 class="total-price" id ="quant-final-total" style="margin: 50px 0px;" valor="<?php echo @$_SESSION['totalFinal'] ?>"> R$ <?php echo @number_format($_SESSION['totalFinal'],2,",",".") ?></h2>
 </div>
-
-
 </div>
 
-            
-<button class="get-paid-here" valor='boleto'><i class="fa-solid fa-credit-card  "></i> Pagar com Boleto!</button>
 
-<button class="get-paid-here" valor='credit-card'><i class="fa-solid fa-credit-card"></i> Pagar com Crédito!</button>
+<div class="container center-row">
+
+<button class="go-back"  style="margin: 10px 21px;"  ordem="4">Voltar <i class="fa-regular fa-circle-left"></i></button>
+
+<button class="get-paid-here" valor='boleto' style="margin: 10px 21px;"  ordem="4"> Pagar com Boleto! <i class="fa-solid fa-barcode"></i></button>
+
+<button class="get-paid-here" valor='credit-card' style="margin: 10px 21px;"  ordem="4"> Pagar com Crédito! <i class="fa-solid fa-credit-card"></i></button>
+
+</div>  
+
 
 </div>
 
@@ -287,7 +315,7 @@
 
 <!-- Dados Pagamento -->
 
-<div class="tabela-form pay-card" style="display:none;">
+<div class="tabela-form" style="display:none;"  ordem="5">
     
 
     <div class="container">
@@ -409,7 +437,7 @@
     </form>
     </div>
 
-
+    <button class="go-back"  style="float: right;width: 142px;" ordem="5"> Voltar</button>
     <button id="proceed-payment" class="apagar" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card" valor="CreditCard"></i> Prosseguir</button>
 
     <div class="aparecer-success-buy" style="display:none">
