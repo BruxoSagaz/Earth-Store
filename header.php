@@ -28,6 +28,7 @@
                     <ul class="list-nav">
                         <?php 
                         if(isset($_SESSION['login'])){
+                            $nome = explode(" ", $_SESSION['nome']);
                             echo '<div class="account-head">
                             <i class="fa-solid fa-user"></i><li>Minha Conta</li>
                             </div>
@@ -68,12 +69,37 @@
                 </nav><!-- Nav -->
 
             </div>
-            <div class="cart-sidebar2"></div>
+
+            <!-- Area Do User -->           
+            <?php if(isset($_SESSION['login'])){ ?>
+
+          
+            <div class="cart-sidebar2 user-header-area">
+                <?php echo '<div class="welcome">';
+                    echo '<h2>Seja bem vindo: </h2>';
+                    echo '<h2>'; 
+                    echo "$nome[0]";
+                    echo '</h2>';
+                    echo '</div>'; 
+                ?>
+
+
+                <div class="user-header">
+                    <?php  echo "<a href='".PATH."PaginaDoUsuario'>Minha Conta</a>"; ?>
+                    <span>OU</span>
+                    <?php  echo "<a href='".PATH."&loggout'>Sair</a>"; ?>
+                </div>
+                
+            </div>
+            <?php } ?>
+
+            <!-- Area Do User -->
             <div class="cart-sidebar">
+            <!-- Area Do Cart -->
                 
                 <?php 
                 if(isset($_SESSION['login'])){
-                    $nome = explode(" ", $_SESSION['nome']);
+                    
                     echo '<div class="welcome">';
                     echo '<h2>Seja bem vindo: </h2>';
                     echo '<h2>'; 
@@ -207,3 +233,5 @@
 
         </div>
     </header>
+
+    <div style="height:100px"></div>

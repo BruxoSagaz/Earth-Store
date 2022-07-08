@@ -455,13 +455,29 @@ footer.F2{
     padding: 2px 3px;
 }
 
-.paiment{
+.payment{
     height: 136px;
     align-self: center;
-    background: #da787d;
+    display: flex;
     text-align: center;
-    vertical-align: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 10px;
+    justify-content: flex-start;
 }
+
+.payment-opt-div{
+    display: flex;
+    flex-direction: column-reverse;
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.payment :first-child{
+    margin-left: 0px;
+}
+
 
 .icon-list{
     font-size: 35px;
@@ -573,7 +589,7 @@ section.banner img{
     height: 50px;
     background: var(--bg_nav);
     display: flex;
-    margin-top: 109px;
+    margin-top: 10px;
 }
 
 
@@ -914,7 +930,34 @@ div .img-field{
 
 
 
+.user-header-area .user-header{
+    height: 100%;
+    width: 100%;
+    min-height: 215px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.user-header a{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border: 0;
+    background-color: #ef5350;
+    color: white;
+    height: 50px;
+    justify-content: center;
+    border-radius: 17px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.user-header span{
+    color: white;
+    margin: 11px 0px;
+}
 
 
 

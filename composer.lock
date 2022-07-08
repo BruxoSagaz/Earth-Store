@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b33eff4cf5611c6fc8f7252168861faa",
+    "content-hash": "4e12ff93ba00158e1f58b911c0baff33",
     "packages": [
         {
             "name": "flyingluscas/correios-php",

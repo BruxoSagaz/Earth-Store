@@ -1,7 +1,7 @@
 <?php
-
-include("../ajax/PDO.php");
 include("../config.php");
+include("../ajax/PDO.php");
+
 // ordem: SEDEX À Vista / PAC à visa
 
 

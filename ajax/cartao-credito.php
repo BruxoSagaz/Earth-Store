@@ -220,7 +220,7 @@ if(isset($_POST['gerar_sessao'])){
 
             $dbRef = array_push($dbRef, $reference);
             
-            $dbRef = implode(",", $dbRef);
+            $dbRef = implode($dbRef,",");
         }else{
             $dbRef = $dbRef.','.$reference;
         }

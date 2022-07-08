@@ -31,9 +31,9 @@ define("DATABASE",'dblojinha');
 
 $autoload = function($class){
     if($class == 'Email'){
-        include('vendor/phpmailer/src/PHPMailer.php');
+        include('classes/phpmailer/src/PHPMailer.php');
     }
-    include('vendor/'.$class.'.php');
+    include('classes/'.$class.'.php');
 };
 
 spl_autoload_register($autoload);

@@ -43,9 +43,19 @@
                 <div class="footer-single">
                     <h2>Formas de pagamento</h2>
 
-                    <div class="paiment">
-                        <p style="padding-top: 60px;">ainda não implementado</p>
+                    <div class="payment">
+
+                        <div class="payment-opt-div">
+                            <span>Boleto</span>
+                            <i class="fa-solid fa-barcode"></i>
+                        </div>
+
+                        <div class="payment-opt-div">
+                            <span>Crédito</span>
+                            <i class="fa-solid fa-credit-card"></i>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="footer-single">
