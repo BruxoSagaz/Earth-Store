@@ -10,20 +10,25 @@ $senha = $_POST{'senha'};
 $date =  explode('-',$date);
 $date = "{$date[2]}-{$date[1]}-{$date[0]}";
 
+$dbReturn;
+
 $data = array();
 
-$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `dataNascimento`, `celular`, `email`) VALUES ('{$cpf}','{$senha}','{$nome}','{$date}','{$cell}','{$email}')";
+$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `dataNascimento`, `celular`, `email`) VALUES ('{$cpf}','{$senha}','{$nome}','{$date}','{$cell}','{$email}'); SELECT LAST_INSERT_ID()";
 
 function dbQuery($query){
     global $pdo;
+    global $dbReturn;
+
     $sql = $pdo->prepare($query);
     if($sql->execute()){
         if (strpos($query, 'SELECT') !== false) {
             $result = $sql->fetchAll();
             //print_r($result);
+            $dbReturn = $result;
             return $result;
         }
-        return true;
+        return false;
     }else{
         return false;
     };
@@ -35,6 +40,9 @@ function dbQuery($query){
 
 try{
     if(dbQuery($query)){
+
+        $query = "INSERT INTO `dblojinha`.`usuarios-compras` (`id`,`cpf`) VALUES ('{$dbReturn[0][0]}','{$cpf}')";
+
         $data['retorno'] = "sucesso";
     }else{
         $invalidos = "";
@@ -60,6 +68,7 @@ try{
 }catch (Exception $e) {
     echo 'Exceção capturada: ',  $e->getMessage(), "\n";   
 }
+
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 
+
 class Loja 
 {
     public static function logado(){

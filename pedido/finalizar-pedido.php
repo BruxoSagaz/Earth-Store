@@ -286,6 +286,17 @@
 
 <button class="get-paid-here" valor='credit-card' style="margin: 10px 21px;"  ordem="4"> Pagar com Crédito! <i class="fa-solid fa-credit-card"></i></button>
 
+<div class="center" style="justify-content: normal;">
+
+<button class="get-paid-here" valor='credit-card' style="margin: 10px 21px;    width: 100%;"  ordem="4" disabled> Pagar com PIX! <i class="fa-brands fa-pix"></i></button>
+<span style="position: absolute;
+    background: #352829;
+    color: white;
+    width: 100px;
+    text-align: center;
+    border-radius: 6px;">Em Breve!</span>
+</div>
+
 </div>  
 
 
@@ -437,7 +448,7 @@
     </form>
     </div>
 
-    <button class="go-back"  style="float: right;width: 142px;" ordem="5"> Voltar</button>
+
     <button id="proceed-payment" class="apagar" style="float: right;width: 142px;"><i class="fa-solid fa-credit-card" valor="CreditCard"></i> Prosseguir</button>
 
     <div class="aparecer-success-buy" style="display:none">

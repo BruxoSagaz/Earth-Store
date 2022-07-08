@@ -535,7 +535,7 @@ section.banner img{
 }
 
 .text-desk{
-    font-size: 26px;
+    font-size: 22px;
     width: 100%;
     text-align: center;
 }
@@ -546,7 +546,7 @@ section.banner img{
 }
 
 .desk div.alert-icon span{
-    font-size: 26px;
+    font-size: 22px;
     width: 100%;
     text-align: center;
 
@@ -734,10 +734,6 @@ div.product-name{
 
 }
 
-.result-items div.product-name {
-  
-}
-
 
 .price-box{
     display: flex;
@@ -780,17 +776,17 @@ div.product-name{
 
 .add-to-cart input{
     width: 40px;
-    height: 30px;
+    /* height: 30px; */
     text-align: center;
 }
 
 .add-to-cart button{
     display: flex;
-    height: 31px;
+    height: 46px;
     align-items: center;
     border: 0;
     background-color: var(--sec_footer);
-    padding: 0px 10px;
+    padding: 0px 19px;
     margin-left: 15px;
     color: white;
 }
@@ -1152,6 +1148,14 @@ div .img-field{
 
 
 @media screen and (max-width:1010px) {
+    .offers .item {
+        width: 25%;
+    }
+
+    .add-to-cart button{
+        padding: 0px 0px;
+    }
+
     .form-field{
         width: 200px;
     }

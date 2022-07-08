@@ -1,6 +1,7 @@
 <?php 
 include('config.php');
 include("./ajax/PDO.php");
+include("./classes/loja.php");
 
 ?>
 

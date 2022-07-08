@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '645a7a1cbed4b8bd77adadbd88503c83ec51175f',
+        'reference' => '5113755fb8b08a969080a0785b5bd0feb2bccea3',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '645a7a1cbed4b8bd77adadbd88503c83ec51175f',
+            'reference' => '5113755fb8b08a969080a0785b5bd0feb2bccea3',
             'dev_requirement' => false,
         ),
         'flyingluscas/correios-php' => array(

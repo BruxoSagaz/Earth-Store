@@ -1,6 +1,7 @@
 <?php
 
 include("../config.php");
+include('../ajax/PDO.php');
 
 
 
@@ -11,7 +12,8 @@ include("../config.php");
 $idComprador = $_SESSION['dados']['id'];
 
 $email = PAGEMAIL;
-$token = PAGTOKEN; 
+$token = PAGTOKEN;
+$reference = uniqid();
 
 ini_set('max_execution_time','0');
 
@@ -74,7 +76,7 @@ if(isset($_POST['gerar_sessao'])){
             'currency' => 'BRL',
             'extraAmount' => '0.00',
             'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
-            'reference' => uniqid(),
+            'reference' => $reference,
             // COMPRADOR
             'senderName' => $_POST['User']['nome'],
             'senderCPF' => $_POST['User']['cpf'],
@@ -124,7 +126,7 @@ if(isset($_POST['gerar_sessao'])){
             'currency' => 'BRL',
             'extraAmount' => '0.00',
             'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
-            'reference' => uniqid(),
+            'reference' => $reference,
             // COMPRADOR
             'senderName' => $_POST['nome'],
             'senderCPF' => $_POST['cpf'],
@@ -191,6 +193,45 @@ if(isset($_POST['gerar_sessao'])){
     curl_close($curl);
 
     $xml = json_encode(simplexml_load_string($retorno));
+
+    function dbQuery($query){
+        global $pdo;
+        $sql = $pdo->prepare($query);
+        ;
+        if($sql->execute()){
+            $result = $sql->fetchAll();
+            return $result;
+        }else{
+            return false;
+        };
+    }
+
+    $queryy = "SELECT `transaction-id` FROM `usuarios-compras` WHERE `id` = '".$_SESSION['dados']['id']."'";
+    // echo $queryy;
+    $dbRef = dbQuery($queryy);
+    $dbRef = $dbRef[0][0];
+
+
+    if($dbRef != '0'){
+
+
+        if(strpos($dbRef, ',') == true){
+            $dbRef = explode($dbRef,",");
+
+            $dbRef = array_push($dbRef, $reference);
+            
+            $dbRef = implode(",", $dbRef);
+        }else{
+            $dbRef = $dbRef.','.$reference;
+        }
+
+        $reference = $dbRef;  
+    }
+
+
+    $queryy = "UPDATE `usuarios-compras` SET `transaction-id` = '$reference' WHERE `id` = '".$_SESSION['dados']['id']."'";
+    dbQuery($queryy);
+    // echo $queryy;
 
     die($xml);
 
