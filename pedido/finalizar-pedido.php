@@ -279,7 +279,7 @@
 
 
 <div class="container center-row">
-
+<div id="get-total-final-response" style="display:none" valor=""></div>
 <button class="go-back"  style="margin: 10px 21px;"  ordem="4">Voltar <i class="fa-regular fa-circle-left"></i></button>
 
 <button class="get-paid-here" valor='boleto' style="margin: 10px 21px;"  ordem="4"> Pagar com Boleto! <i class="fa-solid fa-barcode"></i></button>

@@ -2,9 +2,11 @@
 
 include("../config.php");
 include('../ajax/PDO.php');
+require_once('../vendor/autoload.php');
 
 
-
+use Carbon\Carbon;
+Carbon::setLocale('pt_BR');
 // CORRETO
 //https://ws.sandbox.pagseguro.uol.com.br/v2/sessions?
 
@@ -14,6 +16,7 @@ $idComprador = $_SESSION['dados']['id'];
 $email = PAGEMAIL;
 $token = PAGTOKEN;
 $reference = uniqid();
+
 
 ini_set('max_execution_time','0');
 
@@ -174,6 +177,9 @@ if(isset($_POST['gerar_sessao'])){
     
     $data = array_merge($data,$itens);
 
+
+
+
     //print_r($data);
     $query = http_build_query($data);
     // print_r($data);
@@ -194,49 +200,72 @@ if(isset($_POST['gerar_sessao'])){
 
     $xml = json_encode(simplexml_load_string($retorno));
 
-    function dbQuery($query){
-        global $pdo;
-        $sql = $pdo->prepare($query);
-        ;
-        if($sql->execute()){
-            $result = $sql->fetchAll();
-            return $result;
+    $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = '".$_SESSION['dados']['id']."'";
+    
+    $dbRef = normalDbQuery($queryy);
+    $dbRef = $dbRef[0];
+
+    // print_r($dbRef);
+    // $valoles = array();
+
+
+    function compactToDB($compactor,$add){
+        if($compactor != '0'){
+
+            if(strpos($compactor, ',') === true){
+                $compactor = explode($compactor,",");
+    
+                $compactor = array_push($compactor, $add);
+                
+                $compactor = implode($compactor,",");
+            }else{
+                $compactor = $compactor.','.$add;
+            }
+    
+           return $compactor;  
         }else{
-            return false;
-        };
-    }
 
-    $queryy = "SELECT `transaction-id` FROM `usuarios-compras` WHERE `id` = '".$_SESSION['dados']['id']."'";
-    // echo $queryy;
-    $dbRef = dbQuery($queryy);
-    $dbRef = $dbRef[0][0];
-
-
-    if($dbRef != '0'){
-
-
-        if(strpos($dbRef, ',') == true){
-            $dbRef = explode($dbRef,",");
-
-            $dbRef = array_push($dbRef, $reference);
-            
-            $dbRef = implode($dbRef,",");
-        }else{
-            $dbRef = $dbRef.','.$reference;
+            $compactor = $add;
+            return $compactor;
         }
-
-        $reference = $dbRef;  
     }
 
+    $dbRef['notification-code'] = compactToDB($dbRef['notification-code'],'Inicial');
+    $dbRef['transaction-status'] = compactToDB($dbRef['transaction-status'],'Aguardando pagamento');
+    $dbRef['transaction-id'] = compactToDB($dbRef['transaction-id'],$reference);
 
-    $queryy = "UPDATE `usuarios-compras` SET `transaction-id` = '$reference' WHERE `id` = '".$_SESSION['dados']['id']."'";
-    dbQuery($queryy);
+    
+
+
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code` = '".$dbRef['notification-code']."', `transaction-status` ='".$dbRef['transaction-status']."',`transaction-id` = '".$dbRef['transaction-id']."' WHERE `id` = '".$_SESSION['dados']['id']."'";
+    normalDbQuery($queryy);
     // echo $queryy;
+
+    // DADOS PARA O BANCO
+
+        // String transform
+        $intensDb = implode(',',$itens);
+    $dataBank = [
+        'transaction-id' => $reference,
+        'nome_comprador' =>  $_POST['nome'],
+        "endereco_entrega" => $_POST['local']['rua'].",".$_POST['local']['numero']." ".$_POST['local']['complemento'].",".$_POST['local']['bairro']."-".$_POST['local']['cidade']."/".$_POST['local']['estado']." CEP: ".$_POST['local']['cep'],
+        'custo' => $_SESSION['frete'] + $_POST['amount'],
+        'itens' => $intensDb,
+        'status' => 'Aguardando pagamento'
+    ];
+
+    $agora = Carbon::now();
+    $carbonDate = \Carbon\Carbon::parse($agora)->format('d/m/Y');
+
+    $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES ('".$dataBank['transaction-id']."','".$dataBank['nome_comprador']."','".$dataBank['endereco_entrega']."','".$_SESSION['servicoEntrega']."',".$dataBank['custo'].",'".$dataBank['itens']."','".$dataBank['status']."','".$carbonDate."','".$_POST['metodo']."')";
+    // echo $query;
+    normalDbQuery($query);
 
     die($xml);
 
 
 }
+
 
 
 ?>

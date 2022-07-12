@@ -3,7 +3,10 @@
     "require": {
         "nesbot/carbon": "^2.58",
         "flyingluscas/correios-php": "^2.4",
-        "guzzlehttp/guzzle": "^7.4"
+        "guzzlehttp/guzzle": "^7.4",
+        "php": ">=7.3",
+        "symfony/translation": "^4.4",
+        "symfony/translation-contracts": "1.1.6"
         
     }
 

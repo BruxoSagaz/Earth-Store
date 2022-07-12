@@ -48,7 +48,7 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
     }
 
 
-    $references = dbQuery("SELECT * FROM  `usuarios-compras` WHERE `transaction-id` LIKE '%$reference%'");
+    $references = dbQuery("SELECT * FROM  `usuarios_compras` WHERE `transaction-id` LIKE '%$reference%'");
 
     $references = $references[0];
     
@@ -58,7 +58,7 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
     $casa = array_search($reference, $transactionIdBank);
 
    
-    print_r($casa);
+    // print_r($casa);
 
 
     $notificationCodeBank = deCompress($references['notification-code']);
@@ -77,12 +77,14 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
 
 
 
-    $queryy = "UPDATE `usuarios-compras` SET `notification-code`='$notificationCodeBank', `transaction-status`='$transactionStatusBank' WHERE `transaction-id` LIKE '%$reference%'";
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code`='$notificationCodeBank', `transaction-status`='$transactionStatusBank' WHERE `transaction-id` LIKE '%$reference%'";
 
     dbQuery($queryy);
   
 
+    $queryy = "UPDATE `usuarios_pedidos` SET `status`='$transactionStatus' WHERE `transaction-id` = '$reference'";
 
+    dbQuery($queryy);
 
 
 

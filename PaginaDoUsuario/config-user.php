@@ -16,11 +16,38 @@ if(isset($_GET['page'])){
 
 <?php
 // carregar dados
+$dictStatus = array(
+    'Aguardando pagamento' => "aguardando-pgto",
+    'Paga' => 'pgto-realizado',
+    'Cancelada' => 'pgto-cancelado',
+    'Devolvida' => 'pgto-cancelado'
+);
 
-$dadosCompras = normalDbQuery("SELECT * FROM `usuarios-compras` WHERE id='".$_SESSION['dados']['id']."'");
+
+
+$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_compras` WHERE id='".$_SESSION['dados']['id']."'");
+
+
 $dadosCompras = $dadosCompras[0];
 $userData = normalDbQuery("SELECT * FROM `usuario` WHERE id='".$_SESSION['dados']['id']."'");
 $userData = $userData[0];
+// Array ( [id] => 1 [0] => 1 [cpf] => 141.765.474-05 [1] => 141.765.474-05 [notification-code] => 0 [2] => 0 [transaction-status] => 0 [3] => 0 [transaction-id] => 62c9aa40ae2de [4] => 62c9aa40ae2de )
+
+$arrIds = unpackDb($dadosCompras['transaction-id']);
+$dataPedidosInd = array();
+
+// MONTANDO OS DADOS DOS PEDIDOS
+foreach ($arrIds as $key => $value) {
+    $query = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `transaction-id`='".$value."'");
+    $query = $query[0];
+
+    array_push($dataPedidosInd,$query);
+    // Array ( [transaction-id] => 62c9aa40ae2de [nome_comprador] => Gabriel Pereira Bezerra [endereco_entrega] => R. Rio Capibaribe,50 ,Cordeiro-Recife/PE CEP: 50721-290 [servico] => PAC [custo] => 280.60 [itens] => 115,Terço de Madeira,50.50,4,116,Produto 2,10.00,3 [status] => Em Espera [data] => 2022-07-09 )
+}
+
+
+
+// $dataPedidosDB = normalDbQuery("SELECT * FROM `usuario_pedidos` WHERE id='".$_SESSION['dados']['id']."'")
 
 ?>
 <div class="container w100" style="margin-top: 35px;">
@@ -88,185 +115,16 @@ $userData = $userData[0];
 
         </div>
 
+
         <!-- DISPLAY -->
         <div class="display-right">
             <div class="container" style="padding: 24px 2%;">
 
-            <!-- Geral -->
-            <section class="config-display" page='geral' style="display:none">
+            <?php
 
-                <div class="user-data flex column center">
-                    <div class="user-icon"><i class="fa-regular fa-user"></i></div>
+                include_once("displays/".$page.".php");
 
-                    <h2><?php echo $userData['nome'] ?></h2>
-                    <span><?php echo $userData['celular'] ?></span>
-                </div>
-
-                <div class="flex row center space-top">
-                <!-- calcular -->
-                <?php 
-                    $totalPed = unpackDb($dadosCompras['transaction-id']);
-                    
-                    if( $totalPed[0]  != '0'){
-                        $totalPed = count($totalPed);
-                    }else{
-                        $totalPed = '0';
-                    }
-                    $totalConf = unpackDb($dadosCompras['transaction-status']);
-                    if($totalConf[0] != '0'){
-                        
-                        $totalConf = array_count_values($totalConf);
-                        $totalConf = $totalConf['Paga'];
-                    }else{
-                        $totalConf = '0';
-                    }
-                   
-                ?>
-
-                <div class="data-button flex center neutral-color">Pedidos Totais: <?php echo $totalPed ?></div>
-                <div class="data-button flex center wait-color">Pedidos Confirmados: <?php echo $totalConf ?></div>
-                <div class="data-button flex center correct-color" >Pedidos Recebidos: 0</div>
-
-                </div>
-
-                <!-- testes -->
-                <?php print_r("") ?>
-            </section>
-            <!-- Geral -->
-
-            <!-- Pedidos -->
-            <section class="config-display" page='pedidos' style="display:none">
-
-            <div class="user-data flex column center">
-                <div class="user-icon"><i class="fa-regular fa-user"></i></div>
-
-                <h2><?php echo $userData['nome'] ?></h2>
-                <span><?php echo $userData['celular'] ?></span>
-            </div>
-
-                <!-- Tabelas -->
-                <div class="w100 space-top flex column">
-
-                    <!-- individual -->
-                    <div class="w100  pedido-individual">
-
-                        <div class="flex row pedido-status-top correct-color" style="float:left">
-                            <div class="status-bar "></div>
-                            <div class="transaction-id">
-                                <p>ID:</p>
-                                <p>#62c88e2216b4e</p>
-                            </div>
-                            
-                        </div>
-                        <div class="pedido-status-date flex center column" style="float:right">
-                            <p>Pedido</p>
-                            <p>Realizado:</p>
-                            <p>14/07/2002</p>
-                        </div>
-                        <div class="clear"></div>
-                        <!-- DIV Full information -->
-
-                        <div class="info-area" >
-
-                        </div>
-
-                        <div class="line-separation"></div>
-                        <div class="slide-indicator w100"><i class="fa-solid fa-angle-down"></i></div>
-                    </div>
-                    <!-- individual -->
-
-                    <!-- individual -->
-                    <div class="w100  pedido-individual">
-
-                    </div>
-                    <!-- individual -->
-
-                    <!-- individual -->
-                    <div class="w100  pedido-individual">
-
-                    </div>
-                    <!-- individual -->
-                    
-                </div>
-                
-            </section>
-            <!-- Pedidos -->
-
-
-            <!-- Dados -->
-            <section class="config-display" page='dados' style="display:none">
-
-            <div class="user-data flex column center">
-                <div class="user-icon"><i class="fa-regular fa-user"></i></div>
-
-                <h2><?php echo $userData['nome'] ?></h2>
-                <span><?php echo $userData['celular'] ?></span>
-            </div>
-
-            <form action="">
-            <div class="flex row center wrap space-top">
-
-                
-                <div class="enter">
-                <label for="">Nome Completo:</label>
-                <input  type="text" name="nome" placeholder="Nome" 
-                value = "<?php echo $userData['nome'] ?>">
-                </div>
-
-                <div class="enter">
-                <label for="data" style="">Data de Nascimento:</label>
-                <input  type="text" name="data"  id="data"
-                 value = "<?php echo $userData['dataNascimento']?>">
-
-                </div>
-
-                <div class="enter">
-                <label for="">CPF:</label>
-                <input  type="tel" name="cpf" placeholder="CPF" id="cpf"
-                value = "<?php echo @$userData['cpf'] ?>">
-                </div>
-
-                <div class="enter">
-                <label for="">Celular:</label>
-                <input  type="tel" name="cell" placeholder="(xx) xxxxx-xxxx " id="cell" value = "<?php echo $userData['celular'] ?>">
-                </div>
-
-                <div class="enter"> 
-                <label for="">Email:</label>
-                <input  type="email" name="email" placeholder="Email" value = "<?php echo $userData['email'] ?>">
-                </div> 
-
-            </div>
-            </form>
-            </section>
-            <!-- Dados -->
-
-            <!-- SENHA -->
-            <section class="config-display" page='senha' style="display:none">
-
-            <div class="user-data flex column center">
-                <div class="user-icon"><i class="fa-regular fa-user"></i></div>
-
-                <h2><?php echo $userData['nome'] ?></h2>
-                <span><?php echo $userData['celular'] ?></span>
-            </div>
-            
-            <form action="">
-            <div class="flex row center wrap space-top">
-
-                <div class="enter">
-                    <label for="">Senha Atual:</label>
-                    <input type="password" name="senhaAtual" placeholder="Senha Atual" id="senhaAtual">
-                </div>
-
-                <div class="enter">
-                    <label for="">Nova Senha:</label>
-                    <input type="password" name="senhaNova" placeholder="Senha Nova" id="senhaNova"> <div class="password-area"><span style="display:none">Força da senha: </span><p class="seg-senha" id="segtotal"></p></div>
-                </div>
-            </div>
-            </form>
-            </section>
-            <!-- SENHA -->
+            ?>
 
             </div> 
         </div>
@@ -280,9 +138,7 @@ $userData = $userData[0];
 <script src="<?php echo PATH?>js/config.js"></script>
 <script src="<?php echo PATH?>js/jquery-3.6.0.js"></script>
 <script src="<?php echo PATH?>js/jquery.mask.js"></script>
+<script src="<?php echo PATH?>js/verificacoes.js"></script>
 <script src="<?php echo PATH?>js/header.js"></script>
 <script src="<?php echo PATH?>js/config-user.js"></script>
 
-<script>
-    $('#data').mask('00/00/0000')
-</script>

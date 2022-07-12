@@ -25,36 +25,32 @@ trait TranslatorTrait
     /**
      * {@inheritdoc}
      */
-    public function setLocale(string $locale)
+    public function setLocale($locale)
     {
-        $this->locale = $locale;
+        $this->locale = (string) $locale;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @return string
      */
     public function getLocale()
     {
-        return $this->locale ?: (class_exists(\Locale::class) ? \Locale::getDefault() : 'en');
+        return $this->locale ?: \Locale::getDefault();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function trans(?string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
-        if (null === $id || '' === $id) {
-            return '';
-        }
+        $id = (string) $id;
 
         if (!isset($parameters['%count%']) || !is_numeric($parameters['%count%'])) {
             return strtr($id, $parameters);
         }
 
         $number = (float) $parameters['%count%'];
-        $locale = $locale ?: $this->getLocale();
+        $locale = (string) $locale ?: $this->getLocale();
 
         $parts = [];
         if (preg_match('/^\|++$/', $id)) {
@@ -94,8 +90,8 @@ EOF;
                         }
                     }
                 } else {
-                    $leftNumber = '-Inf' === $matches['left'] ? -\INF : (float) $matches['left'];
-                    $rightNumber = is_numeric($matches['right']) ? (float) $matches['right'] : \INF;
+                    $leftNumber = '-Inf' === $matches['left'] ? -INF : (float) $matches['left'];
+                    $rightNumber = is_numeric($matches['right']) ? (float) $matches['right'] : INF;
 
                     if (('[' === $matches['left_delimiter'] ? $number >= $leftNumber : $number > $leftNumber)
                         && (']' === $matches['right_delimiter'] ? $number <= $rightNumber : $number < $rightNumber)
@@ -138,11 +134,9 @@ EOF;
      * which is subject to the new BSD license (http://framework.zend.com/license/new-bsd).
      * Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
      */
-    private function getPluralizationRule(float $number, string $locale): int
+    private function getPluralizationRule(int $number, string $locale): int
     {
-        $number = abs($number);
-
-        switch ('pt_BR' !== $locale && 'en_US_POSIX' !== $locale && \strlen($locale) > 3 ? substr($locale, 0, strrpos($locale, '_')) : $locale) {
+        switch ('pt_BR' !== $locale && \strlen($locale) > 3 ? substr($locale, 0, strrpos($locale, '_')) : $locale) {
             case 'af':
             case 'bn':
             case 'bg':
@@ -151,7 +145,6 @@ EOF;
             case 'de':
             case 'el':
             case 'en':
-            case 'en_US_POSIX':
             case 'eo':
             case 'es':
             case 'et':
@@ -210,7 +203,7 @@ EOF;
             case 'pt_BR':
             case 'ti':
             case 'wa':
-                return ($number < 2) ? 0 : 1;
+                return ((0 == $number) || (1 == $number)) ? 0 : 1;
 
             case 'be':
             case 'bs':

@@ -1,5 +1,12 @@
-<?php 
-include_once('../config.php')
+<?php
+
+include_once('../config.php');
+if(!isset($_SESSION['login'])){
+    header("Location: ".PATH);
+
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +38,11 @@ include_once('../header.php');
 <?php
 
 
+
 if(isset($_GET['url'])){
 
     if(is_file("./pages/".$_GET['url'].".php")){
-       
+        
         include("./pages/".$_GET['url'].".php");
     }else{
         include("config-user.php");
@@ -44,6 +52,9 @@ if(isset($_GET['url'])){
 }else{
     include("config-user.php");
 };
+
+
+
 
 
 

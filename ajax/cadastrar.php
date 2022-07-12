@@ -1,14 +1,16 @@
 <?php
-include("PDO.php");
-$nome = $_POST['nome'];
-$date = $_POST['data'];
-$cpf = $_POST{'cpf'};
-$cell = $_POST{'cell'};
-$email = $_POST{'email'};
-$senha = $_POST{'senha'};
+include("../config.php");
+include("../ajax/PDO.php");
 
-$date =  explode('-',$date);
-$date = "{$date[2]}-{$date[1]}-{$date[0]}";
+$nome = trim($_POST['nome']);
+$date = trim($_POST['data']);
+$cpf = trim($_POST['cpf']);
+$cell = trim($_POST['cell']);
+$email = trim($_POST['email']);
+$senha = trim($_POST['senha']);
+
+// $date =  explode('-',$date);
+// $date = "{$date[2]}-{$date[1]}-{$date[0]}";
 
 $dbReturn;
 

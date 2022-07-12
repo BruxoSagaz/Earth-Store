@@ -113,6 +113,42 @@ div.neutral-color{
     background: #4c61d5d1;;
 }
 
+.aguardando-pgto{
+    background-color: #fbc02d;
+}
+
+.pgto-realizado{
+    background-color: #69f0ae;
+}
+
+.pgto-cancelado{
+    background-color: #f44336;
+}
+
+.pgto-generic{
+    background-color: #ba68c8;
+}
+
+.color-ind{
+    border-radius: 100%;
+    width: 26px;
+    height: 26px;
+    margin-left: 5px;
+}
+
+button{
+    background-color: var(--color_primary);
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 0px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
 /* INICIO */
 
 .user-table{
@@ -238,9 +274,13 @@ div.neutral-color{
 
 .enter input{
     height: 36px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(163, 163, 163);
     font-size: 15px;
     padding-left: 8px;
+}
+
+.enter input::placeholder {
+    color: rgb(124, 124, 124);
 }
 
 .enter label{
@@ -306,8 +346,62 @@ div.neutral-color{
     display: none;
     width: 94%;
     margin-left: 3%;
-    height: 200px;
+
     margin-top: 12px;
     border-top: 1px solid #00000091;
     border-bottom: 2px solid #00000091;
+}
+
+.info-comprador{
+    max-width: 50%;
+    float: left;
+}
+
+.info-comprador .info{
+    margin: 16px 0px;
+}
+
+
+.info-produto{
+    float: right;
+    width: 50%;
+    min-height: 132px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.display-final-payment{
+    max-width: 100%;
+    margin-top: 10px;
+    margin-right: 10px;
+    min-width: 288px;
+
+}
+
+.display-final-payment tr{
+    text-align: center;
+    font-size: 18px;
+}
+
+.display-final-payment th{
+    background: #ccc;
+    font-weight: bolder;
+    height: 40px;
+    font-size: 20px;
+}
+
+
+.estado-atual{
+    width: 100%;
+    min-height: 70px;
+}
+
+.estado-atual p{
+    margin: 0 5px;
+}
+
+.retorno-total{
+    background-color: #ff7b7b;
 }

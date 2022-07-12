@@ -34,9 +34,9 @@ function packDb($item){
 function normalDbQuery($query){
     global $pdo;
     $sql = $pdo->prepare($query);
-    
+
     if($sql->execute()){
-        $result = $sql->fetchAll();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }else{
         return false;

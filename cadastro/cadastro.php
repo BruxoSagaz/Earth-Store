@@ -174,7 +174,7 @@
 
                                 
                                 <label for="data" style="margin:8px 0">Data de Nascimento:</label>
-                                <input  type="date" name="data"  id="data">
+                                <input  type="text" name="data"  id="data" placeholder = "dd/mm/aaaa">
                                 
                             </div>
 
@@ -242,7 +242,9 @@
    <script src="<?php echo PATH?>js/jquery-3.6.0.js"></script>
    <script src="<?php echo PATH?>js/functions.js"></script>
    <script src="<?php echo PATH?>js/jquery.mask.js"></script>
+   <script src="<?php echo PATH?>js/verificacoes.js"></script>
    <script src="<?php echo PATH?>js/validatons.js"></script>
+
 
 </body>
 </html>

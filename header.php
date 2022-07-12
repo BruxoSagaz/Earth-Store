@@ -14,7 +14,7 @@
 
                     <ul class="list-nav">   
                         <form action="<?php echo PATH ?>filtros" method="get">                 
-                        <input type="input" class="form-field" placeholder="Pesquisa..." name="nome" id='keysearch' autocomplete="on" />
+                        <input type="input" class="form-field" placeholder="Pesquisa..." name="pesq" id='keysearch' autocomplete="on" />
                         <input type="radio" value='filtros' name='page' style="display:none;" checked>
 
                         </form>  

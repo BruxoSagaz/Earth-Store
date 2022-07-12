@@ -162,7 +162,6 @@ $(document).ready(function(){
 
 
     // listar badneiras
-
     $.ajax({
         method:"post",
         url: config.path+"/ajax/cartao-credito.php",
@@ -200,6 +199,7 @@ $(document).ready(function(){
 
     $('#num-card').on('keyup',function(){
         if($(this).val().length >= 6){
+            console.log($this)
             brand =  $(this).val().substring(0,6);
             PagSeguroDirectPayment.getBrand({
                 cardBin:brand,
@@ -275,40 +275,46 @@ $(document).ready(function(){
         e.stopPropagation();
         $('.once').fadeOut();
         window.scrollTo(0,0);
+        var ordemAtual = $(this).attr('ordem');
+        metodoForm = $(this).attr('valor');
         pegarLocal();
         $.getJSON(config.path+'/ajax/get-total-final.php', function (response) {
-            valor = response.total
+            valor = response.total 
             
-        })
-        // valor = $('#quant-final-carr').attr('valor');
-        console.log(valor)
-        if(validarLocal() == true){
-            // $('.modal-bg').fadeIn();
-            let ordemAtual = $(this).attr('ordem');
+            
+            
+            // $('#get-total-final-response').attr('valor',)
+            if(validarLocal() == true){
+                // $('.modal-bg').fadeIn();
+               
+                
+            
+                selector = "*[ordem="+ordemAtual+"]";
         
-            selector = "*[ordem="+ordemAtual+"]";
+                $(selector).fadeOut(600,function(){
+                    proximo = parseInt(ordemAtual) + 1;
+        
+                    selector = "*[ordem="+proximo+"]";
+                    $(selector).fadeIn(1200);
+                });
+        
+                // $('.pay-card').fadeIn();
+               
+                seletor = "."+metodoForm;
+                $(seletor).fadeIn();
     
-            $(selector).fadeOut(600,function(){
-                proximo = parseInt(ordemAtual) + 1;
+                if(metodoForm == 'boleto'){
+                    $('#proceed-payment').attr('valor',"BOLETO");
+                }else{
+                    $('#proceed-payment').attr('valor','CreditCard')
+                }
+                
+                //disableForm('.pay-card')
     
-                selector = "*[ordem="+proximo+"]";
-                $(selector).fadeIn(1200);
-            });
-    
-            // $('.pay-card').fadeIn();
-            metodoForm = $(this).attr('valor');
-            seletor = "."+metodoForm;
-            $(seletor).fadeIn();
-
-            if(metodoForm == 'boleto'){
-                $('#proceed-payment').attr('valor',"BOLETO");
-            }else{
-                $('#proceed-payment').attr('valor','CreditCard')
             }
-            
-            //disableForm('.pay-card')
+        })
 
-        }
+
 
     })
 
