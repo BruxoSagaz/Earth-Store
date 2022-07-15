@@ -193,7 +193,7 @@ header img{
 
 
 .config-list li button{
-    height: 40px;
+    height: 50px;
     background-color: white;
     border: none;
     margin: 0 6px;
@@ -203,6 +203,14 @@ header img{
     padding: 0 10px;
     cursor: pointer;
 }
+
+.config-list li button.marked{
+    background-color: #cccccc;
+    font-weight: bolder;
+    color: #757575;
+    cursor: default;
+}
+
 
 /* Form */
 

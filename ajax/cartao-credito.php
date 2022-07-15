@@ -78,7 +78,7 @@ if(isset($_POST['gerar_sessao'])){
             'receiverEmail' => $email,
             'currency' => 'BRL',
             'extraAmount' => '0.00',
-            'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
+            'notificationURL' => PATH.'php/retorno.php',
             'reference' => $reference,
             // COMPRADOR
             'senderName' => $_POST['User']['nome'],
@@ -128,7 +128,7 @@ if(isset($_POST['gerar_sessao'])){
             'receiverEmail' => $email,
             'currency' => 'BRL',
             'extraAmount' => '0.00',
-            'notificationURL' => PATH.'/php/receberDadosRetornoPagamento.php',
+            'notificationURL' => PATH.'php/retorno.php',
             'reference' => $reference,
             // COMPRADOR
             'senderName' => $_POST['nome'],
@@ -261,7 +261,7 @@ if(isset($_POST['gerar_sessao'])){
         'transaction-id' => $reference,
         'nome_comprador' =>   $nome,
         "endereco_entrega" => $_POST['local']['rua'].",".$_POST['local']['numero']." ".$_POST['local']['complemento'].",".$_POST['local']['bairro']."-".$_POST['local']['cidade']."/".$_POST['local']['estado']." CEP: ".$_POST['local']['cep'],
-        'custo' => $_SESSION['frete'] + $_POST['amount'],
+        'custo' => $_POST['amount'],
         'itens' => $intensDb,
         'status' => 'Aguardando pagamento'
     ];

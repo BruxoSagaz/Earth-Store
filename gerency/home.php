@@ -81,16 +81,25 @@
         <div class="align-nav">
             <ul class="config-list">
                 <!-- Botao cad item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button <?php if($_GET['page']=='cad_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Cadastrar Item</button></a></li>
+                <?php
+// if($_GET['page']=='cad_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} 
+                ?>
+
+                <li id='button-highlight' page='<?php echo $_GET['page'] ?>'></li>
+
+                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
 
                 <!-- Botao edit item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button <?php if($_GET['page']=='edit_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Consultar Banco</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Banco</button></a></li>
 
                 <!-- Botão Variação de Item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button <?php if($_GET['page']=='variacao'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Variação Estoque</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button class="variacao">Variação Estoque</button></a></li>
 
                 <!-- Botao visitas -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button <?php if($_GET['page']=='visitas'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} ?>>Visitas</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
+
+                <!-- Botao pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos</button></a></li>
             
             </ul>
         </div>

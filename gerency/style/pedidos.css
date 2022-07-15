@@ -1,0 +1,20 @@
+.lista-pedido{
+    background-color: #f2eeee;
+    height: 728px;
+
+}
+
+.pedidos{
+    width: 100%;
+}
+
+.ind-th{
+    width: calc(100% / 5);
+}
+
+.lista-pedido i{
+    color: darkolivegreen;
+    font-size: 25px;
+    cursor: pointer;
+    width: 100%;
+}
