@@ -200,6 +200,11 @@ if(isset($_POST['gerar_sessao'])){
 
     $xml = json_encode(simplexml_load_string($retorno));
 
+    // DATA ATUAL
+    $agora = Carbon::now();
+    $carbonDate = \Carbon\Carbon::parse($agora)->format('d/m/Y');
+
+
     $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = '".$_SESSION['dados']['id']."'";
     
     $dbRef = normalDbQuery($queryy);
@@ -245,17 +250,23 @@ if(isset($_POST['gerar_sessao'])){
 
         // String transform
         $intensDb = implode(',',$itens);
+    $nome ="";
+
+    if(isset($_POST['User']['nome'])){
+        $nome = $_POST['User']['nome'];
+    }else{
+        $nome = $_POST['nome'];
+    }
     $dataBank = [
         'transaction-id' => $reference,
-        'nome_comprador' =>  $_POST['nome'],
+        'nome_comprador' =>   $nome,
         "endereco_entrega" => $_POST['local']['rua'].",".$_POST['local']['numero']." ".$_POST['local']['complemento'].",".$_POST['local']['bairro']."-".$_POST['local']['cidade']."/".$_POST['local']['estado']." CEP: ".$_POST['local']['cep'],
         'custo' => $_SESSION['frete'] + $_POST['amount'],
         'itens' => $intensDb,
         'status' => 'Aguardando pagamento'
     ];
 
-    $agora = Carbon::now();
-    $carbonDate = \Carbon\Carbon::parse($agora)->format('d/m/Y');
+
 
     $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES ('".$dataBank['transaction-id']."','".$dataBank['nome_comprador']."','".$dataBank['endereco_entrega']."','".$_SESSION['servicoEntrega']."',".$dataBank['custo'].",'".$dataBank['itens']."','".$dataBank['status']."','".$carbonDate."','".$_POST['metodo']."')";
     // echo $query;

@@ -1,6 +1,6 @@
 
 <!-- Pedidos -->
-<section class="config-display" page='pedidos' style="display:none">
+<section class="config-display" page='pedidos' >
 
 <div class="user-data flex column center">
     <div class="user-icon"><i class="fa-regular fa-user"></i></div>

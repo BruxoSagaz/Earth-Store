@@ -5,10 +5,10 @@ $(document).ready(function(){
     linkBotao = $(seletorBotao);
     linkBotao.css('background-color', "#f0ecec")
 
-    selectorSec = 'section[page='+pagina+']';
+    // selectorSec = 'section[page='+pagina+']';
 
-    linkSec = $(selectorSec);
-    linkSec.css('display', "flex")
+    // linkSec = $(selectorSec);
+    // linkSec.css('display', "flex")
 
     // MASKS
     $('#cpf').mask('000.000.000-00');
@@ -144,6 +144,23 @@ $(document).ready(function(){
 
 
 })
+
+
+    $('.user-local-form').submit(function(e){
+        e.preventDefault()
+
+        valores = $(this).serialize();
+
+        $.ajax({
+            type: "post",
+            dataType:'json',
+            url: config.path+'/ajax/salvar-end-bank.php' ,
+            data: valores,
+        }).done(function(data){
+            alert(data.retorno);
+            
+        });
+    })
 
 
 

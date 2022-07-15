@@ -3,6 +3,12 @@
 
 <!-- Só mostra se tiver itens no carrinho -->
 <?php if(isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
+    include_once("../ajax/PDO.php");
+    $id = $_SESSION['dados']['id'];
+    $query = "SELECT * FROM `usuarios-cards` WHERE `id` = $id";
+    $cardData = normalDbQuery($query);
+    $cardData = $cardData[0];
+   
     ?>
 
 <div class="div-chamada-finalizar">
@@ -66,8 +72,9 @@
     <h2 style="font-size: 27px;">Total do Carrinho:</h2>
     <h2 class="total-price-cart" id ="quant-final-carr" valor="<?php echo $_SESSION['total'] ?>">R$ <?php echo number_format($_SESSION['total'],2,",",".") ?></h2>
 
+    <?php if(isset($_SESSION['login'])){ ?>
     <button class="continue-shipping" style="width: 100%;margin: 20px 0px;" ordem="1">Continuar <i class="fa-regular fa-circle-right"></i></button>
-    
+    <?php } ?>
 </div>
 </div>
 <div class="clear"></div>
@@ -76,7 +83,7 @@
 
 </div><!-- Tabela Pedidos -->
 
-
+<?php if(isset($_SESSION['login'])){ ?>
 
 <!-- Localização -->
 
@@ -284,7 +291,7 @@
 
 <button class="get-paid-here" valor='boleto' style="margin: 10px 21px;"  ordem="4"> Pagar com Boleto! <i class="fa-solid fa-barcode"></i></button>
 
-<button class="get-paid-here" valor='credit-card' style="margin: 10px 21px;"  ordem="4"> Pagar com Crédito! <i class="fa-solid fa-credit-card"></i></button>
+<button class="get-paid-here paid-card-trig" valor='credit-card' style="margin: 10px 21px;"  ordem="4"> Pagar com Crédito! <i class="fa-solid fa-credit-card"></i></button>
 
 <div class="center" style="justify-content: normal;">
 
@@ -337,7 +344,7 @@
 
     <div class="container">
     <div class="credit-card once" style="display:none"> 
-    <form action="" class="finalizar-form payment-information apagar">
+    <form action="" class="finalizar-form payment-information apagar" id = "credit-card-form">
 
 
         <div class='row'><!-- Row -->
@@ -366,7 +373,7 @@
 
         <div class="individual">
         <label for="num-card">numero do cartão: </label>
-        <input type="text" name="num-card" id="num-card" style="width: 300px;">
+        <input type="text" name="num-card" id="num-card" style="width: 300px;" class="card" value="<?php echo @$cardData['num-card'] ?>">
         </div>
 
         </div><!-- Row -->
@@ -375,14 +382,22 @@
         <div class='row'><!-- Row -->
         <div class="individual">
         <label for="bandeira">Bandeiras: </label>
-        <select name="bandeiras" id="bandeiras"  style="width: 175px;">
+        <select name="bandeiras" id="bandeiras"  style="width: 175px;" class="card"  value="<?php echo @$cardData['bandeira'] ?>">
             <!-- <option value="visa">Visa</option> -->
+            <option value=""></option>
+            <?php 
+            if(isset($cardData['bandeira'])){
+                $bandeira = $cardData['bandeira'];
+                $upper = strtoupper($bandeira);
+                echo "<option value='$bandeira' selected>$upper</option>";
+            }
+            ?>
         </select>
         </div>
 
         <div class="individual">
         <label for="valores">divisões: </label>
-        <select name="valores" id="divisions-values"  style="width: 240px;">
+        <select name="valores" id="divisions-values"  style="width: 240px;" >
             <!-- <option value="199.00">1x de R$ 190.00</option> -->
         </select>
         </div>
@@ -397,12 +412,12 @@
 
         <div class="individual">
         <label for="cvv">CVV: </label>
-        <input type="text" name="cvv" id="cvv" style="width: 75px;">
+        <input type="text" name="cvv" id="cvv" style="width: 75px;" class="card"  value="<?php echo @$cardData['cvv'] ?>">
         </div>
 
         <div class="individual">
         <label for="validade">Validade(MM/AAAA): </label>
-        <input type="text" name="validade" id="validade" style="width: 100px;">
+        <input type="text" name="validade" id="validade" style="width: 100px;" class="card"  value="<?php echo @$cardData['validade'] ?>">
         </div>
 
         </div><!-- Row -->
@@ -410,7 +425,7 @@
         <div class="row"><!-- Row -->
         <div class="individual">
             <label for="salvar-card">Salvar Meu Cartão!</label>
-            <input type="checkbox" name="salvar-card" id="salvar-card">
+            <input type="checkbox" name="salvar-card" id="salvar-card"  <?php echo @$_SESSION['salvar-card'] ?>>
         </div>
         </div><!-- Row -->
 
@@ -467,6 +482,7 @@
 </div>
 <!-- Dados Pagamento -->
 
+<?php } ?>
 
 <div class="container">
 <div class="finalizar-pedido">

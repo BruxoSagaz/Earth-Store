@@ -18,43 +18,51 @@ $(document).ready(function(){
 
     })
 
-    
+
+
+
     // Abrir Popup do cart
-    abrirJanela();
-    function abrirJanela(){
-        $('.bag-shipping').click(function(e){
-            e.stopPropagation();
+
+    $('#bag-shippig-div').click(function(e){
+        
+        e.stopPropagation();
+        sidebar2 = $('.cart-sidebar2');
+        if(sidebar2.length > 0){
             $('.cart-sidebar2').fadeOut("fast",function(){
                 $('.cart-sidebar').fadeToggle("slow");
             });
-              
-        });
+        }else{
+            $('.cart-sidebar').fadeToggle("slow");
+        }
 
-        $('.account-head').click(function(e){
-            e.stopPropagation();
-            $('.cart-sidebar').fadeOut("fast",function(){
-                $('.cart-sidebar2').fadeToggle("slow");
-            });
             
-            
-        });
+    });
 
-        $('.cart-sidebar').click(function(e){
-            e.stopPropagation();
+    $('.account-head').click(function(e){
+        e.stopPropagation();
+        $('.cart-sidebar').fadeOut("fast",function(){
+            $('.cart-sidebar2').fadeToggle("slow");
         });
-
         
-        $('.cart-sidebar2').click(function(e){
-            e.stopPropagation();
-        });
+        
+    });
 
-        $('body').click(function(e){
-            e.stopPropagation();
-            $('.cart-sidebar').fadeOut("slow");
-            $('.cart-sidebar2').fadeOut("slow");
-        });
+    $('.cart-sidebar').click(function(e){
+        e.stopPropagation();
+    });
 
-    }
+    
+    $('.cart-sidebar2').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('body').click(function(e){
+        e.stopPropagation();
+        $('.cart-sidebar').fadeOut("slow");
+        $('.cart-sidebar2').fadeOut("slow");
+    });
+
+    
     //Escutar o evento de redimencionalização de tela
     window.addEventListener('resize', hideCartSideBar);
 
@@ -141,6 +149,7 @@ $(document).ready(function(){
             addItemToCart(id,nome,quant,precoFormat,img,max);
            
             $('#empty-cart').fadeOut(100);
+            $('.total-div').fadeIn(100);
         }
 
         $('.cart-sidebar').fadeIn();

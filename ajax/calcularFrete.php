@@ -113,6 +113,5 @@ array_push($retorno,$item2);
 
 die(json_encode($retorno));
 
-// echo $parsed;
-// print_r($parsed);
+
 ?>

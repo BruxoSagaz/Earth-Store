@@ -1,5 +1,5 @@
     <!-- Geral -->
-    <section class="config-display" page='geral' style="display:none">
+    <section class="config-display" page='geral'>
 
         <div class="user-data flex column center">
             <div class="user-icon"><i class="fa-regular fa-user"></i></div>

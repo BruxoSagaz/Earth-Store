@@ -1,6 +1,6 @@
 
             <!-- Dados -->
-            <section class="config-display" page='dados' style="display:none">
+            <section class="config-display" page='dados'>
 
             <div class="user-data flex column center">
                 <div class="user-icon"><i class="fa-regular fa-user"></i></div>

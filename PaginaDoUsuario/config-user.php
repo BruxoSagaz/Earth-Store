@@ -39,9 +39,12 @@ $dataPedidosInd = array();
 // MONTANDO OS DADOS DOS PEDIDOS
 foreach ($arrIds as $key => $value) {
     $query = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `transaction-id`='".$value."'");
-    $query = $query[0];
+    if(count($query) > 0){
+        $query = $query[0];
 
-    array_push($dataPedidosInd,$query);
+        array_push($dataPedidosInd,$query);
+    }
+
     // Array ( [transaction-id] => 62c9aa40ae2de [nome_comprador] => Gabriel Pereira Bezerra [endereco_entrega] => R. Rio Capibaribe,50 ,Cordeiro-Recife/PE CEP: 50721-290 [servico] => PAC [custo] => 280.60 [itens] => 115,Terço de Madeira,50.50,4,116,Produto 2,10.00,3 [status] => Em Espera [data] => 2022-07-09 )
 }
 
@@ -55,10 +58,13 @@ foreach ($arrIds as $key => $value) {
     <div class="user-table">
         <div id="page-chosen" page="<?php echo $page ?>"></div>
         <div class="opts-left">
+
+
+            <div>
             <div class="opt-row">
                 <a href="?page=geral" page="geral">
 
-                <div class="opt-icon"><i class="fa-solid fa-user-gear"></i></div>
+                <div class="opt-icon"><i class="fa-solid fa-user"></i></div>
                 <div class="opt-description">
                     <p>Geral</p>
                 </div>
@@ -89,6 +95,28 @@ foreach ($arrIds as $key => $value) {
             </div>
 
             <div class="opt-row">
+                <a href="?page=enderecos" page="enderecos">
+
+                <div class="opt-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="opt-description">
+                    <p>Meu Endereço</p>
+                </div>
+
+                </a>
+            </div>
+
+            <div class="opt-row">
+                <a href="?page=cartoes" page="cartoes">
+
+                <div class="opt-icon"><i class="fa-regular fa-credit-card"></i></div>
+                <div class="opt-description">
+                    <p>Meu Cartão</p>
+                </div>
+
+                </a>
+            </div>
+
+            <div class="opt-row">
                 <a href="?page=senha" page="senha">
 
                 <div class="opt-icon"><i class="fa-solid fa-unlock"></i></div>
@@ -98,10 +126,11 @@ foreach ($arrIds as $key => $value) {
 
                 </a>
             </div>
+            </div>
 
             
 
-            <div class="opt-row" style="margin-top: 334px;">
+            <div class="opt-row" >
                 <a href="<?php echo PATH ?>">
 
                 <div class="opt-icon"><i class="fa-solid fa-person-walking-arrow-loop-left"></i></div>
@@ -112,7 +141,7 @@ foreach ($arrIds as $key => $value) {
                 </a>
             </div>
 
-
+           
         </div>
 
 
@@ -142,3 +171,9 @@ foreach ($arrIds as $key => $value) {
 <script src="<?php echo PATH?>js/header.js"></script>
 <script src="<?php echo PATH?>js/config-user.js"></script>
 
+<?php 
+    $pathJs = PATH."PaginaDoUsuario/js/".$page.".js";
+
+    echo "<script src=".$pathJs."></script>";
+    
+?>

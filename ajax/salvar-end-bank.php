@@ -24,28 +24,30 @@ $_SESSION['local'] = $local;
 
 
 $query = "SELECT * FROM `enderecos` WHERE `id` = $id";
+$result = normalDbQuery($query);
 
-if(dbQuery($query)->rowCount() > 0){
+if(count($result) > 0){
     // echo "oii";
+    $query = "UPDATE `enderecos` SET `cep`='$cep',`logradouro`='$endereco',`bairro`='$bairro',`cidade`='$cidade',`estado`='$estado',`numero`='$numero',`complemento`= '$complement' WHERE `id`=$id";
     $return['salvo'] = 'true';
+
+    $result = normalDbQuery($query);
+
+    die(json_encode(['retorno'=>"Localização atualizada com sucesso"]));
+
 }else{
     $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ('$id','$cep','$endereco','$bairro','$cidade','$estado','$numero','$complement')";
 
     // echo $query;
-    if(dbQuery($query)->rowCount() > 0){
-        die(json_encode(['sucesso'=>"true"]));
+    if(count(normalDbQuery($query)) > 0){
+        die(json_encode(['retorno'=>"Loc nâo salva"]));
     }
     
 }
 
 
-function dbQuery($query){
-    global $pdo;
-    $sql = $pdo->prepare($query);
-    $sql->execute();
-    $sql->fetchAll();
-    return $sql;
-}
+die(json_encode(['retorno'=>"Loc nâo salva"]))
+
 
 
 

@@ -152,6 +152,25 @@ $(document).ready(function(){
             })
     };
 
+    // SALVAR CARTAO
+
+    $('#salvar-card').click(function(){
+        if($(this).is(":checked")){
+           
+            $('#credit-card-form input.card').change(function(){
+                salvarcard();
+            })
+
+            salvarcard();
+        
+        };
+    });
+
+    if($('#salvar-card').is(":checked")){
+        $('#credit-card-form input.card').change(function(){
+            salvarcard();
+        })
+    };
 
 
     // Sistema de pagamento transparente
@@ -186,8 +205,11 @@ $(document).ready(function(){
 
                     bandeiras+='<option value="'+value.name.toLowerCase()+'">'+value.name+'</option>';
 
-                    $('#bandeiras').html(bandeiras);
+                    $('#bandeiras').append(bandeiras);
                 })
+
+
+            
             }
        })
 
@@ -195,86 +217,40 @@ $(document).ready(function(){
 
 
     // Detectar a bandeira do cartão
-
-
     $('#num-card').on('keyup',function(){
         if($(this).val().length >= 6){
-            console.log($this)
-            brand =  $(this).val().substring(0,6);
-            PagSeguroDirectPayment.getBrand({
-                cardBin:brand,
-                success:function(v){
-                    var cartao = v.brand.name;
-                    console.log(valor);
-                    PagSeguroDirectPayment.getInstallments({
-                        amount:valor,
-                        maxInstallmentNoInterest:'4',
-                        brand:cartao,
-                        success: function(data){
-
-                            bandeiras = $('select[name=bandeiras]')
-                            bandeiras.find('option').removeAttr('selected')
-                            bandeiras.find('option[value='+cartao+']').attr('selected','selected')
-
-                            // Listar Parcelamento
-                            $('#divisions-values').html('');
-                            $.each(data.installments[cartao],function(index,value){
-                                index++
-                                var htmlAtual =  $('#divisions-values').html();
-                                var valorParcela = value.installmentAmount;
-                                var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-
-                                parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
-
-                                var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
-
-                                $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
-
-                            })
-
-                          
-                        }
-                    })
-                }
-            });
+            detectarBandeira($(this));
         }
     });
 
 
+    // Pegar pracelamento
     $('#bandeiras').change(function (){
         cartao = $(this).val();
-        PagSeguroDirectPayment.getInstallments({
-            amount:valor,
-            maxInstallmentNoInterest:'4',
-            brand:cartao,
-            success: function(data){
+        gerarParcelas(cartao);
+    })
+    //console.log($('#bandeiras').val());
+    $('.paid-card-trig').click(function(){
+        console.log('oi');
 
+        if($('#num-card').val().length >= 6){
+            detectarBandeira($('#num-card'));
+        }
 
-                // Listar Parcelamento
-                $('#divisions-values').html('');
-                $.each(data.installments[cartao],function(index,value){
-                    index++
-                    var htmlAtual =  $('#divisions-values').html();
-                    var valorParcela = value.installmentAmount;
-                    var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-
-                    parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
-
-                    var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
-
-                    $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
-
-                })
-
-              
-            }
-        })
+        if($('#bandeiras').val() != ''){
+            console.log('if');
+            cartao = $('#bandeiras').val();
+            gerarParcelas(cartao);
+        }
     })
 
     $('.get-paid-here').click(function(e){
         e.stopPropagation();
         $('.once').fadeOut();
         window.scrollTo(0,0);
+
+
+
         var ordemAtual = $(this).attr('ordem');
         metodoForm = $(this).attr('valor');
         pegarLocal();
@@ -388,6 +364,21 @@ $(document).ready(function(){
                         }else{
                             // processado com sucesso
                             console.log(data);
+                            // $.get( config.path+"/ajax/clean-cart.php", function( data ) {
+                            //     console.log('cart limpo')
+                            // });
+
+                            $.ajax({
+                                method:"post",
+                                url: config.path+"/ajax/clean-cart.php",
+                                data: '0',
+                                dataType: "json",
+                                error: function(){
+                                    console.log('Ocorreu um erro apagando cart')
+                                }
+                            })
+
+                            
                             $('.apagar').fadeOut("fast");
                             $('.aparecer-success-buy').fadeIn("slow")
                             enableForm('.pay-card');
@@ -428,6 +419,18 @@ $(document).ready(function(){
                 dataType: "json",
 
             }).done(function(BOLETO){
+
+                
+                $.ajax({
+                    method:"post",
+                    url: config.path+"/ajax/clean-cart.php",
+                    data: '0',
+                    dataType: "json",
+                    error: function(){
+                        console.log('Ocorreu um erro apagando cart')
+                    }
+                })
+
                 $('.apagar').fadeOut("fast");
                 $('.aparecer-success-buy').fadeIn("slow")
                 enableForm('.pay-card');
@@ -574,11 +577,32 @@ $(document).ready(function(){
                 console.log("Erro em save local Session")
             }
         }).done(function(data){
-           console.log(data);
+        //    console.log(data);
 
         })
 
     }
+
+    function salvarcard(){
+        data = $('#credit-card-form').serialize();
+        // console.log(data);
+
+
+        $.ajax({
+            method:"post",
+            url: config.path+"/ajax/save-card.php",
+            data: data,
+            dataType: "json",
+            error: function(){
+                console.log("Erro em save card Session")
+            }
+        }).done(function(data){
+        //    console.log(data);
+
+        })
+
+    }
+
 
 
 
@@ -626,6 +650,77 @@ $(document).ready(function(){
         
     }
 
+
+    function detectarBandeira(input){
+        
+        brand =  input.val().substring(0,6);
+        console.log(brand);
+        PagSeguroDirectPayment.getBrand({
+            cardBin:brand,
+            success:function(v){
+                var cartao = v.brand.name;
+                console.log(valor);
+                PagSeguroDirectPayment.getInstallments({
+                    amount:valor,
+                    maxInstallmentNoInterest:'4',
+                    brand:cartao,
+                    success: function(data){
+
+                        bandeiras = $('select[name=bandeiras]')
+                        bandeiras.find('option').removeAttr('selected')
+                        bandeiras.find('option[value='+cartao+']').attr('selected','selected')
+
+                        // Listar Parcelamento
+                        $('#divisions-values').html('');
+                        $.each(data.installments[cartao],function(index,value){
+                            index++
+                            var htmlAtual =  $('#divisions-values').html();
+                            var valorParcela = value.installmentAmount;
+                            var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+                            parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
+                            var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
+
+                            $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
+
+                        })
+
+                      
+                    }
+                })
+            }
+        });
+    }
+
+    function gerarParcelas(cartao){
+        PagSeguroDirectPayment.getInstallments({
+            amount:valor,
+            maxInstallmentNoInterest:'4',
+            brand:cartao,
+            success: function(data){
+
+
+                // Listar Parcelamento
+                $('#divisions-values').html('');
+                $.each(data.installments[cartao],function(index,value){
+                    index++
+                    var htmlAtual =  $('#divisions-values').html();
+                    var valorParcela = value.installmentAmount;
+                    var parcelaFormatada = valorParcela.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+                    parcelaFormatada = parcelaFormatada.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
+                    var juros = value.interestFree == true ? 'Sem Juros' : 'Com Juros';
+
+                    $('#divisions-values').html(htmlAtual+'<option value="'+index+':'+valorParcela+'" > '+index+'x '+parcelaFormatada+'  '+juros+'</option>');
+
+                })
+
+              
+            }
+        })
+    }
 
     
     function calcularTotal() {

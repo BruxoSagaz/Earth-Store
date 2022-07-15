@@ -25,7 +25,6 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
     }
     $transaction = simplexml_load_string($transaction);
 
-    // print_r($transaction);
 
     $transactionStatus = $transaction->status;
     $reference = (string)$transaction->reference;
@@ -46,6 +45,20 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
     } elseif($transactionStatus == 7){
         $transactionStatus = 'Cancelada';
     }
+
+    // $pedido = array(
+    //     'code' => $adapt['code']['value'],
+    //     'referencia' => $adapt['reference']['value'],
+    //     'status' => $transactionStatus,
+    //     'valor' => $adapt['grossAmount']['value'],
+    //     'itens' => $adapt['itens'],
+    //     'comprador' => $adapt['sender'],
+    //     'entrega' => $adapt['shipping']['address'],
+    //     'frete' => $adapt['shipping']['cost'],
+
+    // );
+
+    // print_r($pedido);
 
 
     $references = dbQuery("SELECT * FROM  `usuarios_compras` WHERE `transaction-id` LIKE '%$reference%'");
@@ -116,4 +129,43 @@ function dbQuery($query){
         return false;
     };
 }
+
+
+
+
+
+
+// function xmlToArray(SimpleXMLElement $xml): array
+// {
+//     $parser = function (SimpleXMLElement $xml, array $collection = []) use (&$parser) {
+//         $nodes = $xml->children();
+//         $attributes = $xml->attributes();
+
+//         if (0 !== count($attributes)) {
+//             foreach ($attributes as $attrName => $attrValue) {
+//                 $collection['attributes'][$attrName] = strval($attrValue);
+//             }
+//         }
+
+//         if (0 === $nodes->count()) {
+//             $collection['value'] = strval($xml);
+//             return $collection;
+//         }
+
+//         foreach ($nodes as $nodeName => $nodeValue) {
+//             if (count($nodeValue->xpath('../' . $nodeName)) < 2) {
+//                 $collection[$nodeName] = $parser($nodeValue);
+//                 continue;
+//             }
+
+//             $collection[$nodeName][] = $parser($nodeValue);
+//         }
+
+//         return $collection;
+//     };
+
+//     return [
+//         $xml->getName() => $parser($xml)
+//     ];
+// }
 ?>

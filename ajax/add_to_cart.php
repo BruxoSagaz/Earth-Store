@@ -14,7 +14,7 @@ $nome = $_POST['nome'];
 $quant = $_POST['quantidade'];
 
 $precoOrig = $_POST['precoOrig'];
-echo $precoOrig;
+// echo $precoOrig;
 $precoFormat = $_POST['precoFormat'];
 
 $img = $_POST['img'];

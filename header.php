@@ -13,12 +13,16 @@
                 <nav class="nav-desktop">
 
                     <ul class="list-nav">   
-                        <form action="<?php echo PATH ?>filtros" method="get">                 
+                        <form action="<?php echo PATH ?>filtros" method="get"
+                        style="display: flex;align-items: center;" >
+                                       
                         <input type="input" class="form-field" placeholder="Pesquisa..." name="pesq" id='keysearch' autocomplete="on" />
+                        <div id="glass" style="display: flex;align-items: center;"> 
                         <input type="radio" value='filtros' name='page' style="display:none;" checked>
-
+                        <i class="fa-solid fa-magnifying-glass" ></i ><li>Pesquisar</li>
                         </form>  
-                        <i class="fa-solid fa-magnifying-glass" id="glass"></i ><li>Pesquisar</li>
+                        </div> 
+
                     </ul>
 
                     <ul class="divlist-nav">
@@ -45,7 +49,7 @@
                     </ul>
 
                     <ul>
-                        <div class="bag-shipping">
+                        <div class="bag-shipping" id="bag-shippig-div">
                             <div class="num-cart">
                                 <?php
                                  if(isset($_SESSION['cart'])){
@@ -179,22 +183,34 @@
 
  
                         }
-
-                        if(@count($_SESSION['cart']) == 0 || !isset($_SESSION['cart'])){
-                            echo "<h2 id = 'empty-cart' style='color: #ef5350;font-size: 19px;'>- Carrinho Vazio -</h2>";
-                        }
                         if(!isset($_SESSION['total'])){
                             $_SESSION['total'] = 0;
                         }
-                        echo '<div class="total-div">
-                        <span>Total do pedido (sem frete): </span>
-                        <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
+                        if(@count($_SESSION['cart']) == 0 || !isset($_SESSION['cart'])){
+                            echo "<h2 id = 'empty-cart' style='color: #ef5350;font-size: 19px;'>- Carrinho Vazio -</h2>";
+                            
+                            echo '<div class="total-div" style="display: none;">
+                            <span>Total do pedido (sem frete): </span>
+                            <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
+    
+                            <a href="'.PATH.'./pedido/" style="width: 56%;">
+                            <button id="finalizar-pedido">Finalizar pedido</button>
+                            </div>
+                            </a>
+                            ';
+                        }else{
+                            echo '<div class="total-div">
+                            <span>Total do pedido (sem frete): </span>
+                            <h3 class="total-price-cart">R$ '.number_format($_SESSION['total'],2,",",".").'</h3>
+    
+                            <a href="'.PATH.'./pedido/" style="width: 56%;">
+                            <button id="finalizar-pedido">Finalizar pedido</button>
+                            </div>
+                            </a>
+                            ';
+                        }
 
-                        <a href="'.PATH.'./pedido/" style="width: 56%;">
-                        <button id="finalizar-pedido">Finalizar pedido</button>
-                        </div>
-                        </a>
-                        ';
+
                         
                     ?>
                         
