@@ -42,7 +42,7 @@
             Painel::loggout();
         }
         if(!isset($_GET['page'])){
-            $_GET['page'] = 'edit_item';
+            $_GET['page'] = 'pedidos';
         }
     ?>
 
@@ -81,11 +81,12 @@
         <div class="align-nav">
             <ul class="config-list">
                 <!-- Botao cad item -->
-                <?php
-// if($_GET['page']=='cad_item'){ echo 'style="background-color: #cccccc;font-weight: bolder;color: #757575;cursor: default;"';} 
-                ?>
-
                 <li id='button-highlight' page='<?php echo $_GET['page'] ?>'></li>
+
+                <!-- Nível 3 de priv -->
+                <?php   
+                    if($_SESSION['nivel_admin']=='3'){
+                ?>
 
                 <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
 
@@ -99,8 +100,59 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
 
                 <!-- Botao pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos</button></a></li>
-            
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
+
+                <?php } ?>
+
+
+
+
+
+                <!-- Nível 2 de priv -->
+                <?php   
+                    if($_SESSION['nivel_admin']=='2'){
+                ?>
+
+                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
+
+                <!-- Botao edit item -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Banco</button></a></li>
+
+                <!-- Botão Variação de Item -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button class="variacao">Variação Estoque</button></a></li>
+
+                <!-- Botao visitas -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
+
+                <!-- Botao pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
+                <?php } ?>
+
+
+
+                
+                <!-- Nível 2 de priv -->
+                <?php   
+                    if($_SESSION['nivel_admin']=='1'){
+                ?>
+
+
+                <!-- Botao pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
+
+                <?php } ?>
+
+
+
             </ul>
         </div>
     </nav>

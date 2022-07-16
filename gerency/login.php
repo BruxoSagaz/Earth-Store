@@ -12,7 +12,8 @@
             $_SESSION['usuario_admin'] = $user;
             $_SESSION['senha_admin'] = $senha;
             $_SESSION['nome_admin'] = $info['nome_admin'];
-            $_SESSION['cargo_admin'] = $info['cargo_admin'];
+            $_SESSION['nivel_admin'] = $info['nivel'];
+            $_SESSION['id_admin'] = $info['admin_id'];
             header('Location:'.PATH_GERENCY);
             die();
         }
@@ -47,7 +48,8 @@
                         $_SESSION['usuario_admin'] = $user;
                         $_SESSION['senha_admin'] = $senha;
                         $_SESSION['nome_admin'] = $info['nome_admin'];
-                        $_SESSION['cargo_admin'] = $info['cargo_admin'];
+                        $_SESSION['nivel_admin'] = $info['nivel'];
+                        $_SESSION['id_admin'] = $info['admin_id'];
                         if(isset($_POST['lembrar_admin'])){
                             setcookie('lembrar_admin',true,time()+(60*60*24),'/');
                             setcookie('user_admin',$user,time()+(60*60*24),'/');

@@ -106,7 +106,11 @@
                 <div class="clear"></div>
                 <div class="estado-atual flex center">
                     <p>Estado do Pedido:</p>
-                    <P><?php echo $value['status'] ?></P>
+                    <P><?php echo $value['status']; if($value['status'] == 'Paga'){
+                        echo ", Aguardando Envio";
+                    }else if($value['status'] == 'Enviado'){
+                        echo ", Pedido Enviado e à caminho, consulte o código de rastreio";
+                    }  ?></P>
                     <div class="color-ind <?php echo (isset($dictStatus[$value['status']])) ? $dictStatus[$value['status']] : "pgto-generic";?>"></div>
                 </div>
 

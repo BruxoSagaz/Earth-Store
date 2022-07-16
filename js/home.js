@@ -28,7 +28,7 @@ $(document).ready(function(){
         data:"oi",
         dataType: "json",
         error: function(){
-            console.log("Sem itens no banco")
+            console.log("Nav Com erro")
         }
     }).done(function(data){
         categs = data;

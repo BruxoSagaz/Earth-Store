@@ -503,13 +503,13 @@ footer.F2{
 /*Banner Cta*/
 section.banner{
     width: 100%;
-    max-height: 350px;
     padding-top: 5px;
 }
 
 section.banner img{
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    margin: 0 auto;
 }
 
 /* Desk */

@@ -6,7 +6,7 @@ include_once('../config.php');
 include_once('../ajax/PDO.php');
 
 
-$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Paga' AND `responsavel` = ''");
+$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Paga' AND `responsavel` = '".$_SESSION['id_admin']."'");
 
 
 ?>
@@ -31,23 +31,21 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
                         <th class="ind-th">Comprador</th>
                         <th class="ind-th">Status</th>
                         <th class="ind-th">Data</th>
-                        <th class="ind-th">Pegar</th>
+                        <th class="ind-th">Alterar</th>
                     </tr>
                 </thead>
 
-                <tbody id="itens-banco">
+                <tbody>
                     <?php foreach ($dadosCompras as $key => $value) {
                         # code...
                     ?>
-                    <tr id= "<?php echo $key ?>">
+                    <tr>
                         <td><?php echo $value['transaction-id']?></td>
                         <td><?php echo $value['nome_comprador']?></td>
                         <td><?php echo $value['status']?></td>
                         <td><?php echo $value['data']?></td>
-                        <td><i class="fa-solid fa-dolly" id='<?php echo $value['transaction-id'] ?>'
-                        onclick="pegarPedido('<?php echo $value['transaction-id'] ?>', '<?php echo $key ?>')"
-                        ></i></td>
-                        
+                        <td><i class="fa-solid fa-pen-to-square" id='<?php echo $value['transaction-id'] ?>'></i></td>
+                       
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -62,6 +60,7 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
     </div>
 </div>
 
+
+
 <script src="../js/jquery-3.6.0.js"></script>
-<script src="js/prototype.js"></script>
-<script src="js/pedidos.js"></script>
+<script src="js/meus-pedidos.js"></script>
