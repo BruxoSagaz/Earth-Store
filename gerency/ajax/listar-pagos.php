@@ -1,6 +1,5 @@
 <?php
-include_once('../../config.php');
-include_once('../../ajax/PDO.php');
+include_once('PDO.php');
 
 
 $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Paga' AND `responsavel` = ''");

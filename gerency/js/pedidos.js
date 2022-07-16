@@ -1,35 +1,3 @@
-// $(document).ready(function(){
-
-
-
-    
-
-
-
-//     $('td i.fa-dolly').click(function(){
-        
-//         id = $(this).attr('id')
-//         item = $(this).parent().parent();
-//         $.ajax({
-//             method:"post",
-//             url: "./ajax/add_pedido.php",
-//             data: "id="+id,
-//             dataType: "json",
-//             success: function (response) {
-               
-//                if(response.retorno == "sucesso"){
-//                 console.log($(this));
-//                 item.fadeOut();
-//                }
-//             },
-//             error: function(){
-                
-//             }
-//         });
-    
-//     })
-
-    
 
 
 

@@ -7,12 +7,74 @@ include_once('../ajax/PDO.php');
 
 
 $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Paga' AND `responsavel` = '".$_SESSION['id_admin']."'");
-
-
 ?>
 
 
 <!-- MAIN -->
+<div class="modal-bg" >
+
+    <div class="form-modal" id="form-modal-pedido" style="display:block">
+        <!-- <div class="modal-shadow"></div> -->
+        <!-- close Button -->
+
+        <h2 style="text-align: center;" id="id-do-pedido"></h2>
+        <div class="close-btn">x</div>
+
+        <!-- FORM   -->
+        <form action="" id="form_edit_item">
+            <!-- info-produto -->
+            <div class='info-produto'>
+            <!-- itens -->
+                <table class="display-ind-pedido">
+                    <thead>
+                    <tr class="letter">
+                        <th>Nome</th>
+                        <th>Preço</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class='information-area'>
+
+
+                    </tbody>
+
+
+                </table>
+                <!-- itens -->
+                <!-- Endereço de entrega -->
+                <div class="place-entrega">
+                    <p id="nome-comprador"></p>
+                    <p id="endereco-entrega"></p>
+                    <div style="display: flex;justify-content: center;">
+                    <p>Serviço de Entrega:</p>
+                    <span  id="servico-entrega" style="color: red;margin-left: 10px;"></span>
+                    </div>
+                    <p id="data-pedido"></p>
+
+
+                </div>
+                <!-- Endereço de entrega -->
+
+
+                <div class="rastreio">
+                    <div>
+                    <label for="cod-rastreio">Insira o Código de Rastreio para despachar o produto: </label>
+                    <input type="text" name="cod-rastreio" id="cod-rastreio" required>
+                    </div>
+
+                    <button>DESPACHAR!</button>
+
+                </div>
+
+       
+
+
+
+            </div><!-- info-produto -->
+        </form>
+    </div> 
+</div><!-- MODAL BG -->
+
 
 <div class="container">
 
@@ -57,10 +119,12 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
 
         </div>
     </div>
-    </div>
 </div>
 
 
 
-<script src="../js/jquery-3.6.0.js"></script>
-<script src="js/meus-pedidos.js"></script>
+
+
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="js/meus_pedidos.js"></script>

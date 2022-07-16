@@ -100,7 +100,7 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
 
                 <!-- Botao pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos <?php if($_GET['page'] == 'pedidos'){echo 'marked';} ?>">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
