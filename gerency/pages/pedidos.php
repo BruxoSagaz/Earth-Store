@@ -18,7 +18,7 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
 
     <div class="form-area">
 
-    <div class="flex-center" style="height:32px"><h2>Lista de Pedidos</h2></div>
+    <div class="flex-center" style="height:32px"><h2>Pedidos Prontos Para Entrega:</h2></div>
 
     <div class="container" >
     

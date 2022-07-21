@@ -1,0 +1,35 @@
+.outdooor-div{
+    background-color: #c91f27;
+    min-height: 500px;
+}
+
+
+.outdooor-div .title{
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    color: white;
+    padding-top: 15px;
+    margin-bottom: 30px;
+    cursor: default;
+}
+
+.title h1{
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: 1px solid wheat;
+}
+
+
+.outdooor-div p{
+    margin: 12px 2%;
+    font-size: 18px;
+    color: white;
+    border-left: 1px solid;
+    padding-left: 16px;
+    border-radius: 4px;
+}
+
+.space{
+    height: 20px;
+}

@@ -103,7 +103,11 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos <?php if($_GET['page'] == 'pedidos'){echo 'marked';} ?>">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+
+                
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
 
                 <?php } ?>
 
@@ -119,7 +123,7 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
 
                 <!-- Botao edit item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Banco</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Itens</button></a></li>
 
                 <!-- Botão Variação de Item -->
                 <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button class="variacao">Variação Estoque</button></a></li>
@@ -131,7 +135,11 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+
                 <?php } ?>
 
 
@@ -147,8 +155,10 @@
                 <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Meus Pedidos</button></a></li>
-
+                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+                
+                <!-- Botao Meus pedidos -->
+                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
                 <?php } ?>
 
 

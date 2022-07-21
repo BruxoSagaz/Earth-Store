@@ -101,6 +101,21 @@
                         <td>R$ <?php echo number_format($value['custo'],2,",",".") ?></td>
                     </tr>
                     </table>
+
+
+                    <div class="cod-rastreio flex center display-final-payment <?php
+                        echo (isset($dictStatus[$value['status']])) ? $dictStatus[$value['status']] : "pgto-generic"; 
+                    ?>">
+                        <p style="margin-right: 6px;">Codigo de Rastreio:</p>
+                        <!-- Filtrar Cod de rastreio -->
+                        <p style="font-weight: bolder;
+                        font-size: 20px;">
+                        <?php 
+                            // if()echo $value['rastreio'] 
+                            echo ($value['rastreio']=="Sem") ? 'À enviar' :$value['rastreio']; 
+                        ?>
+                        </p>
+                    </div>
                 </div>
 
                 <div class="clear"></div>

@@ -6,7 +6,7 @@ include_once('../config.php');
 include_once('../ajax/PDO.php');
 
 
-$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Paga' AND `responsavel` = '".$_SESSION['id_admin']."'");
+$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Enviado' OR `status`='Finalizado' AND`responsavel` = '".$_SESSION['id_admin']."'");
 ?>
 
 
@@ -61,11 +61,12 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
 
                 <div class="rastreio">
                     <div>
-                    <label for="cod-rastreio">Insira o Código de Rastreio para despachar o Pacote: </label>
+                    <label for="cod-rastreio">Código de Rastreio Do Pacote: </label>
+                    
                     <input type="text" name="cod-rastreio" id="cod-rastreio" required>
                     </div>
 
-                    <button style="margin-top: 15px;">DESPACHAR!</button>
+                    <button style="margin-top: 15px;">MUDAR COD!</button>
 
                 </div>
 
@@ -83,7 +84,7 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
 
     <div class="form-area">
 
-    <div class="flex-center" style="height:32px"><h2>Meus Pedidos</h2></div>
+    <div class="flex-center" style="height:32px"><h2>Lista de Despachados</h2></div>
 
     <div class="container" >
     
@@ -109,14 +110,14 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
                         <td><?php echo $value['nome_comprador']?></td>
                         <td><?php echo $value['status']?></td>
                         <td><?php echo $value['data']?></td>
-                        <td><i class="fa-solid fa-pen-to-square" id='<?php echo $value['transaction-id'] ?>'></i></td>
+                        <td><i class="fa-solid fa-info" id='<?php echo $value['transaction-id'] ?>'></i></td>
                        
                     </tr>
                     <?php } ?>
                 </tbody>
 
 
-
+                
 
             </table>
 
@@ -130,4 +131,4 @@ $dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='
 
 
 <script src="../js/jquery-3.6.0.min.js"></script>
-<script src="js/meus_pedidos.js"></script>
+<script src="js/despachados.js"></script>

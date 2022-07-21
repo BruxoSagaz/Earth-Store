@@ -163,8 +163,9 @@ function construirItem($item){
         $divisoes = $divisoes.",00";
     }
 
+    $divisoes = str_replace(",",".",$divisoes);
     echo '<div  class="divisions">';
-        echo '<span> Ou até '.$parcelas.'x de R$ '.$divisoes.'</span>';
+        echo '<span> Ou até '.$parcelas.'x de R$ '.number_format($divisoes,2,',','').'</span>';
         echo '<span>+ Frete</span>';
     echo '</div>';
 

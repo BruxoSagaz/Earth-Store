@@ -2,7 +2,7 @@ $(document).ready(function(){
     var modal = $('.modal-bg');
     var detalhes = {};
 
-    $('td i.fa-pen-to-square').click(function(){
+    $('td i.fa-info').click(function(){
         
         id = $(this).attr('id');
         $.ajax({
@@ -43,6 +43,7 @@ $(document).ready(function(){
                 $('#servico-entrega').text(detalhes['servico'])
                 $('#data-pedido').text('Data do Pedido: '+detalhes['data'])
                 $('#nome-comprador').text('Nome do Receptor: '+detalhes['nome_comprador'])
+                $('#cod-rastreio').val(detalhes['rastreio']);
 
 
             },
@@ -88,7 +89,7 @@ $(document).ready(function(){
     
     }
 
-    $('td i.fa-pen-to-square').click(function(e){
+    $('td i.fa-info').click(function(e){
         e.preventDefault();
         e.stopPropagation();
         modal.fadeIn();
@@ -114,44 +115,42 @@ $(document).ready(function(){
         modal.fadeOut(function(){
             $('.information-area').empty();
         });
-        // $('#nome-comprador').empty();
-        // $('#endereco-entrega').empty();
-        // $('#servico-entrega').empty();
-        // $('#data-pedido').empty();
-     
-        // $('#').empty();
-        // $('#').empty();
         
     }
+
 
     $('.rastreio button').click(function(e){
         e.preventDefault();
         e.stopPropagation();
-        info = $('#form_edit_item').serialize();
-        idTran = $('#id-do-pedido').text().trim();
-        info += '&id='+idTran;
-        console.log(info);
-
-        $.ajax({
-            method:"post",
-            url: "./ajax/despachar.php",
-            data: info,
-            dataType: "json",
-            success: function (response) {
-                detalhes = response;
-                console.log(response);
-                if(response['retorno'] == 'sucesso'){
-                    alert('Atualizado com sucesso, recarregando página')
-                    document.location.reload(true);
-                }else{
-                    alert('Falha no despache, tente novamente ou contate o desenvolvedor')
+        if(confirm("Tem certeza que deseja mudar o código de rastreio?")){
+            info = $('#form_edit_item').serialize();
+            idTran = $('#id-do-pedido').text().trim();
+            info += '&id='+idTran;
+            console.log(info);
+    
+            $.ajax({
+                method:"post",
+                url: "./ajax/despachar.php",
+                data: info,
+                dataType: "json",
+                success: function (response) {
+                    detalhes = response;
+                    console.log(response);
+                    if(response['retorno'] == 'sucesso'){
+                        alert('Atualizado com sucesso, recarregando página')
+                        document.location.reload(true);
+                    }else{
+                        alert('Falha no despache, tente novamente ou contate o desenvolvedor')
+                    }
+    
+                },
+                error: function(){
+                    console.log('erro')
                 }
+            });
+        }
 
-            },
-            error: function(){
-                console.log('erro')
-            }
-        });
     })
+
 
 });

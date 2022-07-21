@@ -26,7 +26,9 @@
                     </ul>
 
                     <ul class="divlist-nav">
+                        <a href="<?php echo PATH?>entrar-contato">
                         <i class="fa-solid fa-comment-dots"></i><li>Fale Conosco</li>
+                        </a>
                     </ul>
 
                     <ul class="list-nav">

@@ -11,19 +11,17 @@ include("./classes/loja.php");
         }
         if(@$_GET['page']=='filtros'){
             include("pages/filtros.php");
-        }else if(@$_GET['page']=='individual'){
-            include("pages/individual.php");
         }else{
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" style="">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php 
-    if(isset($_GET['url'])){echo $_GET['url'];}else{echo 'Home';};?></title>
+    if(isset($_GET['page'])){echo ucfirst($_GET['page']);}else{echo 'Home';};?></title>
 
     <!--Favicon-->
     <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/">
@@ -60,7 +58,7 @@ include("./classes/loja.php");
         
     ?>
 </head>
-<body>
+<body style="">
 
     <!-- Header -->
         <?php
@@ -113,9 +111,9 @@ include("./classes/loja.php");
     <script src="<?php echo PATH?>js/header.js"></script>
 
     <?php
-        if(@$_GET['url'] != 'home'){
-            if(is_file('js/'.$_GET['url'].'.js')){
-                echo '<script src="js/'.$_GET['url'].'.js"></script>';
+        if(@$_GET['page'] != 'home'){
+            if(@is_file('js/'.$_GET['page'].'.js')){
+                echo@'<script src="js/'.$_GET['page'].'.js"></script>';
             } 
         }
     ?>
