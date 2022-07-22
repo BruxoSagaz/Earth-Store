@@ -14,18 +14,21 @@ $id = $_SESSION['dados']['id'];
 $_SESSION['salvar-card'] = 'checked';
 
 $query = "SELECT * FROM `usuarios-cards` WHERE `id` = $id";
-$res = normalDbQuery($query);
+$valores = [$id];
+$res = normalDbQuery($query,$valores);
 
 if(count($res) == 0){
     // Não salvo Card
 
-    $query = "INSERT INTO `usuarios-cards` (`id`, `num-card`, `bandeira`, `cvv`, `validade`) VALUES ($id,'$numCard','$bandeira','$cvv','$validade')";
-    $res = normalDbQuery($query);
+    $query = "INSERT INTO `usuarios-cards` (`id`, `num-card`, `bandeira`, `cvv`, `validade`) VALUES (?,'?','?','?','?')";
+    $valores = [$id,$numCard,$bandeira,$cvv,$validade];
+    $res = normalDbQuery($query,$valores);
 
     print_r($res);
 }else{
-    $query = "UPDATE `usuarios-cards` SET `num-card`='$numCard',`bandeira`='$bandeira',`cvv`='$cvv',`validade`='$validade'";
-    $res = normalDbQuery($query);
+    $query = "UPDATE `usuarios-cards` SET `num-card`='?',`bandeira`='?',`cvv`='?',`validade`='?'";
+    $valores = [$numCard,$bandeira,$cvv,$validade];
+    $res = normalDbQuery($query,$valores);
 
     print_r($res);
 }

@@ -205,9 +205,10 @@ if(isset($_POST['gerar_sessao'])){
     $carbonDate = \Carbon\Carbon::parse($agora)->format('d/m/Y');
 
 
-    $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = '".$_SESSION['dados']['id']."'";
+    $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = '?'";
+    $valoress = [$_SESSION['dados']['id']];
     
-    $dbRef = normalDbQuery($queryy);
+    $dbRef = normalDbQuery($queryy,$valoress);
     $dbRef = $dbRef[0];
 
     // print_r($dbRef);
@@ -242,8 +243,9 @@ if(isset($_POST['gerar_sessao'])){
     
 
 
-    $queryy = "UPDATE `usuarios_compras` SET `notification-code` = '".$dbRef['notification-code']."', `transaction-status` ='".$dbRef['transaction-status']."',`transaction-id` = '".$dbRef['transaction-id']."' WHERE `id` = '".$_SESSION['dados']['id']."'";
-    normalDbQuery($queryy);
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code` = '?', `transaction-status` ='?',`transaction-id` = '?' WHERE `id` = '?'";
+    $valoress = [$dbRef['notification-code'],$dbRef['transaction-status'],$dbRef['transaction-id'],$_SESSION['dados']['id']];
+    normalDbQuery($queryy,$valoress);
     // echo $queryy;
 
     // DADOS PARA O BANCO
@@ -268,9 +270,10 @@ if(isset($_POST['gerar_sessao'])){
 
 
 
-    $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES ('".$dataBank['transaction-id']."','".$dataBank['nome_comprador']."','".$dataBank['endereco_entrega']."','".$_SESSION['servicoEntrega']."',".$dataBank['custo'].",'".$dataBank['itens']."','".$dataBank['status']."','".$carbonDate."','".$_POST['metodo']."')";
+    $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES ('?','?','?','?',?,'?','?','?','?')";
     // echo $query;
-    normalDbQuery($query);
+    $valoress = [$dataBank['transaction-id'],$dataBank['nome_comprador'],$dataBank['endereco_entrega'],$_SESSION['servicoEntrega'],$dataBank['custo'],$dataBank['itens'],$dataBank['status'],$carbonDate,$_POST['metodo']];
+    normalDbQuery($query,$valoress);
 
     die($xml);
 

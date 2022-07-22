@@ -1,8 +1,9 @@
 
+
 function pegarTicket(id,key){
 
   
-    new Ajax.Request("./ajax/add_pedido.php", { 
+    new Ajax.Request("./ajax/add_ticket.php", { 
         method:'post',
         parameters: {'id': id},
         onSuccess:function(transport){
@@ -25,7 +26,7 @@ function pegarTicket(id,key){
     }
 }
 
-new Ajax.PeriodicalUpdater('itens-banco',"./ajax/listar-pagos.php",{
+new Ajax.PeriodicalUpdater('itens-banco',"./ajax/listar-ticket.php",{
     method:'get',
     frequency: 1,
     decay: 1

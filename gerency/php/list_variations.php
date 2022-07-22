@@ -15,9 +15,10 @@ if($select == "all"){
         }
     }
 }else{
-    $query = "SELECT * FROM `variacoes` WHERE `categoria` LIKE '%$select%' LIMIT 0,25";
+    $query = "SELECT * FROM `variacoes` WHERE `categoria` LIKE ? LIMIT 0,25";
+    $valores = ["%".$select."%"];
     $sql = $pdo->prepare($query);
-    $sql->execute();
+    $sql->execute($valores);
 
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){

@@ -9,14 +9,15 @@ if($variations == ''){
     $variations = "Sem Variações";
 }
 
-$querys = "UPDATE `variacoes` SET `variacoes` = '$variations' WHERE `categoria` = '$categoria'";
+$querys = "UPDATE `variacoes` SET `variacoes` = '?' WHERE `categoria` = '?'";
+$valores = [$variations,$categoria];
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
     try{
-        $sql->execute();
+        $sql->execute($valores);
         $data['sucesso']='true';
         die(json_encode($data));
     }catch (Exception $e) {
@@ -24,5 +25,5 @@ function dbQuery($query){
     }
 }
 
-dbQuery($querys);
+dbQuery($querys,$valores);
 ?>

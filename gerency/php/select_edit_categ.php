@@ -5,14 +5,15 @@ $categoria = $_POST['categoria'];
 $data = array();
 
 
-$querys = "SELECT * FROM `variacoes` WHERE `categoria` = '$categoria'";
+$querys = "SELECT * FROM `variacoes` WHERE `categoria` = '?'";
+$valores = [$categoria];
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
     try{
-        $receive = $sql->execute();
+        $receive = $sql->execute($valores);
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $key => $value){
@@ -33,5 +34,5 @@ function dbQuery($query){
     }
 }
 
-dbQuery($querys);
+dbQuery($querys,$valores);
 ?>

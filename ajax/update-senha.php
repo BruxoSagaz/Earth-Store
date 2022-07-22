@@ -11,12 +11,12 @@ $data = array();
 
 
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     global $dbReturn;
 
     $sql = $pdo->prepare($query);
-    if($sql->execute()){
+    if($sql->execute($valores)){
         if (strpos($query, 'SELECT') !== false) {
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             // print_r(count($result[0]));
@@ -29,21 +29,22 @@ function dbQuery($query){
 }
 
 
-$query = "SELECT `senha` FROM `usuario` WHERE `id` = {$id}";
+$query = "SELECT `senha` FROM `usuario` WHERE `id` = ?";
+$valores =[$id];
 // echo $query;
 
-$senhaDb = dbQuery($query);
+$senhaDb = dbQuery($query,$valores);
 // print_r($senhaDb);
 $senhaDb = $senhaDb['senha'];
 // echo 'senhaDB : '. $senhaDb;
 // echo '<br>';
 // echo 'senhaAtual : '. $senhaAtual;
 if($senhaDb == $senhaAtual){
-    $query = "UPDATE `usuario` SET `senha`='{$senhaNova}' WHERE `id` = {$id}";
-
+    $query = "UPDATE `usuario` SET `senha`='?' WHERE `id` = ?";
+    $valores = [$senhaNova,$id];
         
     try{
-        if(dbQuery($query)){
+        if(dbQuery($query,$valores)){
             $data['status'] = 'login';
             $data['retorno'] = "Senha Alterada Com Sucesso, Refaça o Login!";
         }else{

@@ -8,12 +8,14 @@ $email = $_POST['email'];
 $celular = $_POST['celular'];
 $relato = $_POST['relato'];
 
+$idTicket = uniqid();
+
 $celular = preg_replace("/\D/", "", $celular);
 
 
-$query = "INSERT INTO `tickets_ajuda` (`assunto`, `email`, `celular`, `relato`) VALUES ('$assunto','$email','$celular','$relato')";
-
-normalDbQuery($query);
+$query = "INSERT INTO `tickets_ajuda` ( `id`,`assunto`, `email`, `celular`, `relato`) VALUES ('?','?','?','?','?')";
+$valores = [$id,$assunto,$email,$celular,$relato];
+normalDbQuery($query,$valores);
 
 die(json_encode(['retorno'=>'sucesso']));
 ?>

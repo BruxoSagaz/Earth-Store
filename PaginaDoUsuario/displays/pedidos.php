@@ -127,9 +127,16 @@
                         echo ", Pedido Enviado e à caminho, consulte o código de rastreio";
                     }  ?></P>
                     <div class="color-ind <?php echo (isset($dictStatus[$value['status']])) ? $dictStatus[$value['status']] : "pgto-generic";?>"></div>
+
+
                 </div>
 
+                <?php
+                    echo ($value['status'] == 'Enviado') ? '<div class="flex center"><button class="marcar-recebido" valor='.$value['transaction-id'].' style="  height: 45px;padding: 10px 15px;margin-bottom: 6px;">Recebi meu Pedido</button></div>' : ""; 
+                ?>
+                
             </div>
+
 
             <div class="line-separation"></div>
             <div class="slide-indicator w100"><i class="fa-solid fa-angle-down"></i></div>
@@ -142,3 +149,4 @@
     
 </section>
 <!-- Pedidos -->
+

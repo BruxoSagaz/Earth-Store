@@ -61,7 +61,7 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
     // print_r($pedido);
 
 
-    $references = dbQuery("SELECT * FROM  `usuarios_compras` WHERE `transaction-id` LIKE '%$reference%'");
+    $references = dbQuery("SELECT * FROM  `usuarios_compras` WHERE `transaction-id` LIKE ?",["%".$reference."%"]);
 
     $references = $references[0];
     
@@ -90,14 +90,16 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
 
 
 
-    $queryy = "UPDATE `usuarios_compras` SET `notification-code`='$notificationCodeBank', `transaction-status`='$transactionStatusBank' WHERE `transaction-id` LIKE '%$reference%'";
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code`='?', `transaction-status`='?' WHERE `transaction-id` LIKE '?'";
+    $valores = [$notificationCodeBank,$transactionStatus,"%".$reference."%"];
 
-    dbQuery($queryy);
+    dbQuery($queryy,$valores);
   
 
-    $queryy = "UPDATE `usuarios_pedidos` SET `status`='$transactionStatus' WHERE `transaction-id` = '$reference'";
+    $queryy = "UPDATE `usuarios_pedidos` SET `status`='?' WHERE `transaction-id` = '?'";
+    $valores = [$transactionStatus,$reference];
 
-    dbQuery($queryy);
+    dbQuery($queryy,$valores);
 
 
 
@@ -118,11 +120,11 @@ function compress($item){
     }
 }
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
     ;
-    if($sql->execute()){
+    if($sql->execute($valores)){
         $result = $sql->fetchAll();
         return $result;
     }else{

@@ -15,14 +15,16 @@ $dbReturn;
 
 $data = array();
 
-$query = "UPDATE `usuario` SET `cpf`='{$cpf}',`nome`='{$nome}',`dataNascimento`='{$date}',`celular`='{$cell}',`email`='{$email}' WHERE `id` = {$id}";
+$query = "UPDATE `usuario` SET `cpf`='?',`nome`='?',`dataNascimento`='?',`celular`='?',`email`='?' WHERE `id` = ?";
+$valores = [$cpf,$nome,$date,$cell,$email,$id];
+
 // echo $query;
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     global $dbReturn;
 
     $sql = $pdo->prepare($query);
-    if($sql->execute()){
+    if($sql->execute($valores)){
         if (strpos($query, 'SELECT') !== false) {
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             // print_r(count($result[0]));
@@ -43,18 +45,18 @@ function dbQuery($query){
 
 
 try{
-    if(dbQuery($query)){
+    if(dbQuery($query,$valores)){
         $data['retorno'] = "sucesso";
     }else{
         $invalidos = "";
         // $query = "SELECT * FROM `usuario` WHERE `cpf` ='{$cpf}' OR `senha` ='{$senha}' OR `email` ='{$email}'";
         // echo $query;
         // echo "SELECT * FROM `usuario` WHERE `senha` ='{$senha}'";
-        if(dbQuery("SELECT `cpf` FROM `usuario` WHERE `cpf` ='{$cpf}'")){
+        if(dbQuery("SELECT `cpf` FROM `usuario` WHERE `cpf` ='?'",[$cpf])){
             // tem cpf iguais na tabela
             $invalidos .= ",cpf";
         }
-        if(dbQuery("SELECT `email` FROM `usuario` WHERE `email` ='{$email}'")){
+        if(dbQuery("SELECT `email` FROM `usuario` WHERE `email` ='?'",[$cpf])){
             // tem emails iguais na tabela
             $invalidos .= ",email";
         };

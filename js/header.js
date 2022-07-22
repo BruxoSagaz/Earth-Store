@@ -143,7 +143,9 @@ $(document).ready(function(){
                 error: function(){
                     console.log("Erro em add cart ajax")
                 }
-            })
+            }).done(function (){
+
+            });
 
             
             addItemToCart(id,nome,quant,precoFormat,img,max);

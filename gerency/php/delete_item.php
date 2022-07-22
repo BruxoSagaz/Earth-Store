@@ -5,18 +5,18 @@ $id = $_POST['id'];
 $data = array();
 
 
-$querys = "DELETE FROM `produto` WHERE `id` = $id";
-
+$querys = "DELETE FROM `produto` WHERE `id` = ?";
+$valorys = [$id];
 
 // $sql = $pdo->query("DELETE FROM `produto` WHERE `id` = $id");
 
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
     try{
-        $sql->execute();
+        $sql->execute($valores);
         $data['sucesso']='true';
         die(json_encode($data));
     }catch (Exception $e) {
@@ -25,11 +25,12 @@ function dbQuery($query){
 }
 
 function apagarIm($id){
-    $queryInterna = "SELECT `imagens` FROM `produto` WHERE `id` = $id";
+    $queryInterna = "SELECT `imagens` FROM `produto` WHERE `id` = ?";
+    $valores = [$id];
     global $pdo;
     $sql = $pdo->prepare($queryInterna);
     try{
-        $sql->execute();
+        $sql->execute($valores);
         
         if($sql->rowCount() > 0 ){
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -53,5 +54,5 @@ function apagarIm($id){
 }
 
 apagarIm($id);
-dbQuery($querys);
+dbQuery($querys,$valorys);
 ?>

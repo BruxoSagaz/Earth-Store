@@ -16,14 +16,15 @@ $dbReturn;
 
 $data = array();
 
-$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `dataNascimento`, `celular`, `email`) VALUES ('{$cpf}','{$senha}','{$nome}','{$date}','{$cell}','{$email}'); SELECT LAST_INSERT_ID()";
+$query = "INSERT INTO `dblojinha`.`usuario` (`cpf`, `senha`, `nome`, `dataNascimento`, `celular`, `email`) VALUES ('?','?','?','?','?','?'); SELECT LAST_INSERT_ID()";
+$valores = [$cpf,$senha,$date,$nome,$cell,$email];
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     global $dbReturn;
 
     $sql = $pdo->prepare($query);
-    if($sql->execute()){
+    if($sql->execute($valores)){
         if (strpos($query, 'SELECT') !== false) {
             $result = $sql->fetchAll();
             //print_r($result);

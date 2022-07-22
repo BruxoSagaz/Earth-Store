@@ -48,18 +48,19 @@ if(isset($_POST['especificacoes'])){
 // echo "Nome = ",$nome," <br>  Categoria = ",$categoria," <br> BasePrice = ",$basePrice," <br> Parcelas = ",$parcelas," <br> Estoque = ",$estoque," <br> Tags = ",$tags," <br> IMG-Names = ",$image_names," <br> PROM_VER: ",
 // $prom_ver,$prom_val," <br> Descricao = ",$descricaoGeral,"  <br>Especificacoes = ", $especificacoes," <br> ID = ",$id;
 
-$querys = "UPDATE `produto` SET `nome`='$nome',`imagens`='$image_names',`categoria`='$categoria',`descricao-geral`='$descricaoGeral',`especificacoes`='$especificacoes',`tags`='$tags',`preco`='$basePrice',`promocao`=$prom_ver,`valor_em_promocao`='$prom_val',`parcelas`='$parcelas',`estoque`='$estoque',`peso`='$peso',`comprimento`='$comprimento',`altura`='$altura',`largura`='$largura' WHERE `id` = $id";
+$querys = "UPDATE `produto` SET `nome`='?',`imagens`='?',`categoria`='?',`descricao-geral`='?',`especificacoes`='?',`tags`='?',`preco`='?',`promocao`= ?,`valor_em_promocao`='?',`parcelas`='?',`estoque`='?',`peso`='?' WHERE `id` = ?";
+$valores = [$nome,$image_names,$categoria,$descricaoGeral,$especificacoes,$tags,$basePrice,$prom_ver,$prom_val,$parcelas,$estoque,$peso,$id];
 
 // echo "<br>";
 // echo $querys;
 // echo "<br>";
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
     try{
-        $sql->execute();
+        $sql->execute($valores);
         $data['sucesso']='true';
         die(json_encode($data));
     }catch (Exception $e) {
@@ -67,5 +68,5 @@ function dbQuery($query){
     }
 }
 
-dbQuery($querys);
+dbQuery($querys,$valores);
 ?>

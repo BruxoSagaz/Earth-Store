@@ -41,10 +41,10 @@ $(document).ready(function(){
             tdNome.innerHTML =  stringItem;
             trItem.appendChild(tdNome);
 
-            tdPreco = document.createElement('td');
+            tdPreco = document.createElement('td'); 
             total = value.preco * parseInt(value.quant);
             totalFormated = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total);
-
+            
             tdPreco.innerHTML =  totalFormated;
             trItem.appendChild(tdPreco);
 
@@ -293,6 +293,7 @@ $(document).ready(function(){
         precoHTML = $('.valorFinal');
         $.each(precoHTML, function (index, value) { 
             preco[index] = $(this).attr('valor');
+            console.log(preco[index] );
         });
         
         id = Array();
@@ -302,6 +303,7 @@ $(document).ready(function(){
         });
 
 
+        
 
         $.each(nomes, function (index, value) { 
             data[index] = {'nome':value,'quant':quant[index],
@@ -311,8 +313,7 @@ $(document).ready(function(){
 
         
 
-        console.log(data);
-
+      
         return data;
     }
 

@@ -5,7 +5,7 @@ include_once('PDO.php');
 $id = $_SESSION['id_admin'];
 $trans = $_POST['id'];
 
-$query = "UPDATE `usuarios_pedidos` SET `responsavel` = '$id'  WHERE `transaction-id` = '$trans' ";
+$query = "UPDATE `tickets_ajuda` SET `responsavel` = '$id'  WHERE `id` = '$trans' ";
 
 // echo $query;
 

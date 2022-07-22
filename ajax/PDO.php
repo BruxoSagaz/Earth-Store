@@ -31,11 +31,11 @@ function packDb($item){
     }
 }
 
-function normalDbQuery($query){
+function normalDbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
-    if($sql->execute()){
+    if($sql->execute($valores)){
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }else{

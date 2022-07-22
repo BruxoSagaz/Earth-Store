@@ -21,6 +21,7 @@ $(document).ready(function(){
             alert('Seu pedido foi enviado, aguarde resposta pelo seu email');
             $('.form-contact input').val('');
             $('.form-contact textarea').val('');
+            $('#range-carac').text('0');
         });
     })
 

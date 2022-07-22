@@ -13,27 +13,44 @@ $(document).ready(function(){
         e.preventDefault();
 
         let ordemAtual = $(this).attr('ordem');
-        
-        selector = "*[ordem="+ordemAtual+"]";
-        if(ordemAtual != '3'){
-            $(selector).fadeOut(600,function(){
-                proximo = parseInt(ordemAtual) + 1;
-    
-                selector = "*[ordem="+proximo+"]";
-                $(selector).fadeIn(1200);
-            });    
-        }else{
-            $(selector).fadeOut(1200,function(){
-                proximo = parseInt(ordemAtual) + 1;
-    
-                selector = "*[ordem="+proximo+"]";
-                $(selector).fadeIn(1800);
-            });
-        }
+        if(validarEtapa(ordemAtual)){
 
+    
+            selector = "*[ordem="+ordemAtual+"]";
+            if(ordemAtual != '3'){
+                $(selector).fadeOut(600,function(){
+                    proximo = parseInt(ordemAtual) + 1;
+
+                    selector = "*[ordem="+proximo+"]";
+                    $(selector).fadeIn(1200);
+                });    
+            }else{
+                $(selector).fadeOut(1200,function(){
+                    proximo = parseInt(ordemAtual) + 1;
+
+                    selector = "*[ordem="+proximo+"]";
+                    $(selector).fadeIn(1800);
+                });
+            }
+        }
 
     })
 
+    function validarEtapa(pag){
+
+        switch (pag) {
+            case '3':
+                esc = $('input[name="escolha"').is(":checked");
+
+                return esc;
+            case '2':
+
+                return true
+            default:
+                return true;
+        }
+
+    }
         
     $('.go-back').click(function(e){
         e.preventDefault();
@@ -381,7 +398,7 @@ $(document).ready(function(){
                             
                             $('.apagar').fadeOut("fast");
                             $('.aparecer-success-buy').fadeIn("slow")
-                            enableForm('.pay-card');
+                            enableForm('#credit-card-form');
                         }
             
                     })
@@ -391,7 +408,7 @@ $(document).ready(function(){
                 error: function(erro){
                     alert('Erro ao gerar pagamento, Revise seus dados! Ou tente novamente mais tarde');
                     
-                    enableForm('.pay-card');
+                    enableForm('#credit-card-form');
                 }
             })
 

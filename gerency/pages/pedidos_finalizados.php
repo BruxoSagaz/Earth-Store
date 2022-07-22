@@ -6,7 +6,7 @@ include_once('../config.php');
 include_once('../ajax/PDO.php');
 
 
-$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Enviado' OR `status`='Finalizado' AND`responsavel` = '".$_SESSION['id_admin']."'");
+$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `status`='Enviado' OR `status`='Recebido' AND `responsavel` = '".$_SESSION['id_admin']."' ORDER BY  `status`='Enviado' ");
 ?>
 
 

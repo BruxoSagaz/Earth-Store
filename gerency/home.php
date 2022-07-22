@@ -88,26 +88,33 @@
                     if($_SESSION['nivel_admin']=='3'){
                 ?>
 
-                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
 
                 <!-- Botao edit item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Banco</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>edit_item"><button class="edit_item">Consultar Banco</button></a></li>
 
                 <!-- Botão Variação de Item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button class="variacao">Variação Estoque</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>variacao"><button class="variacao">Variação Estoque</button></a></li>
 
-                <!-- Botao visitas -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
+                <!-- Botao visitas
+                <li><a href="<?php //echo PATH_GERENCY ?>visitas"><button class="visitas">Visitas</button></a></li> -->
 
                 <!-- Botao pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos <?php if($_GET['page'] == 'pedidos'){echo 'marked';} ?>">Pedidos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos"><button class="pedidos <?php if($_GET['page'] == 'pedidos'){echo 'marked';} ?>">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
 
                 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+
+                
+                <!-- Botao Ajuda -->
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
+             
+                <!-- Meus Atendimentos-->
+                <li><a href="<?php echo PATH_GERENCY ?>meus-atendimentos"><button class="meus-atendimentos">Meus Atendimentos</button></a></li>
 
                 <?php } ?>
 
@@ -120,25 +127,32 @@
                     if($_SESSION['nivel_admin']=='2'){
                 ?>
 
-                <li><a href="<?php echo PATH_GERENCY ?>&page=cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>cad_item"><button class="cad_item">Cadastrar Item</button></a></li>
 
                 <!-- Botao edit item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=edit_item"><button class="edit_item">Consultar Itens</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>edit_item"><button class="edit_item">Consultar Itens</button></a></li>
 
                 <!-- Botão Variação de Item -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=variacao"><button class="variacao">Variação Estoque</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>variacao"><button class="variacao">Variação Estoque</button></a></li>
 
-                <!-- Botao visitas -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=visitas"><button class="visitas">Visitas</button></a></li>
+                <!-- Botao visitas
+                <li><a href="<?php //echo PATH_GERENCY ?>visitas"><button class="visitas">Visitas</button></a></li> -->
 
                 <!-- Botao pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+
+                
+                <!-- Botao Ajuda -->
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
+
+                <!-- Meus Atendimentos-->
+                <li><a href="<?php echo PATH_GERENCY ?>meus-atendimentos"><button class="meus-atendimentos">Meus Atendimentos</button></a></li>
 
                 <?php } ?>
 
@@ -152,17 +166,19 @@
 
 
                 <!-- Botao pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos"><button class="pedidos">Pedidos Lançados</button></a></li>
 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>meus_pedidos"><button class="meus_pedidos">Pedidos Pendentes</button></a></li>
                 
                 <!-- Botao Meus pedidos -->
-                <li><a href="<?php echo PATH_GERENCY ?>&page=pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
+
+                <!-- Botao Ajuda -->
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
                 <?php } ?>
 
-
-
+                
             </ul>
         </div>
     </nav>
@@ -181,7 +197,6 @@
     
 
     <script  src="js/home.js"></script>
-
 
 </body>
 </html>

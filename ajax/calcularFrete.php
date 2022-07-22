@@ -19,12 +19,12 @@ if(count($ids) > 1){
     foreach ($ids as  $chave => $id) {
 
         $cep = str_replace("-","",$cep);
-        $query = "SELECT `peso` FROM `produto` WHERE `id` = $id";
-        
+        $query = "SELECT `peso` FROM `produto` WHERE `id` = ?";
+        $valores = [$id];
         
         
         $sql = $pdo->prepare($query);
-        $sql->execute();
+        $sql->execute($valores);
         $item = $sql->fetchAll();
         $item = $item[0];
 
@@ -33,11 +33,11 @@ if(count($ids) > 1){
 }else{
     $cep = str_replace("-","",$cep);
     $query = "SELECT `peso` FROM `produto` WHERE `id` = $id";
-    
+    $valores = [$id];
     
     
     $sql = $pdo->prepare($query);
-    $sql->execute();
+    $sql->execute($valores);
     $item = $sql->fetchAll();
     $item = $item[0];
 

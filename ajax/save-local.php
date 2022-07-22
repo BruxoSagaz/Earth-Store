@@ -24,28 +24,24 @@ $_SESSION['local'] = $local;
 
 
 $query = "SELECT * FROM `enderecos` WHERE `id` = $id";
+$valores = [$id];
 
-if(dbQuery($query)->rowCount() > 0){
+if(normalDbQuery($query,$valores)->rowCount() > 0){
     // echo "oii";
     $return['salvo'] = 'true';
 }else{
-    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ('$id','$cep','$endereco','$bairro','$cidade','$estado','$numero','$complement')";
+    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ('?','?','?','?','?','?','?','?')";
+    $valores = [$id,$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement];
 
     // echo $query;
-    if(dbQuery($query)->rowCount() > 0){
+    if(normalDbQuery($query,$valores)->rowCount() > 0){
         die(json_encode(['sucesso'=>"true"]));
     }
     
 }
 
 
-function dbQuery($query){
-    global $pdo;
-    $sql = $pdo->prepare($query);
-    $sql->execute();
-    $sql->fetchAll();
-    return $sql;
-}
+
 
 
 

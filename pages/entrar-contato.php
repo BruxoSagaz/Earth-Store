@@ -12,6 +12,10 @@
     <div class="itens-cont">
     
     <div class="individual">
+        <h2>O Atendimento Será realiazado pelo email fornecido</h2>
+    </div>
+
+    <div class="individual">
     <label for="nome" class="left">Nome:</label>
     <input type="text" name="nome" id="nome" class="right">
     </div>

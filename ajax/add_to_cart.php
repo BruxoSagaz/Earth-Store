@@ -33,6 +33,7 @@ $info = ["id"=>$id,
 
 if(array_push($_SESSION['cart'],$info)){
     $data['sucesso']='true';
+    $data['info'] = $info;
 }else{
     $date['falha'] ='true';
 };

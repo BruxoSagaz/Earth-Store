@@ -20,7 +20,8 @@ $dictStatus = array(
     'Aguardando pagamento' => "aguardando-pgto",
     'Paga' => 'pgto-realizado',
     'Cancelada' => 'pgto-cancelado',
-    'Devolvida' => 'pgto-cancelado'
+    'Devolvida' => 'pgto-cancelado',
+    'Recebido' => 'pedido-recebido'
 );
 
 

@@ -129,6 +129,12 @@ div.neutral-color{
     background-color: #ba68c8;
 }
 
+.pedido-recebido{
+    background: #2fa12fc4;
+}
+
+
+
 .color-ind{
     border-radius: 100%;
     width: 26px;

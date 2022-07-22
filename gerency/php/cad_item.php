@@ -46,30 +46,32 @@ if(isset($_POST['especificacoes'])){
 // echo $nome," ",$categoria," ",$basePrice," ",$parcelas," ",$estoque," ",$tags," ",$image_names," PROM_VER: ",
 // $prom_ver,$prom_val," ",$descricaoGeral," ", $especificacoes;
 
-$querys = "INSERT INTO `produto`( `nome`, `imagens`, `categoria`, `descricao-geral`, `especificacoes`, `tags`, `preco`, `promocao`, `valor_em_promocao`, `parcelas`, `estoque`, `peso`) VALUES ('$nome','$image_names','$categoria','$descricaoGeral','$especificacoes','$tags','$basePrice',$prom_ver,'$prom_val','$parcelas','$estoque','$peso')";
-
+$querys = "INSERT INTO `produto`( `nome`, `imagens`, `categoria`, `descricao-geral`, `especificacoes`, `tags`, `preco`, `promocao`, `valor_em_promocao`, `parcelas`, `estoque`, `peso`) VALUES ('?','?','?','?','?','?','?',?,'?','?','?','?')";
+$valores1 = [$nome,$image_names,$categoria,$descricaoGeral,$especificacoes,$tags,$basePrice,$prom_ver,$prom_val,$parcelas,$estoque,$peso];
 // echo "<br>";
 // echo $querys;
 
 
-$query2 = "SELECT * FROM `variacoes` WHERE categoria = '".$categoria."'";
+$query2 = "SELECT * FROM `variacoes` WHERE categoria = '?'";
+$valores2 = [$categoria];
 
 $sql2 = $pdo->prepare($query2);
 
-$sql2->execute();
+$sql2->execute($valores2);
 $row = $sql2->rowCount();
 
 if($sql2->rowCount() == 0 || $sql2->rowCount() == false ){
-    $sql2 = $pdo->prepare("INSERT INTO `variacoes` (`categoria`) VALUES ('$categoria')");
-    $sql2->execute();
+    $sql2 = $pdo->prepare("INSERT INTO `variacoes` (`categoria`) VALUES ('?')");
+    $valoresX = [$categoria];
+    $sql2->execute($valoresX);
 }
 
-function dbQuery($query){
+function dbQuery($query,$valores){
     global $pdo;
     $sql = $pdo->prepare($query);
 
     try{
-        $sql->execute();
+        $sql->execute($valores);
         $data['sucesso']='true';
         die(json_encode($data));
     }catch (Exception $e) {
@@ -78,5 +80,5 @@ function dbQuery($query){
 }
 
 
-dbQuery($querys);
+dbQuery($querys,$valores1);
 ?>

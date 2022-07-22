@@ -789,9 +789,10 @@ div.product-name{
 .price-box{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     font-family: "Open Sans";
-    padding-bottom: 18px;
+    height: 90px;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .price-box .price-item{
@@ -840,6 +841,7 @@ div.product-name{
     padding: 0px 19px;
     margin-left: 15px;
     color: white;
+    border-radius: 3px;
 }
 
 .add-to-cart button:hover {
@@ -869,8 +871,8 @@ div.product-name{
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     padding-bottom: 2px;
+    justify-content: flex-start;
 }
 
 div .img-field{
