@@ -6,7 +6,7 @@
     include_once("../ajax/PDO.php");
     $id = $_SESSION['dados']['id'];
     $query = "SELECT * FROM `usuarios-cards` WHERE `id` = $id";
-    $cardData = normalDbQuery($query);
+    $cardData = normalDbQuery($query,[]);
     $cardData = $cardData[0];
    
     ?>
@@ -155,15 +155,23 @@
         <div class="row"><!-- Row -->
 
         <div class="individual">
-        <label for="cidade">Cidade: </label>
-        <input type="text" name="cidade" id="cidade" style="width: 170px;" value="<?php echo @$_SESSION['local']['cidade']?>">
+        <label for="estado">Estado: </label>
+        <!-- <input type="text" name="estado" id="estado" style="width: 70px;" value="<?php echo @$_SESSION['local']['estado']?>" list="estados_list"> -->
+        <select name="estado" id="estado" >
+            <option value="<?php echo @$_SESSION['local']['estado']?>"  selected="selected"><?php echo @$_SESSION['local']['estado']?></option>
+        </select>
         </div>
 
 
         <div class="individual">
-        <label for="estado">Estado: </label>
-        <input type="text" name="estado" id="estado" style="width: 70px;" value="<?php echo @$_SESSION['local']['estado']?>">
+        <label for="cidade">Cidade: </label>
+        <select name="cidade" id="cidade" >
+            <option value="<?php echo @$_SESSION['local']['cidade']?>"  selected="selected"><?php echo @$_SESSION['local']['cidade']?></option>
+        </select>
         </div>
+
+
+
 
         </div><!-- Row -->
 

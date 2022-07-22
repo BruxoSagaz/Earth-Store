@@ -8,7 +8,7 @@ include_once('../config.php');
 include_once('../ajax/PDO.php');
 
 
-$dadosAtendimento = normalDbQuery("SELECT * FROM `tickets_ajuda` WHERE `status`='Aberto' AND `responsavel` = '".$_SESSION['id_admin']."'");
+$dadosAtendimento = normalDbQuery("SELECT * FROM `tickets_ajuda` WHERE `status`='Aberto' AND `responsavel` = '".$_SESSION['id_admin']."'",[]);
 ?>
 
 

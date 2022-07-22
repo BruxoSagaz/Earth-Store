@@ -1,5 +1,45 @@
 $(document).ready(function(){
 
+
+
+    $.getJSON(config.path+'/json/estados_cidades.json', function (data) {
+       
+        var items = [];
+        var options = '<option value="">escolha um estado</option>';
+        origin = $("#estado").html();	
+      
+        $.each(data, function (key, val) {
+            options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+        });	
+        origin += options;
+        // console.log($("#estado"))				
+        $("#estado").html(origin);				
+        
+        $("#estado").change(function () {				
+        
+            var options_cidades = '';
+            var str = "";					
+            
+            $("#estado option:selected").each(function () {
+                str += $(this).text();
+            });
+            
+            $.each(data, function (key, val) {
+                if(val.nome == str) {							
+                    $.each(val.cidades, function (key_city, val_city) {
+                        options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+                    });							
+                }
+            });
+
+            $("#cidade").html(options_cidades);
+            
+        }).change();		
+    
+    });
+
+
+
     if($('#ceps').val().length == 9){
         calcularFreteTotal();
     }
@@ -74,8 +114,8 @@ $(document).ready(function(){
         }, 1600);
 
 
-        // tudo = Array(itens,valors,fretes)
-        // console.log(tudo)
+
+        
     });
 
 

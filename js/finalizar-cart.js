@@ -44,7 +44,10 @@ $(document).ready(function(){
 
                 return esc;
             case '2':
-
+                if($('#salvar-end').is(':checked')){
+                    salvarLocal();
+                }
+                
                 return true
             default:
                 return true;
@@ -581,8 +584,8 @@ $(document).ready(function(){
 
 
     function salvarLocal(){
-        data = $('.local-form input').serialize();
-        // console.log(data);
+        data = $('.local-form').serialize();
+        console.log(data);
 
 
         $.ajax({
