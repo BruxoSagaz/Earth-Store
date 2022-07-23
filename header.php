@@ -51,7 +51,7 @@
                     </ul>
 
                     <ul>
-                        <div class="bag-shipping" id="bag-shippig-div">
+                        <div class="bag-shipping">
                             <div class="num-cart">
                                 <?php
                                  if(isset($_SESSION['cart'])){
@@ -87,7 +87,7 @@
                     echo "$nome[0]";
                     echo '</h2>';
                     echo '</div>'; 
-                ?>
+                ?>  
 
 
                 <div class="user-header">
@@ -235,21 +235,53 @@
 
         <div class="container">
             <div class="mobile-header">
-            
-                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fa-solid fa-bars"></i></a>
-
+                <!-- SLIDE CONFIG -->
+                <i class="fa-solid fa-bars"></i>
+                <!-- SLIDE CONFIG -->
                 
                 <!-- Logo -->
                 <div class="logo-mobile"><a href="<?php echo PATH?>home"><img src="<?php echo PATH?>images/Logo.png" alt=""></a></div>
                 <!-- Logo -->
 
                 <ul class="list-nav">
-                   <a href="<?php echo PATH?>cadastro"><i class="fa-solid fa-arrow-right-to-bracket" ></i></a> <!--<li>Minha Conta</li> -->
+                    <div class="bag-shipping">
+                            <div class="num-cart" id="first-num-cart">
+                                <?php
+                                 if(isset($_SESSION['cart'])){
+                                    $totalItem = 0;
+                                    foreach ($_SESSION['cart'] as $key => $value) {
+                                        $totalItem++;
+                                    }
+                                    echo $totalItem;
+                                 }else{
+                                     echo "0";
+                                 }
+
+                                ?>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </div>
+                    </div>
                 </ul>
                 
             </div>
-
+            <div class="slide-menu">
+                    <div class="opt-menu">
+                        <input type="input" class="form-field" placeholder="Pesquisa..." name="pesq" id='keysearch' autocomplete="on" />
+                        <input type="radio" value='filtros' name='page' style="display:none;" checked>
+                        <i class="fa-solid fa-magnifying-glass" ></i ><p>Pesquisar</p>
+                    </div>
+                    
+                    <a href="<?php echo PATH?>entrar-contato">
+                    <div class="opt-menu"><i class="fa-solid fa-comment-dots"></i> <p>Fale Conosco</p></div>
+                    </a>
+                    
+                    <a href="<?php echo PATH?>PaginaDoUsuario">
+                    <div class="opt-menu"> <i class="fa-solid fa-user"></i>Minha Conta</div>
+                    </a>
+            </div>          
         </div>
     </header>
 
-    <div style="height:100px"></div>
+    <div id="height-header"></div>

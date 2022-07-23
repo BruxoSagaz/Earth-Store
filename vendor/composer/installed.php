@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1323bd0d30fc20ddda87acc73e882e0096c6cb11',
+        'reference' => '5bc9fd85bd839d7d56a3e67593722debaab2aa41',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1323bd0d30fc20ddda87acc73e882e0096c6cb11',
+            'reference' => '5bc9fd85bd839d7d56a3e67593722debaab2aa41',
             'dev_requirement' => false,
         ),
         'flyingluscas/correios-php' => array(
@@ -62,6 +62,15 @@
             'install_path' => __DIR__ . '/../nesbot/carbon',
             'aliases' => array(),
             'reference' => 'a9000603ea337c8df16cc41f8b6be95a65f4d0f5',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.6.3',
+            'version' => '6.6.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => '9400f305a898f194caff5521f64e5dfa926626f3',
             'dev_requirement' => false,
         ),
         'psr/http-client' => array(

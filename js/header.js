@@ -23,8 +23,8 @@ $(document).ready(function(){
 
     // Abrir Popup do cart
 
-    $('#bag-shippig-div').click(function(e){
-        
+    $('.bag-shipping').click(function(e){
+        console.log('2')
         e.stopPropagation();
         sidebar2 = $('.cart-sidebar2');
         if(sidebar2.length > 0){
@@ -120,7 +120,7 @@ $(document).ready(function(){
             
             val = input.val();
             val = parseInt(val);
-            console.log(input.attr('max'))
+            // console.log(input.attr('max'))
             if(val < parseInt(input.attr('max'))){
                 val++
                 input.val(val);
@@ -373,18 +373,23 @@ $(document).ready(function(){
     }
 
     function addNumCart(){
-        cart = $('.num-cart');
+        cart = $('#first-num-cart');
         let quant = cart.text();
         quant = parseInt(quant) + 1;
-        cart.text(quant);
+        $('.num-cart').text(quant);
     }
 
     function subNumCart(){
-        cart = $('.num-cart');
+        cart = $('#first-num-cart');
         let quant = cart.text();
         quant = parseInt(quant) - 1;
-        cart.text(quant);
+        $('.num-cart').text(quant);
     }
 
-    
+    // MOBILE
+
+    $('.fa-bars').click(function(){
+        $('.slide-menu').slideToggle();
+    });
+
 });

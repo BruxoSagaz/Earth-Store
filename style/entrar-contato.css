@@ -105,3 +105,63 @@ textarea::-webkit-scrollbar-thumb {
     text-align: center;
     color: #c91f27;
 }
+
+
+
+
+@media screen and (max-width:768px) {
+    .individual{   
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .individual input {
+        width: 100%;
+    }
+    
+    .right{
+        width: 100%;
+    }
+
+    .individual label{
+        width: 100%;
+    }
+
+    .itens-cont{
+        width: 60%;
+    }
+    
+}
+
+
+@media screen and (max-width:425px) {
+    .individual{   
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .individual input {
+        width: 100%;
+    }
+    
+    .right{
+        width: 100%;
+    }
+
+    .individual label{
+        width: 100%;
+    }
+
+    .itens-cont{
+        width: 100%;
+        margin-top: 25px;
+        border-top: 2px solid #c91f27;
+        
+    }
+    
+    .outdooor-div button {     
+        width: 75%;
+    }
+}
