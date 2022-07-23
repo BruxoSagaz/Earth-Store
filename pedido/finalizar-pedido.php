@@ -165,7 +165,7 @@
 
         <div class="individual">
         <label for="cidade">Cidade: </label>
-        <select name="cidade" id="cidade" >
+        <select name="cidade" id="cidade" style="min-width: 125px;" >
             <option value="<?php echo @$_SESSION['local']['cidade']?>"  selected="selected"><?php echo @$_SESSION['local']['cidade']?></option>
         </select>
         </div>
@@ -181,6 +181,7 @@
             <input type="checkbox" name="salvar-end" id="salvar-end" <?php echo @$_SESSION['local']['salvar']?>>
         </div>
         </div><!-- Row -->
+
 
 
     </form><!-- Local-Form -->
@@ -477,11 +478,15 @@
     <div class="aparecer-success-buy" style="display:none">
         <div class='success-buy'>
             <i class="fa-regular fa-circle-check"></i>
-            <p>Sua Compra Foi Efetuada com sucesso!</p>
-            <p>Você será notificado com as etapas do pagamento</p>
-            <p>e o código de rastreio!</p>
+            <p class="p-fade">Sua Compra Foi Efetuada com sucesso!</p>
+            <p class="p-fade">Você será notificado com as etapas do pagamento</p>
+            
+            <p class="boleto-show" style='display:none;'>Seu Boleto Foi gerado!</p>
+        
 
-            <a href='<?php echo PATH ?>'><button class='return-home'> Voltar para página inicial</button></a>
+            <a href='<?php echo PATH ?>'  class="p-fade"><button class='return-home'> Voltar para página inicial</button></a>
+
+            <a href="" class="boleto-show"><button style="width: 100%;margin-right: 20px;">Clique Aqui Para Imprimir O Boleto</button></a>
         </div>
     </div>
 

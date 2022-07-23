@@ -44,6 +44,7 @@ $(document).ready(function(){
 
                 return esc;
             case '2':
+                
                 if($('#salvar-end').is(':checked')){
                     salvarLocal();
                 }
@@ -439,7 +440,10 @@ $(document).ready(function(){
                 dataType: "json",
 
             }).done(function(BOLETO){
-
+                $('a.boleto-show').attr('href',BOLETO.paymentLink);
+                $('.p-fade').fadeOut(100);
+                $('.boleto-show').fadeIn(100);
+           
                 
                 $.ajax({
                     method:"post",
@@ -538,26 +542,27 @@ $(document).ready(function(){
 
     function pegarLocal(){
         form =  $('.local-form');
-        inputs = form.find('input');
-        info = Array();
-
+        inputs = form.serializeArray();
+        
+        final = Array();
+     
         $.each(inputs, function (index, value) {
-            info.push($(this).val());
+            final.push(value)
         });
-
-        final = {
-            'cep':info[0],
-            'rua':info[1],
-            'numero':info[2],
-            'complemento':info[3],
-            'bairro':info[4],
-            'cidade':info[5],
-            'estado':info[6]
-        }
-
         console.log(final);
 
-        return final;
+        ret = {
+            'cep':final[0]['value'],
+            'rua':final[1]['value'],
+            'numero':final[2]['value'],
+            'complemento':final[3]['value'],
+            'bairro':final[4]['value'],
+            'cidade':final[6]['value'],
+            'estado':final[5]['value']
+        }
+        console.log(ret);
+
+        return ret;
 
     }
 

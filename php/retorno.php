@@ -90,13 +90,13 @@ if(isset($_POST['notificationType']) && $_POST['notificationType'] == 'transacti
 
 
 
-    $queryy = "UPDATE `usuarios_compras` SET `notification-code`='?', `transaction-status`='?' WHERE `transaction-id` LIKE '?'";
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code`= ?, `transaction-status`= ? WHERE `transaction-id` LIKE ?";
     $valores = [$notificationCodeBank,$transactionStatus,"%".$reference."%"];
 
     dbQuery($queryy,$valores);
   
 
-    $queryy = "UPDATE `usuarios_pedidos` SET `status`='?' WHERE `transaction-id` = '?'";
+    $queryy = "UPDATE `usuarios_pedidos` SET `status`= ? WHERE `transaction-id` = ?";
     $valores = [$transactionStatus,$reference];
 
     dbQuery($queryy,$valores);

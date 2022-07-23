@@ -92,8 +92,8 @@ if(isset($_POST['gerar_sessao'])){
             'shippingAddressComplement' => $_POST['local']['complemento'],
             'shippingAddressDistrict' => $_POST['local']['bairro'],
             'shippingAddressPostalCode' => $_POST['local']['cep'],
-            'shippingAddressCity' => $_POST['local']['cidade'],
-            'shippingAddressState' => $_POST['local']['estado'],
+            'shippingAddressCity' => urldecode($_POST['local']['cidade']),
+            'shippingAddressState' => urldecode($_POST['local']['estado']),
             'shippingAddressCountry' => 'BRA',
             'shippingType' => '3',
             'shippingCost'=> number_format($_SESSION['frete'],2,'.',''),
@@ -111,8 +111,8 @@ if(isset($_POST['gerar_sessao'])){
             'billingAddressComplement' => $_POST['local']['complemento'],
             'billingAddressDistrict' => $_POST['local']['bairro'],
             'billingAddressPostalCode' => $_POST['local']['cep'],
-            'billingAddressCity' => $_POST['local']['cidade'],
-            'billingAddressState' => $_POST['local']['estado'],
+            'billingAddressCity' => urldecode($_POST['local']['cidade']),
+            'billingAddressState' => urldecode($_POST['local']['estado']),
             'billingAddressCountry' => 'BRA',
         ];
     }else if($_POST['metodo'] == 'BOLETO'){
@@ -142,7 +142,7 @@ if(isset($_POST['gerar_sessao'])){
             'shippingAddressComplement' => $_POST['local']['complemento'],
             'shippingAddressDistrict' => $_POST['local']['bairro'],
             'shippingAddressPostalCode' => $_POST['local']['cep'],
-            'shippingAddressCity' => $_POST['local']['cidade'],
+            'shippingAddressCity' => urldecode($_POST['local']['cidade']),
             'shippingAddressState' => $_POST['local']['estado'],
             'shippingAddressCountry' => 'BRA',
             'shippingType' => '3',
@@ -155,8 +155,8 @@ if(isset($_POST['gerar_sessao'])){
             'billingAddressComplement' => $_POST['local']['complemento'],
             'billingAddressDistrict' => $_POST['local']['bairro'],
             'billingAddressPostalCode' => $_POST['local']['cep'],
-            'billingAddressCity' => $_POST['local']['cidade'],
-            'billingAddressState' => $_POST['local']['estado'],
+            'billingAddressCity' => urldecode($_POST['local']['cidade']),
+            'billingAddressState' => urldecode($_POST['local']['estado']),
             'billingAddressCountry' => 'BRA',
         ];
     }
@@ -205,12 +205,10 @@ if(isset($_POST['gerar_sessao'])){
     $carbonDate = \Carbon\Carbon::parse($agora)->format('d/m/Y');
 
 
-    $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = '?'";
+    $queryy = "SELECT * FROM `usuarios_compras` WHERE `id` = ?";
     $valoress = [$_SESSION['dados']['id']];
-    
     $dbRef = normalDbQuery($queryy,$valoress);
     $dbRef = $dbRef[0];
-
     // print_r($dbRef);
     // $valoles = array();
 
@@ -243,8 +241,14 @@ if(isset($_POST['gerar_sessao'])){
     
 
 
-    $queryy = "UPDATE `usuarios_compras` SET `notification-code` = '?', `transaction-status` ='?',`transaction-id` = '?' WHERE `id` = '?'";
-    $valoress = [$dbRef['notification-code'],$dbRef['transaction-status'],$dbRef['transaction-id'],$_SESSION['dados']['id']];
+    $queryy = "UPDATE `usuarios_compras` SET `notification-code` = ?, `transaction-status` = ?,`transaction-id` = ? WHERE `id` = ?";
+
+    $valoress = [
+        $dbRef['notification-code'],
+        $dbRef['transaction-status'],
+        $dbRef['transaction-id'],
+        $_SESSION['dados']['id']
+    ];
     normalDbQuery($queryy,$valoress);
     // echo $queryy;
 
@@ -262,7 +266,7 @@ if(isset($_POST['gerar_sessao'])){
     $dataBank = [
         'transaction-id' => $reference,
         'nome_comprador' =>   $nome,
-        "endereco_entrega" => $_POST['local']['rua'].",".$_POST['local']['numero']." ".$_POST['local']['complemento'].",".$_POST['local']['bairro']."-".$_POST['local']['cidade']."/".$_POST['local']['estado']." CEP: ".$_POST['local']['cep'],
+        "endereco_entrega" => $_POST['local']['rua'].",".$_POST['local']['numero']." ".$_POST['local']['complemento'].",".$_POST['local']['bairro']."-".urldecode($_POST['local']['cidade'])."/".urldecode($_POST['local']['estado'])." CEP: ".$_POST['local']['cep'],
         'custo' => $_POST['amount'],
         'itens' => $intensDb,
         'status' => 'Aguardando pagamento'
@@ -270,9 +274,19 @@ if(isset($_POST['gerar_sessao'])){
 
 
 
-    $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES ('?','?','?','?',?,'?','?','?','?')";
+    $query = "INSERT INTO `usuarios_pedidos`(`transaction-id`, `nome_comprador`, `endereco_entrega`,`servico`, `custo`, `itens`, `status`,`data`,`metodo_pagamento`) VALUES (?,?,?,?,?,?,?,?,?)";
     // echo $query;
-    $valoress = [$dataBank['transaction-id'],$dataBank['nome_comprador'],$dataBank['endereco_entrega'],$_SESSION['servicoEntrega'],$dataBank['custo'],$dataBank['itens'],$dataBank['status'],$carbonDate,$_POST['metodo']];
+    $valoress = [
+        $dataBank['transaction-id'],
+        $dataBank['nome_comprador'],
+        $dataBank['endereco_entrega'],
+        $_SESSION['servicoEntrega'],
+        $dataBank['custo'],
+        $dataBank['itens'],
+        $dataBank['status'],
+        $carbonDate,
+        $_POST['metodo']
+    ];
     normalDbQuery($query,$valoress);
 
     die($xml);

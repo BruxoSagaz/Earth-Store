@@ -72,11 +72,12 @@ $(document).ready(function(){
 
 
     function construirItens(value,index){
-
+        console.log(value)
         const tr = document.createElement('tr');
-        tr.setAttribute('class','retono'+index);
+        tr.setAttribute('class','retono');
         const nome = document.createElement('td');
-        nome.innerHTML = value[1]+':';
+        nome.innerHTML = value[1]+' : '+value[3];
+        nome.setAttribute('class','nome-quant');
         const valor = document.createElement('td');
         total = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value[2]);
         valor.innerHTML = total;
@@ -124,18 +125,36 @@ $(document).ready(function(){
         
     }
 
-    $('.rastreio button').click(function(e){
+    $('#form_edit_item').submit(function(e){
         e.preventDefault();
-        e.stopPropagation();
-        info = $('#form_edit_item').serialize();
+        cod = $('#cod-rastreio').val();
         idTran = $('#id-do-pedido').text().trim();
-        info += '&id='+idTran;
-        console.log(info);
+        nomes = '';
+        quants ='';
+        nomesQuants = $('.nome-quant');
+        query = {};
+        $.each(nomesQuants, function (index, value) { 
+            str = value.innerHTML;
+            separ = str.split(':');
+            separ[0] = separ[0].trim();
+            separ[1] = separ[1].trim();
+            query[index] = [separ[1],separ[0]];
+        });
+       
+        function toObject(arr) {
+            var rv = {};
+            for (var i = 0; i < arr.length; ++i)
+              if (arr[i] !== undefined) rv[i] = arr[i];
+            return rv;
+        }
+
+        // final = toObject(query)
+        console.log(query);
 
         $.ajax({
             method:"post",
             url: "./ajax/despachar.php",
-            data: info,
+            data: {'cod-rastreio':cod ,'id':idTran,query},
             dataType: "json",
             success: function (response) {
                 detalhes = response;
@@ -152,6 +171,8 @@ $(document).ready(function(){
                 console.log('erro')
             }
         });
+
+
     })
 
 });

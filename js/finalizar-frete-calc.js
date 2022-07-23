@@ -6,14 +6,15 @@ $(document).ready(function(){
        
         var items = [];
         var options = '<option value="">escolha um estado</option>';
-        origin = $("#estado").html();	
+        originEstado = $("#estado").html();	
+        var originCidade =  $("#cidade").html();
       
         $.each(data, function (key, val) {
-            options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+            options += '<option value="' + val.sigla + '">' + val.nome + '</option>';
         });	
-        origin += options;
+        originEstado += options;
         // console.log($("#estado"))				
-        $("#estado").html(origin);				
+        $("#estado").html(originEstado);				
         
         $("#estado").change(function () {				
         
@@ -31,10 +32,11 @@ $(document).ready(function(){
                     });							
                 }
             });
-
+            
+            ;
             $("#cidade").html(options_cidades);
             
-        }).change();		
+        });		
     
     });
 
