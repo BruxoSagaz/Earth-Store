@@ -10,6 +10,8 @@
         if($item){
         
         $divisoes = pegarDivisoes($item);
+
+        $variat = getVariations($item['categoria']);
         
     // Tratamento das divisoes
 
@@ -100,10 +102,37 @@
 
                             <div class="product-quantity">
 
+                                <div class="quantity">
                                 <label for="">Quantidade:</label>
 
                                 <div class="positioner">
                                     <input type="number" value="1" max="<?php echo $item['estoque'] ?>" min="1">
+                                </div>
+                                </div>
+
+
+                                <div class="variations-container">
+
+                                    <?php
+                                        $variat = explode(',',$variat);
+                                        
+                                        if(count($variat) > 1){
+                                            // variacoes
+                                            echo '
+                                            <div class="variation-select">
+                                            <span>Variacao do Protudo</span>
+                                            <select name="variation" class="select-varia">';
+                                    
+                                                foreach ($variat as $key => $value) {
+                                                    echo "<option value='$value'>$value</option>";
+                                                }
+                                                // <option value="vari-1">Vari 1</option>
+                                            echo '</select>
+                                            </div>';
+                                            // variacoes
+                                        }
+                                    ?>
+
                                 </div>
                                 
                             </div>

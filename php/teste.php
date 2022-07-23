@@ -28,3 +28,12 @@ echo "<br>";
 echo "<br>";
 
 ?>
+
+<div>
+<span>Escolha</span>
+<select name="variation" id="">
+    <option value="vari-1">Vari 1</option>
+    <option value="vari-1">Vari 1</option>
+    <option value="vari-1">Vari 1</option>
+</select>
+</div>

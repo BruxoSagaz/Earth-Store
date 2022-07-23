@@ -99,6 +99,13 @@ $(document).ready(function(){
         img = pai.find('.img').attr('src');
         // maximo de itens
         max = pai.find('input[type="number"]').attr('max');
+        varia = pai.find('.select-varia');
+
+        if(varia.length > 0){
+            nome = nome + " ("+ varia.val()+")";
+        }
+        
+
         // id / nome / quantidade / precoFormat
         data = "id="+id+"&nome="+nome+"&quantidade="+quant+"&precoFormat="+precoFormat+"&precoOrig="+precoOrig+"&img="+img+"&max="+max;
 

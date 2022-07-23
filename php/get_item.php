@@ -66,10 +66,32 @@ function selectCateg($categ){
     
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+
+
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
+
         }
     }
 }
+
+
+    function getVariations($categoria){
+        // PEGAR VARIACOES
+        $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+        $valores = [$categoria];
+        $res = normalDbQuery($query,$valores);
+        $res = $res[0];
+        $res = $res['variacoes'];
+
+        return $res;    
+    }
 
 
 

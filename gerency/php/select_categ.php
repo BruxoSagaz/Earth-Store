@@ -5,7 +5,7 @@ $categoria = $_POST['categoria'];
 $data = array();
 
 
-$querys = "SELECT * FROM `variacoes` WHERE `categoria` = '?'";
+$querys = "SELECT * FROM `variacoes` WHERE `categoria` = ?";
 $valores = [$categoria];
 
 function dbQuery($query,$valores){

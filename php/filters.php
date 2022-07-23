@@ -16,7 +16,14 @@ function selectCateg(){
     
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }
 }
@@ -35,7 +42,14 @@ function selectNome(){
     
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }
 }
@@ -140,7 +154,14 @@ function pegarSubfiltros($array){
 
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }else{
         echo "<h1 class='alert-filter' style='margin: 0 auto;'>Não foram encontrados produtos com essas características</h1> ";
@@ -186,7 +207,14 @@ function gerarAleatorio(){
 
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }
 }

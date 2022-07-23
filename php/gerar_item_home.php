@@ -11,7 +11,14 @@ function gerarAleatorio(){
 
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }
 }
@@ -26,7 +33,15 @@ function gerarMaisVendidos(){
 
     if($sql->rowCount() > 0 ){
         foreach($sql->fetchAll() as $value){
-            construirItem($value);
+
+            // PEGAR VARIACOES
+            $query = "SELECT `variacoes` FROM  `variacoes` WHERE `categoria` = ?";
+            $valores = [$value['categoria']];
+            $res = normalDbQuery($query,$valores);
+            $res = $res[0];
+            $res = $res['variacoes'];
+
+            construirItem($value,$res);
         }
     }
 }

@@ -48,11 +48,11 @@ if(isset($_POST['especificacoes'])){
 // echo "Nome = ",$nome," <br>  Categoria = ",$categoria," <br> BasePrice = ",$basePrice," <br> Parcelas = ",$parcelas," <br> Estoque = ",$estoque," <br> Tags = ",$tags," <br> IMG-Names = ",$image_names," <br> PROM_VER: ",
 // $prom_ver,$prom_val," <br> Descricao = ",$descricaoGeral,"  <br>Especificacoes = ", $especificacoes," <br> ID = ",$id;
 
-$querys = "UPDATE `produto` SET `nome`='?',`imagens`='?',`categoria`='?',`descricao-geral`='?',`especificacoes`='?',`tags`='?',`preco`='?',`promocao`= ?,`valor_em_promocao`='?',`parcelas`='?',`estoque`='?',`peso`='?' WHERE `id` = ?";
+$querys = "UPDATE `produto` SET `nome`= ?,`imagens`= ?,`categoria`= ?,`descricao-geral`= ?,`especificacoes`= ?,`tags`= ?,`preco`= ?,`promocao`= ?,`valor_em_promocao`= ?,`parcelas`= ?,`estoque`= ?,`peso`= ? WHERE `id` = ?";
 $valores = [$nome,$image_names,$categoria,$descricaoGeral,$especificacoes,$tags,$basePrice,$prom_ver,$prom_val,$parcelas,$estoque,$peso,$id];
 
 // echo "<br>";
-// echo $querys;
+// echo $prom_ver;
 // echo "<br>";
 
 function dbQuery($query,$valores){

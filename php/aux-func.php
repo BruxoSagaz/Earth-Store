@@ -2,14 +2,14 @@
 
 
 
-function construirItem($item){
+function construirItem($item,$variations){
     $imagens = explode(" ",$item['imagens']);
     $promFormatado = number_format($item['valor_em_promocao'],2,",",".");
     // Formatando dinheiro
     $valFormatado = number_format($item['preco'],2,",",".");
     $parcelas = intval($item['parcelas']);
+    $varia = unpackVar($variations);
 
-    
     // if($item['promocao'] != 0){
     //     $item['preco'] = $item['valor_em_promocao'];
     // }
@@ -57,15 +57,19 @@ function construirItem($item){
     // area de preço
     if($item['promocao'] != 0){
     echo '<div class="price-before"> R$ '.$valFormatado.'</div>';
-    echo '<div class="price-off" valor="'.$item['valor_em_promocao'].'"> R$ '.$promFormatado.'</div>';
+    // separador
+    echo "<div class='flex center'>";
+    echo '<div class="price-off" valor="'.$item['valor_em_promocao'].'"> R$ '.$promFormatado.'</div><span class="red" >+ Frete</span>';
+    echo "</div>";
     // adicionando as divisoes
     $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
     }else{
-        echo '<div class="price-off" valor="'.$item['preco'].'"> R$ '.$valFormatado.'</div>';
+        echo "<div class='flex center'>";
+        echo '<div class="price-off" valor="'.$item['preco'].'"> R$ '.$valFormatado.'</div><span class="red" >+ Frete</span>';
         $divisoes = floatval($item['preco']) / $parcelas;
-        
+        echo "</div>";
     }
-    echo '<span>+ Frete</span>';
+    // echo '<span>+ Frete</span>';
     // area de preço
     echo '</div>';
 
@@ -96,11 +100,34 @@ function construirItem($item){
     // echo '</div>';
 
     echo '</div>';
+    if(count($varia) > 1){
+        // variacoes
+        echo '
+        <div class="variation-area">
+        <span>Escolha</span>
+        <select name="variation" class="select-varia">';
+
+            foreach ($varia as $key => $value) {
+                echo "<option value='$value'>$value</option>";
+            }
+            // <option value="vari-1">Vari 1</option>
+            // <option value="vari-1">Vari 1</option>
+            // <option value="vari-1">Vari 1</option>
+        
+        echo '</select>
+        </div>';
+        // variacoes
+    }else{
+        echo '<div style="height:31px"></div>';
+    }
+
 
     echo '<div class="add-to-cart">';
     echo '<input type="number" value="1" max="'.$item['estoque'].'">';
     echo '<button class="button-add-cart">Adicionar ao Carrinho</button>';
     echo '<div class="item-id" style="display:none;">'.$item['id'].'</div>';
+
+
     echo '</div>';
     echo '</div>';
     echo '</div>';
@@ -126,6 +153,13 @@ function calcularPorcentagem($prom,$preco){
     $final = strval($final);
     $final = $final."%"; 
     return $final;
+}
+
+function unpackVar($str){
+
+    $str = explode(',',$str);
+
+    return $str;
 }
 
 ?>
