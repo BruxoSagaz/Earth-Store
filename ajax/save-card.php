@@ -20,13 +20,13 @@ $res = normalDbQuery($query,$valores);
 if(count($res) == 0){
     // Não salvo Card
 
-    $query = "INSERT INTO `usuarios-cards` (`id`, `num-card`, `bandeira`, `cvv`, `validade`) VALUES (?,'?','?','?','?')";
+    $query = "INSERT INTO `usuarios-cards` (`id`, `num-card`, `bandeira`, `cvv`, `validade`) VALUES (?, ?, ?, ?, ?)";
     $valores = [$id,$numCard,$bandeira,$cvv,$validade];
     $res = normalDbQuery($query,$valores);
 
     print_r($res);
 }else{
-    $query = "UPDATE `usuarios-cards` SET `num-card`='?',`bandeira`='?',`cvv`='?',`validade`='?'";
+    $query = "UPDATE `usuarios-cards` SET `num-card`= ?,`bandeira`= ?,`cvv`= ?,`validade`= ?";
     $valores = [$numCard,$bandeira,$cvv,$validade];
     $res = normalDbQuery($query,$valores);
 

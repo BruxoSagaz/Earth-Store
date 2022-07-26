@@ -58,13 +58,13 @@ function construirItem($item,$variations){
     if($item['promocao'] != 0){
     echo '<div class="price-before"> R$ '.$valFormatado.'</div>';
     // separador
-    echo "<div class='flex center'>";
+    echo "<div class='flex center resp-values'>";
     echo '<div class="price-off" valor="'.$item['valor_em_promocao'].'"> R$ '.$promFormatado.'</div><span class="red" >+ Frete</span>';
     echo "</div>";
     // adicionando as divisoes
     $divisoes = floatval($item['valor_em_promocao']) / $parcelas;
     }else{
-        echo "<div class='flex center'>";
+        echo "<div class='flex center resp-values'>";
         echo '<div class="price-off" valor="'.$item['preco'].'"> R$ '.$valFormatado.'</div><span class="red" >+ Frete</span>';
         $divisoes = floatval($item['preco']) / $parcelas;
         echo "</div>";

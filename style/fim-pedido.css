@@ -155,6 +155,7 @@ textarea:focus{
 
 .tabela-form{
     margin-top: 95px;
+    margin-bottom: 32px;
 }
 
 
@@ -368,7 +369,7 @@ input[type="text"]::-webkit-input-placeholder{
 
 
 .div-final-price{
-    width: 600px;
+    width: 100%;
     border-radius: 14px;
     margin-top: 70px;
 }
@@ -391,3 +392,40 @@ input[type="text"]::-webkit-input-placeholder{
     font-size: 20px;
 }
 
+
+
+
+@media screen and (max-width:768px) {
+
+    .tabela-pedidos td {
+        font-size: 13px;
+    }
+
+
+    .result-cep table {
+        width: 100%;
+    }
+
+    .result-cep tbody .letter {
+        font-size: 18px;
+    }
+
+
+    .display-final-payment {
+        width: 100%;
+    }
+
+    .paiment-methods-resp{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .display-total-resp{
+        width: 90%;
+    }
+
+    .paiment-methods-resp button{
+        width: 60%;
+    }
+}

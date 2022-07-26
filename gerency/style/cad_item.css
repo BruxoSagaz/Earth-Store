@@ -73,6 +73,9 @@ form{
 
 /* Auxilliar Classes */
 
+.mobile-off{
+    display: none;
+}
 
 .left{
     float: left;
@@ -909,4 +912,95 @@ h3.alert_var{
     background-color: #ffffff;
     border: 3px solid #ccc;
     border-radius: 8px;
+}
+
+.tagcont{
+    width: 40%; 
+    margin-left: 85px;
+}
+
+
+@media screen and (max-width:607px) {
+    .logo h2{
+        width: 50%;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .config-nav {
+        max-width: 100%;
+    }
+
+    .config-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 270px;
+        flex-wrap: wrap;
+    }
+
+    .total-area {
+        display: none;
+    }
+
+    .offers {
+        width: 90%;
+    }
+
+    .offers .item {
+        width: 100%;
+    }
+
+    .offers .item > .product {
+        width: 100%;
+    }
+
+    textarea{
+        width: 100%;
+    }
+
+    .tagcont{
+        width: 100%; 
+        margin-left: 0px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        height: 30px;
+    }
+
+    .input-area {
+        margin: 6px 8px;
+    }
+
+    .input-area .inp-filters button{
+        margin-left: 25%;
+        margin-top: 8px;
+    }
+
+    .images-show{
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .list{
+        height: 30px;
+    }
+
+    .mobile-off{
+        display: block;
+
+    }
+
+    .mobile-off h2{
+        width: 90%;
+        font-size: 18px;
+        margin: 55px auto;
+        text-align: center;
+        border: 1px solid red;
+        padding: 20px 0px;
+        color: red; 
+    }
 }

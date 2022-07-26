@@ -1,4 +1,4 @@
-    <!-- CSS -->
+        <!-- CSS -->
     <link rel="stylesheet" href="style/cad_item.css">
     <!-- Main -->
     <main>
@@ -65,7 +65,7 @@
                             <input type="number" name="estoque" id="" min="0">
                         </div>
 
-                        <div class="input-area">
+                        <div class="input-area inp-filters">
 
                             <label for="">Filtro: </label>
                             <input list="filtro" name="filtro" class="list" id="filter">
@@ -116,7 +116,7 @@
 
                     <div class="flex-center">
 
-                        <div class="input-area" style="width: 40%; margin-left: 85px;">
+                        <div class="input-area tagcont" style="">
                             <div class="tag-container">
                                 
                             </div>
@@ -204,7 +204,7 @@
 
                     <div class="flex-center w100">
                         <label for="especificacoes">Especficações: </label>
-                        <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style="margin-left: 20px;"></textarea>
+                        <textarea name="especificacoes" id="especificacoes" cols="30" rows="10" style=""></textarea>
                     </div>
 
                     <input type="submit" value="Mandar para o Servidor" id="upload_file_button">

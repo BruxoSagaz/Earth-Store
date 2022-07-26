@@ -16,8 +16,7 @@ define("SENDER_CPF", '14176547405');
 define("SENDER_AREA_CODE", '87');
 define("SENDER_PHONE", "991358619");
 
-//tamanho do pacote e CEP de Origem
-
+//tamanho do pacote e CEP de Origem para calculo
 define("COMPRIMENTO","15");
 define("ALTURA","1");
 define("LARGURA","10");

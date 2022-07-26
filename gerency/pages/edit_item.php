@@ -233,7 +233,7 @@
     <div class="container"> 
         <div class="form-area">
             <div class="flex-center"><h2>Consulta e Gerência</h2></div>
-
+            <div class="flex-center mobile-off"><h2>Página não disponível para celular no momento</h2></div>
             <!-- Area total -->
             <div class="total-area">
     

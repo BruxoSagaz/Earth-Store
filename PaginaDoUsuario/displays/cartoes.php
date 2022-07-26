@@ -9,7 +9,7 @@
 </div>
 
 <?php
-    $cardData = normalDbQuery("SELECT * FROM `usuarios-cards` WHERE id='".$_SESSION['dados']['id']."'");
+    $cardData = normalDbQuery("SELECT * FROM `usuarios-cards` WHERE id='".$_SESSION['dados']['id']."'",[]);
     $cardData = $cardData[0];
 
     // print_r($endereco);

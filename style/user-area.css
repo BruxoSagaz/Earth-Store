@@ -62,9 +62,6 @@ html{
     width: 50%;
 }
 
-.w100{
-    width: 100%;
-}
 
 .h100{
     height: 100%;
@@ -181,7 +178,7 @@ button{
     cursor: pointer;
 }
 
-.opts-left .opt-row a{
+.opt-row a{
     color: black;
     height: 70px;
     padding: 0px 15px;
@@ -198,10 +195,10 @@ button{
 }
 
 .opt-icon{
-   width: 50px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .opt-icon i{
@@ -262,7 +259,6 @@ button{
     border-radius: 10px;
     color:white;
     padding: 0 22px;
-    min-width: 222px;
     margin: 0 20px;
     cursor: default;
 }
@@ -415,4 +411,114 @@ button{
 
 .cod-rastreio{
     height: 42px;
+}
+
+
+
+.enter-first{
+    height: 55px;
+    width:65%
+}
+
+
+@media screen and (max-width:500px){
+    .opts-left div.opt-row {
+        width: 50%; 
+    }
+    .w100 {
+        width: 94%;
+    }
+
+    .opt-row .opt-description p{
+        font-size: 16px;
+    }
+
+    .opt-row .opt-icon i {
+
+    }
+
+    .opt-icon{
+        width: 38px;
+    }
+
+    .opt-row a{
+        border: none;
+    }
+}
+
+
+
+@media screen and (max-width:768px) {
+
+    .opts-left{
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+
+    .user-table {
+        width: 100%;
+        min-height: 685px;
+        border: 1px solid #cccccc63;
+        margin: 0 auto;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /*  
+    .respose-balance{
+        max-width: 1600px;
+        padding: 0 2%;
+        margin: 0 auto;
+    } */
+
+    .config-display div{
+        flex-direction: column;
+    }
+
+    .data-button{
+        margin: 8px 20px;
+    }
+
+    .config-display .cont-data-btt{
+        flex-direction: column;
+    }
+
+    .display-right{
+        width: 100%;
+    }
+
+    .opts-align-resp{
+        max-height: 211px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .opt-row{
+        cursor: pointer;
+        width: 33.3%;
+    }
+
+    .enter-first{
+        height: auto;
+        width: 30%;
+        margin-bottom: 12px;
+    }
+
+
+    .opt-description p {
+        font-size: 18px;
+    }
+
+    .opt-icon i {
+
+    }
+    .opt-row a{
+        border: none;
+    }
 }

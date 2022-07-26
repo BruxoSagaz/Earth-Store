@@ -9,7 +9,7 @@
 </div>
 
 <?php
-    $endereco = normalDbQuery("SELECT * FROM `enderecos` WHERE id='".$_SESSION['dados']['id']."'");
+    $endereco = normalDbQuery("SELECT * FROM `enderecos` WHERE id='".$_SESSION['dados']['id']."'",[]);
     $endereco = $endereco[0];
 
     // print_r($endereco);
@@ -19,23 +19,27 @@
     <div class="flex row center wrap space-top">
 
 
-        <div class="enter" style="height: 55px; width:65%">
-            <div>
+        <div class="enter enter-first" style="">
+
+            
+            
             <label for="cep">CEP:</label>
             <input type="text" name="cep" id="ceps" placeholder="00000-000" style="width: 115px;" value="<?php echo @$endereco['cep']?>">
             
-            <a class="btn-link" id='oho' target="_blank" href="https://buscacepinter.correios.com.br/" style="text-decoration: underline; color:red;">
-            Não sei meu CEP
-            </a>
-            
-       
-        
 
-        
-            <span>O CEP irá preencher os dados automaticamente</span>
-            </div>
+            
+            
+
+       
+         
+         
         </div>
-        
+        <div class="enter">
+        <a class="btn-link" id='oho' target="_blank" href="https://buscacepinter.correios.com.br/" style="text-decoration: underline; color:red;">
+            Não sei meu CEP
+        </a>
+        <span>O CEP irá preencher os dados automaticamente</span>
+        </div>
 
  
         <div class="enter">

@@ -286,7 +286,7 @@
 
 </table>
 
-<div class="center-row">
+<div class="center-row display-total-resp">
 
 <h2 style="margin-right: 15px;">Total Final Com Frete:</h2>
 <h2 class="total-price" id ="quant-final-total" style="margin: 50px 0px;" valor="<?php echo @$_SESSION['totalFinal'] ?>"> R$ <?php echo @number_format($_SESSION['totalFinal'],2,",",".") ?></h2>
@@ -294,7 +294,7 @@
 </div>
 
 
-<div class="container center-row">
+<div class="container center-row paiment-methods-resp">
 <div id="get-total-final-response" style="display:none" valor=""></div>
 <button class="go-back"  style="margin: 10px 21px;"  ordem="4">Voltar <i class="fa-regular fa-circle-left"></i></button>
 
@@ -486,7 +486,7 @@
 
             <a href='<?php echo PATH ?>'  class="p-fade"><button class='return-home'> Voltar para página inicial</button></a>
 
-            <a href="" class="boleto-show"><button style="width: 100%;margin-right: 20px;">Clique Aqui Para Imprimir O Boleto</button></a>
+            <a href="" class="boleto-show" style='display:none;'><button style="width: 100%;margin-right: 20px;">Clique Aqui Para Imprimir O Boleto</button></a>
         </div>
     </div>
 

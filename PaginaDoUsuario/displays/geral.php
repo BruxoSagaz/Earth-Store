@@ -8,7 +8,7 @@
             <span><?php echo $userData['celular'] ?></span>
         </div>
 
-        <div class="flex row center space-top">
+        <div class="flex row center space-top cont-data-btt">
         <!-- calcular -->
         <?php 
             $totalPed = unpackDb($dadosCompras['transaction-id']);

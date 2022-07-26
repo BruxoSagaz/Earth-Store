@@ -4,6 +4,8 @@ $(document).ready(function(){
     seletorBotao = 'a[page='+pagina+']';
     linkBotao = $(seletorBotao);
     linkBotao.css('background-color', "#f0ecec")
+    linkBotao.css('color', "#de0610")
+    linkBotao.css('border', "1px solid")
 
     // selectorSec = 'section[page='+pagina+']';
 

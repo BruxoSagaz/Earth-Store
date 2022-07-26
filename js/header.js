@@ -69,7 +69,7 @@ $(document).ready(function(){
     function hideCartSideBar(){
 
         if($(window).width() < 768){
-            $('.cart-sidebar').replaceWith('<div class="cart-sidebar"></div>');
+            $('.cart-sidebar').fadeOut();
         }
 
     }
@@ -113,11 +113,25 @@ $(document).ready(function(){
 
         cartId = $('.cart-itens').find('.cart-id');
         cartId = cartId.text();
+        cartNames = $('.cart-itens').find('.cart-item-name');
+        cartNames = cartNames.text()
         // console.log("cartId:"+cartId+" id:"+id) ;  
-        if(cartId.trim().includes(id)){         
-            str = "."+id;
+        if(cartId.trim().includes(id) && cartNames.trim().includes(nome)){         
+            nome2 = nome.replace(/ /g, "");
+            nome2 = nome2.replace(/\(/g, "-")
+            nome2 = nome2.replace(/\)/g, "-")
+            str = "."+nome2;
+            console.log(str)
             input = $(str).parent().find('input[type=number]');
             
+            // $.each(input, function (index, value) { 
+            //     paiNome = input[index].parent().parent().find('.cart-item-name').text();
+            //     if(paiNome == nome){
+            //         input = value;
+            //     }
+            // });
+
+            console.log(input)
             val = input.val();
             val = parseInt(val);
             // console.log(input.attr('max'))
@@ -128,7 +142,7 @@ $(document).ready(function(){
                 $.ajax({
                     method:"post",
                     url: config.path+"/ajax/update_cart_quant.php",
-                    data:"id="+id+"&quant="+val,
+                    data:"id="+id+"&quant="+val+"&nome="+nome,
                     dataType: "json",
                     error: function(){
                         console.log("Erro em add cart ajax")
@@ -168,11 +182,11 @@ $(document).ready(function(){
         
         val = $(this).val();
         let id = $(this).parent().parent().parent().find('.cart-id').text();
-
+        let nome =  $(this).parent().parent().parent().find('.cart-item-name').text()
         $.ajax({
             method:"post",
             url: config.path+"/ajax/update_cart_quant.php",
-            data:"id="+id+"&quant="+val,
+            data:"id="+id+"&quant="+val+"&nome="+nome,
             dataType: "json",
             error: function(){
                 console.log("Erro em add cart ajax")
@@ -188,7 +202,7 @@ $(document).ready(function(){
 
     function addItemToCart(id,nome,quant,precoFormat,img,max){
         //Criando as tags
-
+        let nome2 ="";
         //div pai
         const  pai = document.createElement('div');
         pai.setAttribute('class','cart-item-individual');
@@ -245,7 +259,10 @@ $(document).ready(function(){
 
         //id tag
         const idTag = document.createElement('div');
-        idTag.setAttribute("class","cart-id "+id);
+        nome2 = nome.replace(/ /g, "");
+        nome2 = nome2.replace(/\(/g, "-")
+        nome2 = nome2.replace(/\)/g, "-")
+        idTag.setAttribute("class","cart-id "+nome2);
         idTag.setAttribute("value",id);
         idTag.setAttribute("style","display:none;")
         idTag.innerHTML = id+" ";

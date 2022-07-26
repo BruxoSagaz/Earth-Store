@@ -268,9 +268,12 @@
             </div>
             <div class="slide-menu">
                     <div class="opt-menu">
-                        <input type="input" class="form-field" placeholder="Pesquisa..." name="pesq" id='keysearch' autocomplete="on" />
+                        <form action="<?php echo PATH ?>filtros" method="get"
+                        style="display: flex;align-items: center;" >
+                        <input type="input" class="form-field" placeholder="Pesquisa..." name="pesq" id='keysearch-2' autocomplete="on" />
                         <input type="radio" value='filtros' name='page' style="display:none;" checked>
-                        <i class="fa-solid fa-magnifying-glass" ></i ><p>Pesquisar</p>
+                        <i class="fa-solid fa-magnifying-glass" ></i ><button class="pesqui">Pesquisar</button>
+                        </form>
                     </div>
                     
                     <a href="<?php echo PATH?>entrar-contato">

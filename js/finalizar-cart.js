@@ -39,6 +39,14 @@ $(document).ready(function(){
     function validarEtapa(pag){
 
         switch (pag) {
+            case '1':
+                valorF = $('#quant-final-carr').attr('valor');
+                if(valorF != '0'){
+                    return true
+                }else{
+                    return false
+                }
+
             case '3':
                 esc = $('input[name="escolha"').is(":checked");
 
@@ -376,6 +384,8 @@ $(document).ready(function(){
                         dataType: "json",
                         error: function(){
                             console.log('Ocorreu um erro no pagamento, Revise seus dados!')
+
+                            enableForm('#credit-card-form');
                         }
                     }).done(function(data){
                     //    console.log(data);

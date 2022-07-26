@@ -26,11 +26,11 @@ $dictStatus = array(
 
 
 
-$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_compras` WHERE id='".$_SESSION['dados']['id']."'");
+$dadosCompras = normalDbQuery("SELECT * FROM `usuarios_compras` WHERE id='".$_SESSION['dados']['id']."'",[]);
 
 
 $dadosCompras = $dadosCompras[0];
-$userData = normalDbQuery("SELECT * FROM `usuario` WHERE id='".$_SESSION['dados']['id']."'");
+$userData = normalDbQuery("SELECT * FROM `usuario` WHERE id='".$_SESSION['dados']['id']."'",[]);
 $userData = $userData[0];
 // Array ( [id] => 1 [0] => 1 [cpf] => 141.765.474-05 [1] => 141.765.474-05 [notification-code] => 0 [2] => 0 [transaction-status] => 0 [3] => 0 [transaction-id] => 62c9aa40ae2de [4] => 62c9aa40ae2de )
 
@@ -39,7 +39,7 @@ $dataPedidosInd = array();
 
 // MONTANDO OS DADOS DOS PEDIDOS
 foreach ($arrIds as $key => $value) {
-    $query = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `transaction-id`='".$value."'");
+    $query = normalDbQuery("SELECT * FROM `usuarios_pedidos` WHERE `transaction-id`='".$value."'",[]);
     if(count($query) > 0){
         $query = $query[0];
 
@@ -54,14 +54,14 @@ foreach ($arrIds as $key => $value) {
 // $dataPedidosDB = normalDbQuery("SELECT * FROM `usuario_pedidos` WHERE id='".$_SESSION['dados']['id']."'")
 
 ?>
-<div class="container w100" style="margin-top: 35px;">
+<div class="container w100" style="margin-top: 35px;" id="respose-balance">
 
     <div class="user-table">
         <div id="page-chosen" page="<?php echo $page ?>"></div>
         <div class="opts-left">
 
 
-            <div>
+            <div class="opts-align-resp">
             <div class="opt-row">
                 <a href="?page=geral" page="geral">
 
