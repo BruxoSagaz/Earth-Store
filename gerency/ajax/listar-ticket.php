@@ -2,7 +2,7 @@
 include_once('PDO.php');
 
 
-$dadosCompras = normalDbQuery("SELECT * FROM `tickets_ajuda` WHERE `status`='Aberto' AND `responsavel` = ''");
+$dadosCompras = normalDbQuery("SELECT * FROM `tickets_ajuda` WHERE `status`='Aberto' AND `responsavel` = ''",[]);
 
 foreach ($dadosCompras as $key => $value) {
     # code...

@@ -188,9 +188,10 @@ header img{
 .config-list{
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
+    justify-content: center;
     align-items: center;
+    height: auto;
+    flex-wrap: wrap;
 }
 
 
@@ -223,7 +224,8 @@ header img{
     background-color: rgb(249 249 249);
     border: 1px solid #ccc;
     margin-top: 50px;
-    overflow: hidden;   
+    overflow: auto;
+    margin-bottom: 60px;
 }
 
 
@@ -709,10 +711,10 @@ div .img-field{
 
 .case{
     width: 97%;
-    height: 695px;
+    height: 688px;
     padding-top: 10px;
     margin: 2px -1%;
-    overflow: overlay;
+    overflow: auto;
     min-width: 100%;
     max-width: 1200px; 
 }
@@ -930,15 +932,6 @@ h3.alert_var{
 @media screen and (max-width:768px) {
     .config-nav {
         max-width: 100%;
-    }
-
-    .config-list {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 270px;
-        flex-wrap: wrap;
     }
 
     .total-area {

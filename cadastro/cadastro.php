@@ -185,7 +185,7 @@
 
                             <div class="enter">
                                 <label for="">Celular:</label>
-                                <input  type="tel" name="cell" placeholder="(xx) xxxxx-xxxx " id="cell">
+                                <input  type="tel" name="cell" placeholder="(xx) xxxxx-xxxx" id="cell">
                             </div>
 
                             <div class="enter"> 

@@ -111,10 +111,13 @@
 
                 
                 <!-- Botao Ajuda -->
-                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento_pendente"><button class="atendimento_pendente">Atendimentos Lançados</button></a></li>
              
                 <!-- Meus Atendimentos-->
-                <li><a href="<?php echo PATH_GERENCY ?>meus-atendimentos"><button class="meus-atendimentos">Meus Atendimentos</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>meus_atendimentos"><button class="meus_atendimentos">Meus Atendimentos</button></a></li>
+
+                <!-- Gerenciar Adm-->
+                <li><a href="<?php echo PATH_GERENCY ?>gerenciar_adm"><button class="gerenciar_adm">Gerenciar ADM</button></a></li>
 
                 <?php } ?>
 
@@ -149,10 +152,10 @@
 
                 
                 <!-- Botao Ajuda -->
-                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento_pendente"><button class="atendimento_pendente">Atendimentos Lançados</button></a></li>
 
                 <!-- Meus Atendimentos-->
-                <li><a href="<?php echo PATH_GERENCY ?>meus-atendimentos"><button class="meus-atendimentos">Meus Atendimentos</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>meus_atendimentos"><button class="meus_atendimentos">Meus Atendimentos</button></a></li>
 
                 <?php } ?>
 
@@ -175,7 +178,7 @@
                 <li><a href="<?php echo PATH_GERENCY ?>pedidos_finalizados"><button class="pedidos_finalizados">Pedidos Finalizados</button></a></li>
 
                 <!-- Botao Ajuda -->
-                <li><a href="<?php echo PATH_GERENCY ?>atendimento-pendente"><button class="atendimento-pendente">Atendimentos Lançados</button></a></li>
+                <li><a href="<?php echo PATH_GERENCY ?>atendimento_pendente"><button class="atendimento_pendente">Atendimentos Lançados</button></a></li>
                 <?php } ?>
 
                 
@@ -190,7 +193,12 @@
     <?php
 
         if(isset($_GET['page'])){
-            include("./pages/".$_GET['page'].".php");
+            if(is_file("./pages/".$_GET['page'].".php")){
+                include("./pages/".$_GET['page'].".php");
+            }else{
+                include("./pages/pedidos.php");
+            }
+            
         }
     
     ?>

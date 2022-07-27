@@ -44,7 +44,6 @@
         var splitStr = nome.split(' ');
         var final = '';
 
-
         if( amount >= 2){
 
             for(var i = 0; i < amount; i++){
@@ -199,7 +198,7 @@
 
         }
 
-        console.log(seg);
+      
         return seg;
         
     }
@@ -230,16 +229,26 @@
         var dataAtual = new Date();
         var anoFilter = dataAtual.getFullYear();
         anoFilter = anoFilter - 5;
-
+        saveData = data;
         data = data.toString();
         data = data.split('/');
-        year = parseInt(data[3]);
+        year = parseInt(data[2]);
         
-
         if(year <= 1900 || year >= anoFilter){
             return false;
         }else{
-            return true;
+            var pattern = /^(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.](\d{4})$/;
+            var match = saveData.match(pattern);
+
+            if (1) {
+            // document.getElementById("message").innerHTML = "Date follows dd/mm/yy format";
+                return true;
+            }   
+            else{
+                // document.getElementById("message").innerHTML = "Invalid date format";
+                return false;
+            }
+
         }   
     };
 

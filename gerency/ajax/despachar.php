@@ -5,7 +5,7 @@ include_once('PDO.php');
 $cod = $_POST['cod-rastreio'];
 $id = $_POST['id'];
 
-$result = normalDbQuery("UPDATE `usuarios_pedidos`  SET  `rastreio`='$cod', `status` = 'Enviado' WHERE `transaction-id` = '$id'");
+$result = normalDbQuery("UPDATE `usuarios_pedidos`  SET  `rastreio`= ?, `status` = 'Enviado' WHERE `transaction-id` = ?",[$cod,$id]);
 
 foreach ($_POST['query'] as $key => $value) {
     // echo 'nome:'.$value[1]." e quantidade: ".$value[0]."\n\n\n";

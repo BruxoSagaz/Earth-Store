@@ -1,0 +1,113 @@
+
+
+.opts-show{
+   
+}
+
+.opts-show .opt-adm{
+    cursor: pointer;
+    margin: 0px 12px;
+    margin-top: 35px;
+    border-radius: 8px;
+    height: 60px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+
+.opts-show .op1{
+    background-color: #51be51;
+}
+
+.opts-show .op2{
+    background-color: #5995d9;
+}
+
+.opts-show .op3{
+    background-color: #d6b42a;
+}
+
+.cad-display fieldset{
+    border-radius: 38px;
+    display: flex;
+    align-items: center;
+}
+
+.cad-display fieldset legend{
+    margin: 0px 5%;
+    padding: 0 35px;
+}
+
+.hide .fa-arrow-left{
+    font-size: 30px;
+    color: #d6b42a;
+    margin-left: 26px;
+    cursor: pointer;
+}
+
+.input-cont{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    align-items: center;
+    margin: 50px auto;
+}
+
+.individual{
+    margin: 8px 0;
+}
+
+.input-cont .individual input{
+    padding-left: 8px;
+}
+
+.lista-adm{
+    margin: 16px 0px;
+}
+
+.adm{
+    width: 100%;
+}
+
+#itens-banco{
+
+}
+
+#adm-values tr.indicators{
+    height: auto;
+}
+
+#adm-values tr.indicators td{
+    font-size: 18px;
+    width: 10%;
+    border-bottom: 1px solid #ccc;
+}
+
+td i{
+    font-size: 30px;
+    color: #2d74f3;
+    cursor: pointer;
+    width: 100%;
+}
+
+.buy{
+    width: 100%;
+}
+
+
+.navigators{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigators i{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.navigators i.fa-arrow-rotate-right{
+    color: #51be51;
+}
