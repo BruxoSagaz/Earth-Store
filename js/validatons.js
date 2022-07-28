@@ -91,6 +91,23 @@ $(function() {
     $('#cell').mask('(00)00000-0000');
     $('#data').mask('00/00/0000');
 
+    $( ".enter i.fa-solid" ).mousedown(function() {
+        $(".senha").attr("type", "text");
+        $(this).toggleClass("fa-eye-slash fa-eye")
+      });
+    
+    $( ".enter i.fa-solid" ).mouseup(function() {
+        $(".senha").attr("type", "password");
+        $(this).toggleClass("fa-eye fa-eye-slash")
+    });
+
+    $( ".enter i.fa-eye" ).mouseout(function() { 
+        console.log('esse')
+        $(".senha").attr("type", "password");
+        $(this).toggleClass("fa-eye fa-eye-slash")
+    });
+
+
 
 });
 

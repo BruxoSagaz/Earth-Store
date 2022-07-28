@@ -1,8 +1,37 @@
 $(document).ready(function(){
+    atualizarTamSlide()
 
 
+    const car = document.querySelector('.car-1 .js-slides');
+    new Glider(car,{
+        slidesToShow:1,
+        slidesToScroll:1,
+        draggable: true,
+        dots: '.car-1-dots',
+        scrollLock: true
+    });
 
+    const car2 = document.querySelector('.car-2 .js-slides');
+    new Glider(car2,{
+        slidesToShow:1,
+        slidesToScroll:1,
+        draggable: true,
+        dots: '.car-2-dots',
+        scrollLock: true
+    });
 
+    $(window).on('resize', function(){
+        atualizarTamSlide()
+    })
+
+    function atualizarTamSlide(){
+        tam = $(window).width();
+
+        $('.c-carousel').each(function (index, element) {
+            // element == this
+            $(this).css('width',tam)
+        });
+    }
 
 
     $(".img").hover(function(e){

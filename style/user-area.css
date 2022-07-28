@@ -272,10 +272,12 @@ button{
     flex-wrap: wrap;
     height: 80px;
     margin: 0 25px;
+    align-content: flex-start;
+    justify-content: flex-end;
 }
 
 
-.enter input{
+.enter input,.enter select{
     height: 36px;
     border: 1px solid rgb(163, 163, 163);
     font-size: 15px;

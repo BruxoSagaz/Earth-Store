@@ -37,7 +37,7 @@
 <?php
     if(isset($_COOKIE['lembrar'])){
         $email = $_COOKIE['email'];
-        $senha = $_COOKIE['senha'];
+        $senha = MD5($_COOKIE['senha']);
         $sql = Mysql::conectar()->prepare("SELECT * FROM `usuario` WHERE email = ? AND senha = ? ");
         $sql->execute(array($email,$senha));
 
@@ -73,7 +73,7 @@
                     <?php
                 if(isset($_POST['acao'])){
                     $email = $_POST['email_login'];
-                    $senha = $_POST['senha_login'];
+                    $senha = MD5($_POST['senha_login']);
                     $sql = Mysql::conectar()->prepare("SELECT `id`,`nome`,`dataNascimento`,`celular`,`email` FROM `usuario` WHERE email = ? AND senha = ?");
 
             
@@ -123,7 +123,10 @@
 
                             <div class="enter">
                                 <label for="">Senha:</label>
-                                <input type="text" placeholder="Senha" name="senha_login">
+                                <div style='display: flex;align-items: center;width: 108%;'>
+                                <input type="password" placeholder="Senha" name="senha_login" class="senha">
+                                <i class="fa-solid fa-eye-slash"></i>
+                                </div>
                                 <div>
                                     <input type="checkbox" name="lembrar_login" >
                                     <span>lembrar senha</span>
@@ -195,7 +198,16 @@
 
                             <div class="enter">
                                 <label for="">Senha:</label>
-                                <input type="password" name="senha" placeholder="Senha" id="senha"> <div class="password-area"><span>Força da senha: </span><p class="seg-senha" id="segtotal"></p></div>
+
+                                <div style='display: flex;align-items: center;width: 108%;'>
+                                <input type="password" name="senha" placeholder="Senha" id="senha" class="senha">
+                                <i class="fa-solid fa-eye-slash"></i>
+                                </div>
+                                
+                                <div class="password-area">
+                                    <span>Força da senha: </span>
+                                    <p class="seg-senha" id="segtotal"></p>
+                                </div>
                             </div>
 
                             <div class="sub-button">

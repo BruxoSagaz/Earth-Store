@@ -168,12 +168,13 @@ div.enter{
 
 
 .form input[type='text'],
+.form input[type='password'],
 .form input[type='email'],
 .form2 input{
     height: 35px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    width: 275px;
+    width: 100%;
     padding: 10px;
 }
 
@@ -183,12 +184,13 @@ div.enter{
     height: 35px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    width: 275px;
+    width: 100%;
     padding: 10px;
 }
 
 .form input[type='text']:focus,
 .form input[type='email']:focus,
+.form input[type='password']:focus,
 .form2 input:focus{
     outline: 0;
 }
@@ -277,6 +279,23 @@ div.enter{
 .error-box i{
     margin-right: 7px;
 }
+ 
+.enter i.fa-solid{
+    cursor: pointer;
+    position: relative;
+    font-size: 20px;
+    left: -30px;
+    color: #828282;
+    width: 25px;
+}
+
+
+
+
+
+
+
+
 
 
 @media screen and (max-width:3800px) {

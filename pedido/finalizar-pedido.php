@@ -5,10 +5,7 @@
 <?php if(isset($_SESSION['cart']) || @count($_SESSION['cart']) != 0){
     include_once("../ajax/PDO.php");
     $id = $_SESSION['dados']['id'];
-    $query = "SELECT * FROM `usuarios-cards` WHERE `id` = $id";
-    $cardData = normalDbQuery($query,[]);
-    $cardData = $cardData[0];
-   
+
     ?>
 
 <div class="div-chamada-finalizar">
@@ -382,7 +379,7 @@
 
         <div class="individual">
         <label for="num-card">numero do cartão: </label>
-        <input type="text" name="num-card" id="num-card" style="width: 300px;" class="card" value="<?php echo @$cardData['num-card'] ?>">
+        <input type="text" name="num-card" id="num-card" style="width: 300px;" class="card" value="">
         </div>
 
         </div><!-- Row -->
@@ -394,13 +391,6 @@
         <select name="bandeiras" id="bandeiras"  style="width: 175px;" class="card"  value="<?php echo @$cardData['bandeira'] ?>">
             <!-- <option value="visa">Visa</option> -->
             <option value=""></option>
-            <?php 
-            if(isset($cardData['bandeira'])){
-                $bandeira = $cardData['bandeira'];
-                $upper = strtoupper($bandeira);
-                echo "<option value='$bandeira' selected>$upper</option>";
-            }
-            ?>
         </select>
         </div>
 
@@ -421,22 +411,16 @@
 
         <div class="individual">
         <label for="cvv">CVV: </label>
-        <input type="text" name="cvv" id="cvv" style="width: 75px;" class="card"  value="<?php echo @$cardData['cvv'] ?>">
+        <input type="text" name="cvv" id="cvv" style="width: 75px;" class="card"  value="">
         </div>
 
         <div class="individual">
         <label for="validade">Validade(MM/AAAA): </label>
-        <input type="text" name="validade" id="validade" style="width: 100px;" class="card"  value="<?php echo @$cardData['validade'] ?>">
+        <input type="text" name="validade" id="validade" style="width: 100px;" class="card"  value="">
         </div>
 
         </div><!-- Row -->
 
-        <div class="row"><!-- Row -->
-        <div class="individual">
-            <label for="salvar-card">Salvar Meu Cartão!</label>
-            <input type="checkbox" name="salvar-card" id="salvar-card"  <?php echo @$_SESSION['salvar-card'] ?>>
-        </div>
-        </div><!-- Row -->
 
                     
 

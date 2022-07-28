@@ -1,8 +1,12 @@
-<?php include("./php/gerar_item_home.php"); ?>
+<?php 
+include("./php/gerar_item_home.php");
+include_once('./banners.php'); 
+?>
+
     <!-- Banner CTA -->
-    <section class="banner">
-        <img src="images/Banneriluminar.png" alt="Campanha Iluminar">
-    </section>
+    <?php
+        banner_1();
+    ?>
 
     <!-- Desk -->
     <section class="desk">
@@ -98,10 +102,9 @@
     </main>
 
     <!-- Banner CTA -->
-    <section class="banner">
-        <img src="images/banner_2.jpg" alt="Campanha Iluminar">
-    </section>
-
+    <?php
+        banner_2();
+    ?>
     <!-- Main Content -->
     <!-- Best Sellers -->
     <main>

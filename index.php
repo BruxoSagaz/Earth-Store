@@ -42,10 +42,11 @@ include("./classes/loja.php");
     <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#e30613">
     <!--Favicon-->
-
-
+    <link rel="stylesheet" href="js/Glider/glider.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style_2.css">
+    <link rel="stylesheet" href="style/test.css">
+ 
 
  
 
@@ -109,12 +110,14 @@ include("./classes/loja.php");
 
     <script src="js/home.js"></script>
     <script src="<?php echo PATH?>js/header.js"></script>
-
+    
     <?php
         if(@$_GET['page'] != 'home'){
             if(@is_file('js/'.$_GET['page'].'.js')){
                 echo@'<script src="js/'.$_GET['page'].'.js"></script>';
             } 
+        }else{
+            echo " <script src='".PATH."js/Glider/glider.js'></script>";
         }
     ?>
 

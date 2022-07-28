@@ -21,16 +21,15 @@ $result = normalDbQuery($query,$valores);
 
 if(count($result) > 0){
     // echo "oii";
-    $query = "UPDATE `usuarios-cards` SET `num-card`='?',`cvv`='?',`validade`='?' WHERE `id`=?";
+    $query = "UPDATE `usuarios-cards` SET `num-card`= ?,`cvv`= ?,`validade`= ? WHERE `id`=?";
     $valores = [$numCard,$cvv,$validade,$id];
     $return['salvo'] = 'true';
-
     $result = normalDbQuery($query,$valores);
 
     die(json_encode(['retorno'=>"Cartão atualizado com sucesso"]));
 
 }else{
-    $query = "INSERT INTO `dblojinha`.`usuarios-cards` (`id`,`num-card`, `cvv`, `validade`) VALUES ('?','?','?','?')";
+    $query = "INSERT INTO `dblojinha`.`usuarios-cards` (`id`,`num-card`, `cvv`, `validade`) VALUES ( ?, ?, ?, ?)";
     $valores = [$id,$numCard,$cvv,$validade];
     // echo $query;
     if(count(normalDbQuery($query,$valores)) > 0){

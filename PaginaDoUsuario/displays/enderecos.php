@@ -24,7 +24,7 @@
             
             
             <label for="cep">CEP:</label>
-            <input type="text" name="cep" id="ceps" placeholder="00000-000" style="width: 115px;" value="<?php echo @$endereco['cep']?>">
+            <input type="text" name="cep" id="ceps" placeholder="00000-000" style="width: 115px;margin-left: 12px;" value="<?php echo @$endereco['cep']?>">
             
 
             
@@ -73,20 +73,26 @@
         </div>
 
         
+        <div class="enter">
+        <label for="estado">Estado: </label>
+
+        <select name="estado" id="estado" >
+            <option value="<?php echo  @$endereco['estado']?>"  selected="selected"><?php echo @$endereco['estado']?></option>
+        </select>
+        </div>
 
         
         
 
         <div class="enter">
         <label for="cidade">Cidade: </label>
-        <input type="text" name="cidade" id="cidade" style="width: 170px;" value="<?php echo @$endereco['cidade']?>">
+
+        <select name="cidade" id="cidade" style="min-width: 125px;" >
+            <option value="<?php echo @$endereco['cidade']?>"  selected="selected"><?php echo @$endereco['cidade']?></option>
+        </select>
         </div>
 
 
-        <div class="enter">
-        <label for="estado">Estado: </label>
-        <input type="text" name="estado" id="estado" style="width: 70px;" value="<?php echo @$endereco['estado']?>">
-        </div>
 
         
 

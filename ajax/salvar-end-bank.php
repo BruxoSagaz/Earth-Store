@@ -29,7 +29,7 @@ $result = normalDbQuery($query,$valores);
 
 if(count($result) > 0){
     // echo "oii";
-    $query = "UPDATE `enderecos` SET `cep`='?',`logradouro`='?',`bairro`='?',`cidade`='?',`estado`='?',`numero`='?',`complemento`= '?' WHERE `id`=?";
+    $query = "UPDATE `enderecos` SET `cep`= ?,`logradouro`= ?,`bairro`= ?,`cidade`= ?,`estado`= ?,`numero`= ?,`complemento`=  ? WHERE `id`=?";
     $return['salvo'] = 'true';
     $valores = [$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement,$id];
 
@@ -38,7 +38,7 @@ if(count($result) > 0){
     die(json_encode(['retorno'=>"Localização atualizada com sucesso"]));
 
 }else{
-    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ('?','?','?','?','?','?','?','?')";
+    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
     $valores = [$id,$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement];
 
     // echo $query;

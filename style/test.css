@@ -1,0 +1,14 @@
+.c-carousel{
+    margin: 0 auto;
+}
+
+
+
+.c-carousel .slides .slide{
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    padding: 15px 0;
+}
+

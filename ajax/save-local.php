@@ -26,20 +26,20 @@ $_SESSION['local'] = $local;
 // print_r($_SESSION['local']);
 
 
-$query = "SELECT * FROM `enderecos` WHERE `id` = ?";
-$valores = [$id];
+$query = "SELECT * FROM `enderecos` WHERE `id` = $id";
+$valores = [];
 $res = normalDbQuery($query,$valores);
 
 if(count($res) > 0){
-    $query ="UPDATE `enderecos` SET `cep`=?,`logradouro`=?,`bairro`=?,`cidade`=?,`estado`=?,`numero`=?,`complemento`=? WHERE `id` = ?";
-    $valores = [$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement,$id];
-
-
+    $query ="UPDATE `enderecos` SET `cep`= ?,`logradouro`= ?,`bairro`= ?,`cidade`= ?,`estado`= ?,`numero`= ?,`complemento`= ? WHERE `id` = $id";
+    $valores = [$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement];
+    normalDbQuery($query,$valores);
+    
     $return['salvo'] = 'true';
 
     
 }else{
-    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ('?','?','?','?','?','?','?','?')";
+    $query = "INSERT INTO `dblojinha`.`enderecos` (`id`,`cep`, `logradouro`, `bairro`, `cidade`, `estado`, `numero`, `complemento`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
     $valores = [$id,$cep,$endereco,$bairro,$cidade,$estado,$numero,$complement];
 
     // echo $query;

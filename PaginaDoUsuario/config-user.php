@@ -106,16 +106,6 @@ foreach ($arrIds as $key => $value) {
                 </a>
             </div>
 
-            <div class="opt-row">
-                <a href="?page=cartoes" page="cartoes">
-
-                <div class="opt-icon"><i class="fa-regular fa-credit-card"></i></div>
-                <div class="opt-description">
-                    <p>Meu Cartão</p>
-                </div>
-
-                </a>
-            </div>
 
             <div class="opt-row">
                 <a href="?page=senha" page="senha">
@@ -151,8 +141,12 @@ foreach ($arrIds as $key => $value) {
             <div class="container" style="padding: 24px 2%;">
 
             <?php
-
-                include_once("displays/".$page.".php");
+                if(is_file("displays/".$page.".php")){
+                    include_once("displays/".$page.".php");
+                }else{
+                    include_once("displays/geral.php");
+                }
+                
 
             ?>
 

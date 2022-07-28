@@ -132,29 +132,8 @@ $(document).ready(function(){
     });
 
 
-    // preencher dados por cep
-    $('#ceps').change(function(){
-        var cep = $(this).val();
-        if(cep.length == 9){
-            cep = {"cep":cep};
-            $.ajax({
-                method:"post",
-                url: config.path+"/ajax/cep-consult.php",
-                data: cep,
-                dataType: "json",
-                error: function(){
-                    console.log("Erro em cep")
-                }
-            }).done(function(data){
-            // console.log(data);
-            $('#endereco').val(data["street"]);
-            $('#complement').val(data["complement"]);
-            $("#bairro").val(data["district"]);
-            $("#cidade").val(data["city"]);
-            $("#estado").val(data["uf"]);
-            })
-        }
-    });
+
+
 
     // Aguardar salvar local
     $('#salvar-end').click(function(){

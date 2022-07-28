@@ -7,7 +7,7 @@ $date = trim($_POST['data']);
 $cpf = trim($_POST['cpf']);
 $cell = trim($_POST['cell']);
 $email = trim($_POST['email']);
-$senha = trim($_POST['senha']);
+$senha = MD5(trim($_POST['senha']));
 
 // $date =  explode('-',$date);
 // $date = "{$date[2]}-{$date[1]}-{$date[0]}";
