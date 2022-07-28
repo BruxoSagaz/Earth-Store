@@ -46,8 +46,7 @@ function gerarMaisVendidos(){
     }
 }
 
-
-
+ 
 
 
 

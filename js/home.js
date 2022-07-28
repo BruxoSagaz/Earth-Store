@@ -20,6 +20,31 @@ $(document).ready(function(){
         scrollLock: true
     });
 
+    const cara = document.querySelector('.car-a .js-slides');
+    new Glider(cara,{
+        slidesToShow:5,
+        slidesToScroll:2,
+        draggable: true,
+        scrollLock: true,
+        arrows:{
+            prev:".car-a-prev",
+            next:".car-a-next"
+        }
+    });
+
+    const carab = document.querySelector('.car-b .js-slides');
+    new Glider(carab,{
+        slidesToShow:5,
+        slidesToScroll:2,
+        draggable: true,
+        scrollLock: true,
+        arrows:{
+            prev:".car-b-prev",
+            next:".car-b-next"
+        }
+    });
+
+
     $(window).on('resize', function(){
         atualizarTamSlide()
     })
@@ -30,6 +55,12 @@ $(document).ready(function(){
         $('.c-carousel').each(function (index, element) {
             // element == this
             $(this).css('width',tam)
+        });
+
+        $('.c-carousel').each( function (indexInArray, valueOfElement) { 
+            tam = $("#metric").width();
+            $(this).css('width',tam);
+            $('.b-allign').css('width',tam);
         });
     }
 

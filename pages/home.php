@@ -40,7 +40,7 @@ include_once('./banners.php');
     <main>
         <!-- Promotions -->
         <section class="promo-section">
-            <div class="container">
+            <div class="container" id="metric">
 
                 <div class="banner-p"></div>
                 <h2>Veja Nosso Estoque!</h2>
@@ -91,11 +91,25 @@ include_once('./banners.php');
                             </div>
                         </div> 
                     </div> -->
-                    
-                    <?php
-                        gerarAleatorio();
-                    ?>
-            
+                    <div class="c-carousel car-a">
+                        <div class="slides js-slides">
+                            <?php
+                                gerarAleatorio();
+                                gerarAleatorio();
+                                gerarAleatorio();
+                                gerarAleatorio();
+                                gerarAleatorio();
+                            ?>
+                        </div>
+
+                        <div style="width:100%;position:absolute" class="b-allign">
+                        <button class="pag prev car-a-prev" ><i class="fa-solid fa-angle-left"></i></button>
+                        <button class="pag next car-a-next" ><i class="fa-solid fa-angle-right"></i></button>
+                        </div>
+
+                        <!-- <div class="car-a-dots"></div> -->
+                    </div>
+                       
                 </div>
             </div>
         </section>
@@ -160,11 +174,25 @@ include_once('./banners.php');
                     </div>
                     </div> -->
 
-                    <?php
+                    <div class="c-carousel car-b">
+                        <div class="slides js-slides">
+                            <?php
+                                gerarMaisVendidos();
+                                gerarMaisVendidos();
+                                gerarMaisVendidos();
+                                gerarMaisVendidos();
+                                gerarMaisVendidos();
+                            ?>
+                        </div>
 
-                        gerarMaisVendidos();
+                        <div style="width:100%;position:absolute" class="b-allign">
+                        <button class="pag prev car-b-prev" ><i class="fa-solid fa-angle-left"></i></button>
+                        <button class="pag next car-b-next" ><i class="fa-solid fa-angle-right"></i></button>
+                        </div>
 
-                    ?>
+                        <!-- <div class="car-a-dots"></div> -->
+                    </div>
+
                 </div>
 
             </div>

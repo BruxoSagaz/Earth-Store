@@ -2,7 +2,24 @@
     margin: 0 auto;
 }
 
+.c-carousel button.pag{
+    position: relative;
+    background: #871d2275;
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: -310px;
+    cursor: pointer;
+}
 
+.c-carousel button.prev{
+    left: 0;
+}
+
+.c-carousel button.next{
+    left: 93.4%;
+}
 
 .c-carousel .slides .slide{
     align-items: center;
