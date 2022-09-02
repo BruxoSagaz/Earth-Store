@@ -180,7 +180,12 @@ include_once('./banners.php');
                     </div> -->
 
                     <div class="c-carousel car-b">
-                        <div class="slides js-slides">
+                        <div class="slides js-slides" style="
+                            display: flex;
+                            width: 100%;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                        ">
                             <?php
                                 gerarMaisVendidos();
                                 gerarMaisVendidos();
