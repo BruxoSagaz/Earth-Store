@@ -11,6 +11,12 @@
 * Jquery
 
 
-#Highlights
+# Highlights
 
+
+* Home
 ![Home](./pictures/home.jpg)
+
+
+* Individual
+![Home](./pictures/individual.jpg)
