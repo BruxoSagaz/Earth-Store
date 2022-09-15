@@ -13,4 +13,4 @@
 
 #Highlights
 
-![Home]('pictures/home.jpeg')
+![Home](pictures/home.jpeg)
