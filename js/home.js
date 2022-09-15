@@ -84,7 +84,7 @@ $(document).ready(function(){
     $.ajax({
         Headers:'Access-Control-Allow-Origin: *',
         method:"post",
-        url: config.path+"/php/gerar_nav.php",
+        url: "./php/gerar_nav.php",
         data:"oi",
         dataType: "json",
         error: function(){

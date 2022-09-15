@@ -81,7 +81,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "post",
                 dataType:'json',
-                url: config.path+'/ajax/update-cadastro.php' ,
+                url: './ajax/update-cadastro.php' ,
                 data: form.serialize(),
             }).done(function(data){
                 if(data.retorno == "sucesso"){
@@ -130,7 +130,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "post",
                 dataType:'json',
-                url: config.path+'/ajax/update-senha.php' ,
+                url: './ajax/update-senha.php' ,
                 data: form.serialize(),
             }).done(function(data){
                 alert(data.retorno);
@@ -156,7 +156,7 @@ $(document).ready(function(){
         $.ajax({
             type: "post",
             dataType:'json',
-            url: config.path+'/ajax/salvar-end-bank.php' ,
+            url: './ajax/salvar-end-bank.php' ,
             data: valores,
         }).done(function(data){
             alert(data.retorno);

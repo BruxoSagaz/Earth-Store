@@ -111,7 +111,7 @@ $(document).ready(function(){
             $(selector).val(quant);
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/update_cart_quant.php",
+                url: "./ajax/update_cart_quant.php",
                 data:"id="+id+"&quant="+quant,
                 dataType: "json",
                 error: function(){
@@ -191,7 +191,7 @@ $(document).ready(function(){
     // listar badneiras
     $.ajax({
         method:"post",
-        url: config.path+"/ajax/cartao-credito.php",
+        url: "./ajax/cartao-credito.php",
         data: {'gerar_sessao':'true'},
         dataType: "json",
         error: function(){
@@ -262,7 +262,7 @@ $(document).ready(function(){
         var ordemAtual = $(this).attr('ordem');
         metodoForm = $(this).attr('valor');
         pegarLocal();
-        $.getJSON(config.path+'/ajax/get-total-final.php', function (response) {
+        $.getJSON('./ajax/get-total-final.php', function (response) {
             valor = response.total 
             
             
@@ -358,7 +358,7 @@ $(document).ready(function(){
     
                     $.ajax({
                         method:"post",
-                        url: config.path+"/ajax/cartao-credito.php",
+                        url: "./ajax/cartao-credito.php",
                         data: {'fechar_pedido': true,'token':token,'cartao':bandeira,'parcelas':numeroParcela,'valorParcela':valorParcela,'hash':hash,'amount':valor,'itens':itens, 'User': pgto,'local':local,'metodo':metodo},
                         dataType: "json",
                         error: function(){
@@ -374,13 +374,13 @@ $(document).ready(function(){
                         }else{
                             // processado com sucesso
                             console.log(data);
-                            // $.get( config.path+"/ajax/clean-cart.php", function( data ) {
+                            // $.get( "./ajax/clean-cart.php", function( data ) {
                             //     console.log('cart limpo')
                             // });
 
                             $.ajax({
                                 method:"post",
-                                url: config.path+"/ajax/clean-cart.php",
+                                url: "./ajax/clean-cart.php",
                                 data: '0',
                                 dataType: "json",
                                 error: function(){
@@ -424,7 +424,7 @@ $(document).ready(function(){
 
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/cartao-credito.php",
+                url: "./ajax/cartao-credito.php",
                 data: {'fechar_pedido': true,'hash':hash,'amount':valor,'itens':itens,'nome': nome,'cpf':cpf,'local':local,'celular':celular,'metodo':metodo},
                 dataType: "json",
 
@@ -436,7 +436,7 @@ $(document).ready(function(){
                 
                 $.ajax({
                     method:"post",
-                    url: config.path+"/ajax/clean-cart.php",
+                    url: "./ajax/clean-cart.php",
                     data: '0',
                     dataType: "json",
                     error: function(){
@@ -584,7 +584,7 @@ $(document).ready(function(){
 
         $.ajax({
             method:"post",
-            url: config.path+"/ajax/save-local.php",
+            url: "./ajax/save-local.php",
             data: data,
             dataType: "json",
             error: function(){
@@ -604,7 +604,7 @@ $(document).ready(function(){
 
         $.ajax({
             method:"post",
-            url: config.path+"/ajax/save-card.php",
+            url: "./ajax/save-card.php",
             data: data,
             dataType: "json",
             error: function(){

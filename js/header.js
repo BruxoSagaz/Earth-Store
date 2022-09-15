@@ -141,7 +141,7 @@ $(document).ready(function(){
 
                 $.ajax({
                     method:"post",
-                    url: config.path+"/ajax/update_cart_quant.php",
+                    url: "./ajax/update_cart_quant.php",
                     data:"id="+id+"&quant="+val+"&nome="+nome,
                     dataType: "json",
                     error: function(){
@@ -158,7 +158,7 @@ $(document).ready(function(){
 
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/add_to_cart.php",
+                url: "./ajax/add_to_cart.php",
                 data:data,
                 dataType: "json",
                 error: function(){
@@ -185,7 +185,7 @@ $(document).ready(function(){
         let nome =  $(this).parent().parent().parent().find('.cart-item-name').text()
         $.ajax({
             method:"post",
-            url: config.path+"/ajax/update_cart_quant.php",
+            url: "./ajax/update_cart_quant.php",
             data:"id="+id+"&quant="+val+"&nome="+nome,
             dataType: "json",
             error: function(){
@@ -294,7 +294,7 @@ $(document).ready(function(){
 
         $.ajax({
             method:"post",
-            url: config.path+"/ajax/remove_from_cart.php",
+            url: "./ajax/remove_from_cart.php",
             data:"id="+id,
             dataType: "json",
             error: function(){
@@ -310,13 +310,13 @@ $(document).ready(function(){
 
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/actualize-total.php",
+                url: "./ajax/actualize-total.php",
                 dataType: "json",
                 error: function(){
                     console.log("Erro em atualizar total")
                 }
             }).done(function(){
-                $.getJSON(config.path+'/ajax/get-total.php', function (response) {
+                $.getJSON('./ajax/get-total.php', function (response) {
                     console.log('Total = '+response.total)
                     //console.log($('tbody tr').length)
         

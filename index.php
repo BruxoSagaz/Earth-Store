@@ -53,8 +53,8 @@ include("./classes/loja.php");
     <script src="https://kit.fontawesome.com/91e791a30b.js" crossorigin="anonymous"></script>
 
     <?php
-        if(!isset($_GET['url'])){
-            $_GET['url'] = 'home';
+        if(!isset($_GET['page'])){
+            $_GET['page'] = 'home';
         }
         
     ?>
@@ -113,7 +113,7 @@ include("./classes/loja.php");
     
     <?php
         if(@$_GET['page'] != 'home'){
-            if(@is_file('js/'.$_GET['page'].'.js')){
+            if(@is_file('./js/'.$_GET['page'].'.js')){
                 echo@'<script src="js/'.$_GET['page'].'.js"></script>';
             } 
         }else{

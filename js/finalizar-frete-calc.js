@@ -22,7 +22,7 @@ $(document).ready(function(){
         
     });	
 
-    $.getJSON(config.path+'/json/estados_cidades.json', function (datas) {
+    $.getJSON('./json/estados_cidades.json', function (datas) {
         dataCEP = datas
         var items = [];
         var options = '<option valor="">escolha um estado</option>';
@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 
         setTimeout(function(){ 
-            $.getJSON(config.path+'/ajax/get-frete-session.php', function (response) {
+            $.getJSON('./ajax/get-frete-session.php', function (response) {
                 fretes = response.total;
     
                 trFrete = document.createElement('tr');
@@ -156,7 +156,7 @@ $(document).ready(function(){
             
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/get-servico-session.php",
+                url: "./ajax/get-servico-session.php",
                 dataType: "json",
                 error: function(){
                     console.log("Erro em pegar servico ")
@@ -300,7 +300,7 @@ $(document).ready(function(){
             
             $.ajax({
                 method:"post",
-                url: config.path+"/ajax/update-total-final.php",
+                url: "./ajax/update-total-final.php",
                 data: {'total':total,'servico':servico,'frete':frete},
                 dataType: "json",
                 error: function(){
@@ -368,7 +368,7 @@ $(document).ready(function(){
                 cep = {"cep":cep};
                 $.ajax({
                     method:"post",
-                    url: config.path+"/ajax/cep-consult.php",
+                    url: "./ajax/cep-consult.php",
                     data: cep,
                     dataType: "json",
                     error: function(){

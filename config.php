@@ -1,7 +1,13 @@
 <?php
 session_start();
-define("PATH","http://localhost/Lojinha/");
-define("PATH_GERENCY","http://localhost/Lojinha/gerency/");
+$path = __FILE__;
+$path = str_replace("\\","/",$path);
+$path = explode("htdocs",$path);
+$path = substr($path[1],0,-10);
+$path = "http://localhost".$path;
+
+define("PATH",$path);
+define("PATH_GERENCY", $path."\/gerency/");
 
 ini_set('display_errors','1');
 header('Access-Control-Allow-Origin: *');
