@@ -11,3 +11,6 @@
 * Jquery
 
 
+#Highlights
+
+![Home]('pictures/home.jpeg')
